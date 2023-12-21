@@ -14,7 +14,7 @@
             <a href="" class="logo">Indrajit Ghosh</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#About">Teaching</a></li>
+                <li><a href="#Teaching">Teaching</a></li>
                 <li><a href="#Research">Research</a></li>
                 <li><a href="#Misc">Misc</a></li>
                 <!-- <li><a href="#Photos">Photos</a></li> -->
@@ -34,9 +34,12 @@
             <div class="header-right">
                 <p><b>Hello, I'm</b></p>
                 <h1>Indrajit Ghosh</h1>
-                <h2>Senior Research Fellow</h2>
+                <h3>Senior Research Fellow</h3>
+                <h2>Indian Statistical Institute</h2>
+                <span class="email-address">Email: rs_math1902@isibang.ac.in</span>
                 <div class="header-action-area">
                     <a href="#" class="btn" download=".img/cv.pdf">Download CV</a>
+                    <a href="#About" class="btn">About me</a>
                     <a href="#Contact" class="btn btn-dark">Contact</a>
                 </div>
                 <div class="header-social">
@@ -70,13 +73,17 @@
                     <div class="edu-box">
                         <img src="./img/education.png" class="icon1" alt="">
                         <h4>Education</h4>
-                        <p>Master Degrees <br>
-                            Mathematics Hons.
+                        <p>PhD (Currently Pursuing) <br>
+                            MSc. in Pure Mathematics <br>
+                            BSc. Mathematics Hons.
                         </p>
                     </div>
                 </div>
                 <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis labore quaerat in, iusto incidunt possimus, modi optio temporibus voluptates id, tempora saepe doloribus est reprehenderit! Sequi minima fugiat nesciunt doloremque.
+                    Greetings! I am honored to introduce myself as a Senior Research Fellow in the 
+                    Theoretical Statistics and Mathematics Unit (SMU) at the Indian Statistical Institute, 
+                    Bangalore Centre. My area of interest lies broadly in the domain of Operator Algebras with 
+                    a pronounced focus on von-Neumann algebras, Type \(II_1\) factors, and \(C^*\)-algebras.
                 </p>
             </div>
         </div>
@@ -92,5 +99,30 @@
     <!-- 44:11 -->
     
     <script src="script.js"></script>
+
+    <!-- The follwoing is for displaying LaTeX code outputs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <!-- MathJax configuration for equations fitting on smaller screens -->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            CommonHTML: {
+                scale: 80,  // Adjust this value as needed
+                linebreaks: { automatic: true },
+                EqnChunk: 10,
+                EqnChunkFactor: 1.5,
+                EqnChunkDelay: 10,
+                EqnChunkSize: MathJax.Hub.Browser.isMobile ? 10 : 50
+            }
+        });
+    </script>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: {
+                extensions: ["AMSmath.js", "AMSsymbols.js", "esint.js"]
+            }
+        });
+    </script>
 </body>
 </html>

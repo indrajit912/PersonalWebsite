@@ -148,6 +148,7 @@ nav {
     width: 100%;
     display: grid;
     place-items: center;
+    background-color: var(--color-white);
 }
 
 .nav-container {
@@ -215,6 +216,12 @@ p {
     gap: 1rem;
     justify-content: center;
     margin: 1rem auto;
+}
+
+.email-address {
+    font-size: 14px;
+    color: var(--color-dark-variant);
+    font-family: 'Roboto Mono', monospace;
 }
 
 /* ........................ End Header Section ...................... */
