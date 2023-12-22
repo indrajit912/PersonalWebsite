@@ -1,0 +1,82 @@
+<!-- 
+    base.html for the website 
+    Author: Indrajit Ghosh
+    Created On: Dec 22, 2023
+
+    Google Fonts API:
+    https://fonts.google.com/
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hello! I'm a Senior Research Fellow at the Indian Statistical Institute, Bangalore, specializing in Operator Algebras, with a focus on von-Neumann algebras, Type II₁ factors, and C∗-algebras. Guided by Dr. Soumyashant Nayak, I passionately explore the worlds of science, mystery, and Bengali literature. Office: S6, ISI Bangalore | Email: rs_math1902@isibang.ac.in.">
+    <meta name="keywords" content="Indrajit Ghosh, Indrajit Ghosh Mathematics, Indrajit Ghosh Mathematician, Senior Research Scholar, ISI Bangalore, Indian Statistical Institute Bangalore, SMU, Stat-Math Unit, Operator Algebras, von Neumann algebras.">
+    <title>Indrajit Ghosh - {% block title %}{% endblock %}</title>
+
+    {% block meta_tags %}
+        <!-- Default meta tags go here -->
+    {% endblock %}
+    
+    {% block styles %}
+    <link rel="stylesheet" href="{{ url_for('main.static', filename='css/style.css') }}">
+    {% endblock %}
+</head>
+
+<body>
+    <body>
+
+        <!-- Nav Bar Start -->
+        <nav>
+            <div class="container nav-container">
+                <a href="" class="logo">Indrajit Ghosh</a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#Teaching">Teaching</a></li>
+                    <li><a href="#Research">Research</a></li>
+                    <li><a href="#Misc">Misc</a></li>
+                    <!-- <li><a href="#Photos">Photos</a></li> -->
+                    <!-- <li><a href="#Timeline">Timeline</a></li> -->
+                </ul>
+            </div>
+        </nav>
+        <!-- Nav Bar End -->
+        
+        <!-- Content of the webpage -->
+        {% block content %}{% endblock %}
+
+
+        <!-- TODO: Footer of the webpage -->
+
+
+
+        <!--  Javascripts required for my website -->
+        <script src="{{ url_for('main.static', filename='js/script.js') }}"></script>
+
+        <!-- The follwoing is for displaying LaTeX code outputs -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        
+        <!-- MathJax configuration for equations fitting on smaller screens -->
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                CommonHTML: {
+                    scale: 80,  // Adjust this value as needed
+                    linebreaks: { automatic: true },
+                    EqnChunk: 10,
+                    EqnChunkFactor: 1.5,
+                    EqnChunkDelay: 10,
+                    EqnChunkSize: MathJax.Hub.Browser.isMobile ? 10 : 50
+                }
+            });
+        </script>
+
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                TeX: {
+                    extensions: ["AMSmath.js", "AMSsymbols.js", "esint.js"]
+                }
+            });
+        </script>
+</body>

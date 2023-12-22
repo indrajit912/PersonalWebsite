@@ -1,0 +1,94 @@
+<!-- 
+    Homepage for the Website
+    Author: Indrajit Ghosh
+    Created On: Dec 22, 2023
+ -->
+
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <!-- Additional styles specific to this template go here -->
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Header Section Start -->
+
+<header id="home">
+    <div class="container header-container">
+        <div class="header-left">
+            <img src="{{ url_for('main.static', filename='images/profile.jpg') }}" class="profile-pic" alt="Indrajit's profile picture">
+        </div>
+        <div class="header-right">
+            <p><b>Hello, I'm</b></p>
+            <h1>Indrajit Ghosh</h1>
+            <h3>Senior Research Fellow</h3>
+            <h2>Indian Statistical Institute</h2>
+            <span class="email-address">Email: rs_math1902@isibang.ac.in</span>
+            <div class="header-action-area">
+                <a href="#" class="btn" download=".img/cv.pdf">Download CV</a>
+                <a href="#About" class="btn">About me</a>
+                <a href="#Contact" class="btn btn-dark">Contact</a>
+            </div>
+            <div class="header-social">
+                <a href=""><img src="{{ url_for('main.static', filename='images/linkedin.png') }}" alt="linkedin" class="icon1"></a>
+                <a href=""><img src="{{ url_for('main.static', filename='images/github.png') }}" alt="github" class="icon1"></a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Header Section End -->
+
+<!-- About Section Start -->
+<section id="About">
+    <p class="heading-p">Get To Know More</p>
+    <h1 class="heading">About Me</h1>
+    <div class="container about-container">
+        <div class="about-left">
+            <img src="{{ url_for('main.static', filename='images/about-pic.jpg') }}" alt="">
+        </div>
+        <div class="about-right">
+            <div class="basic-edu">
+                <div class="edu-box">
+                    <img src="{{ url_for('main.static', filename='images/experience.jpg') }}" class="icon1" alt="">
+                    <h4>Experience</h4>
+                    <p>2+ years <br>
+                        Mathematics Hons.
+                    </p>
+                </div>
+
+                <div class="edu-box">
+                    <img src="{{ url_for('main.static', filename='images/education.png') }}" class="icon1" alt="">
+                    <h4>Education</h4>
+                    <p>PhD (Currently Pursuing) <br>
+                        MSc. in Pure Mathematics <br>
+                        BSc. Mathematics Hons.
+                    </p>
+                </div>
+            </div>
+            <p>
+                Greetings! I am honored to introduce myself as a Senior Research Fellow in the 
+                Theoretical Statistics and Mathematics Unit (SMU) at the Indian Statistical Institute, 
+                Bangalore Centre. My area of interest lies broadly in the domain of Operator Algebras with 
+                a pronounced focus on von-Neumann algebras, Type \(II_1\) factors, and \(C^*\)-algebras.
+            </p>
+        </div>
+    </div>
+</section>
+<!-- About Section End -->
+
+<!-- 44:11 -->
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+# Write down the modules you need to install and then
+# run the cmd: ```pip install -r requirements.txt```
+Flask
+Flask-SQLAlchemy
+Flask-WTF
+Flask-Migrate
+gunicorn
+python-dotenv
+email_validator
+mysql-connector-python
