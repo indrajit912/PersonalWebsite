@@ -125,6 +125,7 @@ img {
 }
 
 .container {
+    display: flex;
     margin: 0 auto;
     max-width: 1200px;
     width: 100%;
@@ -290,10 +291,7 @@ p {
 /* ........................ Start Header Section for Mobile ...................... */
 @media (max-width: 600px) {
     header {
-        padding-top: 8rem;
-        padding-bottom: 8rem;
-        padding-left: 5rem;
-        padding-right: 5rem;
+        padding: 8rem;
     }
 
     .header-container {
@@ -355,11 +353,9 @@ p {
         font-size: 12px; /* Adjust font size as needed */
     }
 }
-/* ........................ End Header Section for Mobile ...................... */
-
-
 
 /* ........................ End Header Section ...................... */
+
 
 /* ........................ Start About Section ...................... */
 
