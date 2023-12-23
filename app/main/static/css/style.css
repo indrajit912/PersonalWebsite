@@ -131,6 +131,9 @@ img {
     max-width: 1200px;
     width: 100%;
     height: auto;
+
+    /* border: 2px solid #ca0505; */
+    /* padding: 10px; */
 }
 
 section {
@@ -138,6 +141,13 @@ section {
     margin: 0 10rem;
     box-sizing: border-box;
     min-height: fit-content;
+}
+
+.section-text {
+    display: flex;
+    margin: 0 auto;
+    max-width: 1200px;
+    flex-direction: column;
 }
 
 /* Media query for screens with a maximum width of 768px (adjust as needed) */
@@ -263,7 +273,13 @@ nav li:first-child {
 
 /* ........................ Start Header Section ...................... */
 header {
-    padding: 14rem;
+    padding: 15rem;
+}
+
+@media(min-width) {
+    header {
+        padding: 20rem;
+    }
 }
 
 .header-container {
@@ -272,6 +288,9 @@ header {
     max-width: 820px;
     gap: 20px;
     justify-content: space-between;
+
+    /* border: 2px solid #000; */
+    /* padding: 10px; */
 }
 
 .profile-pic {
