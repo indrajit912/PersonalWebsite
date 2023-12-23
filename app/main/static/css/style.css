@@ -72,14 +72,15 @@ p {
     text-align: center;
 }
 
-a {
+.header-social a,
+nav a {
     font-size: 24px;
     color: var(--color-black);
     text-decoration-color: var(--color-white);
     transition: var(--transition);
 }
 
-a:hover {
+nav a:hover {
     color: var(--color-dark-variant);
     text-decoration-color: var(--color-dark-variant) !important;
     text-underline-offset: 1rem;
@@ -121,11 +122,6 @@ a:hover {
 img {
     width: 100%;
     display: block;
-}
-
-.icon1 {
-    width: 32px;
-    /* height: max-content; */
 }
 
 .container {
@@ -292,7 +288,7 @@ p {
 }
 
 /* ........................ Start Header Section for Mobile ...................... */
-@media (max-width: 800px) {
+@media (max-width: 600px) {
     header {
         padding-top: 8rem;
         padding-bottom: 8rem;
