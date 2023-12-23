@@ -123,24 +123,28 @@ img {
     display: block;
 }
 
-.profile-pic {
-    border-radius: 70%;
-}
-
 .icon1 {
     width: 32px;
-    height: max-content;
+    /* height: max-content; */
 }
 
 .container {
     margin: 0 auto;
-    max-width: 1100px;
-    width: 95%;
+    max-width: 1200px;
+    width: 100%;
 }
+
+section {
+    padding-top: 4vh;
+    height: 96vh;
+    margin: 0 10rem;
+    box-sizing: border-box;
+    min-height: fit-content;
+  }
 
 /* .......................... Start Nav bar ......................... */
 nav {
-    height: 8rem;
+    height: 6rem;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -149,11 +153,13 @@ nav {
     display: grid;
     place-items: center;
     background-color: var(--color-white);
+    /* background-color: red; */
 }
 
-.nav-container {
+.nav-container ul {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     height: 100%;
 }
@@ -165,10 +171,59 @@ nav {
 }
 
 .nav-links {
+    height: 100%;
     display: flex;
     align-items: center;
     gap: 2rem;
+    padding: 2rem;
 }
+
+nav li:first-child {
+    margin-right: auto;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    z-index: 999;
+    background-color: var(--color-white);
+    box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.sidebar .nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.menu-btn {
+    display: none;
+}
+
+@media(max-width: 800px){
+    .hideOnMobile {
+        display: none;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+}
+
+@media(max-width: 400px){
+    .sidebar {
+        width: 100%;
+    }
+}
+
 
 /* .......................... End Nav bar ......................... */
 
@@ -192,9 +247,20 @@ p {
     justify-content: space-between;
 }
 
+.profile-pic {
+    border-radius: 70%;
+}
+
+.header-left {
+    display: flex;
+    height: 300px;
+    width: 300px;
+    margin: auto 0;
+}
+
 .header-right {
+    align-self: center;
     text-align: center;
-    margin: auto;
 }
 
 .header-right p {
@@ -205,9 +271,10 @@ p {
     margin-top: .4rem;
 }
 
-.header-right .header-action-area {
+.header-action-area {
     margin-top: 1rem;
     display: flex;
+    justify-content: center;
     gap: 1rem;
 }
 
@@ -224,38 +291,147 @@ p {
     font-family: 'Roboto Mono', monospace;
 }
 
+/* ........................ Start Header Section for Mobile ...................... */
+@media (max-width: 800px) {
+    header {
+        padding-top: 8rem;
+        padding-bottom: 8rem;
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+
+    .header-container {
+        grid-template-columns: 1fr; /* Set to a single column for smaller screens */
+        gap: 20px;
+        justify-content: center; /* Center items horizontally */
+    }
+
+    .header-left {
+        height: 200px;
+        width: 200px;
+    }
+
+    .header-right {
+        text-align: center;
+    }
+
+    .header-right h1 {
+        font-size: 30px; /* Adjust font size as needed */
+    }
+
+    .header-right h2 {
+        font-size: 20px; /* Adjust font size as needed */
+        margin-top: 0.2rem; /* Adjust margin as needed */
+    }
+
+    .header-right h3 {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 14px; /* Adjust font size as needed */
+    }
+
+    .btn {
+        width: 100%; /* Make buttons take full width */
+        max-width: 200px; /* Set a maximum width if needed */
+        font-size: 12px; /* Adjust font size as needed */
+        padding: 1rem; /* Adjust padding as needed */
+    }
+
+    .header-action-area {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-direction: column; /* Stack buttons vertically on smaller screens */
+        align-items: center;
+    }
+
+    .header-social {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin: 1rem auto;
+    }
+
+    .email-address {
+        font-size: 12px; /* Adjust font size as needed */
+    }
+}
+/* ........................ End Header Section for Mobile ...................... */
+
+
+
 /* ........................ End Header Section ...................... */
 
 /* ........................ Start About Section ...................... */
-.about-container {
-    display: grid;
-    grid-template-columns: 27% auto;
-    gap: 4rem;
-    align-items: center;
-}
 
-.about-left {
-    height: fit-content;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.basic-edu {
-    display: flex;
-    gap: 32px;
-    margin-bottom: 32px;
-}
-
-.edu-box {
-    padding: 24px;
-    text-align: center;
-    border: 1px solid var(--color-dark-variant);
-    border-radius: 30px;
-    width: 100%;
-}
-
-.edu-box img {
-    margin: auto;
-}
 
 /* ........................ End About Section ...................... */
+
+
+/* ........................ Start Footer Section ...................... */
+
+.footer-basic {
+  padding:20px 0;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  margin-top: 20px;
+}
+
+.footer-basic ul {
+  padding:0;
+  list-style:none;
+  text-align:center;
+  font-size:12px;
+  line-height:1.6;
+  margin-bottom:0;
+}
+
+.footer-basic li {
+  padding:0 10px;
+}
+
+.footer-basic ul a {
+  color:inherit;
+  text-decoration:none;
+  opacity:0.8;
+}
+  
+.footer-basic ul a:hover {
+  opacity:1;
+}
+
+.footer-basic .social {
+  text-align:center;
+  padding-bottom:25px;
+}
+
+.footer-basic .social > a {
+  font-size:24px;
+  width:40px;
+  height:40px;
+  line-height:40px;
+  display:inline-block;
+  text-align:center;
+  border-radius:50%;
+  border:1px solid var(--color-black);
+  margin:0 8px;
+  color:inherit;
+  opacity:0.75;
+}
+
+.footer-basic .social > a:hover {
+  opacity:0.9;
+}
+
+.footer-basic .copyright {
+  margin-top:15px;
+  text-align:center;
+  font-size:13px;
+  color: var(--color-dark);
+  margin-bottom:0;
+}
+
+/* ........................ End Footer Section ...................... */
