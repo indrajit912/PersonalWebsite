@@ -443,12 +443,26 @@ header {
   margin-right: auto;
 }
 
+a.back-to-top {
+    margin: 0 auto;
+}
+
+/* Add a class to style the underlined link */
+.underlined-link {
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 768px) {
     /* Adjust the margin and font size for larger screens */
     .last-updated {
       margin-top: 30px;
       font-size: 12px;
       width: 80%;
+    }
+
+    a.back-to-top {
+        width: 7rem;
+        font-size: 11px;
     }
 }
 

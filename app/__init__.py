@@ -24,6 +24,9 @@ def create_app(config_class=ProductionConfig):
     # Register all blueprints
     from app.main import main_bp
     app.register_blueprint(main_bp)
+
+    from app.teaching import teaching_bp
+    app.register_blueprint(teaching_bp)
     
 
     @app.route('/test/')

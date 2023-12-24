@@ -1,0 +1,109 @@
+<!-- 
+    Optimization page for the Website
+    Author: Indrajit Ghosh
+    Created On: Nov 14, 2023
+ -->
+
+ {% extends 'base.html' %}
+
+ {% block title %}Optimization (BMAT2), Odd Sem 2021{% endblock %}
+  
+ {% block styles %}
+     {{ super() }}
+     <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/teaching_style.css') }}">
+ {% endblock %}
+ 
+  
+ {% block content %}
+ <section>
+    <h1 class="heading">Optimization (BMAT2) - Odd Semester 2021</h1>
+    <div class="">
+        <b>Term:</b> Odd Semester 2021<br>
+        <b>Duration:</b> Sep 21 - Dec 23, 2021<br><br>
+        <b>Course Name:</b> Optimization (B. Math. II)<br>
+        <b>Course Description:</b> <a href="https://www.isibang.ac.in/~adean/infsys/database/Bmath/Opti.html">Link to ISI course archives</a><br>
+        <b>Instructor:</b> Soumyashant Nayak<br>
+        <b>TA:</b> Indrajit Ghosh (Office: S6)<br>
+        <b>Class Schedule:</b> Tue 08:55 a.m. - 10:55 a.m., Thu 08:55 a.m. - 09:55 a.m. (Zoomlink shared over email)<br>
+        <br>
+
+        <h2>Textbooks:</h2>
+
+        <ol>
+            <li>S. Boyd, L. Vandenberghe, <i><a href="https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf">Convex Optimization.</a></i></li>
+            <li>H. Karloff, <i>Linear Programming</i></li>
+            <li>M. J. Kochenderfer and Tim A. Wheeler, <i>Algorithms for Optimization</i></li>
+            <li>R. Schneider, <i>Convex bodies: the Brunn-Minkowski theory</i>, (Chapter 1)</li>
+        </ol>
+        <br>
+        <h2>Assignments</h2>
+        <ul>
+            <li>
+                <a href="{{ url_for('teaching.static', filename='courses/isibc/optimization_isi_2021-2022/Assignment_1_OptimBmat2_2021.pdf') }}" target="_blank" class="underlined-link">
+                    Assignment 1
+                </a> (Due on: 
+                <span class="datestamp"> Oct 11, 2021</span>)
+            </li>
+
+            <li>
+                <a href="{{ url_for('teaching.static', filename='courses/isibc/optimization_isi_2021-2022/Assignment_2_OptimBmat2_2021.pdf') }}" target="_blank" class="underlined-link">
+                    Assignment 2
+                </a> (Due on: 
+                <span class="datestamp"> Oct 20, 2021</span>)
+            </li>
+
+            <li>
+                <a href="{{ url_for('teaching.static', filename='courses/isibc/optimization_isi_2021-2022/Assignment_3_OptimBmat2_2021.pdf') }}" target="_blank" class="underlined-link">
+                    Assignment 3
+                </a> (Due on: 
+                <span class="datestamp"> Nov 11, 2021</span>)
+            </li>
+
+            <li>
+                <a href="{{ url_for('teaching.static', filename='courses/isibc/optimization_isi_2021-2022/Assignment_4_OptimBmat2_2021.pdf') }}" target="_blank" class="underlined-link">
+                    Assignment 4
+                </a> (Due on: 
+                <span class="datestamp"> Nov 27, 2021</span>)
+            </li>
+
+            <li>
+                <a href="{{ url_for('teaching.static', filename='courses/isibc/optimization_isi_2021-2022/Assignment_5_OptimBmat2_2021.pdf') }}" target="_blank" class="underlined-link">
+                    Assignment 5
+                </a> (Due on: 
+                <span class="datestamp"> Dec 13, 2021</span>)
+            </li>
+
+            <li>
+                <a href="{{ url_for('teaching.static', filename='courses/isibc/optimization_isi_2021-2022/Assignment_6_OptimBmat2_2021.pdf') }}" target="_blank" class="underlined-link">
+                    Assignment 6
+                </a> (Due on: 
+                <span class="datestamp"> Jan 02, 2021</span>)
+            </li>
+        </ul>
+
+        <br>
+        <h2>Exams</h2>
+        <ul>
+            <li>
+                <a href="{{ url_for('teaching.static', filename='courses/isibc/optimization_isi_2021-2022/Midterm_Exam_OPTIM_12-13Nov2021_rev1.pdf') }}" target="_blank" class="underlined-link">
+                    Midterm
+                </a> (Date: 
+                <span class="datestamp"> Nov 12-13, 2021</span>)
+            </li>
+
+            <li>
+                <a href="{{ url_for('teaching.static', filename='courses/isibc/optimization_isi_2021-2022/Final.pdf') }}" target="_blank" class="underlined-link">
+                    Final
+                </a> (Date: 
+                <span class="datestamp"> Jan 07, 2021</span>)
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- Add last updated information -->
+<p class="last-updated">Last Updated: Dec 10, 2023</p>
+
+ {% endblock %}
+  
+ 

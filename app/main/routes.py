@@ -16,6 +16,9 @@ def index():
     return render_template('index.html')
 
 
+#######################################################
+#                      Research
+#######################################################
 @main_bp.route('/research/')
 def research():
     return render_template('research.html')
