@@ -5,7 +5,7 @@
 
 from . import teaching_bp
 
-from flask import render_template, redirect, url_for, request
+from flask import render_template
 
 
 #######################################################
