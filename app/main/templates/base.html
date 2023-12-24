@@ -34,10 +34,10 @@
     <nav>
         <div class="container nav-container sidebar">
             <ul class="nav-links">
-                <li onclick=hideSidebar() ><a href="" class=""><svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
-                <li><a href="#home">Home</a></li>
+                <li onclick=hideSidebar() ><a class=""><svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+                <li><a href="{{ url_for('main.index') }}">Home</a></li>
                 <li><a href="https://google.com">Teaching</a></li>
-                <li><a href="#">Research</a></li>
+                <li><a href="{{ url_for('main.research') }}">Research</a></li>
                 <li><a href="#">Photos</a></li>
                 <li><a href="#">Timeline</a></li>
                 <li><a href="#">Misc</a></li>

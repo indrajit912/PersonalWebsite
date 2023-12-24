@@ -7,16 +7,24 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    list-style: none;
     font-family: "Poppins", sans-serif;
     border: none;
     outline: none;
-    scroll-behavior: smooth;
     letter-spacing: .4px;
 }
 
 html {
     scroll-behavior: smooth;
+}
+
+body {
+    padding-top: 7rem;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 6rem; /* Adjust for smaller screens */
+    }
 }
 
 :root {
@@ -201,6 +209,7 @@ nav {
     justify-content: flex-end;
     align-items: center;
     height: 100%;
+    list-style: none;
 }
 
 .logo {
@@ -273,13 +282,7 @@ nav li:first-child {
 
 /* ........................ Start Header Section ...................... */
 header {
-    padding: 15rem;
-}
-
-@media(min-width) {
-    header {
-        padding: 20rem;
-    }
+    padding: 8rem;
 }
 
 .header-container {
@@ -340,7 +343,7 @@ header {
 /* ........................ Start Header Section for Mobile ...................... */
 @media (max-width: 600px) {
     header {
-        padding: 8rem;
+        padding: 3rem;
     }
 
     .header-container {
