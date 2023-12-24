@@ -29,113 +29,112 @@
 </head>
 
 <body>
-    <body>
 
-        <!-- Nav Bar Start -->
-        <nav>
-            <div class="container nav-container sidebar">
-                <ul class="nav-links">
-                    <li onclick=hideSidebar() ><a href="" class=""><svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="https://google.com">Teaching</a></li>
-                    <li><a href="#">Research</a></li>
-                    <li><a href="#">Photos</a></li>
-                    <li><a href="#">Timeline</a></li>
-                    <li><a href="#">Misc</a></li>
-                </ul>
-            </div>
-
-            <div class="container nav-container">
-                <ul class="nav-links">
-                    <li><a href="" class="logo">Indrajit Ghosh</a></li>
-                    <li class="hideOnMobile"><a href="#home">Home</a></li>
-                    <li class="hideOnMobile"><a href="https://google.com" target="_blank">Teaching</a></li>
-                    <li class="hideOnMobile"><a href="#">Research</a></li>
-                    <li class="hideOnMobile"><a href="#">Photos</a></li>
-                    <li class="hideOnMobile"><a href="#">Timeline</a></li>
-                    <li class="hideOnMobile"><a href="#">Misc</a></li>
-                    <li class="menu-btn" onclick=showSidebar() ><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
-                </ul>
-            </div>
-        </nav>
-        
-        <!-- Nav Bar End -->
-        
-        <!-- Content of the webpage -->
-        <div class="">
-            {% block content %}{% endblock %}
+    <!-- Nav Bar Start -->
+    <nav>
+        <div class="container nav-container sidebar">
+            <ul class="nav-links">
+                <li onclick=hideSidebar() ><a href="" class=""><svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="https://google.com">Teaching</a></li>
+                <li><a href="#">Research</a></li>
+                <li><a href="#">Photos</a></li>
+                <li><a href="#">Timeline</a></li>
+                <li><a href="#">Misc</a></li>
+            </ul>
         </div>
 
-
-        <!-- Footer of the webpage -->
-        <div class="footer-basic">
-            <footer>
-                <div class="social">
-                    <a href="https://github.com/indrajit912" target="_blank"><i class="icon ion-social-github"></i></a>
-                    <a href="https://instagram.com/indrajitghosh912" target="_blank"><i class="icon ion-social-instagram"></i></a>
-                    <a href="https://twitter.com/Meself_Indrajit" target="_blank"><i class="icon ion-social-twitter"></i></a>
-                    <a href="https://fb.com/indrajitghosh912" target="_blank"><i class="icon ion-social-facebook"></i></a>
-                    <a href="#"><i class="icon ion-email"></i></a>
-                    <p class="copyright">&copy; 
-                        <span id="copyright-year">
-                            <script>
-                                // JavaScript to print the current year
-                                document.getElementById('copyright-year').appendChild(document.createTextNode(new Date().getFullYear()))
-                            </script>
-                        </span>
-                        Indrajit Ghosh. All rights reserved.</p>
-                </div>
-                <!-- <ul class="list-inline">
-                    <li class="list-inline-item"><a href="#">Home</a></li>
-                    <li class="list-inline-item"><a href="#">Services</a></li>
-                    <li class="list-inline-item"><a href="#">About</a></li>
-                    <li class="list-inline-item"><a href="#">Terms</a></li>
-                    <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-                </ul> -->
-            </footer>
+        <div class="container nav-container">
+            <ul class="nav-links">
+                <li><a href="" class="logo">Indrajit Ghosh</a></li>
+                <li class="hideOnMobile"><a href="{{ url_for('main.index') }}">Home</a></li>
+                <li class="hideOnMobile"><a href="https://google.com" target="_blank">Teaching</a></li>
+                <li class="hideOnMobile"><a href="{{ url_for('main.research') }}">Research</a></li>
+                <li class="hideOnMobile"><a href="#">Photos</a></li>
+                <li class="hideOnMobile"><a href="#">Timeline</a></li>
+                <li class="hideOnMobile"><a href="#">Misc</a></li>
+                <li class="menu-btn" onclick=showSidebar() ><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
+            </ul>
         </div>
-
-
-
-        <!--  Javascripts required for my website -->
-        <script src="{{ url_for('main.static', filename='js/script.js') }}"></script>
-
-        <!-- Javascript for the sidebar -->
-        <script>
-            function showSidebar(){
-                const sidebar = document.querySelector('.sidebar')
-                sidebar.style.display = 'flex'
-            }
-
-            function hideSidebar(){
-                const sidebar = document.querySelector('.sidebar')
-                sidebar.style.display = 'none'
-            }
-        </script>
-
-        <!-- The follwoing is for displaying LaTeX code outputs -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    </nav>
         
-        <!-- MathJax configuration for equations fitting on smaller screens -->
-        <script type="text/x-mathjax-config">
-            MathJax.Hub.Config({
-                CommonHTML: {
-                    scale: 80,  // Adjust this value as needed
-                    linebreaks: { automatic: true },
-                    EqnChunk: 10,
-                    EqnChunkFactor: 1.5,
-                    EqnChunkDelay: 10,
-                    EqnChunkSize: MathJax.Hub.Browser.isMobile ? 10 : 50
-                }
-            });
-        </script>
+    <!-- Nav Bar End -->
+        
+    <!-- Content of the webpage -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
 
-        <script type="text/x-mathjax-config">
-            MathJax.Hub.Config({
-                TeX: {
-                    extensions: ["AMSmath.js", "AMSsymbols.js", "esint.js"]
-                }
-            });
-        </script>
+
+    <!-- Footer of the webpage -->
+    <div class="footer-basic">
+        <footer>
+            <div class="social">
+                <a href="https://github.com/indrajit912" target="_blank"><i class="icon ion-social-github"></i></a>
+                <a href="https://instagram.com/indrajitghosh912" target="_blank"><i class="icon ion-social-instagram"></i></a>
+                <a href="https://twitter.com/Meself_Indrajit" target="_blank"><i class="icon ion-social-twitter"></i></a>
+                <a href="https://fb.com/indrajitghosh912" target="_blank"><i class="icon ion-social-facebook"></i></a>
+                <a href="#"><i class="icon ion-email"></i></a>
+                <p class="copyright">&copy; 
+                    <span id="copyright-year">
+                        <script>
+                            // JavaScript to print the current year
+                            document.getElementById('copyright-year').appendChild(document.createTextNode(new Date().getFullYear()))
+                        </script>
+                    </span>
+                    Indrajit Ghosh. All rights reserved.</p>
+            </div>
+            <!-- <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul> -->
+        </footer>
+    </div>
+
+
+
+    <!--  Javascripts required for my website -->
+    <script src="{{ url_for('main.static', filename='js/script.js') }}"></script>
+
+    <!-- Javascript for the sidebar -->
+    <script>
+        function showSidebar(){
+            const sidebar = document.querySelector('.sidebar')
+            sidebar.style.display = 'flex'
+        }
+
+        function hideSidebar(){
+            const sidebar = document.querySelector('.sidebar')
+            sidebar.style.display = 'none'
+        }
+    </script>
+
+    <!-- The follwoing is for displaying LaTeX code outputs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        
+    <!-- MathJax configuration for equations fitting on smaller screens -->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            CommonHTML: {
+                scale: 80,  // Adjust this value as needed
+                linebreaks: { automatic: true },
+                EqnChunk: 10,
+                EqnChunkFactor: 1.5,
+                EqnChunkDelay: 10,
+                EqnChunkSize: MathJax.Hub.Browser.isMobile ? 10 : 50
+            }
+        });
+    </script>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: {
+                extensions: ["AMSmath.js", "AMSsymbols.js", "esint.js"]
+            }
+        });
+    </script>
 </body>
 </html>

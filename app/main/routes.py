@@ -14,3 +14,8 @@ from flask import render_template, redirect, url_for, request
 @main_bp.route('/')
 def index():
     return render_template('index.html')
+
+
+@main_bp.route('/research/')
+def research():
+    return render_template('research.html')

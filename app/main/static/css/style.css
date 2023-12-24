@@ -345,13 +345,13 @@ header {
 
     .header-container {
         grid-template-columns: 1fr; /* Set to a single column for smaller screens */
-        gap: 20px;
         justify-content: center; /* Center items horizontally */
     }
 
     .header-left {
-        width: 250px;
-        height: 250px;
+        width: 200px;
+        height: 200px;
+        margin: 0 auto 2rem;
     }
 
     .header-right {
@@ -377,8 +377,13 @@ header {
         display: flex;
         justify-content: center;
         gap: 0.5rem;
-        flex-direction: column; /* Stack buttons vertically on smaller screens */
+        flex-direction: row; /* Stack buttons vertically on smaller screens */
         align-items: center;
+    }
+
+    .header-action-area .btn {
+        width: 8rem;
+        font-size: 10px;
     }
 
     .header-social {
