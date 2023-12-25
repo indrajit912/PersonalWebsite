@@ -178,7 +178,7 @@ section h2 {
 /* Media query for screens with a maximum width of 768px (adjust as needed) */
 @media only screen and (max-width: 768px) {
     section {
-        margin: 0 2rem; /* Adjust the margin for smaller screens */
+        margin: 0 1.5rem; /* Adjust the margin for smaller screens */
     }
 
     section h1 {

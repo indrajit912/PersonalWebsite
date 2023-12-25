@@ -5,6 +5,7 @@
   
 {% block styles %}
     {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/teaching_style.css') }}">
     <style>
         table {
             font-family: Arial, sans-serif;
@@ -35,23 +36,20 @@
 
         /* Style for the print button */
         .print-button {
-            margin-top: 1px;
-            margin-bottom: 2px;
             float: right;
-            padding: 8px 16px;
-            font-size: 14px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
+            width: 5rem;
+            height: 2rem;
             align-items: right;
+            margin-bottom: 10px;
+
         }
         
         /* Media query for smaller screens */
         @media screen and (max-width: 600px) {
             table {
                 font-size: 12px;
+                display: block;
+                overflow-x: auto;
             }
 
             th, td {
@@ -69,7 +67,7 @@
 {% block content %}
 
 <section>
-<h1 class="heading">Workshop on Completely Positive Maps</h1>
+<h1 class="heading page-title">Workshop on Completely Positive Maps</h1>
 <div class="">
     <b>Term:</b> Even Semester 2024<br>
     <b>Duration:</b> Jan, 15 2024 - Apr 29, 2024<br><br>
@@ -98,8 +96,8 @@
 
     <h2>Tentative Schedule</h2>
     <!-- Button to trigger printing -->
-    <button onclick="printTentativeSchedule()" class="print-button">Print</button>
-
+    <button onclick="printTentativeSchedule()" class=" btn print-button">Print</button>
+    
     <table id="tentativeScheduleTable">
         <tr>
             <th>Phase</th>
