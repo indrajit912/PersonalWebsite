@@ -27,6 +27,9 @@ def create_app(config_class=ProductionConfig):
 
     from app.teaching import teaching_bp
     app.register_blueprint(teaching_bp)
+
+    from app.errors import errors_bp
+    app.register_blueprint(errors_bp)
     
 
     @app.route('/test/')
