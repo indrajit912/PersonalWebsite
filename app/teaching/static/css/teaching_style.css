@@ -103,6 +103,12 @@ p {
   }
 }
 
+@media (min-width: 1600px) {
+  .course-link {
+    font-size: 12px;
+  }
+}
+
 
 /* Additional styles for grading page */
 .grading-table {
