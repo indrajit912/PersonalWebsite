@@ -26,12 +26,8 @@ p {
 
 .teaching-container {
   width: 95%;
-  max-width: 1220px;
+  max-width: 1200px;
   margin: 20px auto;
-  padding: 20px;
-  /* background-color: #fff; */
-  /* border-radius: 5px; */
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
 .course {
@@ -202,6 +198,8 @@ p {
     align-items: center;
     color: #777;
     height: 40vh; /* Set the height of the container to the viewport height for vertical centering */
+    width: 40vh;
+    margin: 10px auto;
 }
 
 .center-img img {

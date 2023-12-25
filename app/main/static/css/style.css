@@ -160,6 +160,7 @@ img {
 section {
     padding-top: 4vh;
     margin: 0 10rem;
+    margin-bottom: 5rem;
     box-sizing: border-box;
     min-height: fit-content;
 }
@@ -207,6 +208,7 @@ section h2 {
         padding: 1rem; /* Adjust padding as needed */
     }
 }
+
 
 /* .......................... Start Nav bar ......................... */
 nav {
@@ -420,6 +422,31 @@ header {
     }
 }
 
+/* Styles for larger screens */
+@media (min-width: 1600px) {
+    #home {
+        padding-top: 13rem;
+    }
+    .header-container {
+        max-width: 900px;
+    }
+
+    .header-right h1 {
+        font-size: 60px;
+    }
+    
+    .header-right h2 {
+        font-size: 30px;
+    }
+    
+    .header-right h3 {
+        font-size: 28px;
+    }
+    
+    .header-right p {
+        font-size: 30px;
+    }
+}
 /* ........................ End Header Section ...................... */
 
 
@@ -429,7 +456,7 @@ header {
 .last-updated {
   color: #999;
   font-size: 14px;
-  margin-top: 20px;
+  margin-top: 25px;
   margin-bottom: 20px;
   text-align: center;
   padding: 10px;
