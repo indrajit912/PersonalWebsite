@@ -15,10 +15,6 @@ body {
   --color-dark-variant: #555555;
 }
 
-p {
-  margin: 0 0 13px 0;
-}
-
 .teaching-heading {
   text-align: center; 
   margin-bottom: 20px;

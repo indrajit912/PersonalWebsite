@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+
+{% block title %}Miscellaneous{% endblock %}
+
+{% block meta_tags %}
+    {{ super() }}
+    <meta name="keywords" content="past year entrance exam papers, isi entrance question papers, mathematics, tifr question papers, csit net question papers, nbhm question papers">
+{% endblock %}
+
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('misc.static', filename='css/sticky_style.css') }}">
+    <style>
+        .download-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .download-links a {
+            padding: 6px 8px; /* Adjusted padding */
+            font-size: 14px; /* Adjusted font size */
+            background-color: #007bff; /* Green background color */  
+            color: white; /* White text color */
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .download-links a:hover {
+            background-color: #0056b3; /* Darker green on hover */  
+        }
+
+        .download-links a:not(:last-child) {
+            margin-right: 10px; /* Adjusted margin between links */
+        }
+
+        .download-links .overleaf-link {
+            background-color: #4CAF50; /* Blue background color for Overleaf link */
+            padding: 8px 12px; /* Adjusted padding */
+            font-size: 16px; /* Adjusted font size */
+            color: white; /* White text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .download-links .overleaf-link:hover {
+            background-color: #45a049; /* Darker blue on hover */
+        }
+
+        .visit-button {
+            display: inline-block;
+            padding: 8px 16px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            background-color: #4CAF50; /* Green background color */
+            color: white; /* White text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .visit-button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        .exam-container {
+          width: 50%;
+          max-width: 1220px;
+          margin: 20px auto;
+          padding: 20px;
+          /* background-color: #fff; */
+          /* border-radius: 5px; */
+          /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+        }
+
+        .exam-entry {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          position: relative;
+          border-top: 2px solid #fff;
+          /* border-bottom: 2px solid #fff; */
+          padding-top: 10px;
+          padding-bottom: 10px;
+          margin-bottom: 15px;
+        }
+
+        .exam-entry .title {
+          font-weight: 600;
+          font-size: large;
+        }
+
+        .exam-papers {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .paper-group {
+            margin-bottom: 9px; 
+            display: flex;
+            align-items: center;
+        }
+
+        .paper-group:last-child {
+            margin-bottom: 0; /* Remove margin for the last paper-group */
+        }
+
+        .paper-year {
+            margin-right: 20px;
+        }
+
+        .paper-link {
+            margin-right: 20px;
+            padding: 8px 12px; /* Adjusted padding */
+            font-size: 16px; /* Adjusted font size */
+            color: white; /* White text color */
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .paper-link:hover {
+            background-color: #0056b3; /* Change the color on hover */
+        }
+
+        .key-link {
+            margin-right: 20px;
+            padding: 8px 12px; /* Adjusted padding */
+            font-size: 16px; /* Adjusted font size */
+            color: white; /* White text color */
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .key-link:hover {
+            background-color: #45a049; /* Change the color on hover */
+        }
+
+
+        /* Media query for screens with a maximum width of 600px */
+        @media (max-width: 600px) {
+            .download-links {
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: stretch;
+            }
+
+            .download-links a,
+            .download-links .overleaf-link {
+                width: 80%; /* Set full width for each link */
+                margin-bottom: 10px; /* Add space between links */
+            }
+
+            .exam-container {
+                width: 89%;
+            }
+            .exam-entry {
+                grid-template-columns: 1fr;
+            }
+
+            .exam-entry .title {
+              text-align: center;
+              font-size: 15px;
+              margin-bottom: 10px;
+            }
+
+            .paper-link {
+                margin-right: 18px;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="toc_container">
+        <h2 class="center">Page Contents</h2>
+        <ul>
+            <li>
+                <a href="#latex-templates" class="toc_title">LaTeX Templates</a>
+            </li>
+    
+            <li>
+                <a href="#math-research-resources" class="toc_title">Mathematics Research Resources</a>
+            </li>
+    
+            <li>
+                <a href="#exam-archive" class="toc_title">Various Entrance Exam Papers Archive</a>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    {% include 'tex_templates.html' %}
+</section>
+
+<section>
+    {% include 'math_resources.html' %}
+</section>
+
+<section>
+    {% include 'exam_archive.html' %}
+</section>
+
+
+<!-- Add last updated information -->
+<p class="last-updated">Last Updated: Dec 10, 2023</p>
+
+<script src="{{ url_for('misc.static', filename='js/overleaf.js') }}"></script>
+
+{% endblock %}

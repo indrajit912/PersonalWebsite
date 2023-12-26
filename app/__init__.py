@@ -30,6 +30,9 @@ def create_app(config_class=ProductionConfig):
 
     from app.errors import errors_bp
     app.register_blueprint(errors_bp)
+
+    from app.misc import misc_bp
+    app.register_blueprint(misc_bp)
     
 
     @app.route('/test/')

@@ -9,7 +9,7 @@ from flask import render_template
 
 
 #######################################################
-#                      Homepage
+#                      Routes
 #######################################################
 @teaching_bp.route('/')
 def index():
