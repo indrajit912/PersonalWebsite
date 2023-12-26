@@ -68,7 +68,6 @@
         {% block content %}{% endblock %}
     </main>
 
-
     <!-- Footer of the webpage -->
     <div class="footer-basic">
         <footer>
@@ -98,9 +97,21 @@
     </div>
 
 
+    <!-- Add this button at the bottom of your body tag -->
+    <button id="scrollUpBtn" onclick="scrollToTop()">
+        <div class="scrollup-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30">
+                <path d="M440-240v-368L296-464l-56-56 240-240 240 240-56 56-144-144v368h-80Z"/>
+            </svg>
+        </div>
+    </button>
 
     <!--  Javascripts required for my website -->
     <script src="{{ url_for('main.static', filename='js/script.js') }}"></script>
+
+    <!-- Add this to the end of your body tag -->
+    <script src="{{ url_for('main.static', filename='js/scroll.js') }}"></script>
+
 
     <!-- Javascript for the sidebar -->
     <script>
@@ -139,5 +150,6 @@
             }
         });
     </script>
+    
 </body>
 </html>

@@ -141,6 +141,31 @@ nav a:hover {
     background: var(--color-black);
 }
 
+/* styling for the scroll-up button */
+#scrollUpBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.scrollup-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    fill: var(--color-white);
+    position: relative;
+    top: -10px; /* Adjust the top position to center the circle */
+    left: -10px; /* Adjust the left position to center the circle */
+    width: 50px; /* Adjust the size of the circle */
+    height: 50px; /* Adjust the size of the circle */
+    background-color: var(--color-dark-variant);
+    border-radius: 50%; /* Make it a circle */
+}
+
 img {
     width: 100%;
     display: block;
@@ -175,6 +200,19 @@ section {
 section h2 {
     margin-bottom: 0.3rem;
 }
+
+/* Twitter X icon */
+.fa.fa-twitter::before {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    content: "";
+    background-color: currentColor;
+    -webkit-mask: url('data:image/svg+xml;utf8,<svg viewBox="0 -8 26 30" xmlns="http://www.w3.org/2000/svg"><g><path fill="white" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></g></svg>') no-repeat center;
+    mask: url('data:image/svg+xml;utf8,<svg viewBox="0 -8 26 30" xmlns="http://www.w3.org/2000/svg"><g><path fill="white" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></g></svg>') no-repeat center;
+    background-position: center 3px;
+}
+
 
 /* Media query for screens with a maximum width of 768px (adjust as needed) */
 @media only screen and (max-width: 768px) {
@@ -237,18 +275,6 @@ nav {
     font-size: 32px;
     color: var(--color-black) !important;
     text-decoration: none !important;
-}
-
-/* Twitter X icon */
-.fa.fa-twitter::before {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    content: "";
-    background-color: currentColor;
-    -webkit-mask: url('data:image/svg+xml;utf8,<svg viewBox="0 -8 26 30" xmlns="http://www.w3.org/2000/svg"><g><path fill="white" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></g></svg>') no-repeat center;
-    mask: url('data:image/svg+xml;utf8,<svg viewBox="0 -8 26 30" xmlns="http://www.w3.org/2000/svg"><g><path fill="white" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></g></svg>') no-repeat center;
-    background-position: center 3px;
 }
 
 .nav-links {
