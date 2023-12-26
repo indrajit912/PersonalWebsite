@@ -15,6 +15,7 @@ dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
 BASE_DIR = Path(__file__).parent.resolve()
+APP_DATA_DIR = Path(__file__).parent / "app_data"
 
 
 class EmailConfig:
