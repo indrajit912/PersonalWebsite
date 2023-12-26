@@ -36,12 +36,9 @@
   padding: 15px 0;
 }
 
-.title {
-  color: #001233;
-}
-
 .episode__content .title {
-  font-weight: 600
+  font-weight: 600;
+  color: var(--color-dark);
 }
 
 .episode__content .story {
@@ -73,8 +70,8 @@
 
 .toc_container > ul {
   list-style-type: none;
-  border-top: 2px solid #fff;
-  border-bottom: 2px solid #fff;
+  border-top: 2px solid var(--color-black);
+  border-bottom: 2px solid var(--color-black);
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 0;
@@ -82,9 +79,13 @@
 }
 
 .toc_container a {
-  color: #001233;
+  color: var(--color-dark-variant);
 }
 
+.toc_heading {
+  margin-bottom: 15px;
+  text-align: center;
+}
 .toc_title {
   font-weight: 700;
   text-align: center;
@@ -92,6 +93,6 @@
 
 @media (max-width: 600px) {
   .toc_container {
-      width: 89%;
+      width: 100%;
   }
 }
