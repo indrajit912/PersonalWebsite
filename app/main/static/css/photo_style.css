@@ -95,5 +95,6 @@ a:is(:hover, :focus) figcaption {
 
     figcaption {
         font-size: 1rem;
+        z-index: 0;
     }
 }
