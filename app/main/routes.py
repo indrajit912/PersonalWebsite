@@ -8,8 +8,8 @@ from . import main_bp
 
 from flask import render_template, redirect, url_for, request
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, FileField
-from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms import StringField, TextAreaField
+from wtforms.validators import DataRequired, Email
 
 from pathlib import Path
 from smtplib import SMTPAuthenticationError, SMTPException
