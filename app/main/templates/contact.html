@@ -14,10 +14,10 @@
 
     <div class="contact-form">
         <form method="post" enctype="multipart/form-data">
-            <input type="text" name="name" placeholder="Your name" required class="custom-input">
-            <input type="email" name="email" placeholder="Email address ..." required class="custom-input">
-            <input type="text" name="subject" placeholder="Subject" required class="custom-input">
-            <textarea name="message" cols="30" rows="10" placeholder="Write a message here ..." required class="custom-input"></textarea>
+            <input type="text" name="name" placeholder="Your name" required>
+            <input type="email" name="email" placeholder="Email address ..." required>
+            <input type="text" name="subject" placeholder="Subject" required>
+            <textarea name="message" cols="30" rows="10" placeholder="Write a message here ..." required></textarea>
             <div id="attachment-container">
                 <p>Attachment(s)</p>
                 <div class="">
@@ -52,7 +52,6 @@
     function addAttachmentField() {
           var container = document.getElementById('attachment-container');
           var newInput = document.createElement('div');
-          newInput.classList.add('app-form-group');
           newInput.innerHTML = '<input type="file" name="attachment[]" class="" onchange="validateFileSize(this)"><button type="button" class="" onclick="clearAttachment(this)">Clear</button>';
           container.appendChild(newInput);
       }
