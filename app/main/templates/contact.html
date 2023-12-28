@@ -13,14 +13,60 @@
     <h1 class="heading">Contact Me</h1>
 
     <div class="contact-form">
-        <form action="">
-            <input type="text" placeholder="Your name" required>
-            <input type="email" placeholder="Email address ..." required>
-            <textarea name="" id="" cols="30" rows="10" placeholder="Write a message here ..." required></textarea>
+        <form method="post" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Your name" required class="custom-input">
+            <input type="email" name="email" placeholder="Email address ..." required class="custom-input">
+            <input type="text" name="subject" placeholder="Subject" required class="custom-input">
+            <textarea name="message" cols="30" rows="10" placeholder="Write a message here ..." required class="custom-input"></textarea>
+            <div id="attachment-container">
+                <p>Attachment(s)</p>
+                <div class="">
+                    <input type="file" name="attachment[]" class="" onchange="validateFileSize(this)">
+                    <button type="button" class="" onclick="clearAttachment(this)">Clear</button>
+                </div>
+            </div>
+            <button type="button" id="add-more-btn" class="" onclick="addAttachmentField()">Attach More</button>
+            <br>
             <input type="submit" name="" value="Send Message" class="send-btn">
         </form>
     </div>
 
 </section>
+
+<script>
+
+    function validateFileSize(input) {
+            var maxSize = 24 * 1024 * 1024;  // 24 MB in bytes
+            var fileSize = input.files[0].size;
+    
+            if (fileSize > maxSize) {
+                alert('File size must be less than or equal to 24 MB.');
+                // Optionally, you can clear the file input to prevent form submission
+                input.value = '';
+                return false; // Prevent form submission
+            }
+          
+            return true; // Continue with form submission
+        }
+    
+    function addAttachmentField() {
+          var container = document.getElementById('attachment-container');
+          var newInput = document.createElement('div');
+          newInput.classList.add('app-form-group');
+          newInput.innerHTML = '<input type="file" name="attachment[]" class="" onchange="validateFileSize(this)"><button type="button" class="" onclick="clearAttachment(this)">Clear</button>';
+          container.appendChild(newInput);
+      }
+
+      function clearAttachment(button) {
+          var input = button.previousElementSibling;
+          input.value = ""; // Clear the file input
+      }
+
+      function validateForm() {
+          // Add any additional form validation logic here
+          return true; // Return false to prevent form submission
+      }
+
+  </script>
 
 {% endblock %}
