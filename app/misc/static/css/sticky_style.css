@@ -46,9 +46,6 @@
 }
 
 @media (max-width: 600px) {
-  .container{
-    width: 89%;
-  }
   .episode__content {
     grid-template-columns: 1fr;
   }
