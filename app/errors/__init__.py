@@ -7,7 +7,6 @@ errors_bp = Blueprint(
     url_prefix='/errors', 
     template_folder="templates", 
     static_folder="static",
-    static_url_path="/errors/static"
 )
 
 from app.errors import handlers
