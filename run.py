@@ -12,8 +12,9 @@ Usage:
 """
 
 from app import create_app
+from config import DevelopmentConfig
 
-app = create_app()
+app = create_app(DevelopmentConfig)
 
 
 if __name__ == '__main__':
