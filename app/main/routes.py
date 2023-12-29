@@ -8,8 +8,9 @@ from . import main_bp
 
 from flask import render_template, redirect, url_for, request
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, FileField
-from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms import StringField, TextAreaField
+from wtforms.validators import DataRequired, Email
+from werkzeug.utils import secure_filename
 
 from pathlib import Path
 from smtplib import SMTPAuthenticationError, SMTPException
@@ -59,15 +60,12 @@ class ContactForm(FlaskForm):
 
 @main_bp.route('/contact/', methods=['GET', 'POST'])
 def contact():
-    form = ContactForm()
-
-    if request.method == 'POST' and form.validate_on_submit():
+    if request.method == 'POST':
         # Process the form data and send an email or save the message, etc.
-        # Access form data using form.data
-        name = form.name.data
-        email_id = form.email.data
-        subject = form.subject.data
-        message_parts = form.message.data.split('\n')
+        name = request.form.get('name')
+        email_id = request.form.get('email')
+        subject = request.form.get('subject')
+        message_parts = request.form.get('message').split('\n')
 
         # Process file attachments
         attachments = request.files.getlist('attachment[]')
@@ -81,11 +79,11 @@ def contact():
                 _attachment_paths.append(_attachment_filename)
 
         # Render the email template with the provided parameters
-        _email_html_text = render_template(
-            'emails/email_template.html', 
-            name=name, 
-            subject=subject, 
-            message_parts=message_parts, 
+        email_html_text = render_template(
+            'emails/email_template.html',
+            name=name,
+            subject=subject,
+            message_parts=message_parts,
             email_id=email_id
         )
 
@@ -94,43 +92,39 @@ def contact():
             sender_email_id=EmailConfig.INDRAJITS_BOT_EMAIL_ID,
             to=EmailConfig.INDRAJIT912_GMAIL,
             subject="Message from your WebSite!",
-            email_html_text=_email_html_text,
+            email_html_text=email_html_text,
             attachments=_attachment_paths
         )
-
 
         try:
             # Send the email to Indrajit
             msg.send(
-                sender_email_password=EmailConfig.INDRAJITS_BOT_EMAIL_PASSWD, 
+                sender_email_password=EmailConfig.INDRAJITS_BOT_EMAIL_PASSWD,
                 server_info=EmailConfig.GMAIL_SERVER,
                 print_success_status=False
             )
 
-            # Delete the attachments from server
+            # Delete the attachments from the server
             for attachment_path in _attachment_paths:
                 if attachment_path.exists():
                     attachment_path.unlink()
 
-
             # After processing, you can redirect to a thank-you page.
             return render_template('thank_you.html')
-        
+
         except SMTPAuthenticationError as e:
             # TODO: Print the error `e` as 'Know More' button!
             # Redirect to the email authentication error page using the error blueprint
             return redirect(url_for('errors.email_auth_error_route'))
-        
-        
+
         except SMTPException as e:
             return redirect(url_for('errors.email_send_error_route'))
-        
-        except:
+
+        except Exception as e:
             # Handle email sending error
             return redirect(url_for('errors.generic_error_route'))
 
-
-    return render_template('contact.html', form=form)
+    return render_template('contact.html')
 
 ###########################################################
 #               Test route

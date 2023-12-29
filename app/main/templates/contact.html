@@ -4,80 +4,36 @@
 
 {% block styles %}
      {{ super() }}
-     <link rel="stylesheet" href="{{ url_for('main.static', filename='css/contact_style.css') }}">
 {% endblock %} 
  
 {% block content %}
 
-<div class="background">
-    <div class="container">
-      <div class="screen">
-        <div class="screen-header">
-          <div class="screen-header-left">
-            <div class="screen-header-button close"></div>
-            <div class="screen-header-button maximize"></div>
-            <div class="screen-header-button minimize"></div>
-          </div>
-          <div class="screen-header-right">
-            <div class="screen-header-ellipsis"></div>
-            <div class="screen-header-ellipsis"></div>
-            <div class="screen-header-ellipsis"></div>
-          </div>
-        </div>
-        <div class="screen-body">
-          <div class="screen-body-item left">
-            <div class="app-title">
-              <span>CONTACT</span>
-              <span>INDRAJIT</span>
+<section class="contact" id="contact">
+
+    <h1 class="heading">Contact Me</h1>
+
+    <div class="contact-form">
+        <form method="post" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Your name (required)" required class="custom-input">
+            <input type="email" name="email" placeholder="Email address (required)" required class="custom-input">
+            <input type="text" name="subject" placeholder="Subject (required)" required class="custom-input">
+            <textarea name="message" cols="30" rows="10" placeholder="Write a message here ... (required)" required class="msg-input"></textarea>
+            <div id="attachment-container">
+                <p>Attachment(s)</p>
+                <div class="">
+                    <input type="file" name="attachment[]" class="" onchange="validateFileSize(this)">
+                    <button type="button" class="" onclick="clearAttachment(this)">Clear</button>
+                </div>
             </div>
-          </div>
-          <div class="screen-body-item">
-
-            <!-- Contact Me form -->
-            <form method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
-              {{ form.hidden_tag() }}
-              <div class="app-form">
-
-                <div class="app-form-group">
-                    {{ form.name(class="app-form-control", placeholder="Name") }}
-                </div>
-                <div class="app-form-group">
-                    {{ form.email(class="app-form-control", placeholder="Email") }}
-                </div>
-                <div class="app-form-group">
-                    {{ form.subject(class="app-form-control", placeholder="Subject") }}
-                </div>
-                <div class="app-form-group message">
-                    {{ form.message(class="app-form-control", placeholder="Write your message here ...", rows=5) }}
-                </div>
-              
-                <div id="attachment-container">
-                    <div class="app-form-group">
-                        <p>Attachment(s)</p>
-                        <input type="file" name="attachment[]" class="app-form-control" onchange="validateFileSize(this)">
-                        <button type="button" class="app-form-button" onclick="clearAttachment(this)">Clear</button>
-                    </div>
-                </div>
-                
-                <button type="button" id="add-more-btn" class="app-form-button" onclick="addAttachmentField()">Attach More</button>
-                  
-                </div>
-                <!-- ... existing form fields ... -->
-                <div class="app-form-group buttons">
-                    <button type="submit" class="app-form-button">Send</button>
-                </div>
-
-              </div>
-            </form>
-
-          </div>
-        </div>
-      </div>
-      </div>
+            <button type="button" id="add-more-btn" class="" onclick="addAttachmentField()">Attach More</button>
+            <br>
+            <input type="submit" name="" value="Send Message" class="send-btn">
+        </form>
     </div>
-  </div>
 
-  <script>
+</section>
+
+<script>
 
     function validateFileSize(input) {
             var maxSize = 24 * 1024 * 1024;  // 24 MB in bytes
@@ -96,8 +52,7 @@
     function addAttachmentField() {
           var container = document.getElementById('attachment-container');
           var newInput = document.createElement('div');
-          newInput.classList.add('app-form-group');
-          newInput.innerHTML = '<input type="file" name="attachment[]" class="app-form-control" onchange="validateFileSize(this)"><button type="button" class="app-form-button" onclick="clearAttachment(this)">Clear</button>';
+          newInput.innerHTML = '<input type="file" name="attachment[]" class="" onchange="validateFileSize(this)"><button type="button" class="" onclick="clearAttachment(this)">Clear</button>';
           container.appendChild(newInput);
       }
 

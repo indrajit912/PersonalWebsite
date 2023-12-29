@@ -540,6 +540,115 @@ a.back-to-top {
 /* ........................ End Misc Styles ...................... */
 
 
+/* ........................ Start Contact Form Styles ...................... */
+.contact-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.contact-form form {
+    position: relative;
+    width: 600px;
+}
+
+.custom-input,
+.msg-input {
+    width: 100%;
+    padding: 20px;
+    border: none;
+    outline: none;
+    background: var(--color-dark);
+    color: var(--color-white);
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: var(--color-white);
+    font-size: 15px;
+}
+
+.contact-form textarea {
+    resize: none;
+}
+
+.contact-form .send-btn {
+    display: inline-block;
+    padding: 11px 25px;
+    background: var(--color-dark);
+    color: var(--color-white);
+    border: 2px solid var(--color-dark);
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all .6s;
+    width: 30%;
+}
+
+.contact-form .send-btn:hover {
+    background: transparent;
+    color: var(--color-dark);
+    box-shadow: 0 0 20px var(--color-dark);
+    cursor: pointer;
+}
+
+/* Add styling for the attachment container */
+
+#attachment-container > div {
+    display: flex;
+    align-items: baseline; /* Change to 'baseline' for proper vertical alignment */
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
+
+#attachment-container input[type="file"] {
+    margin-right: 10px;
+    padding: 5px; /* Adjust padding as needed */
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Add a border for better visibility */
+    box-sizing: border-box; /* Include padding in the width */
+}
+
+#attachment-container p {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+#attachment-container button {
+    background-color: #ff6666; /* Red color, adjust as needed */
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    /* Add additional styles as needed */
+}
+
+#add-more-btn {
+    background-color: #4CAF50; /* Green color, adjust as needed */
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    /* Add additional styles as needed */
+    margin-bottom: 10px;
+}
+
+
+@media(max-width: 786px) {
+    .contact-form .send-btn {
+        width: 50%;
+    }
+}
+
+
+/* ........................ End Contact Form Styles ...................... */
+
+
 /* ........................ Start Footer Section ...................... */
 
 .footer-basic {
