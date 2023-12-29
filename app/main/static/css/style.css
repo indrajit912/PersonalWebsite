@@ -640,7 +640,7 @@ a.back-to-top {
 
 
 @media(max-width: 786px) {
-    form .send-btn {
+    .contact-form .send-btn {
         width: 50%;
     }
 }
