@@ -9,62 +9,28 @@
 
 {% block content %}
 
-<div class="gallery">
-    
-    <div class="photo-list">
-        <ul>
-            <li>
-                <a href="">
-                    <figure>
-                        <img src="{{ url_for('main.static', filename='images/indrajit/photo1.jpg') }}" alt='Indrajit writing on whiteboard'>
-                        <figcaption>Selfi in ISI Office</figcaption>
-                    </figure>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <figure>
-                        <img src="{{ url_for('main.static', filename='images/indrajit/photo2.jpg') }}" alt='Indrajit in front of ISI Academic building'>
-                        <figcaption>Photo taken by Sneha Bharti</figcaption>
-                    </figure>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <figure>
-                        <img src="{{ url_for('main.static', filename='images/indrajit/photo_sob.jpg') }}" alt='Indrajit in a restaurant' loading="lazy">
-                        <figcaption>At a restaurant in Bangalore</figcaption>
-                    </figure>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <figure>
-                        <img src="{{ url_for('main.static', filename='images/indra_library/books.jpg') }}" alt='Indrajits ISI Bookshelf' loading="lazy">
-                        <figcaption>My book shelf at ISI</figcaption>
-                    </figure>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <figure>
-                        <img src="{{ url_for('main.static', filename='images/indrajit/photo_near_dqtrs.jpg') }}" alt='Indrajit in ISI Campus' loading="lazy">
-                        <figcaption>Near D Qtrs, ISI Campus. Captured by Sneha Bharti</figcaption>
-                    </figure>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <figure>
-                        <img src="{{ url_for('main.static', filename='images/indrajit/photo_with_cat.jpg') }}" alt='Indrajit in ISI Campus' loading="lazy">
-                        <figcaption>Near Worker's Canteen, ISI. Taken by Sneha Bharti</figcaption>
-                    </figure>
-                </a>
-            </li>
-        </ul>
+<section>
+
+<div class="pic-container">
+    <div class="pic-heading">
+        <h1>Photo <span>Gallery</span></h1>
     </div>
 
+    <div class="gallery">
+        <div class="gallery-col">
+            <img src="{{ url_for('main.static', filename='images/indrajit/photo1.jpg') }}" alt='Indrajit writing on whiteboard'>
+            <img src="{{ url_for('main.static', filename='images/indrajit/photo_with_cat.jpg') }}" alt='Indrajit in ISI Campus'>
+        </div>
+        <div class="gallery-col">
+            <img src="{{ url_for('main.static', filename='images/indrajit/photo2.jpg') }}" alt='Indrajit in front of ISI Academic building' loading="lazy">
+            <img src="{{ url_for('main.static', filename='images/indrajit/photo_near_dqtrs.jpg') }}" alt='Indrajit in ISI Campus' loading="lazy">
+        </div>
+        <div class="gallery-col">
+            <img src="{{ url_for('main.static', filename='images/indrajit/photo_sob.jpg') }}" alt='Indrajit in a restaurant' loading="lazy">
+            <img src="{{ url_for('main.static', filename='images/indra_library/books.jpg') }}" alt='Indrajits ISI Bookshelf' loading="lazy">
+        </div>
+    </div>
 </div>
-
+</section>
 
 {% endblock %}

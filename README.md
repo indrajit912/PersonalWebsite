@@ -30,7 +30,7 @@ To run this web app locally on your machine, follow these steps:
 
 1. Clone this repository to your local machine using Git.
 ```bash
-git clone https://github.com/indrajit912/MyWebsite.git
+git clone https://github.com/indrajit912/PersonalWebsite.git
 ```
 
 2. Install the required Python packages listed in requirements.txt.

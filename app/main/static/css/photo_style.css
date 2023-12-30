@@ -1,100 +1,64 @@
-/* Common styles for all screen sizes */
-.gallery {
-    font-family: Lato, sans-serif;
-    padding: 1rem;
-    min-height: 70vh;
+/* main/photo_style.css */
+
+.pic-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-img {
-    width: 100%;
-    max-width: 100%; /* Ensure images don't exceed their container width */
-    height: auto; /* Maintain aspect ratio */
-    display: block;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    transition: transform 1000ms;
-}
-
-.photo-list ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 0.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-    max-width: 100%;
-    width: 70rem;
-}
-
-figure {
-    margin: 0;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Add align-items property */
-}
-
-figure::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 200%;
-    height: 200%;
-    background: rgba(0, 0, 0, 0.5);
-    transform-origin: center;
-    opacity: 0;
-    transform: scale(2);
-    transition: opacity 300ms;
-}
-
-figcaption {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Center the figcaption */
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Add align-items property */
     text-align: center;
-    padding: 1rem;
-    color: white;
-    font-size: 1.2rem;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 600ms, transform 600ms;
 }
 
-a:is(:hover, :focus) figure::after {
-    opacity: 1;
+.pic-container .pic-heading {
+    width: 50%;
+    padding-bottom: 50px;
 }
 
-a:is(:hover, :focus) figcaption {
-    opacity: 1;
-    transition: opacity 600ms;
+.pic-container .pic-heading h1 {
+    border-bottom: 3px solid #222;
+    padding-bottom: 10px;
 }
 
-/* Media query for smaller screens */
-@media screen and (max-width: 768px) {
-    .photo-list {
+.pic-container .pic-heading h1 span {
+    font-weight: 100;
+}
+
+.pic-container .gallery {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.pic-container .gallery .gallery-col {
+    display: flex;
+    flex-direction: column;
+    width: 32.5%;
+}
+
+.pic-container .gallery .gallery-col img {
+    width: 100%;
+    padding-bottom: 15px;
+    border-radius: 5px;
+    /* display: block;
+    height: auto; 
+    aspect-ratio: 1 / 1;
+    object-fit: cover; */
+}
+
+@media only screen and (max-width:769px) {
+    .pic-container .gallery {
+        flex-direction: column;
+    }
+    .pic-container .gallery .gallery-col {
         width: 100%;
     }
-    .photo-list ul {
-        grid-template-columns: 1fr;
-    }
+}
 
-    .photo-list img {
-        max-width: 100%; /* Ensure images don't exceed their container width */
+@media only screen and (max-width:686px) {
+    .pic-container .pic-heading {
+        width: 100%;
     }
-
-    figcaption {
-        font-size: 1rem;
-        z-index: 0;
+    
+    .pic-container .pic-heading h1 {
+        font-size: 2rem;
     }
 }
