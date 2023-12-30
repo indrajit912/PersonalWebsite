@@ -8,20 +8,6 @@
     text-align: center;
 }
 
-.pic-container .pic-heading {
-    width: 50%;
-    padding-bottom: 50px;
-}
-
-.pic-container .pic-heading h1 {
-    border-bottom: 3px solid #222;
-    padding-bottom: 10px;
-}
-
-.pic-container .pic-heading h1 span {
-    font-weight: 100;
-}
-
 .pic-container .gallery {
     display: flex;
     flex-direction: row;
@@ -50,15 +36,5 @@
     }
     .pic-container .gallery .gallery-col {
         width: 100%;
-    }
-}
-
-@media only screen and (max-width:686px) {
-    .pic-container .pic-heading {
-        width: 100%;
-    }
-    
-    .pic-container .pic-heading h1 {
-        font-size: 2rem;
     }
 }

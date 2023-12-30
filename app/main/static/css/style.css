@@ -70,6 +70,38 @@ h4 {
     margin-bottom: 3rem;
 }
 
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page-container .page-heading {
+    text-align: center;
+    margin-bottom: 2rem;
+    width: 50%;
+}
+
+.page-heading h1 {
+    /* border-bottom: 3px solid #222; */
+    padding-bottom: 10px;
+}
+
+.page-heading h1 span {
+    font-weight: 100;
+}
+
+@media only screen and (max-width:686px) {
+    .page-container .page-heading {
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+    
+    .page-container .page-heading h1 {
+        font-size: 30px;
+    }
+}
+
 p {
     font-size: 17px;
     line-height: 140%;
