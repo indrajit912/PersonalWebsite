@@ -285,6 +285,13 @@ section h2 {
     }
 }
 
+/* Media query for iPad Screen */
+@media (max-width: 973px) {
+    section {
+        margin: 0 1.6rem; /* Adjust the margin for smaller screens */
+    }
+}
+
 
 /* .......................... Start Nav bar ......................... */
 nav {
@@ -353,7 +360,8 @@ nav li:first-child {
     display: none;
 }
 
-@media(max-width: 800px){
+@media(max-width: 985px){
+    /* iPad Screen */
     .hideOnMobile {
         display: none;
     }
@@ -361,9 +369,17 @@ nav li:first-child {
     .menu-btn {
         display: block;
     }
-}
+} 
 
 @media(max-width: 500px){
+    .hideOnMobile {
+        display: none;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
     .sidebar {
         width: 100%;
     }
@@ -498,11 +514,30 @@ header {
     }
 }
 
+/* Styles for iPad screen */
+@media (max-width: 973px) and (min-width: 700px){
+    .header-container {
+        grid-template-columns: 1fr; /* Set to a single column for smaller screens */
+    }
+    #home {
+        padding-top: 10rem;
+    }
+
+    .header-left {
+        margin: auto;
+    }
+
+    .header-right {
+        margin-top: 25px;
+    }
+}
+
 /* Styles for larger screens */
 @media (min-width: 1600px) {
     #home {
         padding-top: 13rem;
     }
+
     .header-container {
         max-width: 900px;
     }
