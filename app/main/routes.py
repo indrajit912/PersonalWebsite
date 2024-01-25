@@ -2,7 +2,6 @@
 # Author: Indrajit Ghosh
 # Created On: Dec 22, 2023
 #
-# TODO: The website is not optimized for iPad / tablet.. Add media query for this! 
 
 from . import main_bp
 
