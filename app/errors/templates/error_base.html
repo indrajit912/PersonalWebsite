@@ -15,12 +15,17 @@
             {% block content %}{% endblock %}
     
             <button class="btn green" id="homeButton">HOME</button>
+            <button class="btn green" id="backButton">BACK</button>
         </div>
     </div>
 
     <script>
         document.getElementById("homeButton").addEventListener("click", function() {
             window.location.href = "/"; // Redirect to the home page
+        });
+
+        document.getElementById("backButton").addEventListener("click", function() {
+            window.history.back(); // Go back in the browser history
         });
     </script>
     
