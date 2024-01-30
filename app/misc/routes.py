@@ -18,11 +18,13 @@ def index():
     isi_reg_zip_path = Path(__file__).parent.absolute() / 'static' / 'others' / 'isi_reg_form.zip'
     amsart_template_zip_path = Path(__file__).parent.absolute() / 'static' / 'others' / 'amsart_template_indrajit.zip'
     formal_letter_template_zip_path = Path(__file__).parent.absolute() / 'static' / 'others' / 'formal-letter-template-Indrajit.zip'
-    
+    beamer_template_zip_path = Path(__file__).parent.absolute() / 'static' / 'others' / 'beamer-template-indrajit.zip'
+
     return render_template(
         'misc.html', 
         convert_zip_to_base64=convert_zip_to_base64,
         isi_reg_zip_path=isi_reg_zip_path,
         amsart_template_zip_path=amsart_template_zip_path,
+        beamer_template_zip_path=beamer_template_zip_path,
         formal_letter_template_zip_path=formal_letter_template_zip_path
     )

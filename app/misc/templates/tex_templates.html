@@ -37,9 +37,25 @@
       </div>
     </article>
 
-
     <article class="episode">
       <div class="episode__number">03</div>
+      <div class="episode__content">
+        <div class="title">LaTeX Template for Beamer presentation</div>
+        <div class="story">
+          Elevate your presentations with my personal LaTeX Beamer template, thoughtfully crafted for ease and aesthetics. Download the .zip file for local customization or collaborate seamlessly on Overleaf with the "Open in Overleaf" button. Utilize the "View PDF" button for a quick preview of the final output.
+            <br>
+            <div class="download-links">
+                <a href="{{ url_for('misc.static', filename='others/beamer-template-indrajit.zip') }}" class="btn" download>Download .zip</a>
+                <a href="{{ url_for('misc.static', filename='others/beamer-template-indrajit.pdf') }}" class="btn visit-button" target="_blank">View PDF</a>
+                <button onclick="openOverleaf('{{ convert_zip_to_base64(beamer_template_zip_path) }}')" class="btn btn-dark overleaf-link">Open in Overleaf</button>
+            </div>
+        </div>
+      </div>
+    </article>
+
+
+    <article class="episode">
+      <div class="episode__number">04</div>
       <div class="episode__content">
         <div class="title">LaTeX Template for Formal letter</div>
         <div class="story">
