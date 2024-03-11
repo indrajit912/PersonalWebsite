@@ -43,6 +43,22 @@
             margin-bottom: 10px;
 
         }
+
+        /* Style for lecture links */
+        .lecture-link {
+            color: #007BFF; /* Blue color for links */
+            text-decoration: none;
+        }
+
+        .lecture-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Style for notes that are yet to be uploaded */
+        .not-uploaded {
+            color: #FF0000; /* Red color for emphasis */
+            font-style: italic;
+        }
         
         /* Media query for smaller screens */
         @media screen and (max-width: 600px) {
@@ -94,8 +110,8 @@
         <li>F Strocchi, <i>An Introduction to the Mathematical Structure of Quantum Mechanics</i></li>
         <li>Richard V. Kadison, John R. Ringrose, <i>Fundamentals of the Theory of Operator Algebras. Volume II.</i></li>
     </ol>
-
     <br>
+
 
     <h2>Lecture Schedule</h2>
     <!-- Button to trigger printing -->
@@ -139,7 +155,7 @@
 
         <!-- Phase II -->
         <tr>
-            <td rowspan="5">II</td>
+            <td rowspan="4">II</td>
             <td>Mar 04 (Mon)</td>
             <td>Gahin Maiti</td>
             <td>Basic notions of quantum information - Registers/states;</td>
@@ -158,34 +174,34 @@
             <td>Chapter 2 of Paulsen</td>
         </tr>
         <tr>
-            <td>??? ?? (???)</td>
-            <td>Gahin Maiti</td>
+            <td>Mar 13 (Wed)</td>
+            <td>IG + GM</td>
             <td>Completely Positive Maps; Problem-solving session</td>
             <td>Chapter 3 of Paulsen</td>
-        </tr>
-        <tr>
-            <td>??? ?? (???)</td>
-            <td>Indrajit Ghosh</td>
-            <td>Dilation Theorems; Problem-solving session</td>
-            <td>Chapter 4 of Paulsen</td>
         </tr>
 
         <!-- Phase III -->
         <tr>
-            <td rowspan="3">III</td>
+            <td rowspan="4">III</td>
             <td>Mar 18 (Mon)</td>
+            <td>Indrajit Ghosh</td>
+            <td>Dilation Theorems; Problem-solving session</td>
+            <td>Chapter 4 of Paulsen</td>
+        </tr>
+        <tr>
+            <td>Mar 20 (Wed)</td>
             <td>Gahin Maiti</td>
             <td>Completely Positive Maps into \(M_n( C )\); Problem-solving session</td>
             <td>Chapter 6 of Paulsen</td>
         </tr>
         <tr>
-            <td>Mar 20 (Wed)</td>
+            <td>Mar 25 (Mon)</td>
             <td>Indrajit Ghosh</td>
             <td>Arveson's Extension Theorems; Problem-solving session</td>
             <td>Chapter 7 of Paulsen</td>
         </tr>
         <tr>
-            <td>Mar 25 (Mon)</td>
+            <td class="not-uploaded">TBA (???)</td>
             <td>Soumyashant Nayak</td>
             <td>Tensor Products of \(C^*\)-algebras; Problem-solving session</td>
             <td>Chapter 11 of Paulsen, Chapter 11 of Kadison-Ringrose</td>
@@ -224,13 +240,77 @@
             <td>Chapter 15 of Paulsen</td>
         </tr>
     </table>
+
+    <br>
+
+    <!-- Lecture Notes -->
+    <h2>Lecture Notes</h2>
+
+    <!-- Phase I -->
+    <p><b>Phase I (Jan 2024)</b></p>
+    <ul>
+        <li>
+            <b>Speaker:</b> Indrajit Ghosh
+            <ul>
+                <li><b>Topic:</b> Mathematical Aspects of Quantum Mechanics (References Above)</li>
+                <li><b>Lecture Note PDF:</b> <a href="https://www.dropbox.com/scl/fi/sf8ynxg7gabkz9zwk8jtv/indrajit-ghosh-mathematical-aspects-ofQM.pdf?rlkey=2r2c9uf9dhexit2d1gemq78sg&dl=0" target="_blank" class="lecture-link">Download</a></li>
+            </ul>
+        </li>
+        <li>
+            <b>Speaker:</b> Gahin Maiti
+            <ul>
+                <li><b>Topic:</b> Postulates of Quantum Mechanics (Finite Dimensional Settings)</li>
+                <li><b>Lecture Note PDF:</b> <span class="not-uploaded">Yet To be Uploaded!</span></li>
+            </ul>
+        </li>
+        <li>
+            <b>Speaker:</b> Soumyashant Nayak
+            <ul>
+                <li><b>Topic:</b> Vectorization Identities</li>
+                <li><b>Lecture Note PDF:</b> <span class="not-uploaded">Yet to be Uploaded</span></li>
+            </ul>
+        </li>
+    </ul>
+    <br>
+
+    <!-- Phase II -->
+    <p><b>Phase II (Mar 2024)</b></p>
+    <ul>
+        <li>
+            <b>Speaker:</b> Gahin Maiti
+            <ul>
+                <li><b>Topic:</b> State, Registers and Measurements (Chapter 2, Watrous)</li>
+                <li><b>Lecture Note PDF:</b> <span class="not-uploaded">Yet to be Uploaded</span></li>
+            </ul>
+        </li>
+
+        <li>
+            <b>Speaker:</b> Indrajit Ghosh
+            <ul>
+                <li><b>Topic:</b> Positive Maps on Operator System (Chapter 2, Paulsen)</li>
+                <li><b>Lecture Note PDF:</b> <span class="not-uploaded">Yet to be Uploaded</span></li>
+            </ul>
+        </li>
+    </ul>
+    <br>
+
+    <!-- Phase II -->
+    <p><b>Phase III</b></p>
+    <p class="not-uploaded">To be Updated</p>
+    <br>
+
+    <!-- Phase II -->
+    <p><b>Phase IV</b></p>
+    <p class="not-uploaded">To be Updated</p>
+    
+    <br>
     
 </div>
 
 </section>
 
 <!-- Add last updated information -->
-<p class="last-updated">Last Updated: Mar 09, 2024</p>
+<p class="last-updated">Last Updated: Mar 11, 2024</p>
 
 <!-- Link to the external JavaScript file -->
 <script src="{{ url_for('teaching.static', filename='js/printSchedule.js') }}"></script>
