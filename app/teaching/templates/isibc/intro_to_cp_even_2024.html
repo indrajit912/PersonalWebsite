@@ -6,23 +6,6 @@
 {% block styles %}
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/teaching_style.css') }}">
-    <style>
-        /* Style for the print button */
-        .print-button {
-            float: right;
-            width: 9rem;
-            height: 2rem;
-            margin-bottom: 10px;
-        }
-        
-        /* Media query for smaller screens */
-        @media screen and (max-width: 600px) {
-            .print-button {
-                font-size: 12px;
-                float: left;
-            }
-        }
-    </style>
 {% endblock %}
  
   
@@ -59,15 +42,11 @@
     <br>
 
 
-    <h2>Lecture Schedule
+    <h2>Schedule & Lecture Notes
     </h2>
     
     <div class="table-responsive">
-    <table id="tentativeScheduleTable" class="table table-bordered table-striped caption-top">
-        <caption>
-            <!-- Button to trigger printing -->
-            <button onclick="printTentativeSchedule()" class="indra-btn print-button">Print Schedule</button>
-        </caption>
+    <table id="tentativeScheduleTable" class="table table-bordered table-striped">
 
         <thead class="table-light">
             <tr>
@@ -75,7 +54,7 @@
                 <th>Date</th>
                 <th>Speaker</th>
                 <th>Topics</th>
-                <th>References & Lecture Notes</th>
+                <th>References & Notes</th>
             </tr>
         </thead>
         
