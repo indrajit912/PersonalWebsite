@@ -134,7 +134,7 @@ ul li {
 nav a {
     font-size: 24px;
     color: var(--color-black);
-    text-decoration-color: var(--color-white);
+    text-decoration: none;
     transition: var(--transition);
 }
 
