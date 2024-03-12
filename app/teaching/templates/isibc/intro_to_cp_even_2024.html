@@ -7,73 +7,19 @@
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/teaching_style.css') }}">
     <style>
-        table {
-            font-family: Arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-            /* border: 2px solid black; Add this line to set the table border */
-        }
-
-        th, td {
-            border: 1px solid black; /* Add this line to set the cell borders */
-            text-align: left;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        /* Style for odd rows excluding the first column */
-        tr:nth-child(odd) td:not(:first-child) {
-            background-color: #e6e6e6;
-        }
-
-        /* Style for even rows excluding the first column */
-        tr:nth-child(even) td:not(:first-child) {
-            background-color: #d9d9d9;
-        }
-
         /* Style for the print button */
         .print-button {
             float: right;
-            width: 5rem;
+            width: 9rem;
             height: 2rem;
-            align-items: right;
             margin-bottom: 10px;
-
-        }
-
-        /* Style for lecture links */
-        .lecture-link {
-            color: #007BFF; /* Blue color for links */
-            text-decoration: none;
-        }
-
-        .lecture-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Style for notes that are yet to be uploaded */
-        .not-uploaded {
-            color: #FF0000; /* Red color for emphasis */
-            font-style: italic;
         }
         
         /* Media query for smaller screens */
         @media screen and (max-width: 600px) {
-            table {
-                font-size: 12px;
-                display: block;
-                overflow-x: auto;
-            }
-
-            th, td {
-                padding: 6px;
-            }
-
             .print-button {
                 font-size: 12px;
+                float: left;
             }
         }
     </style>
@@ -113,22 +59,30 @@
     <br>
 
 
-    <h2>Lecture Schedule</h2>
-    <!-- Button to trigger printing -->
-    <button onclick="printTentativeSchedule()" class=" btn print-button">Print</button>
+    <h2>Lecture Schedule
+    </h2>
     
-    <table id="tentativeScheduleTable">
-        <tr>
-            <th>Phase</th>
-            <th>Date</th>
-            <th>Speaker</th>
-            <th>Topics</th>
-            <th>References & Lecture Notes</th>
-        </tr>
+    <div class="table-responsive">
+    <table id="tentativeScheduleTable" class="table table-bordered table-striped caption-top">
+        <caption>
+            <!-- Button to trigger printing -->
+            <button onclick="printTentativeSchedule()" class="indra-btn print-button">Print Schedule</button>
+        </caption>
 
+        <thead class="table-light">
+            <tr>
+                <th>Phase</th>
+                <th>Date</th>
+                <th>Speaker</th>
+                <th>Topics</th>
+                <th>References & Lecture Notes</th>
+            </tr>
+        </thead>
+        
+        <tbody class="table-group-divider">
         <!-- Phase I -->
         <tr>
-            <td rowspan="4">I</td>
+            <th rowspan="4" scope="row">I</th>
             <td>Jan 17 (Wed)</td>
             <td>Soumyashant Nayak</td>
             <td>Review of basic matrix analysis;</td>
@@ -139,7 +93,7 @@
             <td>Indrajit Ghosh</td>
             <td>Mathematical Aspects of Quantum Mechanics: States, Observables, Position Operator, Momentum Operator and Axioms (A1-A5)</td>
             <td>Gerald Teschl and Brian C Hall;
-                <a href="https://www.dropbox.com/scl/fi/sf8ynxg7gabkz9zwk8jtv/indrajit-ghosh-mathematical-aspects-ofQM.pdf?rlkey=2r2c9uf9dhexit2d1gemq78sg&dl=0" target="_blank" class="lecture-link">Lecture note</a>
+                <a href="https://www.dropbox.com/scl/fi/sf8ynxg7gabkz9zwk8jtv/indrajit-ghosh-mathematical-aspects-ofQM.pdf?rlkey=2r2c9uf9dhexit2d1gemq78sg&dl=0" target="_blank" class="">Lecture note</a>
             </td>
         </tr>
         <tr>
@@ -147,7 +101,7 @@
             <td>Indrajit Ghosh</td>
             <td>Hamiltonian (\(\hat{H}\)), Density Matrices in \(B(\mathcal{H})\), Modified Axioms (A6-A10) using Density, Composite System: States and Hamiltonians </td>
             <td>Brian C Hall and F. Strochhi; 
-                <a href="https://www.dropbox.com/scl/fi/sf8ynxg7gabkz9zwk8jtv/indrajit-ghosh-mathematical-aspects-ofQM.pdf?rlkey=2r2c9uf9dhexit2d1gemq78sg&dl=0" target="_blank" class="lecture-link">Lecture note</a>
+                <a href="https://www.dropbox.com/scl/fi/sf8ynxg7gabkz9zwk8jtv/indrajit-ghosh-mathematical-aspects-ofQM.pdf?rlkey=2r2c9uf9dhexit2d1gemq78sg&dl=0" target="_blank" class="">Lecture note</a>
             </td>
         </tr>
         <tr>
@@ -159,9 +113,9 @@
 
         <!-- Phase II -->
         <tr>
-            <td rowspan="4">II</td>
+            <th rowspan="4" scope="row">II</th>
             <td>Mar 04 (Mon)</td>
-            <td>Gahin Maiti</td>
+            <td>SN + GM</td>
             <td>Basic notions of quantum information - Registers/states;</td>
             <td>Chapter 2 of Watrous</td>
         </tr>
@@ -174,21 +128,21 @@
         <tr>
             <td>Mar 11 (Wed)</td>
             <td>Indrajit Ghosh</td>
-            <td>Positive Maps; Problem-solving session</td>
+            <td>Operator Systems, Positive Maps, Fejer-Riesz Lemma, von Neumann Inequality, Russo-Dye Theorem etc.</td>
             <td>Chapter 2 of Paulsen;
-                <a href="https://www.dropbox.com/scl/fi/39190a2vkcvzpv65ajscd/positive-maps-indrajit.pdf?rlkey=23nby9f6hhy1vs8voxtcnjv5c&dl=0" target="_blank" class="lecture-link">Lecture note</a>
+                <a href="https://www.dropbox.com/scl/fi/39190a2vkcvzpv65ajscd/positive-maps-indrajit.pdf?rlkey=23nby9f6hhy1vs8voxtcnjv5c&dl=0" target="_blank" class="">Lecture note</a>
             </td>
         </tr>
         <tr>
             <td>Mar 13 (Wed)</td>
             <td>IG + GM</td>
-            <td>Completely Positive Maps; Problem-solving session</td>
+            <td>Problem-solving session (Positive Maps); Completely Positive Maps</td>
             <td>Chapter 3 of Paulsen</td>
         </tr>
 
         <!-- Phase III -->
         <tr>
-            <td rowspan="4">III</td>
+            <th rowspan="4" scope="row">III</th>
             <td>Mar 18 (Mon)</td>
             <td>Indrajit Ghosh</td>
             <td>Dilation Theorems; Problem-solving session</td>
@@ -207,7 +161,7 @@
             <td>Chapter 7 of Paulsen</td>
         </tr>
         <tr>
-            <td class="not-uploaded">TBA (???)</td>
+            <td><code>TBA (???)</code></td>
             <td>Soumyashant Nayak</td>
             <td>Tensor Products of \(C^*\)-algebras; Problem-solving session</td>
             <td>Chapter 11 of Paulsen, Chapter 11 of Kadison-Ringrose</td>
@@ -215,7 +169,7 @@
 
         <!-- Phase IV -->
         <tr>
-            <td rowspan="6">IV</td>
+            <th rowspan="6" scope="row">IV</th>
             <td>Apr 22 (Mon)</td>
             <td>Gahin Maiti</td>
             <td>Completely Bounded Maps</td>
@@ -245,10 +199,9 @@
             <td>Injective Envelopes</td>
             <td>Chapter 15 of Paulsen</td>
         </tr>
+        </tbody>
     </table>
-    
-    <br>
-    
+    </div>
 </div>
 
 </section>

@@ -33,6 +33,10 @@ body {
   margin: 20px auto;
 }
 
+.course a {
+  text-decoration: none;
+}
+
 .course__number {
   font-size: 5vw;
   font-weight: 600;

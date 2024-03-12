@@ -145,7 +145,7 @@ nav a:hover {
     text-decoration: underline;
 }
 
-.btn {
+.indra-btn {
     display: inline-block;
     width: fit-content;
     padding: 1rem;
@@ -160,21 +160,26 @@ nav a:hover {
     font-weight: 600;
     font-size: 14px;
     transition: var(--transition);
+    text-decoration: none;
 }
 
-.btn:hover {
+.indra-btn:hover {
     background: var(--color-dark-variant);
     color: var(--color-white);
 }
 
-.btn-dark {
+.indra-btn-dark {
     color: var(--color-white);
     background: var(--color-dark);
     text-decoration: none !important;
 }
 
-.btn-dark:hover {
+.indra-btn-dark:hover {
     background: var(--color-black);
+}
+
+.header-action-area a {
+    text-decoration: none;
 }
 
 /* styling for the scroll-up button */
@@ -213,7 +218,7 @@ img {
     display: block;
 }
 
-.container {
+.indra-container {
     display: flex;
     margin: 0 auto;
     max-width: 1200px;
@@ -281,7 +286,7 @@ section h2 {
         font-size: 14px; /* Adjust font size as needed */
     }
 
-    .btn {
+    .indra-btn {
         width: 100%; /* Make buttons take full width */
         max-width: 150px; /* Set a maximum width if needed */
         font-size: 12px; /* Adjust font size as needed */
@@ -501,7 +506,7 @@ header {
         align-items: center;
     }
 
-    .header-action-area .btn {
+    .header-action-area .indra-btn {
         width: 8rem;
         font-size: 12px;
     }
