@@ -729,6 +729,10 @@ a.back-to-top {
     .contact-form .send-btn {
         width: 50%;
     }
+
+    #attachment-container input[type="file"] {
+        width: 78%;
+    }
 }
 
 
