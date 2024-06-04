@@ -803,3 +803,10 @@ a.back-to-top {
 }
 
 /* ........................ End Footer Section ...................... */
+
+.paper-link {
+    font-family: "Source Code Pro", monospace;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+  }
