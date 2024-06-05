@@ -21,6 +21,45 @@
           max-width: 1200px;
           margin: 20px auto;
         }
+        .paper-link {
+            font-family: "Source Code Pro", monospace;
+            font-optical-sizing: auto;
+            font-weight: 600;
+            font-style: normal;
+        }
+        
+        .preprints-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .preprints-container .links {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        @media (min-width: 600px) {
+            .preprints-container {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .preprints-container .links {
+                margin-top: 0;
+                margin-left: 10px;
+            }
+        }
+
+        @media (max-width: 599px) {
+            .paper-link {
+                font-size: 0.9em; /* Adjust the font size as needed */
+            }
+            .preprints-container .links {
+                margin-top: 0; /* Remove gap on smaller screens */
+            }
+        }
+
       </style>
 {% endblock %} 
   
@@ -47,13 +86,13 @@
             </p>
             <br>
             
-            <div class="">
-            <h2>Preprints</h2>
-            <div>
-                [<a href="https://arxiv.org/a/ghosh_i_1.html" target="_blank" class="paper-link">arXiv</a>]
-                [<a href="https://orcid.org/0009-0007-6353-6637" target="_blank" class="paper-link">ORCID</a>]
-            </div>         
-            </div>
+            <div class="preprints-container">
+                <h2>Preprints</h2>
+                <div class="links">
+                    [<a href="https://arxiv.org/a/ghosh_i_1.html" target="_blank" class="paper-link">arXiv</a>]
+                    [<a href="https://orcid.org/0009-0007-6353-6637" target="_blank" class="paper-link">ORCID</a>]
+                </div>         
+            </div>            
         
             <ol>
                 <li>
@@ -66,7 +105,7 @@
             <h2>Algebraic Aspects and Functoriality of The Set of Affiliated Operators</h2>
         
             <p class="">
-                In our recent collaborative<a class="underlined-link paper-link" href="https://arxiv.org/abs/2311.16170" target="_blank"> paper</a> with <a class="underlined-link" href="https://www.isibang.ac.in/~soumyashant/" target="_blank">Dr. Soumyashant Nayak</a>, we have developed a comprehensive algebraic framework aimed at enhancing our understanding of the set of affiliated operators within von Neumann algebras. This framework draws a parallel with the characterization of Murray-von Neumann algebras as specific Ore localizations of finite von Neumann algebras. Our primary objective in this study is to meticulously scrutinize the concept of affiliated operators in von Neumann algebras and elucidate how they should undergo transformations when subjected to morphisms, particularly unital normal homomorphisms, between von Neumann algebras.
+                In our recent collaborative <a class="underlined-link paper-link" href="https://arxiv.org/pdf/2311.16170" target="_blank">paper</a> with <a class="underlined-link" href="https://www.isibang.ac.in/~soumyashant/" target="_blank">Dr. Soumyashant Nayak</a>, we have developed a comprehensive algebraic framework aimed at enhancing our understanding of the set of affiliated operators within von Neumann algebras. This framework draws a parallel with the characterization of Murray-von Neumann algebras as specific Ore localizations of finite von Neumann algebras. Our primary objective in this study is to meticulously scrutinize the concept of affiliated operators in von Neumann algebras and elucidate how they should undergo transformations when subjected to morphisms, particularly unital normal homomorphisms, between von Neumann algebras.
             </p>
         
             <p class="">
@@ -138,7 +177,7 @@
 </section>
 
 <!-- Add last updated information -->
-<p class="last-updated">Last Updated: Dec 09, 2023</p>
+<p class="last-updated">Last Updated: Jun 05, 2024</p>
 
 {% endblock %}
    
