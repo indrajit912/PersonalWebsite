@@ -27,7 +27,13 @@
             </div>
             <button type="button" id="add-more-btn" class="" onclick="addAttachmentField()">Attach More</button>
             <br>
-            <input type="submit" name="" value="Send Message" class="send-btn">
+
+            <button type="submit" class="send-btn" id="sendEmailBtn">
+                Send
+                <i class="bi bi-send-fill" id="send-icon"></i>
+                <span id="sendEmailSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+            </button>            
+            
         </form>
     </div>
 
@@ -65,6 +71,22 @@
           // Add any additional form validation logic here
           return true; // Return false to prevent form submission
       }
+
+      function toggleSpinner() {
+          var spinner = document.getElementById('sendEmailSpinner');
+          var sendIcon = document.getElementById('send-icon');
+          sendIcon.classList.toggle('d-none');
+          spinner.classList.toggle('d-none');
+        }
+
+        document.getElementById('sendEmailBtn').addEventListener('click', function () {
+          // Show spinner before making the request
+          toggleSpinner();
+
+          setTimeout(function () {
+            toggleSpinner();
+          }, 5000); // Adjust the delay as needed
+        });
 
   </script>
 
