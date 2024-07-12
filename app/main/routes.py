@@ -2,7 +2,7 @@
 # Author: Indrajit Ghosh
 # Created On: Dec 22, 2023
 #
-
+import os
 from . import main_bp
 
 from flask import render_template, redirect, url_for, request
@@ -46,6 +46,17 @@ def cv():
 @main_bp.route('/photos/')
 def photos():
     return render_template('photos.html')
+
+######################################################################
+#                       GPG Key
+######################################################################
+@main_bp.route('/gpgkey/')
+def gpgkey():
+    fingerprint = "816E 56E3 463C 30D7 90BC  CE92 B901 BCF5 A9A4 A7CE"
+    gpg_key_file = os.path.join(main_bp.static_folder, 'others', 'indrajit_public_key.asc')
+    with open(gpg_key_file, 'r') as f:
+        gpg_key = f.read()
+    return render_template('gpgkey.html', gpg_key=gpg_key, fingerprint=fingerprint)
 
 ######################################################################
 #                       Contact Me!

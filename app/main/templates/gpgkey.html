@@ -1,0 +1,61 @@
+<!-- gpgkey.html -->
+{% extends 'base.html' %}
+
+{% block title %}GPG Key{% endblock %}
+
+{% block content %}
+<section>
+    <div class="page-container">
+        <div class="page-heading">
+            <h1>Indrajit's GPG Key</h1>
+        </div>
+
+        <div class="card mb-7">
+            <div class="card-body">
+                <h5 class="card-title">Key Fingerprint <i class="bi bi-fingerprint"></i> </h5>
+                <div class="input-group">
+                    <label id="fingerprint" class="form-control" aria-label="Fingerprint">{{ fingerprint }}</label>
+                    <button class="btn btn-outline-secondary" type="button" onclick="copyFingerprint()">
+                        <i class="bi bi-clipboard"></i>
+                    </button>
+                </div>
+                <br>
+
+                <h5 class="card-title">GPG Key <i class="bi bi-key-fill"></i></h5>
+                <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                    <button type="button" class="btn btn-outline-secondary" onclick="copyGPGkey()">Copy</button>
+                    <a class="btn btn-outline-secondary" href="{{ url_for('main.static', filename='others/indrajit_public_key.asc') }}" download="indrajit_public_key.asc">Download</a>
+                </div>
+                <br>
+                <br>
+                <pre>{{ gpg_key }}</pre>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Script for copying fingerprint and GPG key to clipboard -->
+<script>
+    function copyFingerprint() {
+        var fingerprintText = document.getElementById('fingerprint').innerText.trim();
+        navigator.clipboard.writeText(fingerprintText)
+            .then(() => {
+                alert("Copied the fingerprint to clipboard!");
+            })
+            .catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+    }
+
+    function copyGPGkey() {
+        var gpgKeyText = document.querySelector('pre').innerText.trim(); // Assuming <pre> contains the GPG key
+        navigator.clipboard.writeText(gpgKeyText)
+            .then(() => {
+                alert("Copied the GPG key to clipboard!");
+            })
+            .catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+    }
+</script>
+{% endblock %}
