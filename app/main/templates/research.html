@@ -65,6 +65,11 @@
             font-size: 1.2em; /* Increases the font size */
             color: var(--color-dark-variant); /* Dark gray color */
         }
+
+        .publication-size {
+            font-size: 15px; /* Adjust this value as needed */
+        }
+
         
         @media (min-width: 600px) {
             .preprints-container {
@@ -87,6 +92,9 @@
             }
             .publication-title {
                 font-size: 1.1em;
+            }
+            .publication-size {
+                font-size: 13px;
             }
         }
 
@@ -139,12 +147,12 @@
                     <br>
 
                     <!-- Authors and Journal Info -->
-                    <span class="publication-authors">with S. Nayak</span>; 
-                    (accepted in <cite>International Mathematics Research Notices</cite>, <span class="publication-date">2024</span>)
-                    <br>
-
+                    <span class="publication-authors publication-size">I. Ghosh and S. Nayak</span>
+                    <div class="publication-size">
+                        (accepted in <cite>International Mathematics Research Notices</cite>, <span class="publication-date">2024</span>)
+                    </div>
                     <!-- Links -->
-                    [<a class="underlined-link paper-link" href="https://arxiv.org/abs/2311.16170" target="_blank">arXiv:2311.16170</a>]
+                    [<a class="underlined-link paper-link publication-size" href="https://arxiv.org/abs/2311.16170" target="_blank">arXiv:2311.16170</a>]
                 </li>
 
                 <!-- Add more publication items as needed -->
