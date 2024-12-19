@@ -28,3 +28,7 @@ def index():
         beamer_template_zip_path=beamer_template_zip_path,
         formal_letter_template_zip_path=formal_letter_template_zip_path
     )
+
+@misc_bp.route('/isi_symposium_25')
+def isi_symposium_25():
+    return render_template('isi_symposium_25.html')
