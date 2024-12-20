@@ -39,6 +39,26 @@ ISI Symposium 2025
             font-size: 1rem;
             line-height: 1.5;
         }
+        .table-custom th {
+        background-color: var(--color-dark-variant);
+        color: #ffffff;
+        text-align: center;
+    }
+    .table-custom td {
+        vertical-align: middle;
+        text-align: center;
+    }
+    .table-custom a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    .table-custom a:hover {
+        text-decoration: underline;
+    }
+    .break-row {
+        background-color: #ffc107;
+        font-weight: bold;
+    }
     </style>
 {% endblock %}
 
@@ -61,7 +81,7 @@ ISI Symposium 2025
             <div class="col-md-12">
                 <h2>About the Symposium</h2>
                 <p>
-                    The Annual Symposium organized by the Stat-Math Unit of the Indian Statistical Institute, Bangalore, provides a vibrant platform for academic exchange and collaboration. This event brings together Postdoctoral Fellows (PDFs) and Research Scholars (RSs) to present their ongoing research to an audience comprising professors, fellow researchers, and students.  
+                    The Annual Symposium, organized by the Research Scholars at the Stat-Math Unit of the Indian Statistical Institute, Bangalore, provides a vibrant platform for academic exchange and collaboration. This event brings together Postdoctoral Fellows (PDFs) and Research Scholars (RSs) to present their ongoing research to an audience comprising professors, fellow researchers, and students.  
                 <br>
                     This year, the symposium will span three days, with each speaker allotted a maximum of 45 minutes to share their work. The event also offers a valuable opportunity for Junior Research Fellows (JRFs) in the early stages of their academic journey to showcase their research in a supportive and intellectually stimulating environment.
                 </p>
@@ -77,170 +97,200 @@ ISI Symposium 2025
                 <!-- Day 1 Schedule -->
                 <h4>Day 1: January 29, 2025</h4>
                 <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead class="thead-dark">
+                    <table class="table table-bordered table-hover table-custom">
+                        <thead>
                             <tr>
                                 <th>Time</th>
                                 <th>Speaker</th>
                                 <th>Title of Talk</th>
-                                <th>Abstract</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>10:30 AM - 11:15 AM</td>
                                 <td>T. B. Announced</td>
-                                <td>To Be Announced Later</td>
-                                <td><a href="#abstract-1">Click here</a></td>
+                                <td>
+                                    To Be Announced Later<br>
+                                    <a href="#abstract-1">Abstract</a>
+                                </td>
                             </tr>
-                            <tr class="bg-warning">
-                                <td colspan="4" class="text-center">Coffee Break</td>
+                            <tr class="break-row">
+                                <td colspan="3" class="text-center">Coffee Break</td>
                             </tr>
                             <tr>
                                 <td>11:30 AM - 12:15 PM</td>
                                 <td>T. B. Announced</td>
-                                <td>To Be Announced Later</td>
-                                <td><a href="#">Click here</a></td>
+                                <td>
+                                    To Be Announced Later<br>
+                                    <a href="#">Abstract</a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>12:15 PM - 1:00 PM</td>
                                 <td>T. B. Announced</td>
-                                <td>To Be Announced Later</td>
-                                <td><a href="#">Click here</a></td>
+                                <td>
+                                    To Be Announced Later<br>
+                                    <a href="#">Abstract</a>
+                                </td>
                             </tr>
-                            <tr class="bg-warning">
-                                <td colspan="4" class="text-center">Lunch Break</td>
+                            <tr class="break-row">
+                                <td colspan="3" class="text-center">Lunch Break</td>
                             </tr>
                             <tr>
                                 <td>2:15 PM - 3:00 PM</td>
                                 <td>T. B. Announced</td>
-                                <td>To Be Announced Later</td>
-                                <td><a href="#">Click here</a></td>
+                                <td>
+                                    To Be Announced Later<br>
+                                    <a href="#">Abstract</a>
+                                </td>
                             </tr>
-                            <tr class="bg-warning">
-                                <td colspan="4" class="text-center">Tea Break</td>
+                            <tr class="break-row">
+                                <td colspan="3" class="text-center">Tea Break</td>
                             </tr>
                             <tr>
                                 <td>3:15 PM - 4:00 PM</td>
                                 <td>T. B. Announced</td>
-                                <td>To Be Announced Later</td>
-                                <td><a href="#">Click here</a></td>
+                                <td>
+                                    To Be Announced Later<br>
+                                    <a href="#">Abstract</a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                
         
                 <!-- Day 2 Schedule -->
                 <h4>Day 2: January 30, 2025</h4>
                 <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead class="thead-dark">
+                    <table class="table table-bordered table-hover table-custom">
+                        <thead>
                             <tr>
                                 <th>Time</th>
                                 <th>Speaker</th>
                                 <th>Title of Talk</th>
-                                <th>Abstract</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>10:30 AM - 11:15 AM</td>
                                 <td>T. B. Announced</td>
-                                <td>To Be Announced Later</td>
-                                <td><a href="#">Click here</a></td>
+                                <td>
+                                    To Be Announced Later<br>
+                                    <a href="#abstract-1">Abstract</a>
+                                </td>
                             </tr>
-                            <tr class="bg-warning">
-                                <td colspan="4" class="text-center">Coffee Break</td>
+                            <tr class="break-row">
+                                <td colspan="3" class="text-center">Coffee Break</td>
                             </tr>
                             <tr>
                                 <td>11:30 AM - 12:15 PM</td>
                                 <td>T. B. Announced</td>
-                                <td>To Be Announced Later</td>
-                                <td><a href="#">Click here</a></td>
+                                <td>
+                                    To Be Announced Later<br>
+                                    <a href="#">Abstract</a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>12:15 PM - 1:00 PM</td>
                                 <td>T. B. Announced</td>
-                                <td>To Be Announced Later</td>
-                                <td><a href="#">Click here</a></td>
+                                <td>
+                                    To Be Announced Later<br>
+                                    <a href="#">Abstract</a>
+                                </td>
                             </tr>
-                            <tr class="bg-warning">
-                                <td colspan="4" class="text-center">Lunch Break</td>
+                            <tr class="break-row">
+                                <td colspan="3" class="text-center">Lunch Break</td>
                             </tr>
                             <tr>
                                 <td>2:15 PM - 3:00 PM</td>
                                 <td>T. B. Announced</td>
-                                <td>To Be Announced Later</td>
-                                <td><a href="#">Click here</a></td>
+                                <td>
+                                    To Be Announced Later<br>
+                                    <a href="#">Abstract</a>
+                                </td>
                             </tr>
-                            <tr class="bg-warning">
-                                <td colspan="4" class="text-center">Tea Break</td>
+                            <tr class="break-row">
+                                <td colspan="3" class="text-center">Tea Break</td>
                             </tr>
                             <tr>
                                 <td>3:15 PM - 4:00 PM</td>
                                 <td>T. B. Announced</td>
-                                <td>To Be Announced Later</td>
-                                <td><a href="#">Click here</a></td>
+                                <td>
+                                    To Be Announced Later<br>
+                                    <a href="#">Abstract</a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-        
+                
+
                 <!-- Day 3 Schedule -->
                 <h4>Day 3: January 31, 2025</h4>
                 <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead class="thead-dark">
+                    <table class="table table-bordered table-hover table-custom">
+                        <thead>
                             <tr>
                                 <th>Time</th>
                                 <th>Speaker</th>
                                 <th>Title of Talk</th>
-                                <th>Abstract</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>10:30 AM - 11:15 AM</td>
                                 <td>T. B. Announced</td>
-                                <td>To Be Announced Later</td>
-                                <td><a href="#">Click here</a></td>
+                                <td>
+                                    To Be Announced Later<br>
+                                    <a href="#abstract-1">Abstract</a>
+                                </td>
                             </tr>
-                            <tr class="bg-warning">
-                                <td colspan="4" class="text-center">Coffee Break</td>
+                            <tr class="break-row">
+                                <td colspan="3" class="text-center">Coffee Break</td>
                             </tr>
                             <tr>
                                 <td>11:30 AM - 12:15 PM</td>
                                 <td>T. B. Announced</td>
-                                <td>To Be Announced Later</td>
-                                <td><a href="#">Click here</a></td>
+                                <td>
+                                    To Be Announced Later<br>
+                                    <a href="#">Abstract</a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>12:15 PM - 1:00 PM</td>
                                 <td>T. B. Announced</td>
-                                <td>To Be Announced Later</td>
-                                <td><a href="#">Click here</a></td>
+                                <td>
+                                    To Be Announced Later<br>
+                                    <a href="#">Abstract</a>
+                                </td>
                             </tr>
-                            <tr class="bg-warning">
-                                <td colspan="4" class="text-center">Lunch Break</td>
+                            <tr class="break-row">
+                                <td colspan="3" class="text-center">Lunch Break</td>
                             </tr>
                             <tr>
                                 <td>2:15 PM - 3:00 PM</td>
                                 <td>T. B. Announced</td>
-                                <td>To Be Announced Later</td>
-                                <td><a href="#">Click here</a></td>
+                                <td>
+                                    To Be Announced Later<br>
+                                    <a href="#">Abstract</a>
+                                </td>
                             </tr>
-                            <tr class="bg-warning">
-                                <td colspan="4" class="text-center">Tea Break</td>
+                            <tr class="break-row">
+                                <td colspan="3" class="text-center">Tea Break</td>
                             </tr>
                             <tr>
                                 <td>3:15 PM - 4:00 PM</td>
                                 <td>T. B. Announced</td>
-                                <td>To Be Announced Later</td>
-                                <td><a href="#">Click here</a></td>
+                                <td>
+                                    To Be Announced Later<br>
+                                    <a href="#">Abstract</a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                
             </div>
         </div>
 
@@ -278,6 +328,6 @@ ISI Symposium 2025
 
 
 
-<p class="last-updated">Last Updated: Dec 19, 2024</p>
+<p class="last-updated">Last Updated: Dec 20, 2024</p>
 
 {% endblock %}
