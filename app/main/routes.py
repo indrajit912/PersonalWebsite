@@ -52,8 +52,8 @@ def photos():
 ######################################################################
 @main_bp.route('/gpgkey/')
 def gpgkey():
-    fingerprint = "816E 56E3 463C 30D7 90BC  CE92 B901 BCF5 A9A4 A7CE"
-    gpg_key_file = os.path.join(main_bp.static_folder, 'others', 'indrajit_public_key.asc')
+    fingerprint = "13B8 DD7F 039E 9B8F 05ED  2175 4AAB EEA1 FB87 4A64"
+    gpg_key_file = os.path.join(main_bp.static_folder, 'others', 'indrajit_gpg_public_key.asc')
     with open(gpg_key_file, 'r') as f:
         gpg_key = f.read()
     return render_template('gpgkey.html', gpg_key=gpg_key, fingerprint=fingerprint)
