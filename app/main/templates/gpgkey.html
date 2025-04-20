@@ -10,8 +10,16 @@
             <h1>Indrajit's GPG Key</h1>
         </div>
 
+        <!-- Link to encryption guide -->
+        <div class="text-center mb-4">
+            <a href="#encryption-guide" class="btn btn-sm btn-primary">
+                🔐 Learn How to Send Me a Secret Message
+            </a>
+        </div>
+
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-8">
+                <!-- GPG Key Card -->
                 <div class="card mb-4 mx-auto">
                     <div class="card-body">
                         <h5 class="card-title">Key Fingerprint <i class="bi bi-fingerprint"></i></h5>
@@ -25,9 +33,52 @@
                         <h5 class="card-title">GPG Key <i class="bi bi-key-fill"></i></h5>
                         <div class="btn-group btn-group-sm mb-3" role="group" aria-label="Small button group">
                             <button type="button" class="btn btn-outline-secondary" onclick="copyGPGkey()">Copy</button>
-                            <a class="btn btn-outline-secondary" href="{{ url_for('main.static', filename='others/indrajit_public_key.asc') }}" download="indrajit_public_key.asc">Download</a>
+                            <a class="btn btn-outline-secondary" href="{{ url_for('main.static', filename='others/indrajit_gpg_public_key.asc') }}" download="indrajit_public_key.asc">Download</a>
                         </div>
                         <pre class="pre-scrollable">{{ gpg_key }}</pre>
+                    </div>
+                </div>
+
+                <!-- GPG Message Encryption Guide -->
+                <div id="encryption-guide" class="card mb-5 mx-auto">
+                    <div class="card-body">
+                        <h4 class="card-title">🔐 How to Send a Secret Message Using My GPG Key</h4>
+                        <p>This step-by-step guide will show you how to encrypt a message using my public GPG key — without revealing any email.</p>
+
+                        <h5>✅ Prerequisites</h5>
+                        <ul>
+                            <li>Make sure <strong>GPG</strong> is installed. <a href="https://gnupg.org/download/" target="_blank">Download it here</a> if needed.</li>
+                        </ul>
+
+                        <h5>📥 Step 1: Get the GPG Key</h5>
+                        <ol>
+                            <li>Use the copy/download buttons above to get the key.</li>
+                            <li>Save it in a file, e.g., <code>indrajit_gpg_key.txt</code>.</li>
+                        </ol>
+
+                        <h5>📂 Step 2: Import the Key</h5>
+                        <pre><code>gpg --import indrajit_gpg_key.txt</code></pre>
+
+                        <h5>🔎 Step 3: Verify the Key</h5>
+                        <p>Run this command to list fingerprints of all imported keys:</p>
+                        <pre><code>gpg --fingerprint</code></pre>
+                        <p>Now manually compare the fingerprint shown in your terminal with the one displayed above on this page. They should match <strong>exactly</strong>.</p>
+
+                        <h5>✍️ Step 4: Write Your Message</h5>
+                        <p>Create your message in a file like <code>message.txt</code>. It can be any file format — text, PDF, etc.</p>
+
+                        <h5>🔐 Step 5: Encrypt the Message</h5>
+                        <p>Use the fingerprint from above in the command:</p>
+                        <pre><code>gpg --output message.txt.gpg --encrypt --recipient {{ fingerprint }} message.txt</code></pre>
+                        <p>This creates an encrypted file: <code>message.txt.gpg</code></p>
+
+                        <h5>📤 Step 6: Send It</h5>
+                        <p>Send <code>message.txt.gpg</code> to me via email, chat, or any preferred channel.</p>
+
+                        <h5>🧹 Optional: Remove the Key</h5>
+                        <pre><code>gpg --delete-key {{ fingerprint }}</code></pre>
+
+                        <p class="mt-4">That’s it! Your message will be secure, and I’ll be able to decrypt it on my end. 🔐</p>
                     </div>
                 </div>
             </div>
