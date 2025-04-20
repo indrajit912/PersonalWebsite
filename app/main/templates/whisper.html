@@ -29,8 +29,9 @@
             <label for="message" class="form-label">Your Secret Message</label>
             <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Agent, your message goes here. This channel is safe. Hit 'Encrypt Message' to get your code, then send it on its way."></textarea>
         </div>
+        <input type="hidden" name="client_datetime" id="clientDatetime">
         <div class="d-grid">
-            <button type="submit" class="btn btn-dark btn-lg">🔏 Encrypt Message</button>
+            <button type="submit" class="btn btn-dark btn-lg" id="encryptMessageBtn">🔏 Encrypt Message</button>
         </div>
     </form>
     
@@ -43,7 +44,7 @@
 
             <div class="d-flex justify-content-center gap-2">
                 <button class="btn btn-outline-primary" onclick="copyEncrypted()">Copy 📋</button>
-                <button class="btn btn-outline-secondary" id="sendEmailBtn">
+                <button class="btn btn-outline-secondary" id="sendEmailBtn" onclick="sendEncryptedEmail()">
                     Send
                     <i class="bi bi-send-fill" id="send-icon"></i>
                     <span id="sendEmailSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
@@ -53,6 +54,17 @@
     {% endif %}
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const dtInput = document.getElementById('clientDatetime');
+        // Get current datetime with timezone
+        const now = new Date();
+        // const timezoneOffset = -now.getTimezoneOffset(); // in minutes
+        const datetimeWithTimezone = now.toLocaleString('en-US', { timeZoneName: 'short' });
+
+        dtInput.value = datetimeWithTimezone;
+    });
+</script>
 
 <script>
 function copyEncrypted() {
@@ -64,19 +76,36 @@ function copyEncrypted() {
 }
 
 function toggleSpinner() {
-          var spinner = document.getElementById('sendEmailSpinner');
-          var sendIcon = document.getElementById('send-icon');
-          sendIcon.classList.toggle('d-none');
-          spinner.classList.toggle('d-none');
+      var spinner = document.getElementById('sendEmailSpinner');
+      var sendIcon = document.getElementById('send-icon');
+      sendIcon.classList.toggle('d-none');
+      spinner.classList.toggle('d-none');
+    }
+
+function sendEncryptedEmail() {
+    toggleSpinner();
+
+    const encryptedOutput = document.getElementById('encryptedMessage').value;
+
+    fetch('/send_encrypted', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            encrypted_output: encryptedOutput
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        toggleSpinner();
+        if (data.redirect_url) {
+            window.location.href = data.redirect_url;
+        } else {
+            alert(data.message);
         }
-
-        document.getElementById('sendEmailBtn').addEventListener('click', function () {
-          // Show spinner before making the request
-          toggleSpinner();
-
-          setTimeout(function () {
-            toggleSpinner();
-          }, 5000); // Adjust the delay as needed
-        });
+    })
+}
 </script>
+    
 {% endblock %}

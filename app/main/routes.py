@@ -4,10 +4,9 @@
 #
 import os
 import base64
-import tempfile
 from . import main_bp
 
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, jsonify
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired, Email
@@ -21,11 +20,6 @@ from smtplib import SMTPAuthenticationError, SMTPException
 
 from scripts.email_message import EmailMessage
 from config import APP_DATA_DIR, EmailConfig
-
-# File to save encrypted messages (simple example)
-# TODO: Change this file and use your Google sheet
-MESSAGE_STORE = APP_DATA_DIR / "cipherwall_messages.txt"
-
 
 #######################################################
 #                      Homepage
@@ -80,7 +74,11 @@ def whisper():
         user_name = request.form.get('name')
         user_email = request.form.get('email')
         user_message = request.form.get('message')
+        user_datetime = request.form.get('client_datetime')
+        # Get user's IP address
+        user_ip = request.remote_addr
 
+        # TODO: Manage attachments
         if not user_name or not user_email or not user_message:
             error = "All fields are required."
         else:
@@ -89,7 +87,7 @@ def whisper():
                 with open(public_key_path, 'rb') as key_file:
                     public_key = serialization.load_pem_public_key(key_file.read())
 
-                combined = f"Name: {user_name}\nEmail: {user_email}\nMessage: {user_message}"
+                combined = f"Name: {user_name}\nEmail: {user_email}\nIP Address: {user_ip}\nDate time: {user_datetime}\n\nMessage: {user_message}"
                 encrypted = public_key.encrypt(
                     combined.encode(),
                     padding.OAEP(
@@ -105,6 +103,46 @@ def whisper():
                 error = f"Encryption failed: {str(e)}"
 
     return render_template('whisper.html', encrypted_output=encrypted_output, error=error)
+
+
+@main_bp.route('/send_encrypted', methods=['POST'])
+def send_encrypted():
+    data = request.get_json()
+    encrypted_output = data.get('encrypted_output')
+
+    # Send email
+    html_body = render_template("emails/whisper_email.html", encrypted_message=encrypted_output)
+
+    # Create the email message
+    msg = EmailMessage(
+        sender_email_id=EmailConfig.INDRAJITS_BOT_EMAIL_ID,
+        to=EmailConfig.INDRAJIT912_GMAIL,
+        subject="You've got a whisper. It's encrypted. 🔐",
+        email_html_text=html_body
+    )
+
+    try:
+        # Send the email to Indrajit
+        msg.send(
+            sender_email_password=EmailConfig.INDRAJITS_BOT_EMAIL_PASSWD,
+            server_info=EmailConfig.GMAIL_SERVER,
+            print_success_status=False
+        )
+
+        # After processing, you can redirect to a thank-you page.
+        return jsonify({"message": "Email sent successfully!", "redirect_url": url_for('main.thankyou')})
+
+    except SMTPAuthenticationError as e:
+        # TODO: Print the error `e` as 'Know More' button!
+        # Redirect to the email authentication error page using the error blueprint
+        return redirect(url_for('errors.email_auth_error_route'))
+
+    except SMTPException as e:
+        return redirect(url_for('errors.email_send_error_route'))
+        
+    except Exception as e:
+        # Handle email sending error
+        return redirect(url_for('errors.generic_error_route'))
 
 
 ######################################################################
@@ -169,7 +207,7 @@ def contact():
                     attachment_path.unlink()
 
             # After processing, you can redirect to a thank-you page.
-            return render_template('thank_you.html')
+            return redirect(url_for('main.thankyou'))
 
         except SMTPAuthenticationError as e:
             # TODO: Print the error `e` as 'Know More' button!
@@ -194,3 +232,8 @@ def devtest():
     user_agent = request.headers.get('User-Agent')
     
     return f"User IP: {user_ip}"
+
+
+@main_bp.route('/thankyou/')
+def thankyou():
+    return render_template('thank_you.html')

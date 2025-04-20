@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>You've Got a Whisper</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #212529;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .header {
+            text-align: center;
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #343a40;
+        }
+        .message-box {
+            background-color: #f1f3f5;
+            border-left: 4px solid #343a40;
+            padding: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            border-radius: 4px;
+            color: #495057;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #6c757d;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">📩 Indrajit, you've received a whisper!</div>
+        <p>Someone just sent you an encrypted message through your personal website. Here it is:</p>
+
+        <div class="message-box">
+            <pre style="margin: 0;"><code>{{- encrypted_message -}}</code></pre>
+        </div>        
+
+        <div class="footer">
+            This message was delivered securely from your site. Keep whispering safely. 🔐
+        </div>
+    </div>
+</body>
+</html>
