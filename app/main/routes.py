@@ -3,6 +3,8 @@
 # Created On: Dec 22, 2023
 #
 import os
+import base64
+import tempfile
 from . import main_bp
 
 from flask import render_template, redirect, url_for, request
@@ -11,11 +13,18 @@ from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired, Email
 from werkzeug.utils import secure_filename
 
+from cryptography.hazmat.primitives import serialization, hashes
+from cryptography.hazmat.primitives.asymmetric import padding
+
 from pathlib import Path
 from smtplib import SMTPAuthenticationError, SMTPException
 
 from scripts.email_message import EmailMessage
 from config import APP_DATA_DIR, EmailConfig
+
+# File to save encrypted messages (simple example)
+# TODO: Change this file and use your Google sheet
+MESSAGE_STORE = APP_DATA_DIR / "cipherwall_messages.txt"
 
 
 #######################################################
@@ -53,10 +62,50 @@ def photos():
 @main_bp.route('/gpgkey/')
 def gpgkey():
     fingerprint = "13B8 DD7F 039E 9B8F 05ED  2175 4AAB EEA1 FB87 4A64"
-    gpg_key_file = os.path.join(main_bp.static_folder, 'others', 'indrajit_gpg_public_key.asc')
+    gpg_key_file = os.path.join(main_bp.static_folder, 'keys', 'indrajit_gpg_public_key.asc')
     with open(gpg_key_file, 'r') as f:
         gpg_key = f.read()
     return render_template('gpgkey.html', gpg_key=gpg_key, fingerprint=fingerprint)
+
+
+######################################################################
+#                       Whisper
+######################################################################
+@main_bp.route('/whisper/', methods=['GET', 'POST'])
+def whisper():
+    encrypted_output = None
+    error = None
+
+    if request.method == 'POST':
+        user_name = request.form.get('name')
+        user_email = request.form.get('email')
+        user_message = request.form.get('message')
+
+        if not user_name or not user_email or not user_message:
+            error = "All fields are required."
+        else:
+            try:
+                public_key_path = os.path.join(main_bp.static_folder, 'keys', 'indrajit_rsa_public_key.pem')
+                with open(public_key_path, 'rb') as key_file:
+                    public_key = serialization.load_pem_public_key(key_file.read())
+
+                combined = f"Name: {user_name}\nEmail: {user_email}\nMessage: {user_message}"
+                encrypted = public_key.encrypt(
+                    combined.encode(),
+                    padding.OAEP(
+                        mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                        algorithm=hashes.SHA256(),
+                        label=None
+                    )
+                )
+
+                encrypted_output = base64.b64encode(encrypted).decode()
+
+            except Exception as e:
+                error = f"Encryption failed: {str(e)}"
+
+    return render_template('whisper.html', encrypted_output=encrypted_output, error=error)
+
 
 ######################################################################
 #                       Contact Me!

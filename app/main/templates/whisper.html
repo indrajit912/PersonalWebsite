@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Whisper{% endblock %}
+
+{% block styles %}
+     {{ super() }}
+{% endblock %} 
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-3 text-center">🔐 Send a Secret</h2>
+    <p class="lead text-center text-muted">
+        Got something confidential? Whisper it through encryption — only I can hear it.
+    </p>
+
+    {% if error %}
+        <div class="alert alert-danger text-center">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" class="mt-4 shadow-sm p-4 rounded bg-light">
+        <div class="mb-3">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" class="form-control" id="name" name="name" required placeholder="Agent X... or your real name works too">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Your Email</label>
+            <input type="email" class="form-control" id="email" name="email" required placeholder="incognito@protonmail.com (or any email)">
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Your Secret Message</label>
+            <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Agent, your message goes here. This channel is safe. Hit 'Encrypt Message' to get your code, then send it on its way."></textarea>
+        </div>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-dark btn-lg">🔏 Encrypt Message</button>
+        </div>
+    </form>
+    
+
+    {% if encrypted_output %}
+        <div class="mt-5 p-4 border rounded bg-white shadow-sm">
+            <h4 class="mb-3 text-center" id="encrypted-message">🔒 Your Encrypted Message</h4>
+            <p class="text-muted text-center">Want to send it now? Just hit the send button below! Or, if you prefer, copy the message and send it to Indrajit however you like.</p>
+            <textarea class="form-control mb-3" rows="10" readonly id="encryptedMessage">{{ encrypted_output }}</textarea>
+
+            <div class="d-flex justify-content-center gap-2">
+                <button class="btn btn-outline-primary" onclick="copyEncrypted()">Copy 📋</button>
+                <button class="btn btn-outline-secondary" id="sendEmailBtn">
+                    Send
+                    <i class="bi bi-send-fill" id="send-icon"></i>
+                    <span id="sendEmailSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+
+<script>
+function copyEncrypted() {
+    const msg = document.getElementById("encryptedMessage");
+    msg.select();
+    msg.setSelectionRange(0, 99999); // for mobile devices
+    document.execCommand("copy");
+    alert("🔐 Encrypted message copied to clipboard!");
+}
+
+function toggleSpinner() {
+          var spinner = document.getElementById('sendEmailSpinner');
+          var sendIcon = document.getElementById('send-icon');
+          sendIcon.classList.toggle('d-none');
+          spinner.classList.toggle('d-none');
+        }
+
+        document.getElementById('sendEmailBtn').addEventListener('click', function () {
+          // Show spinner before making the request
+          toggleSpinner();
+
+          setTimeout(function () {
+            toggleSpinner();
+          }, 5000); // Adjust the delay as needed
+        });
+</script>
+{% endblock %}
