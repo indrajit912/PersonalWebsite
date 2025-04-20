@@ -10,6 +10,10 @@ import random
 import hashlib
 from datetime import datetime, timedelta, timezone
 
+from cryptography.hazmat.primitives import serialization, hashes
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.backends import default_backend
+
 def generate_otp():
     """Generate a random 6-digit OTP (One-Time Password).
 
@@ -83,3 +87,64 @@ def convert_utc_to_ist(utc_datetime_str):
     formatted_datetime = ist_datetime.strftime("%b %d, %Y %I:%M %p IST")
 
     return formatted_datetime
+
+
+def encrypt_with_public_key(public_key_path: str, plaintext: str):
+    """
+    Encrypts plaintext using an RSA public key from the given path.
+    
+    Args:
+        public_key_path (str): Path to the PEM-encoded public key file.
+        plaintext (str): The text to encrypt.
+    
+    Returns:
+        str: Base64-encoded ciphertext.
+    """
+    with open(public_key_path, 'rb') as key_file:
+        public_key = serialization.load_pem_public_key(
+            key_file.read(),
+            backend=default_backend()
+        )
+
+    ciphertext = public_key.encrypt(
+        plaintext.encode('utf-8'),
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    )
+    return base64.b64encode(ciphertext).decode('utf-8')
+
+
+def decrypt_with_private_key(private_key_path: str, b64_ciphertext: str, password: bytes = None):
+    """
+    Decrypts base64-encoded ciphertext using an RSA private key from the given path.
+    
+    Args:
+        private_key_path (str): Path to the PEM-encoded private key file.
+        b64_ciphertext (str): Base64-encoded encrypted string.
+        password (bytes, optional): Password for encrypted private key, if any.
+    
+    Returns:
+        str: Decrypted plaintext.
+    """
+    with open(private_key_path, 'rb') as key_file:
+        private_key = serialization.load_pem_private_key(
+            key_file.read(),
+            password=password,
+            backend=default_backend()
+        )
+
+    ciphertext = base64.b64decode(b64_ciphertext.encode('utf-8'))
+
+    plaintext = private_key.decrypt(
+        ciphertext,
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    )
+    return plaintext.decode('utf-8')
+    

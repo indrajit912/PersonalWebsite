@@ -19,6 +19,7 @@ from pathlib import Path
 from smtplib import SMTPAuthenticationError, SMTPException
 
 from scripts.email_message import EmailMessage
+from scripts.utils import encrypt_with_public_key
 from config import APP_DATA_DIR, EmailConfig
 
 #######################################################
@@ -84,20 +85,8 @@ def whisper():
         else:
             try:
                 public_key_path = os.path.join(main_bp.static_folder, 'keys', 'indrajit_rsa_public_key.pem')
-                with open(public_key_path, 'rb') as key_file:
-                    public_key = serialization.load_pem_public_key(key_file.read())
-
                 combined = f"Name: {user_name}\nEmail: {user_email}\nIP Address: {user_ip}\nDate time: {user_datetime}\n\nMessage: {user_message}"
-                encrypted = public_key.encrypt(
-                    combined.encode(),
-                    padding.OAEP(
-                        mgf=padding.MGF1(algorithm=hashes.SHA256()),
-                        algorithm=hashes.SHA256(),
-                        label=None
-                    )
-                )
-
-                encrypted_output = base64.b64encode(encrypted).decode()
+                encrypted_output = encrypt_with_public_key(public_key_path, combined)
 
             except Exception as e:
                 error = f"Encryption failed: {str(e)}"
