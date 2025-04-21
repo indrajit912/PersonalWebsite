@@ -31,8 +31,12 @@
         </div>
         <input type="hidden" name="browser_metadata" id="browserMetadata">
 
+        <div class="d-grid mb-3">
+            <button type="submit" class="btn btn-dark btn-lg" id="encryptMessageBtn">🔏 Encrypt</button>
+        </div>
+        <!-- Back Button with margin -->
         <div class="d-grid">
-            <button type="submit" class="btn btn-dark btn-lg" id="encryptMessageBtn">🔏 Encrypt Message</button>
+            <a href="{{ url_for('main.contact') }}" class="btn btn-outline-secondary btn-lg">⬅️ Back</a>
         </div>
     </form>
     
