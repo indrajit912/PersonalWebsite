@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Preview Encrypted Message{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-3 text-center">🔒 Your Encrypted Message</h2>
+    <p class="text-muted text-center">Here's your encrypted message. You can send it now or copy it.</p>
+
+    <div class="p-4 border rounded bg-white shadow-sm">
+        <textarea class="form-control mb-3" rows="10" readonly id="encryptedMessage">{{ encrypted_output }}</textarea>
+
+        <div class="d-flex justify-content-center gap-2">
+            <button class="btn btn-outline-primary" onclick="copyEncrypted()">Copy 📋</button>
+            <button class="btn btn-outline-secondary" id="sendEmailBtn" onclick="sendEncryptedEmail()">
+                Send
+                <i class="bi bi-send-fill" id="send-icon"></i>
+                <span id="sendEmailSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyEncrypted() {
+    const msg = document.getElementById("encryptedMessage");
+    msg.select();
+    msg.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    alert("🔐 Encrypted message copied!");
+}
+
+function toggleSpinner() {
+    var spinner = document.getElementById('sendEmailSpinner');
+    var sendIcon = document.getElementById('send-icon');
+    sendIcon.classList.toggle('d-none');
+    spinner.classList.toggle('d-none');
+}
+
+function sendEncryptedEmail() {
+    toggleSpinner();
+
+    const encryptedOutput = document.getElementById('encryptedMessage').value;
+
+    fetch('/send_encrypted', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ encrypted_output: encryptedOutput }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        toggleSpinner();
+        if (data.redirect_url) {
+            window.location.href = data.redirect_url;
+        } else {
+            alert(data.message);
+        }
+    });
+}
+</script>
+{% endblock %}

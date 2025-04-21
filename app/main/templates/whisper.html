@@ -29,83 +29,58 @@
             <label for="message" class="form-label">Your Secret Message</label>
             <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Agent, your message goes here. This channel is safe. Hit 'Encrypt Message' to get your code, then send it on its way."></textarea>
         </div>
-        <input type="hidden" name="client_datetime" id="clientDatetime">
+        <input type="hidden" name="browser_metadata" id="browserMetadata">
+
         <div class="d-grid">
             <button type="submit" class="btn btn-dark btn-lg" id="encryptMessageBtn">🔏 Encrypt Message</button>
         </div>
     </form>
     
-
-    {% if encrypted_output %}
-        <div class="mt-5 p-4 border rounded bg-white shadow-sm">
-            <h4 class="mb-3 text-center" id="encrypted-message">🔒 Your Encrypted Message</h4>
-            <p class="text-muted text-center">Want to send it now? Just hit the send button below! Or, if you prefer, copy the message and send it to Indrajit however you like.</p>
-            <textarea class="form-control mb-3" rows="10" readonly id="encryptedMessage">{{ encrypted_output }}</textarea>
-
-            <div class="d-flex justify-content-center gap-2">
-                <button class="btn btn-outline-primary" onclick="copyEncrypted()">Copy 📋</button>
-                <button class="btn btn-outline-secondary" id="sendEmailBtn" onclick="sendEncryptedEmail()">
-                    Send
-                    <i class="bi bi-send-fill" id="send-icon"></i>
-                    <span id="sendEmailSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                </button>
-            </div>
-        </div>
-    {% endif %}
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const dtInput = document.getElementById('clientDatetime');
-        // Get current datetime with timezone
+        // Existing code to set clientDatetime...
+        // const dtInput = document.getElementById('clientDatetime');
         const now = new Date();
-        // const timezoneOffset = -now.getTimezoneOffset(); // in minutes
-        const datetimeWithTimezone = now.toLocaleString('en-US', { timeZoneName: 'short' });
-
-        dtInput.value = datetimeWithTimezone;
+    
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = now.getFullYear();
+    
+        const dateFormatted = `${day}/${month}/${year}`;
+        const time = now.toLocaleTimeString('en-US');
+        const tz = now.toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ').pop();
+        const datetimeWithTimezone = `${dateFormatted} ${time} ${tz}`;
+        // dtInput.value = datetimeWithTimezone;
+    
+        // New code to set browser metadata
+        const metadataInput = document.getElementById('browserMetadata');
+    
+        const metadata = {
+            userAgent: navigator.userAgent,
+            timestamp: datetimeWithTimezone,
+            platform: navigator.platform,
+            language: navigator.language,
+            screen: {
+                width: screen.width,
+                height: screen.height,
+                availWidth: screen.availWidth,
+                availHeight: screen.availHeight
+            },
+            viewport: {
+                innerWidth: window.innerWidth,
+                innerHeight: window.innerHeight
+            },
+            devicePixelRatio: window.devicePixelRatio,
+            hardwareConcurrency: navigator.hardwareConcurrency,
+            deviceMemory: navigator.deviceMemory || "Unavailable"
+        };
+    
+        metadataInput.value = JSON.stringify(metadata);
     });
 </script>
+    
 
-<script>
-function copyEncrypted() {
-    const msg = document.getElementById("encryptedMessage");
-    msg.select();
-    msg.setSelectionRange(0, 99999); // for mobile devices
-    document.execCommand("copy");
-    alert("🔐 Encrypted message copied to clipboard!");
-}
-
-function toggleSpinner() {
-      var spinner = document.getElementById('sendEmailSpinner');
-      var sendIcon = document.getElementById('send-icon');
-      sendIcon.classList.toggle('d-none');
-      spinner.classList.toggle('d-none');
-    }
-
-function sendEncryptedEmail() {
-    toggleSpinner();
-
-    const encryptedOutput = document.getElementById('encryptedMessage').value;
-
-    fetch('/send_encrypted', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            encrypted_output: encryptedOutput
-        }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        toggleSpinner();
-        if (data.redirect_url) {
-            window.location.href = data.redirect_url;
-        } else {
-            alert(data.message);
-        }
-    })
-}
-</script>
     
 {% endblock %}

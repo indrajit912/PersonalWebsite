@@ -3,10 +3,10 @@
 # Created On: Dec 22, 2023
 #
 import os
-import base64
+import json
 from . import main_bp
 
-from flask import render_template, redirect, url_for, request, jsonify
+from flask import render_template, redirect, url_for, request, jsonify, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired, Email
@@ -68,14 +68,14 @@ def gpgkey():
 ######################################################################
 @main_bp.route('/whisper/', methods=['GET', 'POST'])
 def whisper():
-    encrypted_output = None
     error = None
 
     if request.method == 'POST':
         user_name = request.form.get('name')
         user_email = request.form.get('email')
         user_message = request.form.get('message')
-        user_datetime = request.form.get('client_datetime')
+        browser_metadata = request.form.get('browser_metadata')
+
         # Get user's IP address
         user_ip = request.remote_addr
 
@@ -83,18 +83,45 @@ def whisper():
         if not user_name or not user_email or not user_message:
             error = "All fields are required."
         else:
-            try:
-                public_key_path = os.path.join(main_bp.static_folder, 'keys', 'indrajit_rsa_public_key.pem')
-                combined = f"Name: {user_name}\nEmail: {user_email}\nIP Address: {user_ip}\nDate time: {user_datetime}\n\nMessage: {user_message}"
-                encrypted_output = encrypt_with_public_key(public_key_path, combined)
+            return render_template('auto_post_to_preview.html', 
+                               user_name=user_name,
+                               user_email=user_email,
+                               user_message=user_message,
+                               browser_metadata=browser_metadata,
+                               user_ip=user_ip)
 
-            except Exception as e:
-                error = f"Encryption failed: {str(e)}"
+    return render_template('whisper.html', error=error)
 
-    return render_template('whisper.html', encrypted_output=encrypted_output, error=error)
+@main_bp.route('/preview_whisper/', methods=['POST'])
+def preview_whisper():
+    try:
+        user_name = request.form.get('user_name')
+        user_email = request.form.get('user_email')
+        user_message = request.form.get('user_message')
+        browser_metadata = request.form.get('browser_metadata')
+        user_ip = request.form.get('user_ip')
+
+        parsed_metadata = json.loads(browser_metadata)
+        
+        public_key_path = os.path.join(main_bp.static_folder, 'keys', 'indrajit_rsa_public_key.pem')
+        combined = (
+            f"Name: {user_name}\n"
+            f"Email: {user_email}\n"
+            f"IP Address: {user_ip}\n\n"
+            f"Message: {user_message}\n\n"
+            f"Browser Info: {parsed_metadata}\n\n"
+        )
+        encrypted_output = encrypt_with_public_key(public_key_path, combined)
+
+        return render_template('preview_encrypted.html', encrypted_output=encrypted_output)
+
+    except Exception as e:
+        print("Error in preview_whisper:", e)
+        flash(f"Encryption failed: {str(e)}", "danger")
+        return redirect(url_for('main.whisper'))
 
 
-@main_bp.route('/send_encrypted', methods=['POST'])
+@main_bp.route('/send_encrypted/', methods=['POST'])
 def send_encrypted():
     data = request.get_json()
     encrypted_output = data.get('encrypted_output')

@@ -1,0 +1,11 @@
+<form id="autoPostForm" method="POST" action="{{ url_for('main.preview_whisper') }}">
+    <input type="hidden" name="user_name" value="{{ user_name }}">
+    <input type="hidden" name="user_email" value="{{ user_email }}">
+    <input type="hidden" name="user_message" value="{{ user_message }}">
+    <input type="hidden" name="browser_metadata" value='{{ browser_metadata|tojson|safe }}'>
+    <input type="hidden" name="user_ip" value="{{ user_ip }}">
+</form>
+
+<script>
+    document.getElementById('autoPostForm').submit();
+</script>

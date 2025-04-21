@@ -4,12 +4,14 @@
 #
 # Date: Nov 15, 2023
 #
-
+import os
+import json
 import base64
 import random
 import hashlib
 from datetime import datetime, timedelta, timezone
 
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.backends import default_backend
@@ -91,60 +93,107 @@ def convert_utc_to_ist(utc_datetime_str):
 
 def encrypt_with_public_key(public_key_path: str, plaintext: str):
     """
-    Encrypts plaintext using an RSA public key from the given path.
-    
-    Args:
-        public_key_path (str): Path to the PEM-encoded public key file.
-        plaintext (str): The text to encrypt.
-    
-    Returns:
-        str: Base64-encoded ciphertext.
+    Hybrid encryption using AES for the data and RSA to encrypt the AES key.
+    Returns a JSON string with base64-encoded encrypted AES key, IV, and ciphertext.
     """
+    # Load RSA public key
     with open(public_key_path, 'rb') as key_file:
         public_key = serialization.load_pem_public_key(
             key_file.read(),
             backend=default_backend()
         )
 
-    ciphertext = public_key.encrypt(
-        plaintext.encode('utf-8'),
+    # Generate AES key and IV
+    aes_key = os.urandom(32)  # AES-256
+    iv = os.urandom(16)       # AES block size for CBC mode
+
+    # Pad the plaintext to be a multiple of 16 bytes
+    pad_len = 16 - len(plaintext.encode('utf-8')) % 16
+    padded_plaintext = plaintext + chr(pad_len) * pad_len
+
+    # Encrypt plaintext with AES
+    cipher = Cipher(algorithms.AES(aes_key), modes.CBC(iv), backend=default_backend())
+    encryptor = cipher.encryptor()
+    ciphertext = encryptor.update(padded_plaintext.encode('utf-8')) + encryptor.finalize()
+
+    # Encrypt AES key with RSA public key
+    encrypted_key = public_key.encrypt(
+        aes_key,
         padding.OAEP(
             mgf=padding.MGF1(algorithm=hashes.SHA256()),
             algorithm=hashes.SHA256(),
             label=None
         )
     )
-    return base64.b64encode(ciphertext).decode('utf-8')
+
+    # Return the entire JSON object as a base64 string (single-line encoded blob)
+    raw_json = json.dumps({
+        'encrypted_key': base64.b64encode(encrypted_key).decode('utf-8'),
+        'iv': base64.b64encode(iv).decode('utf-8'),
+        'ciphertext': base64.b64encode(ciphertext).decode('utf-8')
+    })
+    return base64.b64encode(raw_json.encode('utf-8')).decode('utf-8')
 
 
-def decrypt_with_private_key(private_key_path: str, b64_ciphertext: str, password: bytes = None):
+def decrypt_with_private_key(private_key_path: str, b64_blob: str, password: bytes = None) -> str:
     """
-    Decrypts base64-encoded ciphertext using an RSA private key from the given path.
-    
-    Args:
-        private_key_path (str): Path to the PEM-encoded private key file.
-        b64_ciphertext (str): Base64-encoded encrypted string.
-        password (bytes, optional): Password for encrypted private key, if any.
-    
+    Decrypts a base64-encoded JSON blob containing:
+        - 'encrypted_key': RSA-encrypted AES key
+        - 'iv': AES IV
+        - 'ciphertext': AES-encrypted message
+
     Returns:
-        str: Decrypted plaintext.
+        Decrypted plaintext (str)
     """
-    with open(private_key_path, 'rb') as key_file:
+
+    # Step 1: Decode base64-encoded blob to get JSON string
+    try:
+        json_string = base64.b64decode(b64_blob).decode('utf-8')
+    except Exception as e:
+        raise ValueError(f"Failed to decode base64 blob: {e}")
+
+    # Step 2: Parse the JSON string
+    try:
+        encrypted_data = json.loads(json_string)
+    except Exception as e:
+        raise ValueError(f"Failed to parse JSON: {e}")
+
+    # Step 3: Decode individual fields
+    try:
+        encrypted_key = base64.b64decode(encrypted_data['encrypted_key'])
+        iv = base64.b64decode(encrypted_data['iv'])
+        ciphertext = base64.b64decode(encrypted_data['ciphertext'])
+    except Exception as e:
+        raise ValueError(f"Failed to base64-decode fields: {e}")
+
+    # Step 4: Load private RSA key
+    with open(os.path.expanduser(private_key_path), 'rb') as key_file:
         private_key = serialization.load_pem_private_key(
             key_file.read(),
             password=password,
             backend=default_backend()
         )
 
-    ciphertext = base64.b64decode(b64_ciphertext.encode('utf-8'))
-
-    plaintext = private_key.decrypt(
-        ciphertext,
+    # Step 5: Decrypt AES key using RSA
+    aes_key = private_key.decrypt(
+        encrypted_key,
         padding.OAEP(
             mgf=padding.MGF1(algorithm=hashes.SHA256()),
             algorithm=hashes.SHA256(),
             label=None
         )
     )
+
+    # Step 6: Decrypt message using AES
+    cipher = Cipher(algorithms.AES(aes_key), modes.CBC(iv), backend=default_backend())
+    decryptor = cipher.decryptor()
+    padded_plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+
+    # Step 7: Remove padding (PKCS#7)
+    pad_len = padded_plaintext[-1]
+    if pad_len < 1 or pad_len > 16:
+        raise ValueError("Invalid padding.")
+    plaintext = padded_plaintext[:-pad_len]
+
     return plaintext.decode('utf-8')
-    
+
