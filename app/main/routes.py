@@ -10,12 +10,7 @@ from flask import render_template, redirect, url_for, request, jsonify, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired, Email
-from werkzeug.utils import secure_filename
 
-from cryptography.hazmat.primitives import serialization, hashes
-from cryptography.hazmat.primitives.asymmetric import padding
-
-from pathlib import Path
 from smtplib import SMTPAuthenticationError, SMTPException
 
 from scripts.email_message import EmailMessage
@@ -74,10 +69,17 @@ def whisper():
         user_name = request.form.get('name')
         user_email = request.form.get('email')
         user_message = request.form.get('message')
-        browser_metadata = request.form.get('browser_metadata')
+        browser_metadata_raw = request.form.get('browser_metadata')
 
-        # Get user's IP address
-        user_ip = request.remote_addr
+        # Parse the JSON string into a Python dictionary
+        try:
+            browser_metadata = json.loads(browser_metadata_raw)
+            user_ip = browser_metadata.get('ipAddress', 'Unavailable')
+            user_platform = browser_metadata.get('platform', 'Unavailable')
+            user_timestamp = browser_metadata.get('timestamp', 'Unavailable')
+        except (json.JSONDecodeError, TypeError):
+            browser_metadata = {}
+            user_ip = user_platform = user_timestamp = 'Unavailable'
 
         # TODO: Manage attachments
         if not user_name or not user_email or not user_message:
@@ -87,8 +89,9 @@ def whisper():
                                user_name=user_name,
                                user_email=user_email,
                                user_message=user_message,
-                               browser_metadata=browser_metadata,
-                               user_ip=user_ip)
+                               user_ip=user_ip,
+                               user_platform=user_platform,
+                               user_timestamp=user_timestamp)
 
     return render_template('whisper.html', error=error)
 
@@ -98,19 +101,30 @@ def preview_whisper():
         user_name = request.form.get('user_name')
         user_email = request.form.get('user_email')
         user_message = request.form.get('user_message')
-        browser_metadata = request.form.get('browser_metadata')
         user_ip = request.form.get('user_ip')
-
-        parsed_metadata = json.loads(browser_metadata)
+        user_platform = request.form.get('user_platform')
+        user_timestamp = request.form.get('user_timestamp')
         
         public_key_path = os.path.join(main_bp.static_folder, 'keys', 'indrajit_rsa_public_key.pem')
-        combined = (
-            f"Name: {user_name}\n"
-            f"Email: {user_email}\n"
-            f"IP Address: {user_ip}\n\n"
-            f"Message: {user_message}\n\n"
-            f"Browser Info: {parsed_metadata}\n\n"
-        )
+        combined = f"""\
+==============================
+📨 New Message!
+==============================
+
+From     : {user_name} <{user_email}>
+Sent At  : {user_timestamp}
+Platform : {user_platform}
+IP       : {user_ip}
+
+------------------------------
+📩 Message
+------------------------------
+{user_message}
+
+==============================
+📍 End of Message
+==============================
+"""
         encrypted_output = encrypt_with_public_key(public_key_path, combined)
 
         return render_template('preview_encrypted.html', encrypted_output=encrypted_output)

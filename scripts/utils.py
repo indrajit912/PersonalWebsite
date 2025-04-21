@@ -135,7 +135,7 @@ def encrypt_with_public_key(public_key_path: str, plaintext: str):
     return base64.b64encode(raw_json.encode('utf-8')).decode('utf-8')
 
 
-def decrypt_with_private_key(private_key_path: str, b64_blob: str, password: bytes = None) -> str:
+def decrypt_with_private_key(private_key_path: str, b64_blob: str, password: bytes = None):
     """
     Decrypts a base64-encoded JSON blob containing:
         - 'encrypted_key': RSA-encrypted AES key

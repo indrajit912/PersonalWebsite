@@ -43,24 +43,28 @@
 </div>
 
 <script>
+    /**
+     * Script Purpose:
+     * - Gathers browser and device metadata such as user agent, screen size, platform, language, etc.
+     * - Formats and includes the current timestamp with timezone.
+     * - Fetches the user's public IP address using a public API (ipify).
+     * - Stores all collected information as a JSON string in a hidden input field with the ID 'browserMetadata'.
+     */
+
     document.addEventListener('DOMContentLoaded', function () {
-        // Existing code to set clientDatetime...
-        // const dtInput = document.getElementById('clientDatetime');
-        const now = new Date();
-    
+        const now = new Date();    
         const day = String(now.getDate()).padStart(2, '0');
         const month = String(now.getMonth() + 1).padStart(2, '0');
         const year = now.getFullYear();
-    
+
         const dateFormatted = `${day}/${month}/${year}`;
         const time = now.toLocaleTimeString('en-US');
         const tz = now.toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ').pop();
         const datetimeWithTimezone = `${dateFormatted} ${time} ${tz}`;
-        // dtInput.value = datetimeWithTimezone;
     
-        // New code to set browser metadata
         const metadataInput = document.getElementById('browserMetadata');
-    
+
+        // Initialize metadata object
         const metadata = {
             userAgent: navigator.userAgent,
             timestamp: datetimeWithTimezone,
@@ -80,10 +84,21 @@
             hardwareConcurrency: navigator.hardwareConcurrency,
             deviceMemory: navigator.deviceMemory || "Unavailable"
         };
-    
-        metadataInput.value = JSON.stringify(metadata);
+
+        // Fetch the user's public IP address and add it to the metadata
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                metadata.ipAddress = data.ip;
+                metadataInput.value = JSON.stringify(metadata);
+            })
+            .catch(error => {
+                metadata.ipAddress = "Unavailable";
+                metadataInput.value = JSON.stringify(metadata);
+            });
     });
 </script>
+
     
 
     
