@@ -111,6 +111,9 @@ def main():
 
     DEFAULT_KEYS_DIR = Path.home() / ".keys" # This can be change to any pendrive too
     
+    if not DEFAULT_KEYS_DIR.exists():
+        DEFAULT_KEYS_DIR.mkdir()
+    
     encrypted_key_path = DEFAULT_KEYS_DIR / "rsa_private_key.pem.gpg"
     
     if not encrypted_key_path.exists():
