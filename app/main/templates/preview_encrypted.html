@@ -16,6 +16,7 @@
             <strong>📎 Encrypted Attachments ({{ attachment_filenames|length }})</strong>
             <ul class="mb-0">
                 {% for filename in attachment_filenames %}
+                <!-- TODO: Give a link to download the encrypted files! -->
                 <li>{{ filename }} <span class="text-muted">(encrypted)</span></li>
                 {% endfor %}
             </ul>
