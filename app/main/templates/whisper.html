@@ -16,7 +16,7 @@
         <div class="alert alert-danger text-center">{{ error }}</div>
     {% endif %}
 
-    <form method="POST" class="mt-4 shadow-sm p-4 rounded bg-light">
+    <form method="POST" enctype="multipart/form-data" class="mt-4 shadow-sm p-4 rounded bg-light">
         <div class="mb-3">
             <label for="name" class="form-label">Your Name</label>
             <input type="text" class="form-control" id="name" name="name" required placeholder="Agent X... or your real name works too">
@@ -29,16 +29,22 @@
             <label for="message" class="form-label">Your Secret Message</label>
             <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Agent, your message goes here. This channel is safe. Hit 'Encrypt Message' to get your code, then send it on its way."></textarea>
         </div>
+    
+        <div class="mb-3">
+            <label for="attachment" class="form-label">Attachments (optional)</label>
+            <input type="file" class="form-control" id="attachment" name="attachments" multiple>
+            <div class="form-text">You can attach multiple files. Max size per file: 5MB.</div>
+        </div>        
+    
         <input type="hidden" name="browser_metadata" id="browserMetadata">
-
+    
         <div class="d-grid mb-3">
             <button type="submit" class="btn btn-dark btn-lg" id="encryptMessageBtn">🔏 Encrypt</button>
         </div>
-        <!-- Back Button with margin -->
         <div class="d-grid">
             <a href="{{ url_for('main.contact') }}" class="btn btn-outline-secondary btn-lg">⬅️ Back</a>
         </div>
-    </form>
+    </form>    
     
 </div>
 

@@ -3,6 +3,9 @@
 # Created On: Dec 22, 2023
 #
 import os
+from pathlib import Path
+import tempfile
+import uuid
 import json
 from . import main_bp
 
@@ -10,11 +13,12 @@ from flask import render_template, redirect, url_for, request, jsonify, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired, Email
+from werkzeug.utils import secure_filename
 
 from smtplib import SMTPAuthenticationError, SMTPException
 
 from scripts.email_message import EmailMessage
-from scripts.utils import encrypt_with_public_key
+from scripts.utils import encrypt_with_public_key, encrypt_file_with_public_key
 from config import APP_DATA_DIR, EmailConfig
 
 #######################################################
@@ -81,7 +85,20 @@ def whisper():
             browser_metadata = {}
             user_ip = user_platform = user_timestamp = 'Unavailable'
 
-        # TODO: Manage attachments
+        # Manage attachments
+        files = request.files.getlist('attachments')
+        valid_files = [f for f in files if f and f.filename]
+
+        temp_dir = tempfile.gettempdir()
+        attachment_paths = []
+
+        for file in valid_files:
+            filename = secure_filename(file.filename)
+            unique_filename = f"{uuid.uuid4()}_{filename}"
+            save_path = os.path.join(temp_dir, unique_filename)
+            file.save(save_path)
+            attachment_paths.append(save_path)
+        
         if not user_name or not user_email or not user_message:
             error = "All fields are required."
         else:
@@ -91,7 +108,8 @@ def whisper():
                                user_message=user_message,
                                user_ip=user_ip,
                                user_platform=user_platform,
-                               user_timestamp=user_timestamp)
+                               user_timestamp=user_timestamp,
+                               attachment_paths=attachment_paths)
 
     return render_template('whisper.html', error=error)
 
@@ -104,17 +122,35 @@ def preview_whisper():
         user_ip = request.form.get('user_ip')
         user_platform = request.form.get('user_platform')
         user_timestamp = request.form.get('user_timestamp')
+        attachment_paths = request.form.getlist("attachment_paths")
         
         public_key_path = os.path.join(main_bp.static_folder, 'keys', 'indrajit_rsa_public_key.pem')
+
+        # Handle attachments 
+        encrypted_dir = os.path.join(APP_DATA_DIR, 'encrypted_attachments')
+        os.makedirs(encrypted_dir, exist_ok=True)
+
+        # Encrypt attachments and collect output paths
+        encrypted_attachment_paths = []
+        attachment_filenames = []
+
+        for raw_path in attachment_paths:
+            real_filename = raw_path.split("_", 1)[-1]
+            encrypted_path = encrypt_file_with_public_key(public_key_path, raw_path, encrypted_dir)
+            encrypted_attachment_paths.append(encrypted_path)
+            attachment_filenames.append(real_filename)
+
+        # Encrypt the message
         combined = f"""\
 ==============================
 📨 New Message!
 ==============================
 
-From     : {user_name} <{user_email}>
-Sent At  : {user_timestamp}
-Platform : {user_platform}
-IP       : {user_ip}
+From          : {user_name} <{user_email}>
+Sent At       : {user_timestamp}
+Platform      : {user_platform}
+IP            : {user_ip}
+Attachment(s) : {len(attachment_filenames)}
 
 ------------------------------
 📩 Message
@@ -127,7 +163,12 @@ IP       : {user_ip}
 """
         encrypted_output = encrypt_with_public_key(public_key_path, combined)
 
-        return render_template('preview_encrypted.html', encrypted_output=encrypted_output)
+        return render_template(
+            'preview_encrypted.html', 
+            encrypted_output=encrypted_output, 
+            attachment_filenames=attachment_filenames,
+            encrypted_attachment_paths=encrypted_attachment_paths
+        )
 
     except Exception as e:
         print("Error in preview_whisper:", e)
@@ -139,6 +180,8 @@ IP       : {user_ip}
 def send_encrypted():
     data = request.get_json()
     encrypted_output = data.get('encrypted_output')
+    encrypted_attachments = data.get('encrypted_attachments', [])
+    encrypted_attachments_paths = [Path(f) for f in encrypted_attachments]
 
     # Send email
     html_body = render_template("emails/whisper_email.html", encrypted_message=encrypted_output)
@@ -148,7 +191,8 @@ def send_encrypted():
         sender_email_id=EmailConfig.INDRAJITS_BOT_EMAIL_ID,
         to=EmailConfig.INDRAJIT912_GMAIL,
         subject="You've got a whisper. It's encrypted. 🔐",
-        email_html_text=html_body
+        email_html_text=html_body,
+        attachments=encrypted_attachments_paths
     )
 
     try:
@@ -159,7 +203,12 @@ def send_encrypted():
             print_success_status=False
         )
 
-        # After processing, you can redirect to a thank-you page.
+        # Delete the attachments from the server
+        for attachment_path in encrypted_attachments_paths:
+            if attachment_path.exists():
+                attachment_path.unlink()
+
+        # Redirect to a thank-you page.
         return jsonify({"message": "Email sent successfully!", "redirect_url": url_for('main.thankyou')})
 
     except SMTPAuthenticationError as e:

@@ -6,9 +6,11 @@
 #
 import os
 import json
+import uuid
 import base64
 import random
 import hashlib
+from pathlib import Path
 from datetime import datetime, timedelta, timezone
 
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
@@ -197,3 +199,41 @@ def decrypt_with_private_key(private_key_path: str, b64_blob: str, password: byt
 
     return plaintext.decode('utf-8')
 
+def encrypt_file_with_public_key(public_key_path: str, input_file_path: str, output_dir: str):
+
+    # Load the file data
+    with open(input_file_path, 'rb') as f:
+        file_data = f.read()
+
+    # Encrypt the file content as text encryption
+    encrypted_content = encrypt_with_public_key(public_key_path, file_data.decode('latin1'))
+
+    # Encrypt the filename
+    original_filename = Path(input_file_path).name
+    encrypted_filename = encrypt_with_public_key(public_key_path, original_filename)
+
+    # Save encrypted file
+    output_path = os.path.join(output_dir, f"{uuid.uuid4()}.enc")
+    with open(output_path, 'w') as f:
+        json.dump({
+            'encrypted_filename': encrypted_filename,
+            'encrypted_content': encrypted_content
+        }, f)
+
+    return output_path
+
+def decrypt_file_with_private_key(private_key_path: str, encrypted_file_path: str, output_dir: str, password: bytes = None):
+    # Load encrypted data
+    with open(encrypted_file_path, 'r') as f:
+        data = json.load(f)
+
+    # Decrypt filename and content
+    decrypted_filename = decrypt_with_private_key(private_key_path, data['encrypted_filename'], password)
+    decrypted_content = decrypt_with_private_key(private_key_path, data['encrypted_content'], password)
+
+    # Save to output
+    output_path = os.path.join(output_dir, decrypted_filename)
+    with open(output_path, 'wb') as f:
+        f.write(decrypted_content.encode('latin1'))
+
+    return output_path

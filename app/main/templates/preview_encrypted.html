@@ -7,56 +7,77 @@
     <p class="text-muted text-center">Here's your encrypted message. You can send it now or copy it.</p>
 
     <div class="p-4 border rounded bg-white shadow-sm">
+        <!-- Encrypted Message -->
         <textarea class="form-control mb-3" rows="10" readonly id="encryptedMessage">{{ encrypted_output }}</textarea>
+
+        <!-- Attachments -->
+        {% if attachment_filenames %}
+        <div class="alert alert-warning mt-4">
+            <strong>📎 Encrypted Attachments ({{ attachment_filenames|length }})</strong>
+            <ul class="mb-0">
+                {% for filename in attachment_filenames %}
+                <li>{{ filename }} <span class="text-muted">(encrypted)</span></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
 
         <div class="d-flex justify-content-center gap-2">
             <button class="btn btn-outline-primary" onclick="copyEncrypted()">Copy 📋</button>
             <button class="btn btn-outline-secondary" id="sendEmailBtn" onclick="sendEncryptedEmail()">
                 Send
                 <i class="bi bi-send-fill" id="send-icon"></i>
-                <span id="sendEmailSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                <span id="sendEmailSpinner" class="spinner-border spinner-border-sm d-none" role="status"
+                    aria-hidden="true"></span>
             </button>
+            <div class="d-grid">
+                <a href="{{ url_for('main.whisper') }}" class="btn btn-outline-secondary btn-lg">⬅️ Back</a>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-function copyEncrypted() {
-    const msg = document.getElementById("encryptedMessage");
-    msg.select();
-    msg.setSelectionRange(0, 99999);
-    document.execCommand("copy");
-    alert("🔐 Encrypted message copied!");
-}
+    function copyEncrypted() {
+        const msg = document.getElementById("encryptedMessage");
+        msg.select();
+        msg.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        alert("🔐 Encrypted message copied!");
+    }
 
-function toggleSpinner() {
-    var spinner = document.getElementById('sendEmailSpinner');
-    var sendIcon = document.getElementById('send-icon');
-    sendIcon.classList.toggle('d-none');
-    spinner.classList.toggle('d-none');
-}
+    function toggleSpinner() {
+        var spinner = document.getElementById('sendEmailSpinner');
+        var sendIcon = document.getElementById('send-icon');
+        sendIcon.classList.toggle('d-none');
+        spinner.classList.toggle('d-none');
+    }
 
-function sendEncryptedEmail() {
-    toggleSpinner();
-
-    const encryptedOutput = document.getElementById('encryptedMessage').value;
-
-    fetch('/send_encrypted', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ encrypted_output: encryptedOutput }),
-    })
-    .then(response => response.json())
-    .then(data => {
+    function sendEncryptedEmail() {
         toggleSpinner();
-        if (data.redirect_url) {
-            window.location.href = data.redirect_url;
-        } else {
-            alert(data.message);
-        }
-    });
-}
+
+        const encryptedOutput = document.getElementById('encryptedMessage').value;
+        const encryptedAttachments = JSON.parse('{{ encrypted_attachment_paths | tojson | safe }}');
+
+        fetch('/send_encrypted', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                encrypted_output: encryptedOutput, 
+                encrypted_attachments: encryptedAttachments 
+            }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                toggleSpinner();
+                if (data.redirect_url) {
+                    window.location.href = data.redirect_url;
+                } else {
+                    alert(data.message);
+                }
+            });
+    }
 </script>
 {% endblock %}

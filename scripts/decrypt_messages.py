@@ -19,7 +19,7 @@ from pathlib import Path
 import sys
 import os
 import getpass
-from utils import decrypt_with_private_key
+from utils import decrypt_with_private_key, decrypt_file_with_private_key
 
 def prompt_passphrase_with_confirmation(prompt="Enter passphrase", confirm_prompt="Confirm passphrase"):
     """
@@ -146,25 +146,43 @@ def main():
         sys.exit(1)
 
     key_path = decrypted_key_path
-    
-    print("\nPaste the base64-encoded encrypted message (end with an empty line):")
-    b64_blob = ""
-    while True:
-        line = input()
-        if not line.strip():
-            break
-        b64_blob += line.strip()
 
-    try:
-        decrypted_text = decrypt_with_private_key(str(key_path), b64_blob)
-        print("\nDecrypted message:")
-        print(decrypted_text)
-        
-        os.remove(decrypted_key_path)
-        print(f"Decrypted private key file {decrypted_key_path} removed for security.")
+    # Ask the user whether to decrypt email message (text) or email attachments (file)
+    choice = input("\n\nWhat do you want to decrypt?\n1. Encrypted message (text)\n2. Encrypted attachment (file)\nEnter 1 or 2: ").strip()
 
-    except Exception as e:
-        print(f"\n[Decryption Failed] {e}")
+    if choice == "1":
+        print("\nPaste the base64-encoded encrypted message (end with an empty line):")
+        b64_blob = ""
+        while True:
+            line = input()
+            if not line.strip():
+                break
+            b64_blob += line.strip()
+
+        try:
+            decrypted_text = decrypt_with_private_key(str(key_path), b64_blob)
+            print("\nDecrypted message:")
+            print(decrypted_text)
+
+        except Exception as e:
+            print(f"\n[Decryption Failed] {e}")
+
+    elif choice == "2":
+        encrypted_file_path = Path(input("\nEnter the path to the encrypted file (e.g. instance/encrypted_attachments/xyz.enc): ").strip()).expanduser()
+
+        try:
+            decrypted_file_path = decrypt_file_with_private_key(
+                private_key_path=str(key_path), 
+                encrypted_file_path=encrypted_file_path,
+                output_dir=encrypted_file_path.parent
+            )
+            print(f"\nDecrypted file saved as: {decrypted_file_path}")
+
+        except Exception as e:
+            print(f"\n[Decryption Failed] {e}")
+
+    else:
+        print("Invalid input. Please enter 1 or 2.")
 
 if __name__ == "__main__":
     main()
