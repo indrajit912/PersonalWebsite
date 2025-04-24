@@ -1,4 +1,5 @@
 ### Python ###
+app_data/encrypted_attachments
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

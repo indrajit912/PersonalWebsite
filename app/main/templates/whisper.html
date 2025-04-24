@@ -19,7 +19,7 @@
     <form method="POST" enctype="multipart/form-data" class="mt-4 shadow-sm p-4 rounded bg-light">
         <div class="mb-3">
             <label for="name" class="form-label">Your Name</label>
-            <input type="text" class="form-control" id="name" name="name" required placeholder="Agent X... or your real name works too">
+            <input type="text" class="form-control" id="name" name="name" required placeholder="Your name ...">
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Your Email</label>
@@ -27,7 +27,7 @@
         </div>
         <div class="mb-3">
             <label for="message" class="form-label">Your Secret Message</label>
-            <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Agent, your message goes here. This channel is safe. Hit 'Encrypt Message' to get your code, then send it on its way."></textarea>
+            <textarea class="form-control" id="message" name="message" rows="5" required placeholder="This channel is safe. Hit 'Encrypt' to get your code, then send it on its way."></textarea>
         </div>
     
         <div class="mb-3">
@@ -47,6 +47,25 @@
     </form>    
     
 </div>
+
+<script>
+    document.getElementById('attachment').addEventListener('change', function (event) {
+        const maxFileSize = 5 * 1024 * 1024; // 5 MB in bytes
+        const files = event.target.files;
+        let tooLarge = [];
+    
+        for (let file of files) {
+            if (file.size > maxFileSize) {
+                tooLarge.push(`${file.name} (${(file.size / (1024 * 1024)).toFixed(2)} MB)`);
+            }
+        }
+    
+        if (tooLarge.length > 0) {
+            alert(`❌ The following file(s) exceed the 5MB limit:\n\n${tooLarge.join('\n')}\n\nPlease remove them and try again.`);
+            event.target.value = ''; // Clear the file input
+        }
+    });
+</script>    
 
 <script>
     /**
@@ -104,8 +123,5 @@
             });
     });
 </script>
-
-    
-
     
 {% endblock %}

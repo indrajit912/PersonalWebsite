@@ -18,6 +18,13 @@ from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.backends import default_backend
 
+def format_size(size):
+    for unit in ['bytes', 'KB', 'MB', 'GB']:
+        if size < 1024.0:
+            return f"{size:.1f} {unit}"
+        size /= 1024.0
+    return f"{size:.1f} TB"
+
 def generate_otp():
     """Generate a random 6-digit OTP (One-Time Password).
 

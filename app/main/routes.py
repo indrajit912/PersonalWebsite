@@ -9,16 +9,15 @@ import uuid
 import json
 from . import main_bp
 
-from flask import render_template, redirect, url_for, request, jsonify, flash
+from flask import render_template, redirect, url_for, request, jsonify, flash, send_from_directory, send_file
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired, Email
 from werkzeug.utils import secure_filename
-
 from smtplib import SMTPAuthenticationError, SMTPException
 
 from scripts.email_message import EmailMessage
-from scripts.utils import encrypt_with_public_key, encrypt_file_with_public_key
+from scripts.utils import encrypt_with_public_key, encrypt_file_with_public_key, format_size
 from config import APP_DATA_DIR, EmailConfig
 
 #######################################################
@@ -140,6 +139,13 @@ def preview_whisper():
             encrypted_attachment_paths.append(encrypted_path)
             attachment_filenames.append(real_filename)
 
+        # Pair each filename with its corresponding encrypted path basename
+        attachments = list(zip(
+            attachment_filenames,
+            [os.path.basename(p) for p in encrypted_attachment_paths],
+            [format_size(os.path.getsize(p)) for p in encrypted_attachment_paths]
+        ))
+
         # Encrypt the message
         combined = f"""\
 ==============================
@@ -165,9 +171,9 @@ Attachment(s) : {len(attachment_filenames)}
 
         return render_template(
             'preview_encrypted.html', 
-            encrypted_output=encrypted_output, 
-            attachment_filenames=attachment_filenames,
-            encrypted_attachment_paths=encrypted_attachment_paths
+            encrypted_output=encrypted_output,
+            encrypted_attachment_paths=encrypted_attachment_paths,
+            attachments=attachments
         )
 
     except Exception as e:
@@ -222,6 +228,19 @@ def send_encrypted():
     except Exception as e:
         # Handle email sending error
         return redirect(url_for('errors.generic_error_route'))
+    
+
+###########################################################
+#               Download Attachments
+###########################################################
+@main_bp.route('/download_attachment/<path:filename>')
+def download_attachment(filename):
+    encrypted_dir = os.path.join(APP_DATA_DIR, 'encrypted_attachments')
+    try:
+        return send_from_directory(encrypted_dir, filename, as_attachment=True)
+    except FileNotFoundError:
+        flash("File not found.", "danger")
+        return redirect(url_for('main.whisper'))
 
 
 ######################################################################
