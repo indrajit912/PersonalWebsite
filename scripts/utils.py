@@ -12,6 +12,7 @@ import random
 import hashlib
 from pathlib import Path
 from datetime import datetime, timedelta, timezone
+import zlib
 
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import serialization, hashes
@@ -99,11 +100,10 @@ def convert_utc_to_ist(utc_datetime_str):
 
     return formatted_datetime
 
-
 def encrypt_with_public_key(public_key_path: str, plaintext: str):
     """
-    Hybrid encryption using AES for the data and RSA to encrypt the AES key.
-    Returns a JSON string with base64-encoded encrypted AES key, IV, and ciphertext.
+    Hybrid encryption using AES for the plaintext and RSA to encrypt the AES key.
+    Returns a JSON string with base64-encoded AES key, IV, and ciphertext.
     """
     # Load RSA public key
     with open(public_key_path, 'rb') as key_file:
@@ -116,16 +116,19 @@ def encrypt_with_public_key(public_key_path: str, plaintext: str):
     aes_key = os.urandom(32)  # AES-256
     iv = os.urandom(16)       # AES block size for CBC mode
 
-    # Pad the plaintext to be a multiple of 16 bytes
-    pad_len = 16 - len(plaintext.encode('utf-8')) % 16
-    padded_plaintext = plaintext + chr(pad_len) * pad_len
+    # Step 1: Compress the data
+    compressed_data = zlib.compress(plaintext.encode('utf-8'))
 
-    # Encrypt plaintext with AES
+    # Step 2: Apply PKCS#7 padding to compressed data
+    pad_len = 16 - len(compressed_data) % 16
+    padded_data = compressed_data + bytes([pad_len] * pad_len)
+
+    # Step 3: AES encrypt
     cipher = Cipher(algorithms.AES(aes_key), modes.CBC(iv), backend=default_backend())
     encryptor = cipher.encryptor()
-    ciphertext = encryptor.update(padded_plaintext.encode('utf-8')) + encryptor.finalize()
+    ciphertext = encryptor.update(padded_data) + encryptor.finalize()
 
-    # Encrypt AES key with RSA public key
+    # Step 4: RSA encrypt the AES key
     encrypted_key = public_key.encrypt(
         aes_key,
         padding.OAEP(
@@ -135,39 +138,34 @@ def encrypt_with_public_key(public_key_path: str, plaintext: str):
         )
     )
 
-    # Return the entire JSON object as a base64 string (single-line encoded blob)
+    # Step 5: Return base64 JSON object
     raw_json = json.dumps({
         'encrypted_key': base64.b64encode(encrypted_key).decode('utf-8'),
         'iv': base64.b64encode(iv).decode('utf-8'),
         'ciphertext': base64.b64encode(ciphertext).decode('utf-8')
     })
-    return base64.b64encode(raw_json.encode('utf-8')).decode('utf-8')
+
+    return raw_json
 
 
-def decrypt_with_private_key(private_key_path: str, b64_blob: str, password: bytes = None):
+def decrypt_with_private_key(private_key_path: str, raw_json: str, password: bytes = None):
     """
-    Decrypts a base64-encoded JSON blob containing:
+    Decrypts a JSON string containing:
         - 'encrypted_key': RSA-encrypted AES key
         - 'iv': AES IV
-        - 'ciphertext': AES-encrypted message
+        - 'ciphertext': AES-encrypted and padded + compressed message
 
     Returns:
         Decrypted plaintext (str)
     """
 
-    # Step 1: Decode base64-encoded blob to get JSON string
+    # Step 1: Parse the JSON string
     try:
-        json_string = base64.b64decode(b64_blob).decode('utf-8')
-    except Exception as e:
-        raise ValueError(f"Failed to decode base64 blob: {e}")
-
-    # Step 2: Parse the JSON string
-    try:
-        encrypted_data = json.loads(json_string)
+        encrypted_data = json.loads(raw_json)
     except Exception as e:
         raise ValueError(f"Failed to parse JSON: {e}")
 
-    # Step 3: Decode individual fields
+    # Step 2: Decode base64 fields
     try:
         encrypted_key = base64.b64decode(encrypted_data['encrypted_key'])
         iv = base64.b64decode(encrypted_data['iv'])
@@ -175,7 +173,7 @@ def decrypt_with_private_key(private_key_path: str, b64_blob: str, password: byt
     except Exception as e:
         raise ValueError(f"Failed to base64-decode fields: {e}")
 
-    # Step 4: Load private RSA key
+    # Step 3: Load private RSA key
     with open(os.path.expanduser(private_key_path), 'rb') as key_file:
         private_key = serialization.load_pem_private_key(
             key_file.read(),
@@ -183,7 +181,7 @@ def decrypt_with_private_key(private_key_path: str, b64_blob: str, password: byt
             backend=default_backend()
         )
 
-    # Step 5: Decrypt AES key using RSA
+    # Step 4: Decrypt AES key using RSA
     aes_key = private_key.decrypt(
         encrypted_key,
         padding.OAEP(
@@ -193,18 +191,25 @@ def decrypt_with_private_key(private_key_path: str, b64_blob: str, password: byt
         )
     )
 
-    # Step 6: Decrypt message using AES
+    # Step 5: Decrypt ciphertext using AES
     cipher = Cipher(algorithms.AES(aes_key), modes.CBC(iv), backend=default_backend())
     decryptor = cipher.decryptor()
-    padded_plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+    padded_compressed_data = decryptor.update(ciphertext) + decryptor.finalize()
 
-    # Step 7: Remove padding (PKCS#7)
-    pad_len = padded_plaintext[-1]
+    # Step 6: Remove PKCS#7 padding
+    pad_len = padded_compressed_data[-1]
     if pad_len < 1 or pad_len > 16:
         raise ValueError("Invalid padding.")
-    plaintext = padded_plaintext[:-pad_len]
+    compressed_data = padded_compressed_data[:-pad_len]
 
-    return plaintext.decode('utf-8')
+    # Step 7: Decompress to get the original plaintext
+    try:
+        plaintext_bytes = zlib.decompress(compressed_data)
+    except Exception as e:
+        raise ValueError(f"Failed to decompress data: {e}")
+
+    return plaintext_bytes.decode('utf-8')
+
 
 def encrypt_file_with_public_key(public_key_path: str, input_file_path: str, output_dir: str):
 
@@ -214,7 +219,6 @@ def encrypt_file_with_public_key(public_key_path: str, input_file_path: str, out
 
     # Encrypt the file content as text encryption
     encrypted_content = encrypt_with_public_key(public_key_path, file_data.decode('latin1'))
-
     # Encrypt the filename
     original_filename = Path(input_file_path).name
     encrypted_filename = encrypt_with_public_key(public_key_path, original_filename)

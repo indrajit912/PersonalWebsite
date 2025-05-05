@@ -10,7 +10,7 @@ encryption/decryption workflows. It includes:
 1. Encrypting a private RSA key using GPG with AES256 symmetric encryption.
 2. Storing the encrypted key in the user's home directory (~/.keys/).
 3. Decrypting the RSA private key when needed using a passphrase.
-4. Accepting a base64-encoded encrypted message as input and decrypting it using the RSA key.
+4. Accepting a json data of encrypted message or encrypted attachment files as input and decrypting it using the RSA key.
 
 Sensitive passphrase inputs are masked using getpass for improved security.
 """
@@ -148,10 +148,10 @@ def main():
     key_path = decrypted_key_path
 
     # Ask the user whether to decrypt email message (text) or email attachments (file)
-    choice = input("\n\nWhat do you want to decrypt?\n1. Encrypted message (text)\n2. Encrypted attachment (file)\nEnter 1 or 2: ").strip()
+    choice = input("\n\nWhat do you want to decrypt?\n1. Encrypted message (json data)\n2. Encrypted attachment (file)\nEnter 1 or 2: ").strip()
 
     if choice == "1":
-        print("\nPaste the base64-encoded encrypted message (end with an empty line):")
+        print("\nPaste the content of the message.json file (end with an empty line):")
         b64_blob = ""
         while True:
             line = input()

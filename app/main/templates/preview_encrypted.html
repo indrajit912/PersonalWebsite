@@ -4,11 +4,26 @@
 {% block content %}
 <div class="container my-5">
     <h2 class="mb-3 text-center">🔒 Your Encrypted Message</h2>
-    <p class="text-muted text-center">Here's your encrypted message. You can send it now or copy it.</p>
+    <p class="text-muted text-center">Here's your encrypted message. You can send it now or download it.</p>
 
     <div class="p-4 border rounded bg-white shadow-sm">
+
         <!-- Encrypted Message -->
-        <textarea class="form-control mb-3" rows="10" readonly id="encryptedMessage">{{ encrypted_output }}</textarea>
+        {% if message_filename %}
+        <div class="alert alert-info mb-4">
+            <strong>📝 Encrypted Message File</strong>
+            <ul class="mb-0">
+                <li>
+                    🔐 The encrypted message is saved as: <code>{{ message_filename }}</code>
+                    <a href="{{ url_for('main.download_attachment', filename=message_filename) }}" class="ms-2 text-decoration-none"
+                        title="Download Encrypted Message">
+                        <i class="bi bi-download"></i> Download
+                    </a>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+
 
         <!-- Attachments -->
         {% if attachments %}
@@ -35,7 +50,6 @@
         {% endif %}
 
         <div class="d-flex justify-content-center gap-2">
-            <button class="btn btn-outline-primary" onclick="copyEncrypted()">Copy 📋</button>
             <button class="btn btn-outline-secondary" id="sendEmailBtn" onclick="sendEncryptedEmail()">
                 Send
                 <i class="bi bi-send-fill" id="send-icon"></i>
@@ -50,14 +64,6 @@
 </div>
 
 <script>
-    function copyEncrypted() {
-        const msg = document.getElementById("encryptedMessage");
-        msg.select();
-        msg.setSelectionRange(0, 99999);
-        document.execCommand("copy");
-        alert("🔐 Encrypted message copied!");
-    }
-
     function toggleSpinner() {
         var spinner = document.getElementById('sendEmailSpinner');
         var sendIcon = document.getElementById('send-icon');
@@ -68,7 +74,7 @@
     function sendEncryptedEmail() {
         toggleSpinner();
 
-        const encryptedOutput = document.getElementById('encryptedMessage').value;
+        const messageFilename = JSON.parse('{{ message_filename | tojson | safe }}');
         const encryptedAttachments = JSON.parse('{{ encrypted_attachment_paths | tojson | safe }}');
 
         fetch('/send_encrypted', {
@@ -77,7 +83,7 @@
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ 
-                encrypted_output: encryptedOutput, 
+                message_filename: messageFilename,
                 encrypted_attachments: encryptedAttachments 
             }),
         })

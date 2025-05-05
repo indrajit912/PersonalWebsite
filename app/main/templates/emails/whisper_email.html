@@ -8,53 +8,73 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             color: #212529;
         }
         .container {
             background-color: #ffffff;
             border-radius: 8px;
-            padding: 30px;
-            max-width: 600px;
-            margin: auto;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            padding: 24px 32px;
+            max-width: 620px;
+            margin: 40px auto;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
         }
         .header {
             text-align: center;
-            font-size: 1.4em;
+            font-size: 1.5em;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             color: #343a40;
         }
-        .message-box {
-            background-color: #f1f3f5;
-            border-left: 4px solid #343a40;
-            padding: 20px;
-            font-family: monospace;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            border-radius: 4px;
+        .info-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 20px 24px;
+            border-radius: 6px;
             color: #495057;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        .info-box strong {
+            color: #212529;
+        }
+        code {
+            background-color: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
         }
         .footer {
-            margin-top: 30px;
-            font-size: 0.9em;
+            margin-top: 32px;
+            font-size: 0.85em;
             color: #6c757d;
             text-align: center;
+            border-top: 1px solid #dee2e6;
+            padding-top: 16px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">📩 Indrajit, you've received a whisper!</div>
-        <p>Someone just sent you an encrypted message through your personal website. Here it is:</p>
+        <div class="header">📩 You've Received a Whisper</div>
 
-        <div class="message-box">
-            <pre style="margin: 0;"><code>{{- encrypted_message -}}</code></pre>
-        </div>        
+        <p style="margin-bottom: 24px;">
+            A new encrypted message has been delivered to you via your personal website.
+        </p>
+
+        <div class="info-box">
+            <p>📝 <strong>Main Message:</strong><br>
+            The encrypted message is attached as <code>{{ message_filename }}</code>.</p>
+
+            <p>📎 <strong>Attachments:</strong><br>
+            Additional files are included as encrypted attachments with the <code>.enc</code> extension.</p>
+
+            <p>🛠 <strong>Decryption Instructions:</strong><br>
+            To decrypt the message and attachments, please use the script located at <code>scripts/decrypt_messages.py</code>.</p>
+        </div>
 
         <div class="footer">
-            This message was delivered securely from your site. Keep whispering safely. 🔐
+            This message was securely delivered from your website. Keep whispering safely. 🔐
         </div>
     </div>
 </body>

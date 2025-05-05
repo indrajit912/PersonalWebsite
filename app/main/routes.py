@@ -93,7 +93,7 @@ def whisper():
 
         for file in valid_files:
             filename = secure_filename(file.filename)
-            unique_filename = f"{uuid.uuid4()}_{filename}"
+            unique_filename = f"{uuid.uuid4().hex[:8]}_{filename}"
             save_path = os.path.join(temp_dir, unique_filename)
             file.save(save_path)
             attachment_paths.append(save_path)
@@ -125,9 +125,9 @@ def preview_whisper():
         
         public_key_path = os.path.join(main_bp.static_folder, 'keys', 'indrajit_rsa_public_key.pem')
 
-        # Handle attachments 
-        encrypted_dir = os.path.join(APP_DATA_DIR, 'encrypted_attachments')
-        os.makedirs(encrypted_dir, exist_ok=True)
+        # Handle attachments
+        encrypted_dir = APP_DATA_DIR / 'encrypted_attachments'
+        encrypted_dir.mkdir(parents=True, exist_ok=True)
 
         # Encrypt attachments and collect output paths
         encrypted_attachment_paths = []
@@ -167,11 +167,19 @@ Attachment(s) : {len(attachment_filenames)}
 📍 End of Message
 ==============================
 """
+        # Encrypt the message
         encrypted_output = encrypt_with_public_key(public_key_path, combined)
+
+        # Save encrypted JSON message
+        message_filename = f"message_{uuid.uuid4().hex[:8]}.json"
+        message_path = encrypted_dir / message_filename
+        with open(message_path, 'w') as f:
+            f.write(encrypted_output)
 
         return render_template(
             'preview_encrypted.html', 
-            encrypted_output=encrypted_output,
+            message_filename=message_filename,
+            original_message_name='message.json',
             encrypted_attachment_paths=encrypted_attachment_paths,
             attachments=attachments
         )
@@ -184,13 +192,16 @@ Attachment(s) : {len(attachment_filenames)}
 
 @main_bp.route('/send_encrypted/', methods=['POST'])
 def send_encrypted():
+    encrypted_dir = APP_DATA_DIR / 'encrypted_attachments'
+
     data = request.get_json()
-    encrypted_output = data.get('encrypted_output')
+    message_filename = data.get('message_filename')
+    message_filepath = encrypted_dir / message_filename
     encrypted_attachments = data.get('encrypted_attachments', [])
-    encrypted_attachments_paths = [Path(f) for f in encrypted_attachments]
+    encrypted_attachments_paths = [message_filepath] + [Path(f) for f in encrypted_attachments]
 
     # Send email
-    html_body = render_template("emails/whisper_email.html", encrypted_message=encrypted_output)
+    html_body = render_template("emails/whisper_email.html", message_filename=message_filename)
 
     # Create the email message
     msg = EmailMessage(
@@ -198,7 +209,7 @@ def send_encrypted():
         to=EmailConfig.INDRAJIT912_GMAIL,
         subject="You've got a whisper. It's encrypted. 🔐",
         email_html_text=html_body,
-        attachments=encrypted_attachments_paths
+        attachments= encrypted_attachments_paths
     )
 
     try:
@@ -213,6 +224,7 @@ def send_encrypted():
         for attachment_path in encrypted_attachments_paths:
             if attachment_path.exists():
                 attachment_path.unlink()
+                print(f"Attachment {attachment_path} deleted.")
 
         # Redirect to a thank-you page.
         return jsonify({"message": "Email sent successfully!", "redirect_url": url_for('main.thankyou')})
