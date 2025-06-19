@@ -334,8 +334,14 @@ def main():
         print("Remember this passphrase for future use!")
 
     # Ask the user whether to decrypt email message (text) or email attachments (file)
-    choice = input("\n\nWhat do you want to decrypt?\n1. Encrypted message (json data)\n2. Encrypted attachment (file)\nEnter 1 or 2: ").strip()
-
+    choice = input(
+        "\n\nWhat do you want to do?\n"
+        "1. Decrypt an encrypted message (JSON data)\n"
+        "2. Decrypt an encrypted attachment (file)\n"
+        "3. Change passphrase\n"
+        "Enter 1, 2, or 3: "
+    ).strip()
+    
     if choice == "1":
         print("\nPaste the content of the message.json file (end with an empty line):")
         b64_blob = ""
@@ -372,6 +378,8 @@ def main():
 
         except Exception as e:
             print(f"\n[Decryption Failed] {e}")
+    elif choice == "3":
+        change_passphrase()
 
     else:
         print("Invalid input. Please enter 1 or 2.")
@@ -381,8 +389,4 @@ def main():
 
 
 if __name__ == "__main__":
-    if "--change-passphrase" in sys.argv:
-        change_passphrase()
-    else:
-        main()
-
+    main()
