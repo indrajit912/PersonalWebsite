@@ -1,13 +1,15 @@
 """
-Hybrid RSA+AES Decryption Utility
+Decryption Utility For Wishper Messages!
+
+This script securely stores the rsa_private_key.pem file on the local system by encrypting 
+it with GPG, using a passphrase—typically the system password. When a Whisper message needs 
+to be decrypted, the script prompts for the passphrase, decrypts the rsa_private_key.pem.gpg 
+file, and then uses the recovered private key to decrypt the actual Whisper message.
 
 Author: Indrajit Ghosh
 Created On: Apr 21, 2025
 
-This script assists in securely managing and using RSA private keys for hybrid
-encryption/decryption workflows. It includes:
-
-1. Encrypting a private RSA key using GPG with AES256 symmetric encryption.
+1. Encrypting a private RSA key using GPG with AES256 symmetric encryption
 2. Storing the encrypted key in the user's home directory (~/.keys/).
 3. Decrypting the RSA private key when needed using a passphrase.
 4. Accepting a json data of encrypted message or encrypted attachment files as input and decrypting it using the RSA key.
@@ -17,7 +19,6 @@ Sensitive passphrase inputs are masked using getpass for improved security.
 import subprocess
 from pathlib import Path
 import sys
-import os
 import getpass
 from utils import decrypt_with_private_key, decrypt_file_with_private_key
 
