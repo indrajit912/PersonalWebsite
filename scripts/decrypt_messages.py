@@ -9,6 +9,20 @@ encrypted key in the user's home directory (`~/.keys/`). The passphrase is store
 securely as a SHA-256 hash for verification purposes. Optionally, the passphrase 
 can also be saved to a connected USB drive for easier retrieval.
 
+Author:
+-------
+Indrajit Ghosh  
+Created on: April 21, 2025
+Modified on: Jun 19, 2025
+
+Commands:
+---------
+  decrypt --message    Decrypt a message
+  decrypt --attachment Decrypt a file attachment
+  change-passphrase    Change your passphrase
+  help                 Show command list and usage
+
+
 Features:
 ---------
 1. **Secure Key Storage**:
@@ -40,18 +54,14 @@ Usage:
    - Providing the passphrase manually, or
    - Allowing the script to retrieve it from a connected pendrive.
 4. The script offers to decrypt either a JSON-based message or a file attachment.
-
-Author:
--------
-Indrajit Ghosh  
-Created on: April 21, 2025
-Modified on: Jun 19, 2025
 """
-
 import subprocess
 from pathlib import Path
 import sys
 import getpass
+
+import click
+
 from utils import decrypt_with_private_key, decrypt_file_with_private_key, is_pendrive_connected, sha256_hash
 
 DEFAULT_KEYS_DIR = Path.home() / ".keys"
@@ -109,6 +119,31 @@ def _prompt_passphrase_with_confirmation(prompt="Enter passphrase", confirm_prom
     print("[Error] Maximum attempts reached. Exiting.")
     sys.exit(1)
 
+def _load_passphrase_from_pendrive():
+    pendrive_path = is_pendrive_connected(label=PENDRIVE_LABEL)
+    secret_dir_name = PENDRIVE_SECRET_DIR_NAME
+    passphrase_file_name = PENDRIVE_PASSPHRASE_FILENAME
+    
+    passphrase = secret_dir = passphrase_file = None
+
+    if pendrive_path:
+        secret_dir = Path(pendrive_path) / secret_dir_name
+        passphrase_file = secret_dir / passphrase_file_name
+
+        if passphrase_file.is_file():
+            try:
+                passphrase = passphrase_file.read_text(encoding='utf-8').strip()
+
+                # Check whether this is valid passphrase or not
+                if not _verify_passphrase_hash(passphrase, PASSPHRASE_HASH_FILE):
+                    passphrase = None
+                else:
+                    print("[Info] Passphrase loaded from pendrive.\n")
+            except Exception as e:
+                print(f"[Warning] Could not read passphrase file: {e}")
+    
+    return passphrase, pendrive_path, secret_dir, passphrase_file
+
 
 def _prompt_passphrase_from_user_and_get_keypath(encrypted_key_path):
     """
@@ -131,26 +166,7 @@ def _prompt_passphrase_from_user_and_get_keypath(encrypted_key_path):
     """
     print("-" * 30 + " Decryption " + "-" * 30)
 
-    pendrive_path = is_pendrive_connected(label=PENDRIVE_LABEL)
-    secret_dir_name = PENDRIVE_SECRET_DIR_NAME
-    passphrase_file_name = PENDRIVE_PASSPHRASE_FILENAME
-    passphrase = None
-
-    if pendrive_path:
-        secret_dir = Path(pendrive_path) / secret_dir_name
-        passphrase_file = secret_dir / passphrase_file_name
-
-        if passphrase_file.is_file():
-            try:
-                passphrase = passphrase_file.read_text(encoding='utf-8').strip()
-
-                # Check whether this is valid passphrase or not
-                if not _verify_passphrase_hash(passphrase, PASSPHRASE_HASH_FILE):
-                    passphrase = None
-                else:
-                    print("[Info] Passphrase loaded from pendrive.\n")
-            except Exception as e:
-                print(f"[Warning] Could not read passphrase file: {e}")
+    passphrase, pendrive_path, secret_dir, passphrase_file = _load_passphrase_from_pendrive()
 
     if not passphrase:
         # Prompt user for passphrase
@@ -167,7 +183,7 @@ def _prompt_passphrase_from_user_and_get_keypath(encrypted_key_path):
                 except Exception as e:
                     print(f"[Error] Failed to save passphrase to pendrive: {e}")
 
-    decrypted_key_path = decrypt_private_key_with_gpg(encrypted_key_path, passphrase)
+    decrypted_key_path = _decrypt_private_key_with_gpg(encrypted_key_path, passphrase)
 
     if not decrypted_key_path:
         print("\n[Error] Failed to decrypt the private key.")
@@ -183,43 +199,40 @@ def change_passphrase():
 
     if not encrypted_key_path.exists():
         print(f"[Error] Encrypted private key not found at {encrypted_key_path}")
-        return False
+        sys.exit(1)
 
     # Step 1: Get current passphrase and verify hash
-    current_passphrase = getpass.getpass("Enter current passphrase: ").strip()
+    # If the pendrive is connected check it first
+    current_passphrase, _, _, _ = _load_passphrase_from_pendrive()
+    
+    if current_passphrase is None:
+        current_passphrase = getpass.getpass("Enter current passphrase: ").strip()
 
     if not _verify_passphrase_hash(current_passphrase, PASSPHRASE_HASH_FILE):
         print("[Error] Incorrect current passphrase.")
-        return False
+        sys.exit(1)
+    
+    # Step 2: Prompt for new passphrase
+    new_passphrase = _prompt_passphrase_with_confirmation("Enter new passphrase", "Confirm new passphrase")
 
-    # Step 2: Decrypt the private key
-    decrypted_key_path = decrypt_private_key_with_gpg(encrypted_key_path, current_passphrase)
+    # Step 3: Decrypt the private key
+    decrypted_key_path = _decrypt_private_key_with_gpg(encrypted_key_path, current_passphrase)
 
     if not decrypted_key_path or not decrypted_key_path.exists():
         print("[Error] Failed to decrypt the private key.")
-        return False
-
-    # Step 3: Prompt for new passphrase
-    new_passphrase = _prompt_passphrase_with_confirmation("Enter new passphrase", "Confirm new passphrase")
+        sys.exit(1)
 
     # Step 4: Re-encrypt the private key using the new passphrase
-    encrypted_path = encrypt_private_key_with_gpg(decrypted_key_path, new_passphrase)
+    encrypted_path = _encrypt_private_key_with_gpg(decrypted_key_path, new_passphrase)
 
     if not encrypted_path:
         print("[Error] Failed to re-encrypt private key.")
-        return False
-
-    # Step 5: Clean up decrypted file
-    try:
-        decrypted_key_path.unlink()
-        print("[Info] Decrypted private key removed from disk.")
-    except Exception as e:
-        print(f"[Warning] Failed to delete decrypted private key: {e}")
+        sys.exit(1)
 
     print("[Success] Passphrase changed successfully.")
-    return True
+    return decrypted_key_path
 
-def encrypt_private_key_with_gpg(private_key_path, passphrase):
+def _encrypt_private_key_with_gpg(private_key_path, passphrase):
     """
     Encrypts the given RSA private key file using GPG with AES256 encryption.
 
@@ -264,7 +277,7 @@ def encrypt_private_key_with_gpg(private_key_path, passphrase):
         print(f"[Error] Failed to encrypt private key: {e}")
         return None
 
-def decrypt_private_key_with_gpg(encrypted_key_path, passphrase):
+def _decrypt_private_key_with_gpg(encrypted_key_path, passphrase):
     """
     Decrypts the given encrypted RSA private key file using GPG.
 
@@ -299,14 +312,8 @@ def decrypt_private_key_with_gpg(encrypted_key_path, passphrase):
     except subprocess.CalledProcessError as e:
         print(f"Failed to decrypt private key with GPG: {e}")
         return None
-
-def main():
-    """
-    Entry point for the hybrid RSA+AES message decryption tool.
-    Handles checking for encrypted key, encryption/decryption, and message decryption.
-    """
-    print("=== Decryption Utility For Whisper Messages ===")
     
+def _get_encrypted_key_path():
     if not DEFAULT_KEYS_DIR.exists():
         DEFAULT_KEYS_DIR.mkdir()
     
@@ -324,7 +331,7 @@ def main():
         
         passphrase = _prompt_passphrase_with_confirmation("Enter passphrase to encrypt the private key", "Confirm passphrase")
         
-        encrypted_key_path = encrypt_private_key_with_gpg(private_key_path, passphrase)
+        encrypted_key_path = _encrypt_private_key_with_gpg(private_key_path, passphrase)
         
         if not encrypted_key_path:
             print("[Error] Encryption failed.")
@@ -333,60 +340,110 @@ def main():
         print(f"\nPrivate key has been encrypted and stored at: {encrypted_key_path}")
         print("Remember this passphrase for future use!")
 
-    # Ask the user whether to decrypt email message (text) or email attachments (file)
-    choice = input(
-        "\n\nWhat do you want to do?\n"
-        "1. Decrypt an encrypted message (JSON data)\n"
-        "2. Decrypt an encrypted attachment (file)\n"
-        "3. Change passphrase\n"
-        "Enter 1, 2, or 3: "
-    ).strip()
+    return encrypted_key_path
     
-    if choice == "1":
-        print("\nPaste the content of the message.json file (end with an empty line):")
-        b64_blob = ""
+def decrypt_message(encrypted_key_path):
+    print("\nPaste the content of the message.json file (end with an empty line):")
+    b64_blob = ""
+    while True:
+        line = input()
+        if not line.strip():
+            break
+        b64_blob += line.strip()
+
+    try:
+        # Get the key_path
+        key_path = _prompt_passphrase_from_user_and_get_keypath(encrypted_key_path)
+        decrypted_text = decrypt_with_private_key(str(key_path), b64_blob)
+        print("\n\nDecrypted message:")
+        print(decrypted_text)
+        return key_path
+
+    except Exception as e:
+        print(f"\n[Decryption Failed] {e}")
+
+def decrypt_attachment(encrypted_key_path, encrypted_file_path=None):
+    try:
+        # Get the key_path
+        key_path = _prompt_passphrase_from_user_and_get_keypath(encrypted_key_path)
+
+        decrypted_file_path = decrypt_file_with_private_key(
+            private_key_path=str(key_path), 
+            encrypted_file_path=encrypted_file_path,
+            output_dir=encrypted_file_path.parent
+        )
+        print(f"\nDecrypted file saved as: {decrypted_file_path}")
+
+        return key_path
+
+    except Exception as e:
+        print(f"\n[Decryption Failed] {e}")
+
+def _cleanup_key(key_path):
+    try:
+        key_path.unlink()
+        click.secho("[✓] Decrypted private key removed from disk.", fg="green")
+    except Exception as e:
+        click.secho(f"[!] Warning: Failed to delete decrypted private key: {e}", fg="yellow")
+
+
+@click.group(invoke_without_command=True)
+@click.pass_context
+def cli(ctx):
+    """
+    🔐 Whisper Message Decryption Utility
+
+    Author: Indrajit Ghosh
+    Last modified: Jun 19, 2025
+    """
+    click.secho("=== Decryption Utility For Whisper Messages ===", fg="cyan", bold=True)
+    click.secho("Author: Indrajit Ghosh", fg="magenta")
+    click.secho("Last modified: Jun 19, 2025\n", fg="magenta")
+
+    if ctx.invoked_subcommand is None:
+        click.secho("Use one of the following commands:", fg="blue", bold=True)
+        click.echo("  decrypt --message    Decrypt a message")
+        click.echo("  decrypt --attachment Decrypt a file attachment")
+        click.echo("  change-passphrase    Change your passphrase")
+        click.echo("  help                 Show command list and usage")
+        click.echo("\nRun with --help after any command for more options.")
+
+
+@cli.command("decrypt")
+@click.option("--message", "-m", is_flag=True, help="Decrypt an encrypted message (JSON data)")
+@click.option("--attachment", "-a", is_flag=True, help="Decrypt an encrypted attachment (file)")
+def decrypt_cmd(message, attachment):
+    """Decrypt a message or attachment."""
+    encrypted_key_path = _get_encrypted_key_path()
+
+    if message:
+        key_path = decrypt_message(encrypted_key_path)
+
+    elif attachment:
         while True:
-            line = input()
-            if not line.strip():
+            raw_path = click.prompt("Enter the path to the encrypted file (e.g. ~/instance/encrypted_attachments/xyz.enc)")
+            file_path = Path(raw_path).expanduser()
+            if file_path.exists() and file_path.is_file():
                 break
-            b64_blob += line.strip()
+            click.secho("❌ Invalid file path. Please try again.", fg="red")
 
-        try:
-            # Get the key_path
-            key_path = _prompt_passphrase_from_user_and_get_keypath(encrypted_key_path)
-
-            decrypted_text = decrypt_with_private_key(str(key_path), b64_blob)
-            print("\n\nDecrypted message:")
-            print(decrypted_text)
-
-        except Exception as e:
-            print(f"\n[Decryption Failed] {e}")
-
-    elif choice == "2":
-        encrypted_file_path = Path(input("\nEnter the path to the encrypted file (e.g. instance/encrypted_attachments/xyz.enc): ").strip()).expanduser()
-
-        try:
-            # Get the key_path
-            key_path = _prompt_passphrase_from_user_and_get_keypath(encrypted_key_path)
-
-            decrypted_file_path = decrypt_file_with_private_key(
-                private_key_path=str(key_path), 
-                encrypted_file_path=encrypted_file_path,
-                output_dir=encrypted_file_path.parent
-            )
-            print(f"\nDecrypted file saved as: {decrypted_file_path}")
-
-        except Exception as e:
-            print(f"\n[Decryption Failed] {e}")
-    elif choice == "3":
-        change_passphrase()
-
+        key_path = decrypt_attachment(
+            encrypted_key_path=encrypted_key_path,
+            encrypted_file_path=file_path
+        )
     else:
-        print("Invalid input. Please enter 1 or 2.")
+        click.secho("❌ Please specify either --message or --attachment.", fg="red")
+        return
 
-    # Remove the decrypted key from the local system
-    key_path.unlink()
+    _cleanup_key(key_path)
+
+
+@cli.command("change-passphrase")
+def change_passphrase_cmd():
+    """Change your encrypted private key passphrase."""
+    key_path = change_passphrase()
+    _cleanup_key(key_path)
 
 
 if __name__ == "__main__":
-    main()
+    cli()
