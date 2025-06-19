@@ -9,6 +9,8 @@ import json
 import uuid
 import base64
 import random
+import platform
+import getpass
 import hashlib
 from pathlib import Path
 from datetime import datetime, timedelta, timezone
@@ -248,3 +250,49 @@ def decrypt_file_with_private_key(private_key_path: str, encrypted_file_path: st
         f.write(decrypted_content.encode('latin1'))
 
     return output_path
+
+
+def is_pendrive_connected(label='Indrajit'):
+    """
+    Check if the USB drive with the given label is connected and return its path.
+
+    Returns:
+        str or None: The path to the connected USB drive, or None if not found.
+    """
+    system = platform.system()
+    possible_paths = []
+
+    if system == 'Linux':
+        username = getpass.getuser()
+        possible_paths = [
+            f'/media/{username}/{label}',
+            f'/run/media/{username}/{label}'
+        ]
+    elif system == 'Darwin':
+        possible_paths = [f'/Volumes/{label}']
+    elif system == 'Windows':
+        from ctypes import windll, create_unicode_buffer
+
+        for letter in 'DEFGHIJKLMNOPQRSTUVWXYZ':
+            drive_path = f'{letter}:\\'
+            if os.path.exists(drive_path):
+                volume_name_buffer = create_unicode_buffer(1024)
+                fs_name_buffer = create_unicode_buffer(1024)
+                result = windll.kernel32.GetVolumeInformationW(
+                    drive_path,
+                    volume_name_buffer,
+                    len(volume_name_buffer),
+                    None, None, None,
+                    fs_name_buffer,
+                    len(fs_name_buffer)
+                )
+                if result and volume_name_buffer.value == label:
+                    return drive_path
+        return None
+    else:
+        raise NotImplementedError(f'Unsupported platform: {system}')
+
+    for path in possible_paths:
+        if Path(path).is_dir():
+            return path
+    return None
