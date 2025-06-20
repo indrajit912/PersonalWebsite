@@ -252,7 +252,7 @@ def decrypt_file_with_private_key(private_key_path: str, encrypted_file_path: st
     return output_path
 
 
-def is_pendrive_connected(label='Indrajit'):
+def is_flashdrive_connected(label='Indrajit'):
     """
     Check if the USB drive with the given label is connected and return its path.
 

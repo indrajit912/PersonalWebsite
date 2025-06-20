@@ -39,11 +39,11 @@ Features:
    - Provides functionality to change the passphrase used to protect the RSA key.
    - Uses `getpass` to securely collect user input without echoing it to the terminal.
    - Verifies passphrase integrity using SHA-256 hashing.
-   - Optionally saves the passphrase to a USB pendrive (e.g., `/media/<user>/Indrajit/.secret_keys/.whisper_passphrase`) 
+   - Optionally saves the passphrase to a USB flashdrive (e.g., `/media/<user>/Indrajit/.secret_keys/.whisper_passphrase`) 
    for automatic loading.
 
-4. **USB Pendrive Integration**:
-   - If a pendrive labeled `Indrajit` is connected, the script checks for an existing saved passphrase.
+4. **USB flashdrive Integration**:
+   - If a flashdrive labeled `Indrajit` is connected, the script checks for an existing saved passphrase.
    - If found, the passphrase is automatically loaded and validated.
 
 Usage:
@@ -52,7 +52,7 @@ Usage:
 2. The private key is then encrypted and stored securely.
 3. On subsequent uses, the user can decrypt a Whisper message or attachment by:
    - Providing the passphrase manually, or
-   - Allowing the script to retrieve it from a connected pendrive.
+   - Allowing the script to retrieve it from a connected flashdrive.
 4. The script offers to decrypt either a JSON-based message or a file attachment.
 """
 import subprocess
@@ -62,20 +62,18 @@ import getpass
 
 import click
 
-from utils import decrypt_with_private_key, decrypt_file_with_private_key, is_pendrive_connected, sha256_hash
+from utils import decrypt_with_private_key, decrypt_file_with_private_key, is_flashdrive_connected, sha256_hash
 
 DEFAULT_KEYS_DIR = Path.home() / ".keys"
 PASSPHRASE_HASH_FILE = DEFAULT_KEYS_DIR / "passphrase_hash"
-PENDRIVE_LABEL = "Indrajit"
-PENDRIVE_SECRET_DIR_NAME = ".secret_keys"
-PENDRIVE_PASSPHRASE_FILENAME = ".whisper_passphrase"
+FLASHDRIVE_LABEL = "Indrajit"
+FLASHDRIVE_SECRET_DIR_NAME = ".secret_keys"
+FLASHDRIVE_PASSPHRASE_FILENAME = ".whisper_passphrase"
 
 def _verify_passphrase_hash(passphrase: str, hash_file: Path):
     """
     Verifies that the SHA-256 hash of the given passphrase matches
-    the stored hash in the specified hash file.
-
-    Args:
+    the stored hash in the specified hash filFLASHDRIVE
         passphrase (str): The passphrase to verify.
         hash_file (Path): Path to the file containing the stored hash.
 
@@ -119,15 +117,15 @@ def _prompt_passphrase_with_confirmation(prompt="Enter passphrase", confirm_prom
     print("[Error] Maximum attempts reached. Exiting.")
     sys.exit(1)
 
-def _load_passphrase_from_pendrive():
-    pendrive_path = is_pendrive_connected(label=PENDRIVE_LABEL)
-    secret_dir_name = PENDRIVE_SECRET_DIR_NAME
-    passphrase_file_name = PENDRIVE_PASSPHRASE_FILENAME
+def _load_passphrase_from_flashdrive():
+    flashdrive_path = is_flashdrive_connected(label=FLASHDRIVE_LABEL)
+    secret_dir_name = FLASHDRIVE_SECRET_DIR_NAME
+    passphrase_file_name = FLASHDRIVE_PASSPHRASE_FILENAME
     
     passphrase = secret_dir = passphrase_file = None
 
-    if pendrive_path:
-        secret_dir = Path(pendrive_path) / secret_dir_name
+    if flashdrive_path:
+        secret_dir = Path(flashdrive_path) / secret_dir_name
         passphrase_file = secret_dir / passphrase_file_name
 
         if passphrase_file.is_file():
@@ -138,11 +136,11 @@ def _load_passphrase_from_pendrive():
                 if not _verify_passphrase_hash(passphrase, PASSPHRASE_HASH_FILE):
                     passphrase = None
                 else:
-                    print("[Info] Passphrase loaded from pendrive.\n")
+                    print("[Info] Passphrase loaded from flashdrive.\n")
             except Exception as e:
                 print(f"[Warning] Could not read passphrase file: {e}")
     
-    return passphrase, pendrive_path, secret_dir, passphrase_file
+    return passphrase, flashdrive_path, secret_dir, passphrase_file
 
 
 def _prompt_passphrase_from_user_and_get_keypath(encrypted_key_path):
@@ -153,7 +151,7 @@ def _prompt_passphrase_from_user_and_get_keypath(encrypted_key_path):
     `.secret_keys/.whisper_passphrase`, load the passphrase from it.
     Otherwise, prompt the user to enter the passphrase manually.
 
-    If the pendrive is connected but the passphrase is not saved,
+    If the flashdrive is connected but the passphrase is not saved,
     offer to save it securely for future use.
 
     Parameters:
@@ -166,22 +164,22 @@ def _prompt_passphrase_from_user_and_get_keypath(encrypted_key_path):
     """
     print("-" * 30 + " Decryption " + "-" * 30)
 
-    passphrase, pendrive_path, secret_dir, passphrase_file = _load_passphrase_from_pendrive()
+    passphrase, flashdrive_path, secret_dir, passphrase_file = _load_passphrase_from_flashdrive()
 
     if not passphrase:
         # Prompt user for passphrase
         passphrase = getpass.getpass("\nEnter passphrase to decrypt the private key: ").strip()
 
-        # Offer to save to pendrive if connected
-        if pendrive_path:
-            save_choice = input("Do you want to save this passphrase to your pendrive for future use? [y/N]: ").strip().lower()
+        # Offer to save to flashdrive if connected
+        if flashdrive_path:
+            save_choice = input("Do you want to save this passphrase to your flashdrive for future use? [y/N]: ").strip().lower()
             if save_choice == 'y':
                 try:
                     secret_dir.mkdir(parents=True, exist_ok=True)
                     passphrase_file.write_text(passphrase, encoding='utf-8')
                     print(f"[Info] Passphrase saved to: {passphrase_file}\n\n")
                 except Exception as e:
-                    print(f"[Error] Failed to save passphrase to pendrive: {e}")
+                    print(f"[Error] Failed to save passphrase to flashdrive: {e}")
 
     decrypted_key_path = _decrypt_private_key_with_gpg(encrypted_key_path, passphrase)
 
@@ -202,8 +200,8 @@ def change_passphrase():
         sys.exit(1)
 
     # Step 1: Get current passphrase and verify hash
-    # If the pendrive is connected check it first
-    current_passphrase, _, _, _ = _load_passphrase_from_pendrive()
+    # If the flashdrive is connected check it first
+    current_passphrase, _, _, _ = _load_passphrase_from_flashdrive()
     
     if current_passphrase is None:
         current_passphrase = getpass.getpass("Enter current passphrase: ").strip()
@@ -259,13 +257,13 @@ def _encrypt_private_key_with_gpg(private_key_path, passphrase):
         # Save the passphrase hash
         PASSPHRASE_HASH_FILE.write_text(sha256_hash(passphrase), encoding='utf-8')
 
-        # Save the passphrase to the pendrive if connected
-        pendrive_path = is_pendrive_connected(label=PENDRIVE_LABEL)
-        secret_dir_name = PENDRIVE_SECRET_DIR_NAME
-        passphrase_file_name = PENDRIVE_PASSPHRASE_FILENAME
+        # Save the passphrase to the flashdrive if connected
+        flashdrive_path = is_flashdrive_connected(label=FLASHDRIVE_LABEL)
+        secret_dir_name = FLASHDRIVE_SECRET_DIR_NAME
+        passphrase_file_name = FLASHDRIVE_PASSPHRASE_FILENAME
 
-        if pendrive_path:
-            secret_dir = Path(pendrive_path) / secret_dir_name
+        if flashdrive_path:
+            secret_dir = Path(flashdrive_path) / secret_dir_name
             passphrase_file = secret_dir / passphrase_file_name
 
             passphrase_file.write_text(passphrase, encoding='utf-8')
