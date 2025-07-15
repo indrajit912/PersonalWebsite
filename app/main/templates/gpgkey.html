@@ -69,14 +69,14 @@
 
                         <h5>🔐 Step 5: Encrypt the Message</h5>
                         <p>Use the fingerprint from above in the command:</p>
-                        <pre><code>gpg --output message.txt.gpg --encrypt --recipient {{ fingerprint }} message.txt</code></pre>
+                        <pre><code>gpg --output message.txt.gpg --encrypt --recipient {{ "".join(fingerprint.split()) }} message.txt</code></pre>
                         <p>This creates an encrypted file: <code>message.txt.gpg</code></p>
 
                         <h5>📤 Step 6: Send It</h5>
                         <p>Send <code>message.txt.gpg</code> to me via email, chat, or any preferred channel.</p>
 
                         <h5>🧹 Optional: Remove the Key</h5>
-                        <pre><code>gpg --delete-key {{ fingerprint }}</code></pre>
+                        <pre><code>gpg --delete-key {{ "".join(fingerprint.split()) }}</code></pre>
 
                         <p class="mt-4">That’s it! Your message will be secure, and I’ll be able to decrypt it on my end. 🔐</p>
                     </div>
