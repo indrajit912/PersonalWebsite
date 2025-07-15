@@ -33,7 +33,7 @@
                         <h5 class="card-title">GPG Key <i class="bi bi-key-fill"></i></h5>
                         <div class="btn-group btn-group-sm mb-3" role="group" aria-label="Small button group">
                             <button type="button" class="btn btn-outline-secondary" onclick="copyGPGkey()">Copy</button>
-                            <a class="btn btn-outline-secondary" href="{{ url_for('main.static', filename='others/indrajit_gpg_public_key.asc') }}" download="indrajit_public_key.asc">Download</a>
+                            <a class="btn btn-outline-secondary" href="{{ url_for('main.static', filename='keys/indrajit_gpg_public_key.asc') }}" download="indrajit_public_key.asc">Download</a>
                         </div>
                         <pre class="pre-scrollable">{{ gpg_key }}</pre>
                     </div>
