@@ -17,6 +17,7 @@ from werkzeug.utils import secure_filename
 from smtplib import SMTPAuthenticationError, SMTPException
 
 from scripts.email_message import EmailMessage
+from scripts.send_email_client import send_email_via_hermes
 from scripts.utils import encrypt_with_public_key, encrypt_file_with_public_key, format_size
 from config import APP_DATA_DIR, EmailConfig
 
@@ -294,42 +295,26 @@ def contact():
             email_id=email_id
         )
 
-        # Create the email message
-        msg = EmailMessage(
-            sender_email_id=EmailConfig.INDRAJITS_BOT_EMAIL_ID,
+        api_url = EmailConfig.HERMES_BASE_URL + "/api/v1/send-email"
+        result = send_email_via_hermes(
             to=EmailConfig.INDRAJIT912_GMAIL,
             subject="Message from your WebSite!",
             email_html_text=email_html_text,
-            attachments=_attachment_paths
+            attachments=[str(p) for p in _attachment_paths],
+            api_key=EmailConfig.HERMES_API_KEY,
+            api_url=api_url,
+            from_name="Indrajit's Website Bot"
         )
 
-        try:
-            # Send the email to Indrajit
-            msg.send(
-                sender_email_password=EmailConfig.INDRAJITS_BOT_EMAIL_PASSWD,
-                server_info=EmailConfig.GMAIL_SERVER,
-                print_success_status=False
-            )
-
+        if result.get("success"):
             # Delete the attachments from the server
             for attachment_path in _attachment_paths:
                 if attachment_path.exists():
                     attachment_path.unlink()
-
-            # After processing, you can redirect to a thank-you page.
             return redirect(url_for('main.thankyou'))
-
-        except SMTPAuthenticationError as e:
-            # TODO: Print the error `e` as 'Know More' button!
-            # Redirect to the email authentication error page using the error blueprint
-            return redirect(url_for('errors.email_auth_error_route'))
-
-        except SMTPException as e:
+        else:
+            flash(f"Failed to send email. Please try again later. {result.get('message')}", "danger")
             return redirect(url_for('errors.email_send_error_route'))
-
-        except Exception as e:
-            # Handle email sending error
-            return redirect(url_for('errors.generic_error_route'))
 
     return render_template('contact.html')
 

@@ -23,6 +23,9 @@ class EmailConfig:
     INDRAJITS_BOT_EMAIL_PASSWD = os.environ.get("INDRAJITS_BOT_APP_PASSWORD")
     INDRAJIT912_GMAIL = os.environ.get("INDRAJIT912_GMAIL")
     GMAIL_SERVER = ['smtp.gmail.com', 587]
+    
+    HERMES_API_KEY = os.environ.get("HERMES_API_KEY")
+    HERMES_BASE_URL = "https://hermesbot.pythonanywhere.com"
 
 class DatabaseConfig:
     # Below are the PlanetScale db credentials
