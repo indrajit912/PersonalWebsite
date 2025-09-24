@@ -302,6 +302,7 @@ def contact():
             email_html_text=email_html_text,
             attachments=[str(p) for p in _attachment_paths],
             api_key=EmailConfig.HERMES_API_KEY,
+            bot_id=EmailConfig.HERMES_EMAILBOT_ID,
             api_url=api_url,
             from_name="Indrajit's Website Bot"
         )

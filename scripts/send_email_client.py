@@ -19,7 +19,6 @@ import os
 import requests
 from typing import List, Optional, Dict, Any
 
-
 def send_email_via_hermes(
     api_url: str,
     api_key: str,
@@ -38,7 +37,7 @@ def send_email_via_hermes(
     Send an email using the Hermes API /api/v1/send-email endpoint.
 
     Args:
-        api_url: Base URL of the Hermes API (e.g., 'https://your-hermes-url/api/v1/send-email')
+        api_url: Base URL of the Hermes API (e.g., 'https://hermesbot.pythonanywhere.com/api/v1/send-email')
         api_key: Your personal API key (Bearer token)
         to: List of recipient email addresses
         subject: Email subject (optional)
@@ -91,7 +90,6 @@ if __name__ == "__main__":
     # Example usage:
     HOST = "http://localhost:8080"
 
-
     result = send_email_via_hermes(
         api_url=f"{HOST}/api/v1/send-email",
         api_key="YOUR_API_KEY",
@@ -113,4 +111,5 @@ if __name__ == "__main__":
         """,
         from_name="Your App",
     )
+    
     print(result)
