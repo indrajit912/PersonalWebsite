@@ -110,12 +110,13 @@ def email_auth_error_route():
 ##########################################
 @errors_bp.app_errorhandler(SMTPException)
 def email_send_error(error):
-    return render_template('errors/email_send_error.html'), 500
+    return render_template('errors/email_send_error.html', error=error), 500
 
 # Create a named route for email_send_error
-@errors_bp.route('/email_send_error')
-def email_send_error_route():
-    return email_send_error(None)
+@errors_bp.route('/email_send_error/<error>')
+def email_send_error_route(error="Unknown error"):
+    return render_template('errors/email_send_error.html', error=error), 500
+
 
 #######################################################################
 #      A catch-all error handler for other exceptions!

@@ -296,7 +296,7 @@ def contact():
         )
 
         api_url = EmailConfig.HERMES_BASE_URL + "/api/v1/send-email"
-        result = send_email_via_hermes(
+        response = send_email_via_hermes(
             to=EmailConfig.INDRAJIT912_GMAIL,
             subject="Message from your WebSite!",
             email_html_text=email_html_text,
@@ -307,15 +307,16 @@ def contact():
             from_name="Indrajit's Website Bot"
         )
 
-        if result.get("success"):
-            # Delete the attachments from the server
-            for attachment_path in _attachment_paths:
-                if attachment_path.exists():
-                    attachment_path.unlink()
+        # Delete the attachments from the server
+        for attachment_path in _attachment_paths:
+            if attachment_path.exists():
+                attachment_path.unlink()
+
+        if response.get("success"):          
             return redirect(url_for('main.thankyou'))
         else:
-            flash(f"Failed to send email. Please try again later. {result.get('message')}", "danger")
-            return redirect(url_for('errors.email_send_error_route'))
+            error = response.get('error', 'Unknown error occurred.')
+            return redirect(url_for('errors.email_send_error_route', error=error))
 
     return render_template('contact.html')
 
