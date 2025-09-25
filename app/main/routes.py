@@ -94,8 +94,15 @@ def whisper():
 
         for file in valid_files:
             filename = secure_filename(file.filename)
-            unique_filename = f"{uuid.uuid4().hex[:8]}_{filename}"
-            save_path = os.path.join(temp_dir, unique_filename)
+            save_path = os.path.join(temp_dir, filename)
+
+            # Avoid overwriting existing files
+            counter = 1
+            base, ext = os.path.splitext(save_path)
+            while os.path.exists(save_path):
+                save_path = f"{base}_{counter}{ext}"
+                counter += 1
+
             file.save(save_path)
             attachment_paths.append(save_path)
         
