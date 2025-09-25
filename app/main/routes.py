@@ -9,14 +9,12 @@ import uuid
 import json
 from . import main_bp
 
-from flask import render_template, redirect, url_for, request, jsonify, flash, send_from_directory, send_file
+from flask import render_template, redirect, url_for, request, jsonify, flash, send_from_directory
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired, Email
 from werkzeug.utils import secure_filename
-from smtplib import SMTPAuthenticationError, SMTPException
 
-from scripts.email_message import EmailMessage
 from scripts.send_email_client import send_email_via_hermes
 from scripts.utils import encrypt_with_public_key, encrypt_file_with_public_key, format_size
 from config import APP_DATA_DIR, EmailConfig
@@ -230,10 +228,10 @@ def send_encrypted():
             print(f"Attachment {attachment_path} deleted.")
 
     if response.get("success"):          
-        return jsonify({"message": "Email sent successfully!", "redirect_url": url_for('main.thankyou')})
+        return jsonify({"message": "Email sent successfully!", "redirect_url": url_for('main.thankyou')}), 200
     else:
         error = response.get('error', 'Unknown error occurred.')
-        return redirect(url_for('errors.email_send_error_route', error=error))
+        return jsonify({"message": error, "redirect_url": url_for('errors.email_send_error_route', error=error)}), 500
     
 
 ###########################################################
