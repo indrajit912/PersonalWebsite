@@ -142,7 +142,7 @@ def preview_whisper():
         attachment_filenames = []
 
         for raw_path in attachment_paths:
-            real_filename = raw_path.split("_", 1)[-1]
+            real_filename = Path(raw_path).name
             encrypted_path = encrypt_file_with_public_key(public_key_path, raw_path, encrypted_dir)
             encrypted_attachment_paths.append(encrypted_path)
             attachment_filenames.append(real_filename)
@@ -211,43 +211,29 @@ def send_encrypted():
     # Send email
     html_body = render_template("emails/whisper_email.html", message_filename=message_filename)
 
-    # Create the email message
-    msg = EmailMessage(
-        sender_email_id=EmailConfig.INDRAJITS_BOT_EMAIL_ID,
+    # Use Hermes API to send email
+    response = send_email_via_hermes(
         to=EmailConfig.INDRAJIT912_GMAIL,
         subject="You've got a whisper. It's encrypted. 🔐",
         email_html_text=html_body,
-        attachments= encrypted_attachments_paths
+        attachments=[str(p) for p in encrypted_attachments_paths],
+        api_key=EmailConfig.HERMES_API_KEY,
+        bot_id=EmailConfig.HERMES_EMAILBOT_ID,
+        api_url=EmailConfig.HERMES_BASE_URL + "/api/v1/send-email",
+        from_name="Indrajit's Website Bot"
     )
 
-    try:
-        # Send the email to Indrajit
-        msg.send(
-            sender_email_password=EmailConfig.INDRAJITS_BOT_EMAIL_PASSWD,
-            server_info=EmailConfig.GMAIL_SERVER,
-            print_success_status=False
-        )
+    # Delete the attachments from the server
+    for attachment_path in encrypted_attachments_paths:
+        if attachment_path.exists():
+            attachment_path.unlink()
+            print(f"Attachment {attachment_path} deleted.")
 
-        # Delete the attachments from the server
-        for attachment_path in encrypted_attachments_paths:
-            if attachment_path.exists():
-                attachment_path.unlink()
-                print(f"Attachment {attachment_path} deleted.")
-
-        # Redirect to a thank-you page.
+    if response.get("success"):          
         return jsonify({"message": "Email sent successfully!", "redirect_url": url_for('main.thankyou')})
-
-    except SMTPAuthenticationError as e:
-        # TODO: Print the error `e` as 'Know More' button!
-        # Redirect to the email authentication error page using the error blueprint
-        return redirect(url_for('errors.email_auth_error_route'))
-
-    except SMTPException as e:
-        return redirect(url_for('errors.email_send_error_route'))
-        
-    except Exception as e:
-        # Handle email sending error
-        return redirect(url_for('errors.generic_error_route'))
+    else:
+        error = response.get('error', 'Unknown error occurred.')
+        return redirect(url_for('errors.email_send_error_route', error=error))
     
 
 ###########################################################
