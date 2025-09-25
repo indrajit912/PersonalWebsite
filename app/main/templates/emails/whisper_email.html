@@ -70,7 +70,22 @@
             Additional files are included as encrypted attachments with the <code>.enc</code> extension.</p>
 
             <p>🛠 <strong>Decryption Instructions:</strong><br>
-            To decrypt the message and attachments, please use the script located at <code>scripts/decrypt_messages.py</code>.</p>
+            <p>
+              To decrypt the message and its attachments, please use the 
+              <code>Whisper</code> tool 
+              (<a href="https://github.com/indrajit912/Whisper" target="_blank">GitHub repository</a>).
+            </p>
+            
+            <p>
+              For decrypting an email message:
+              <pre><code>whisper decrypt -m -f /path/to/message_file.json</code></pre>
+            </p>
+            
+            <p>
+              For decrypting an attachment:
+              <pre><code>whisper decrypt -a -f /path/to/whisper_attachment.enc</code></pre>
+            </p>
+            
         </div>
 
         <div class="footer">
