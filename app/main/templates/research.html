@@ -194,6 +194,8 @@
                 <!-- Add more publication items as needed -->
 
             </ol>
+            
+            
             <!-- Thesis section -->
             <div class="preprints-container" style="margin-top: 2em;">
                 <h2>PhD Thesis</h2>
@@ -205,14 +207,45 @@
                     Neumann Algebra
                 </span>
                 <br>
-                <span class="publication-authors publication-size">PhD Thesis, Indian Statistical Institute,
-                    Bangalore</span>
+                <span class="publication-authors publication-size">
+                    PhD Thesis, Indian Statistical Institute, Bangalore
+                    <br>
+                    Advisor: <a href="https://www.isibang.ac.in/~soumyashant/" target="_blank">Dr. Soumyashant Nayak</a>
+                </span>
                 <div class="publication-size">
-                    Submitted: <span class="publication-date">May 2025</span>
+                    Submitted: <span class="publication-date">May 19, 2025</span>
                 </div>
-                <!-- [<a class="underlined-link paper-link publication-size" href="https://arxiv.org/abs/2406.00000"
-                    target="_blank">arXiv</a>] -->
-                <!-- TODO: Replace with actual arXiv link when available -->
+            
+                <div class="links" style="margin-top: 5px;">
+                    [<a class="underlined-link paper-link publication-size" 
+                        href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EU_-dwiN4zpOiXUQdkmLoTYBCcbsTB9JPUhdS3wM_X9HMA?e=hjh1IJ" 
+                        target="_blank">Download PDF</a>]
+                    [<a class="underlined-link paper-link publication-size" 
+                        href="https://isibang-my.sharepoint.com/:u:/g/personal/rs_math1902_isibang_ac_in/EVEb80Sn7EpNtofFnaemrj4BEOLf0e2YOh9PTAhtEb6AEQ?e=txxqlr" 
+                        target="_blank">GPG Signature</a>]
+                </div>
+            
+                <p class="publication-size" style="margin-top: 10px;">
+                    🔒 <strong>SHA-256 Checksum:</strong> 
+                    <code>31100c484459bed60f256f65d385185ec9be4f12f06f3db040a198c481862ab5</code>
+                </p>
+            
+                <!-- Collapsible verification instructions -->
+                <button class="btn btn-sm btn-outline-secondary" type="button" onclick="document.getElementById('verify-instructions').classList.toggle('d-none')">
+                    🔑 Show Verification Instructions
+                </button>
+            
+                <div id="verify-instructions" class="publication-size d-none" style="margin-top: 10px; padding: 10px; border-left: 3px solid var(--color-dark-variant); background-color: #f9f9f9;">
+                    <ol>
+                        <li>Download both the PDF and the GPG signature file.</li>
+                        <li>Import my public key from <a href="{{ url_for('main.gpgkey') }}">here</a> if you don’t have it yet:
+                            <br><code>gpg --import indrajit_gpg_public_key.asc</code></li>
+                        <li>Verify the signature:
+                            <br><code>gpg --verify "Indrajit_Ghosh_PhD_Thesis_2025.pdf.asc" "Indrajit_Ghosh_PhD_Thesis_2025.pdf"</code></li>
+                        <li>Optionally, check the SHA-256 hash to ensure integrity matches:
+                            <br><code>sha256sum Indrajit_Ghosh_PhD_Thesis_2025.pdf</code></li>
+                    </ol>
+                </div>
             </div>
 
 
