@@ -218,16 +218,16 @@
             
                 <div class="links" style="margin-top: 5px;">
                     [<a class="underlined-link paper-link publication-size" 
-                        href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EU_-dwiN4zpOiXUQdkmLoTYBCcbsTB9JPUhdS3wM_X9HMA?e=hjh1IJ" 
+                        href="{{ thesis_link }}" 
                         target="_blank">Download PDF</a>]
                     [<a class="underlined-link paper-link publication-size" 
-                        href="https://isibang-my.sharepoint.com/:u:/g/personal/rs_math1902_isibang_ac_in/EVEb80Sn7EpNtofFnaemrj4BEOLf0e2YOh9PTAhtEb6AEQ?e=txxqlr" 
+                        href="{{ thesis_sig_link }}" 
                         target="_blank">GPG Signature</a>]
                 </div>
             
                 <p class="publication-size" style="margin-top: 10px;">
                     🔒 <strong>SHA-256 Checksum:</strong> 
-                    <code>31100c484459bed60f256f65d385185ec9be4f12f06f3db040a198c481862ab5</code>
+                    <code>{{ thesis_sha256sum }}</code>
                 </p>
             
                 <!-- Collapsible verification instructions -->
@@ -238,7 +238,7 @@
                 <div id="verify-instructions" class="publication-size d-none" style="margin-top: 10px; padding: 10px; border-left: 3px solid var(--color-dark-variant); background-color: #f9f9f9;">
                     <ol>
                         <li>Download both the PDF and the GPG signature file.</li>
-                        <li>Import my public key from <a href="{{ url_for('main.gpgkey') }}">here</a> if you don’t have it yet:
+                        <li>Import my public key from <a target="_blank" href="{{ url_for('main.gpgkey') }}">here</a> if you don’t have it yet:
                             <br><code>gpg --import indrajit_gpg_public_key.asc</code></li>
                         <li>Verify the signature:
                             <br><code>gpg --verify "Indrajit_Ghosh_PhD_Thesis_2025.pdf.asc" "Indrajit_Ghosh_PhD_Thesis_2025.pdf"</code></li>

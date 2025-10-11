@@ -32,7 +32,17 @@ def index():
 #######################################################
 @main_bp.route('/research/')
 def research():
-    return render_template('research.html')
+    # These three things need to be calculated if the thesis gets modified.
+    thesis_link = "https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/Eck2kAF5HftDj5G8yesHDCQB5o-_0KG_SvhGxqj2-LDytQ?e=tnrUNQ"
+    thesis_sig_link = "https://isibang-my.sharepoint.com/:u:/g/personal/rs_math1902_isibang_ac_in/EWqZ58cf2cVIttokKR3swVgBPjNfTj-fTJr2JEFuKdp9Cw?e=BzteYp"
+    thesis_sha256sum = "082f12972b12064af4046bf4f1c4fb959be89040400f076f3016f37065168d6a"
+
+    return render_template(
+        'research.html',
+        thesis_link=thesis_link,
+        thesis_sig_link=thesis_sig_link,
+        thesis_sha256sum=thesis_sha256sum
+    )
 
 ######################################################################
 #                       CV
