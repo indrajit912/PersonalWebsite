@@ -24,7 +24,8 @@ from config import APP_DATA_DIR, EmailConfig
 #######################################################
 @main_bp.route('/')
 def index():
-    return render_template('index.html')
+    indra_cv_link = "https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EYFcAH5SjwdNhAjhkz73bE0BmLVecMZ7Uw_jycgh0RtKMQ?e=IitoQm"
+    return render_template('index.html', indra_cv_link=indra_cv_link)
 
 
 #######################################################
