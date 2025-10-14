@@ -233,7 +233,7 @@
             </p>
 
             <div class="preprints-container">
-                <h2>Publications</h2>
+                <h2 id="publications">Publications</h2>
                 <div class="links">
                     <a href="https://arxiv.org/a/ghosh_i_1.html" target="_blank">arXiv</a>
                     <a href="https://www.researchgate.net/profile/Indrajit-Ghosh-15" target="_blank">ResearchGate</a>
@@ -262,57 +262,52 @@
                 </li>
             </ol>
 
-            <h2>PhD Thesis</h2>
-<div class="thesis-entry">
+            
+            <div class="preprints-container" id="thesis">
+                <h2 class="scrollspy">PhD Thesis</h2>
+                <div class="links">
+                    <a href="{{ thesis_link }}" target="_blank">PDF</a>
+                    <a href="javascript:void(0)" onclick="document.getElementById('checksum-box').classList.toggle('d-none')">SHA-256</a>
+                    <a href="{{ thesis_sig_link }}" target="_blank">GPG Sign</a>
+                    <a href="javascript:void(0)" onclick="document.getElementById('verify-instructions').classList.toggle('d-none')">Verify Sign</a>
+                </div>
+            </div>
+            <div class="thesis-entry" style="border-left: 4px solid var(--color-accent, #004aad); padding-left: 1.2rem; background-color: #fafafa; border-radius: 6px; margin-top: 1rem;">
+            
+                <div class="thesis-header">
+                    <h3 class="publication-title mb-1">
+                        On Algebraic Aspects and Functoriality of the Set of Unbounded Operators Affiliated with a von Neumann Algebra
+                    </h3>
+                    <p class="publication-size mb-2">
+                        <strong>PhD Thesis</strong>, Indian Statistical Institute, Bangalore<br>
+                        Advisor: <a href="https://www.isibang.ac.in/~soumyashant/" target="_blank">Dr. Soumyashant Nayak</a><br>
+                        <span class="text-muted">Submitted: May 19, 2025</span>
+                    </p>
+                </div>
+            
+                <!-- Hidden content -->
+                <div id="checksum-box" class="d-none" style="margin-top: 5px;">
+                    <code class="checksum-value">{{ thesis_sha256sum }}</code>
+                </div>
+            
+                <div id="verify-instructions" class="d-none" style="margin-top: 5px;">
+                    <ol class="publication-size">
+                        <li>Download both the <strong>PDF</strong> and its <strong>GPG signature</strong>.</li>
+                        <li>Import my public key from <a href="{{ url_for('main.gpgkey') }}" target="_blank">here</a>: 
+                            <code>gpg --import indrajit_gpg_public_key.asc</code>
+                        </li>
+                        <li>Verify the signature:
+                            <code>gpg --verify "Indrajit_Ghosh_PhD_Thesis_2025.pdf.asc" "Indrajit_Ghosh_PhD_Thesis_2025.pdf"</code>
+                        </li>
+                        <li>Optionally, check file integrity:
+                            <code>sha256sum Indrajit_Ghosh_PhD_Thesis_2025.pdf</code>
+                        </li>
+                    </ol>
+                </div>
+            
+            </div>
 
-    <div class="thesis-header">
-        <h3 class="publication-title mb-1">
-            On Algebraic Aspects and Functoriality of the Set of Unbounded Operators Affiliated with a von Neumann Algebra
-        </h3>
-        <p class="publication-size mb-2">
-            <strong>PhD Thesis</strong>, Indian Statistical Institute, Bangalore<br>
-            Advisor: <a href="https://www.isibang.ac.in/~soumyashant/" target="_blank">Dr. Soumyashant Nayak</a><br>
-            <span class="text-muted">Submitted: May 19, 2025</span>
-        </p>
-    </div>
-
-    <div class="thesis-links">
-        <a href="{{ thesis_link }}" target="_blank" class="badge-link">📄 Download PDF</a>
-        <a href="{{ thesis_sig_link }}" target="_blank" class="badge-link">🔏 GPG Signature</a>
-    </div>
-
-    <div class="checksum-box">
-        <p class="publication-size mb-1">
-            <strong>SHA-256 Checksum:</strong>
-        </p>
-        <code class="checksum-value">{{ thesis_sha256sum }}</code>
-    </div>
-
-    <button class="btn btn-sm btn-outline-secondary verify-toggle" 
-        type="button"
-        onclick="document.getElementById('verify-instructions').classList.toggle('d-none')">
-        🔑 Show Verification Instructions
-    </button>
-
-    <div id="verify-instructions" class="verify-box d-none">
-        <h4>Verification Guide</h4>
-        <ol>
-            <li>Download both the <strong>PDF</strong> and its <strong>GPG signature</strong> file.</li>
-            <li>Import my public key from 
-                <a href="{{ url_for('main.gpgkey') }}" target="_blank">here</a>:
-                <code>gpg --import indrajit_gpg_public_key.asc</code>
-            </li>
-            <li>Verify the signature:
-                <code>gpg --verify "Indrajit_Ghosh_PhD_Thesis_2025.pdf.asc" "Indrajit_Ghosh_PhD_Thesis_2025.pdf"</code>
-            </li>
-            <li>Optionally confirm file integrity:
-                <code>sha256sum Indrajit_Ghosh_PhD_Thesis_2025.pdf</code>
-            </li>
-        </ol>
-    </div>
-
-</div>
-
+            
 
             <h2>Doctoral Research</h2>
             <p>
