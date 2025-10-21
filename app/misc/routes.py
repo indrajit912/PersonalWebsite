@@ -15,6 +15,8 @@ from scripts.utils import convert_zip_to_base64
 #######################################################
 @misc_bp.route('/')
 def index():
+    _parent_dir = Path(__file__).parent.absolute()
+    isi_phd_thesis_template_zip_path = _parent_dir / 'static' / 'others' / 'ISI_PhD_Thesis_Template.zip'
     isi_reg_zip_path = Path(__file__).parent.absolute() / 'static' / 'others' / 'isi_reg_form.zip'
     amsart_template_zip_path = Path(__file__).parent.absolute() / 'static' / 'others' / 'amsart_template_indrajit.zip'
     formal_letter_template_zip_path = Path(__file__).parent.absolute() / 'static' / 'others' / 'formal-letter-template-Indrajit.zip'
@@ -26,7 +28,8 @@ def index():
         isi_reg_zip_path=isi_reg_zip_path,
         amsart_template_zip_path=amsart_template_zip_path,
         beamer_template_zip_path=beamer_template_zip_path,
-        formal_letter_template_zip_path=formal_letter_template_zip_path
+        formal_letter_template_zip_path=formal_letter_template_zip_path,
+        isi_phd_thesis_template_zip_path=isi_phd_thesis_template_zip_path
     )
 
 @misc_bp.route('/isi_symposium_25')

@@ -2,8 +2,32 @@
 
 <div class="scrollspy" id="latex-templates">
     <h2 class="center">LaTeX Templates</h2>
+
     <article class="episode">
       <div class="episode__number">01</div>
+      <div class="episode__content">
+          <div class="title">ISI PhD Thesis <code>LaTeX</code> Template</div>
+          <div class="story">
+              This is the LaTeX file I used for my PhD thesis submitted at the Indian Statistical Institute. You can use this template to create your own thesis as well. Simply download the <code>.zip</code> file or open it directly in Overleaf using the buttons below to get started.
+
+              In the <code>main.tex</code> file, you’ll find various constants such as <code>ThesisTitle</code>, <code>Author</code>, and others — just update their values as needed. You can also modify or add new definitions in <code>macros.tex</code> and <code>chapters/symbols.tex</code> according to your requirements.
+
+              Generally, there’s no need to change anything in <code>preamble.tex</code>, but if necessary, you can make updates within the existing structure. The AMS theorem environments and styles are documented at the beginning of <code>main.tex</code> — be sure to read that section carefully.
+
+              Happy writing!
+              <br>
+              <div class="download-links">
+                  <a href="{{ url_for('misc.static', filename='others/ISI_PhD_Thesis_Template.zip') }}" class="indra-btn" download>Download .zip</a>
+                  <a href="{{ url_for('misc.static', filename='others/ISI_PhD_Thesis_Template.pdf') }}" class="indra-btn visit-button" target="_blank">View PDF</a>
+                  <button onclick="openOverleaf('{{ convert_zip_to_base64(isi_phd_thesis_template_zip_path) }}')" class=" indra-btn indra-btn-dark overleaf-link">Open in Overleaf</button>
+              </div>
+          </div>
+      </div>
+    </article>
+
+
+    <article class="episode">
+      <div class="episode__number">02</div>
       <div class="episode__content">
           <div class="title">ISI PhD Registration Form</div>
           <div class="story">
@@ -22,7 +46,7 @@
     </article>
 
     <article class="episode">
-      <div class="episode__number">02</div>
+      <div class="episode__number">03</div>
       <div class="episode__content">
         <div class="title">LaTeX Template for AMS Article</div>
         <div class="story">
@@ -38,7 +62,7 @@
     </article>
 
     <article class="episode">
-      <div class="episode__number">03</div>
+      <div class="episode__number">04</div>
       <div class="episode__content">
         <div class="title">LaTeX Template for Beamer presentation</div>
         <div class="story">
@@ -55,7 +79,7 @@
 
 
     <article class="episode">
-      <div class="episode__number">04</div>
+      <div class="episode__number">05</div>
       <div class="episode__content">
         <div class="title">LaTeX Template for Formal letter</div>
         <div class="story">
