@@ -34,6 +34,7 @@ def index():
 @main_bp.route('/research/')
 def research():
     # These three things need to be calculated if the thesis gets modified.
+    isi_thesis_link = "https://dspace.isical.ac.in/jspui/handle/10263/7620"
     thesis_link = "https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EXHbeNS8ji5HuU0QhfWVNP0BZUG62aMsxPrDgp0ZBb9G0w?e=jpkLHE"
     thesis_sig_link = "https://isibang-my.sharepoint.com/:u:/g/personal/rs_math1902_isibang_ac_in/EeiKVBiZA05BlL-aFibEp5wBhE0XWN4m-kmjqMsjPPiW4w?e=o3WF5z"
     thesis_sha256sum = "7efd68b7ba90c61f640b05886bbd12a8162c92ce4223d8bcdbcbe215185db664"
@@ -42,7 +43,8 @@ def research():
         'research.html',
         thesis_link=thesis_link,
         thesis_sig_link=thesis_sig_link,
-        thesis_sha256sum=thesis_sha256sum
+        thesis_sha256sum=thesis_sha256sum,
+        isi_thesis_link=isi_thesis_link
     )
 
 ######################################################################
