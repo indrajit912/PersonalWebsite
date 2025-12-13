@@ -19,13 +19,16 @@ from scripts.send_email_client import send_email_via_hermes
 from scripts.utils import encrypt_with_public_key, encrypt_file_with_public_key, format_size
 from config import APP_DATA_DIR, EmailConfig
 
+INSTITUTE_EMAIL = "ic44000@imail.iitm.ac.in"
+
 #######################################################
 #                      Homepage
 #######################################################
 @main_bp.route('/')
 def index():
-    indra_cv_link = "https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/IQDkz-GFFIrsSr_FKSNkBhHVASufnDTj2-6-Vfjq5gCkk8s?e=yrNGta"
-    return render_template('index.html', indra_cv_link=indra_cv_link)
+    institute_email = INSTITUTE_EMAIL
+    indra_cv_link = "https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/IQDvG0UsNZNtQZPzh6iOpDQXASPlnlWxVD_F4UgDlo489og?e=ZGpZaS"
+    return render_template('index.html', indra_cv_link=indra_cv_link, institute_email=institute_email)
 
 
 #######################################################
@@ -52,7 +55,8 @@ def research():
 ######################################################################
 @main_bp.route('/cv/')
 def cv():
-    return render_template('cv.html')
+    institute_email = INSTITUTE_EMAIL
+    return render_template('cv.html', institute_email=institute_email)
 
 ######################################################################
 #                       Photos
