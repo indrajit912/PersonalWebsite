@@ -1,0 +1,505 @@
+{% extends "base.html" %}
+
+{% block title %}
+PDF-RS Symposium 2026 ISI
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/teaching_style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --secondary-color: #3498db;
+            --light-bg: #f8f9fa;
+            --success-color: #27ae60;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .event-info {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .event-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .event-info-item i {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .event-info-item b {
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .event-info a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .event-info a:hover {
+            text-decoration: underline;
+            color: #fff;
+        }
+
+        .section-heading {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-heading::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .about-section {
+            background-color: var(--light-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--secondary-color);
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .about-section p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .schedule-container {
+            margin: 2rem 0;
+        }
+
+        .day-heading {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .table-responsive {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .table-custom {
+            margin-bottom: 0;
+        }
+
+        .table-custom th {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            color: #ffffff;
+            text-align: center;
+            font-weight: 600;
+            padding: 1rem;
+            border: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .table-custom td {
+            vertical-align: middle;
+            padding: 1rem;
+            border: none;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .table-custom tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-custom tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .table-custom tbody tr:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+
+        .table-custom a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .table-custom a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .break-row {
+            background: linear-gradient(90deg, rgba(241, 196, 15, 0.1), rgba(241, 196, 15, 0.05));
+            font-weight: 600;
+            color: #d68910;
+        }
+
+        .break-row td {
+            padding: 0.8rem;
+        }
+
+        .abstract-section {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid var(--secondary-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .abstract-section:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-left-color: var(--accent-color);
+        }
+
+        .abstract-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .abstract-speaker {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .abstract-affiliation {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            background-color: var(--light-bg);
+            border-radius: 5px;
+        }
+
+        .abstract-affiliation b {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .abstract-body {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .abstract-body p {
+            margin-bottom: 1rem;
+        }
+
+        .abstract-references {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.95rem;
+        }
+
+        .abstract-references b {
+            color: var(--primary-color);
+        }
+
+        .abstract-references ul li {
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, var(--success-color) 0%, #229954 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .contact-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .contact-section a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .contact-section a:hover {
+            border-bottom: 2px solid white;
+        }
+
+        .contact-section p {
+            font-size: 1.1rem;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ddd, transparent);
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .section-heading {
+                font-size: 1.5rem;
+            }
+
+            .table-custom th, .table-custom td {
+                font-size: 0.85rem;
+                padding: 0.75rem;
+            }
+
+            .event-info {
+                padding: 1.5rem;
+            }
+
+            .event-info-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .event-info-item i {
+                margin-right: 0.5rem;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <h1 class="page-title">PDF-RS Annual Symposium 2026</h1>
+            <p style="color: #999; font-size: 0.95rem; margin-top: 1rem;">
+                <i class="bi bi-mortarboard-fill" style="color: var(--accent-color); margin-right: 0.5rem;"></i>
+                Stat-Math Unit, Indian Statistical Institute, Bangalore
+            </p>
+            <div style="font-size: 1.8rem; letter-spacing: 1rem; color: var(--secondary-color); margin-top: 0.5rem;">
+                ∫ &nbsp; ⊕ &nbsp; ∏ &nbsp; √ &nbsp; ∂ &nbsp; ∑
+            </div>
+            
+        </div>
+        
+        <div class="event-info">
+            <div class="row">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="event-info-item">
+                        <i class="bi bi-calendar-event"></i>
+                        <div>
+                            <b>Dates:</b><br>
+                            February 25-27, 2026 (Tentative)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="event-info-item">
+                        <i class="bi bi-geo-alt"></i>
+                        <div>
+                            <b>Venue:</b><br>
+                            Platinum Jubilee Auditorium, ISI Bangalore
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="event-info-item">
+                        <i class="bi bi-images"></i>
+                        <div>
+                            <b>Pictures:</b><br>
+                            <a href="https://isibang-my.sharepoint.com/:f:/g/personal/rs_math1902_isibang_ac_in/EqP7YpWRH31BhjSWiXoRCcMBoyIXRpPieq144GaJTyiYoQ?e=tUvfdj" 
+                               target="_blank">
+                                <i class="bi bi-link-45deg"></i> View Gallery
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About the Symposium -->
+        <div class="about-section">
+            <h2 class="section-heading"><i class="bi bi-book"></i> About the Symposium</h2>
+            <p>
+                The Annual Symposium, organized by the Research Scholars at the Stat-Math Unit of the Indian Statistical Institute, Bangalore, provides a vibrant platform for academic exchange and collaboration. This event brings together Postdoctoral Fellows (PDFs) and Research Scholars (RSs) to present their ongoing research to an audience comprising professors, fellow researchers, and students.
+            </p>
+            <p>
+                The 2026 symposium will span three days, with each speaker allotted a maximum of 45 minutes to share their work. The event also offers a valuable opportunity for Junior Research Fellows (JRFs) in the early stages of their academic journey to showcase their research in a supportive and intellectually stimulating environment.
+            </p>
+            <p>
+                <strong>Note:</strong> The detailed schedule and speaker information will be announced soon. Please check back for updates.
+            </p>
+        </div>
+
+        <!-- Schedule Section -->
+        <h2 class="section-heading"><i class="bi bi-calendar2-event"></i> Lecture Schedule</h2>
+        <div style="background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 1.5rem; border-radius: 5px; margin-bottom: 2rem;">
+            <p style="margin: 0; color: #856404;">
+                <i class="bi bi-info-circle"></i> <strong>Schedule Coming Soon!</strong> The detailed lecture schedule with speaker names and talk titles will be announced in due course. Stay tuned for updates!
+            </p>
+        </div>
+        
+        <div class="schedule-container">
+                <!-- Day 1 Schedule -->
+            <div class="day-heading">
+                <i class="bi bi-calendar-week"></i> Day 1: Wednesday, February 25, 2026
+            </div>
+            <div class="table-responsive">
+                <table class="table table-custom">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">Time</th>
+                            <th style="width: 25%;">Speaker</th>
+                            <th style="width: 55%;">Title of Talk</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3" style="text-align: center; padding: 2rem; color: #999;">
+                                <i class="bi bi-hourglass-split"></i> To Be Announced
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Day 2 Schedule -->
+            <div class="day-heading">
+                <i class="bi bi-calendar-week"></i> Day 2: Thursday, February 26, 2026
+            </div>
+            <div class="table-responsive">
+                <table class="table table-custom">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">Time</th>
+                            <th style="width: 25%;">Speaker</th>
+                            <th style="width: 55%;">Title of Talk</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3" style="text-align: center; padding: 2rem; color: #999;">
+                                <i class="bi bi-hourglass-split"></i> To Be Announced
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Day 3 Schedule -->
+            <div class="day-heading">
+                <i class="bi bi-calendar-week"></i> Day 3: Friday, February 27, 2026
+            </div>
+            <div class="table-responsive">
+                <table class="table table-custom">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">Time</th>
+                            <th style="width: 25%;">Speaker</th>
+                            <th style="width: 55%;">Title of Talk</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3" style="text-align: center; padding: 2rem; color: #999;">
+                                <i class="bi bi-hourglass-split"></i> To Be Announced
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- Contact Information -->
+        <div class="contact-section">
+            <h2><i class="bi bi-envelope"></i> Contact Information &nbsp; <span style="color: var(--light-bg); font-size: 1.2rem;">∑ ∂ ∫</span></h2>
+            <p>
+                For any queries or concerns, please contact <a href="mailto:rs_math2002@isibang.com"><i class="bi bi-person-circle"></i> Arghya Chongdar</a>, SRF, Stat-Math Unit, ISIBc.
+            </p>
+        </div>
+
+        <p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Jan 23, 2026</p>
+    </div>
+</section>
+
+{% endblock %}

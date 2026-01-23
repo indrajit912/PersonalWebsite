@@ -35,3 +35,11 @@ def index():
 @misc_bp.route('/isi_symposium_25')
 def isi_symposium_25():
     return render_template('isi_symposium_25.html')
+
+@misc_bp.route('/isi_symposium_26')
+def isi_symposium_26():
+    return render_template('isi_symposium_26.html')
+
+@misc_bp.route('/symposiums')
+def symposiums():
+    return render_template('symposiums.html')
