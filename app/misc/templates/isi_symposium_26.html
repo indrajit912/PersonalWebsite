@@ -107,6 +107,27 @@ PDF-RS Symposium 2026 ISI
             border-radius: 2px;
         }
 
+        .math-symbols-divider {
+            font-size: 1.8rem;
+            letter-spacing: 1rem;
+            color: var(--secondary-color);
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .math-symbols-divider {
+                font-size: 1.2rem;
+                letter-spacing: 0.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .math-symbols-divider {
+                font-size: 0.9rem;
+                letter-spacing: 0.4rem;
+            }
+        }
+
         .about-section {
             background-color: var(--light-bg);
             padding: 2rem;
@@ -332,15 +353,6 @@ PDF-RS Symposium 2026 ISI
             .event-info {
                 padding: 1.5rem;
             }
-
-            .event-info-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .event-info-item i {
-                margin-right: 0.5rem;
-            }
         }
     </style>
 {% endblock %}
@@ -355,7 +367,7 @@ PDF-RS Symposium 2026 ISI
                 <i class="bi bi-mortarboard-fill" style="color: var(--accent-color); margin-right: 0.5rem;"></i>
                 Stat-Math Unit, Indian Statistical Institute, Bangalore
             </p>
-            <div style="font-size: 1.8rem; letter-spacing: 1rem; color: var(--secondary-color); margin-top: 0.5rem;">
+            <div class="math-symbols-divider">
                 ∫ &nbsp; ⊕ &nbsp; ∏ &nbsp; √ &nbsp; ∂ &nbsp; ∑
             </div>
             
@@ -367,7 +379,6 @@ PDF-RS Symposium 2026 ISI
                     <div class="event-info-item">
                         <i class="bi bi-calendar-event"></i>
                         <div>
-                            <b>Dates:</b><br>
                             February 25-27, 2026 (Tentative)
                         </div>
                     </div>
@@ -376,7 +387,6 @@ PDF-RS Symposium 2026 ISI
                     <div class="event-info-item">
                         <i class="bi bi-geo-alt"></i>
                         <div>
-                            <b>Venue:</b><br>
                             Platinum Jubilee Auditorium, ISI Bangalore
                         </div>
                     </div>
@@ -385,10 +395,9 @@ PDF-RS Symposium 2026 ISI
                     <div class="event-info-item">
                         <i class="bi bi-images"></i>
                         <div>
-                            <b>Pictures:</b><br>
-                            <a href="https://isibang-my.sharepoint.com/:f:/g/personal/rs_math1902_isibang_ac_in/EqP7YpWRH31BhjSWiXoRCcMBoyIXRpPieq144GaJTyiYoQ?e=tUvfdj" 
+                            <a href="#" 
                                target="_blank">
-                                <i class="bi bi-link-45deg"></i> View Gallery
+                                <i class="bi bi-link-45deg"></i> Pictures
                             </a>
                         </div>
                     </div>

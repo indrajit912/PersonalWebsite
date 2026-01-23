@@ -2,7 +2,7 @@
     Teaching page for the Website
     Author: Indrajit Ghosh
     Created On: Nov 14, 2023
-    Modified On: Dec 24, 2023
+    Modified On: Jan 23, 2026
  -->
 {% extends 'base.html' %}
 
@@ -14,123 +14,425 @@
 {% endblock %}
   
 {% block styles %}
-      {{ super() }}
-      <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/teaching_style.css') }}">
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/teaching_style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --secondary-color: #3498db;
+            --light-bg: #f8f9fa;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 2rem 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-container .page-heading {
+            text-align: center;
+            margin-bottom: 2rem;
+            width: 50%;
+        }
+
+        .page-heading h1 {
+            padding-bottom: 10px;
+            white-space: nowrap;
+        }
+
+        .page-heading h1 span {
+            font-weight: 100;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            margin-top: 2.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .year-range {
+            font-size: 0.75rem;
+            color: #999;
+            font-weight: 400;
+            margin-left: 0.5rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--secondary-color);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .course-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+        }
+
+        .course-card-header {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+        }
+
+        .course-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .course-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 0.3rem 0 0 0;
+        }
+
+        .course-card-body {
+            padding: 1rem 1.5rem;
+            flex-grow: 1;
+        }
+
+        .course-info {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.7rem;
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .course-info i {
+            color: var(--secondary-color);
+            margin-right: 0.8rem;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .course-card-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .btn-course {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-course:hover {
+            background: linear-gradient(135deg, #2980b9 0%, #1e5fa3 100%);
+            transform: scale(1.05);
+            color: white;
+            text-decoration: none;
+        }
+
+        .teaching-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(520px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .container-teaching {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .teaching-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .course-card-header {
+                padding: 1rem;
+            }
+
+            .course-number {
+                font-size: 2rem;
+            }
+
+            .course-title {
+                font-size: 1.1rem;
+            }
+
+            .btn-course {
+                width: 100%;
+                padding: 0.7rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header {
+                padding: 2rem 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .course-card {
+                border-left-width: 4px;
+            }
+
+            .course-info {
+                font-size: 0.9rem;
+                margin-bottom: 0.8rem;
+            }
+        }
+    </style>
 {% endblock %} 
   
 {% block content %}
 
 <section>
-  <div class="page-container">
-    <div class="page-heading">
-      <h1>Teaching</h1>
+    <div class="page-container">
+        <div class="page-heading">
+            <h1><i class="bi bi-mortarboard-fill"></i> Teaching</h1>
+        </div>
+
+    <div class="container-teaching">
+
+        <!-- Teaching Assistantship Section -->
+        <h2 class="section-title"><i class="bi bi-building"></i> Indian Statistical Institute <span class="year-range">(2021 - 2025)</span></h2>
+
+        <div class="teaching-grid">
+            <div class="course-card">
+                <div class="course-card-header">
+                    <div class="course-number">07</div>
+                    <h3 class="course-title">Optimization (BMAT3)</h3>
+                </div>
+                <div class="course-card-body">
+                    <div class="course-info">
+                        <i class="bi bi-person-fill"></i>
+                        <div><strong>Instructor:</strong> Soumyashant Nayak</div>
+                    </div>
+                    <div class="course-info">
+                        <i class="bi bi-person-badge"></i>
+                        <div><strong>TA:</strong> Indrajit Ghosh</div>
+                    </div>
+                    <div class="course-info">
+                        <i class="bi bi-calendar-event"></i>
+                        <div><strong>Duration:</strong> Jan 01 - Apr 15, 2025</div>
+                    </div>
+                </div>
+                <div class="course-card-footer">
+                    <a class="btn-course" href="{{ url_for('teaching.optimization_even2025') }}">
+                        <i class="bi bi-arrow-right"></i> View Course
+                    </a>
+                </div>
+            </div>
+
+           
+              <div class="course-card">
+                <div class="course-card-header">
+                  <div class="course-number">06</div>
+                  <h3 class="course-title">Workshop on Completely Positive Maps</h3>
+                </div>
+                <div class="course-card-body">
+                  <div class="course-info">
+                    <i class="bi bi-person-fill"></i>
+                    <div><strong>Lecturers:</strong> Indrajit Ghosh, Gahin Maiti, Soumyashant Nayak</div>
+                  </div>
+                  <div class="course-info">
+                    <i class="bi bi-calendar-event"></i>
+                    <div><strong>Duration:</strong> Jan 2024 - Jun 2024</div>
+                  </div>
+                </div>
+                <div class="course-card-footer">
+                  <a class="btn-course" href="{{ url_for('teaching.intro_to_cp_even_2024') }}">
+                    <i class="bi bi-arrow-right"></i> View Course
+                  </a>
+                </div>
+              </div>
+
+            <div class="course-card">
+                <div class="course-card-header">
+                    <div class="course-number">05</div>
+                    <h3 class="course-title">A Course in Harmonic Analysis (BMAT3)</h3>
+                </div>
+                <div class="course-card-body">
+                    <div class="course-info">
+                        <i class="bi bi-person-fill"></i>
+                        <div><strong>Instructor:</strong> Soumyashant Nayak</div>
+                    </div>
+                    <div class="course-info">
+                        <i class="bi bi-person-badge"></i>
+                        <div><strong>TA:</strong> Indrajit Ghosh</div>
+                    </div>
+                    <div class="course-info">
+                        <i class="bi bi-calendar-event"></i>
+                        <div><strong>Duration:</strong> Jan 2024 - Apr 2024</div>
+                    </div>
+                </div>
+                <div class="course-card-footer">
+                    <a class="btn-course" href="{{ url_for('teaching.course_harmonic_even2024') }}">
+                        <i class="bi bi-arrow-right"></i> View Course
+                    </a>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-card-header">
+                    <div class="course-number">04</div>
+                    <h3 class="course-title">Analysis of Several Variables (BMAT2)</h3>
+                </div>
+                <div class="course-card-body">
+                    <div class="course-info">
+                        <i class="bi bi-person-fill"></i>
+                        <div><strong>Instructor:</strong> Mathew Joseph</div>
+                    </div>
+                    <div class="course-info">
+                        <i class="bi bi-person-badge"></i>
+                        <div><strong>TA:</strong> Indrajit Ghosh</div>
+                    </div>
+                    <div class="course-info">
+                        <i class="bi bi-calendar-event"></i>
+                        <div><strong>Duration:</strong> Aug 01 - Nov 25, 2023</div>
+                    </div>
+                </div>
+                <div class="course-card-footer">
+                    <a class="btn-course" href="{{ url_for('teaching.anal_several_vars_odd_2023_ta') }}">
+                        <i class="bi bi-arrow-right"></i> View Course
+                    </a>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-card-header">
+                    <div class="course-number">03</div>
+                    <h3 class="course-title">Complex Analysis I (BMAT3)</h3>
+                </div>
+                <div class="course-card-body">
+                    <div class="course-info">
+                        <i class="bi bi-person-fill"></i>
+                        <div><strong>Instructor:</strong> Mathew Joseph</div>
+                    </div>
+                    <div class="course-info">
+                        <i class="bi bi-person-badge"></i>
+                        <div><strong>TA:</strong> Indrajit Ghosh</div>
+                    </div>
+                    <div class="course-info">
+                        <i class="bi bi-calendar-event"></i>
+                        <div><strong>Duration:</strong> Aug 2022 - Nov 2022</div>
+                    </div>
+                </div>
+                <div class="course-card-footer">
+                    <a class="btn-course" href="{{ url_for('teaching.comp_anal_odd_sem_2022_ta') }}">
+                        <i class="bi bi-arrow-right"></i> View Course
+                    </a>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-card-header">
+                    <div class="course-number">02</div>
+                    <h3 class="course-title">Functional Analysis (MMAT1)</h3>
+                </div>
+                <div class="course-card-body">
+                    <div class="course-info">
+                        <i class="bi bi-person-fill"></i>
+                        <div><strong>Instructor:</strong> Soumyashant Nayak</div>
+                    </div>
+                    <div class="course-info">
+                        <i class="bi bi-person-badge"></i>
+                        <div><strong>TA:</strong> Indrajit Ghosh</div>
+                    </div>
+                    <div class="course-info">
+                        <i class="bi bi-calendar-event"></i>
+                        <div><strong>Duration:</strong> Jan 18 - Apr 28, 2022</div>
+                    </div>
+                </div>
+                <div class="course-card-footer">
+                    <a class="btn-course" href="{{ url_for('teaching.func_anal_even_sem_2021_ta') }}">
+                        <i class="bi bi-arrow-right"></i> View Course
+                    </a>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-card-header">
+                    <div class="course-number">01</div>
+                    <h3 class="course-title">Optimization (BMAT2)</h3>
+                </div>
+                <div class="course-card-body">
+                    <div class="course-info">
+                        <i class="bi bi-person-fill"></i>
+                        <div><strong>Instructor:</strong> Soumyashant Nayak</div>
+                    </div>
+                    <div class="course-info">
+                        <i class="bi bi-person-badge"></i>
+                        <div><strong>TA:</strong> Indrajit Ghosh</div>
+                    </div>
+                    <div class="course-info">
+                        <i class="bi bi-calendar-event"></i>
+                        <div><strong>Duration:</strong> Sep 21 - Dec 23, 2021</div>
+                    </div>
+                </div>
+                <div class="course-card-footer">
+                    <a class="btn-course" href="{{ url_for('teaching.optimization_odd_sem_2021_ta') }}">
+                        <i class="bi bi-arrow-right"></i> View Course
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="teaching-container">
-      <h2 class="teaching-heading">Courses</h2>
-
-      <article class="course">
-        <div class="course__number">01</div>
-        <div class="course__content">
-          <div class="course-title">Workshop on Completely Positive Maps</div>
-          <div class="">
-            <p class="course-info">Lecturers: Indrajit Ghosh, Gahin Maiti and Soumyashant Nayak</p>
-            <p class="course-info">Duration: Jan 2024 - Jun 2024</p>
-            <a class="indra-btn course-link" href="{{ url_for('teaching.intro_to_cp_even_2024') }}">Course Webpage</a>
-          </div>
-        </div>
-      </article>
-
-    </div>
-
-    <div class="teaching-container">
-      <h2 class="teaching-heading">Teaching Assistantship at ISI</h2>
-
-      <article class="course">
-        <div class="course__number">06</div>
-        <div class="course__content">
-          <div class="course-title">Optimization (BMAT3)</div>
-          <div class="course-details">
-            <p class="course-info">Instructors: Soumyashant Nayak</p>
-            <p class="course-info">TA: Indrajit Ghosh</p>
-            <p class="course-info">Duration: Jan 01 - Apr 15, 2025</p>
-            <a class="indra-btn course-link" href="{{ url_for('teaching.optimization_even2025') }}">Course
-              Webpage</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="course">
-        <div class="course__number">05</div>
-        <div class="course__content">
-          <div class="course-title">A Course in Harmonic Analysis (BMAT3)</div>
-          <div class="course-details">
-            <p class="course-info">Instructors: Soumyashant Nayak</p>
-            <p class="course-info">TA: Indrajit Ghosh</p>
-            <p class="course-info">Duration: Jan 2024 - Apr 2024</p>
-            <a class="indra-btn course-link" href="{{ url_for('teaching.course_harmonic_even2024') }}">Course
-              Webpage</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="course">
-        <div class="course__number">04</div>
-        <div class="course__content">
-          <div class="course-title">Analysis of Several Variables (BMAT2)</div>
-          <div class="course-details">
-            <p class="course-info">Instructor: Mathew Joseph</p>
-            <p class="course-info">TA: Indrajit Ghosh</p>
-            <p class="course-info">Duration: Aug 01 - Nov 25, 2023</p>
-            <a class="indra-btn course-link" href="{{ url_for('teaching.anal_several_vars_odd_2023_ta') }}">Course
-              Webpage</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="course">
-        <div class="course__number">03</div>
-        <div class="course__content">
-          <div class="course-title">Complex Analysis I (BMAT3)</div>
-          <div class="course-details">
-            <p class="course-info">Instructor: Mathew Joseph</p>
-            <p class="course-info">TA: Indrajit Ghosh</p>
-            <p class="course-info">Duration: Aug 2022 - Nov 2022</p>
-            <a class="indra-btn course-link" href="{{ url_for('teaching.comp_anal_odd_sem_2022_ta') }}">Course
-              Webpage</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="course">
-        <div class="course__number">02</div>
-        <div class="course__content">
-          <div class="course-title">Functional Analysis (MMAT1)</div>
-          <div class="course-details">
-            <p class="course-info">Instructor: Soumyashant Nayak</p>
-            <p class="course-info">TA: Indrajit Ghosh</p>
-            <p class="course-info">Duration: Jan 18 - Apr 28, 2022</p>
-            <a class="indra-btn course-link" href="{{ url_for('teaching.func_anal_even_sem_2021_ta') }}">Course
-              Webpage</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="course">
-        <div class="course__number">01</div>
-        <div class="course__content">
-          <div class="course-title">Optimization (BMAT2)</div>
-          <div class="course-details">
-            <p class="course-info">Instructor: Soumyashant Nayak</p>
-            <p class="course-info">TA: Indrajit Ghosh</p>
-            <p class="course-info">Duration: Sep 21 - Dec 23, 2021</p>
-            <a class="indra-btn course-link" href="{{ url_for('teaching.optimization_odd_sem_2021_ta') }}">Course
-              Webpage</a>
-          </div>
-        </div>
-      </article>
-
-    </div>
-  </div>
 </section>
 
 {% endblock %}

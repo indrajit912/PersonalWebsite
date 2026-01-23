@@ -1,49 +1,71 @@
 
+<!-- 
+    Completely Positive Maps Workshop page for the Website
+    Author: Indrajit Ghosh
+    Created On: Jan 17, 2025
+    Modified On: Jan 23, 2026
+ -->
+
 {% extends 'base.html' %}
 
 {% block title %}Workshop on Completely Positive Maps, Even Sem 2024{% endblock %}
   
 {% block styles %}
     {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/teaching_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/course_style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
 {% endblock %}
  
   
 {% block content %}
 
 <section>
-<h1 class="heading page-title">Workshop on Completely Positive Maps</h1>
-<div class="teaching-container">
-    <b>Term:</b> Even Semester 2024<br>
-    <b>Duration:</b> Jan 15, 2024 - Jun 04, 2024<br><br>
-    <b>Course Name:</b> Workshop on Completely Positive Maps (RF/VS)<br>
-    <b>Course Overview:</b>
-    <p>
-        This workshop centers around the theoretical exploration of completely positive maps and its associated domain. In the initial sessions, we will delve into the fundamentals of quantum theory, encompassing both mathematical principles and introductory physical aspects. Subsequently, we will pivot to the foundational concepts of quantum information, covering topics such as registers/states, quantum channels, and measurements. Following this groundwork, our focus will shift towards a comprehensive understanding of Completely Positive Maps, encompassing discussions on Dilation Theorems, Arveson's Extension Theorem, and the \(C^*\)-tensor product. The latter part of the workshop will introduce participants to Completely Bounded Maps and their interconnected areas. Additionally, we will delve into the abstract characterizations of Operator Systems and Operator Spaces, enriching the exploration of this intriguing field.
-    </p>
-    <br>
-    <b>Lecturers:</b>  Indrajit Ghosh (SRF), Gahin Maiti (JRF) and Soumyashant Nayak (Asst. Prof.)<br>
-    <b>Lecture Timings:</b> 10:00 AM - 04:15 PM with breaks (11:00-11:15 AM coffee, 01:00-02:00 PM lunch and 03:00-03:15 PM tea) <br>
-    <b>Venue:</b> Phase I & III - left-side seminar room of 2nd Floor Auditorium. Phase II & IV - One of the Ground Floor Classrooms<br>
-    <br>
+<div class="container-course">
+    <div class="page-header">
+        <h1><i class="bi bi-diagram-3"></i> Workshop on Completely Positive Maps</h1>
+        <div class="course-meta">
+            <div class="meta-item">
+                <div class="meta-item-label"><i class="bi bi-calendar-event"></i> Term</div>
+                <div class="meta-item-value">Even Semester 2024</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-item-label"><i class="bi bi-clock"></i> Duration</div>
+                <div class="meta-item-value">Jan 15 - Jun 04, 2024</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-item-label"><i class="bi bi-people-fill"></i> Lecturers</div>
+                <div class="meta-item-value">Indrajit Ghosh, Gahin Maiti, S. Nayak</div>
+            </div>
+        </div>
+    </div>
 
-    <h2>References</h2>
+    <div class="info-box">
+        <p style="margin-bottom: 0.8rem;"><strong>Overview:</strong></p>
+        <p>This workshop centers around the theoretical exploration of completely positive maps and its associated domain. In the initial sessions, we will delve into the fundamentals of quantum theory, encompassing both mathematical principles and introductory physical aspects. Subsequently, we will pivot to the foundational concepts of quantum information, covering topics such as registers/states, quantum channels, and measurements. Following this groundwork, our focus will shift towards a comprehensive understanding of Completely Positive Maps, encompassing discussions on Dilation Theorems, Arveson's Extension Theorem, and the \(C^*\)-tensor product. The latter part of the workshop will introduce participants to Completely Bounded Maps and their interconnected areas.</p>
+    </div>
 
-    <ol>
-        <li>Vern Paulsen, <i>Completely Bounded Maps and Operator Algebras.</i></li>
-        <li>Michael A. Nielsen and Isaac L. Chuang, <i><a href="https://profmcruz.files.wordpress.com/2017/08/quantum-computation-and-quantum-information-nielsen-chuang.pdf" target="_blank">Quantum Computation and Quantum Information.</a></i></li>
-        <li>John Watrous, <i>The Theory of Quantum Information.</i></li>
-        <li>L. Susskind and A. Friedman, <i>Quantum Mechanics: The Theoretical Minimum.</i></li>
-        <li>Brian C. Hall, <i>Quantum Theory for Mathematicians</i></li>
-        <li>Gerald Teschl, <i>Mathematical Methods in Quantum Mechanics: With Applications to Schrödinger Operators</i> </li>
-        <li>F Strocchi, <i>An Introduction to the Mathematical Structure of Quantum Mechanics</i></li>
-        <li>Richard V. Kadison, John R. Ringrose, <i>Fundamentals of the Theory of Operator Algebras. Volume II.</i></li>
-    </ol>
-    <br>
+    <div class="info-box">
+        <p>
+            <strong>Lecture Timings:</strong> 10:00 AM - 04:15 PM with breaks (11:00-11:15 AM coffee, 01:00-02:00 PM lunch and 03:00-03:15 PM tea)<br>
+            <strong>Venue:</strong> Phase I & III - left-side seminar room of 2nd Floor Auditorium. Phase II & IV - One of the Ground Floor Classrooms
+        </p>
+    </div>
 
-
-    <h2>Schedule & Lecture Notes
-    </h2>
+    <!-- References Section -->
+    <h2 class="section-heading"><i class="bi bi-book-fill"></i> References</h2>
+    <div class="textbooks-list">
+        <ol>
+            <li>Vern Paulsen, <i>Completely Bounded Maps and Operator Algebras.</i></li>
+            <li>Michael A. Nielsen and Isaac L. Chuang, <i><a href="https://profmcruz.files.wordpress.com/2017/08/quantum-computation-and-quantum-information-nielsen-chuang.pdf" target="_blank">Quantum Computation and Quantum Information.</a></i></li>
+            <li>John Watrous, <i>The Theory of Quantum Information.</i></li>
+            <li>L. Susskind and A. Friedman, <i>Quantum Mechanics: The Theoretical Minimum.</i></li>
+            <li>Brian C. Hall, <i>Quantum Theory for Mathematicians</i></li>
+            <li>Gerald Teschl, <i>Mathematical Methods in Quantum Mechanics: With Applications to Schrödinger Operators</i></li>
+            <li>F Strocchi, <i>An Introduction to the Mathematical Structure of Quantum Mechanics</i></li>
+            <li>Richard V. Kadison, John R. Ringrose, <i>Fundamentals of the Theory of Operator Algebras. Volume II.</i></li>
+        </ol>
+    </div>
+        <h2 class="section-heading"><i class="bi bi-calendar-check"></i> Schedule & Lecture Notes</h2>
     
     <div class="table-responsive">
     <table id="tentativeScheduleTable" class="table table-bordered table-striped">
@@ -72,7 +94,7 @@
             <td>Indrajit Ghosh</td>
             <td>Mathematical Aspects of Quantum Mechanics: States, Observables, Position Operator, Momentum Operator and Axioms (A1-A5)</td>
             <td>Gerald Teschl and Brian C Hall;
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EQyU_Hg41k9Igkv04_1tNp8BeYvP72pn-WFjLckOSnsEWw?e=uUCIL0" target="_blank" class="">Lecture note</a>
+                <a href="https://drive.google.com/file/d/1nU2eKwDALgPya6Oq37hIx13_a6qvhPPO/view?usp=drive_link" target="_blank" class="">Lecture note</a>
             </td>
         </tr>
         <tr>
@@ -80,7 +102,7 @@
             <td>Indrajit Ghosh</td>
             <td>Hamiltonian (\(\hat{H}\)), Density Matrices in \(B(\mathcal{H})\), Modified Axioms (A6-A10) using Density, Composite System: States and Hamiltonians </td>
             <td>Brian C Hall and F. Strochhi; 
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EQyU_Hg41k9Igkv04_1tNp8BeYvP72pn-WFjLckOSnsEWw?e=uUCIL0" target="_blank" class="">Lecture note</a>
+                <a href="https://drive.google.com/file/d/1nU2eKwDALgPya6Oq37hIx13_a6qvhPPO/view?usp=drive_link" target="_blank" class="">Lecture note</a>
             </td>
         </tr>
         <tr>
@@ -109,7 +131,7 @@
             <td>Indrajit Ghosh</td>
             <td>Operator Systems, Positive Maps, Fejer-Riesz Lemma, von Neumann Inequality, Russo-Dye Theorem etc.</td>
             <td>Chapter 2 of Paulsen;
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EUCLQqlJP75Ku7624rQyJjEBbv6_pnJcswsifU_bd59QGQ?e=Tl5bYm" target="_blank" class="">Lecture note</a>
+                <a href="https://drive.google.com/file/d/1tsbtMNAQGZ8YAIEiNgaTTU3qRYlHnGLQ/view?usp=drive_link" target="_blank" class="">Lecture note</a>
             </td>
         </tr>
         <tr>
@@ -117,7 +139,7 @@
             <td>IG + GM</td>
             <td>Problem-solving session (Positive Maps); Completely Positive Maps</td>
             <td>Chapter 3 of Paulsen; 
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/Eewqe-QBAnhGphLNCMGCGyMB6mXtRGf-jLohmmRiiTQXJA?e=wVLXBQ" target="_blank" class="">Indrajit's note</a>
+                <a href="https://drive.google.com/file/d/1zyvCDmt1jPzCYIOSmtg4Ihz2GgztB5Q9/view?usp=drive_link" target="_blank" class="">Indrajit's note</a>
             </td>
         </tr>
 
@@ -128,7 +150,7 @@
             <td>Indrajit Ghosh</td>
             <td>Stinespring's Dilation Theorem, Sz.-Nagy Dilation, Naimark Dilation and Choi's Theorem on CP maps from \(\mathbb{M}_n\) to \(\mathbb{M}_k\) </td>
             <td>Chapter 4 of Paulsen;
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EROoopNM0jVKjLgThIWTu94BTcNOz-SxXVGgv5XZX6AL-w?e=sPUr4L" target="_blank" class="">Indrajit's note</a>
+                <a href="https://drive.google.com/file/d/1jS8XIIIjEtUvDrsLTZ4eR2d9K5N2lZm-/view?usp=drive_link" target="_blank" class="">Indrajit's note</a>
             </td>
         </tr>
         <tr>
@@ -157,7 +179,7 @@
             <td>Indrajit Ghosh</td>
             <td>BW topology on \(\mathcal{B}(X, Y^*)\), Arveson's Extension Theorems and \(\mathscr{C}\)-bimodule maps.</td>
             <td>Chapter 7 of Paulsen; 
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/ER6WCXPNjaNMiT34NK03gekBz6YRJYlfWGQtc990Hx9Jkg?e=PCzIDa" target="_blank" class="">Indrajit's note</a>
+                <a href="https://drive.google.com/file/d/15on7MlopVRujZ_lmXonFZ0MTza8eVrGM/view?usp=drive_link" target="_blank" class="">Indrajit's note</a>
             </td>
         </tr>
         <tr>
@@ -171,7 +193,7 @@
             <td>Indrajit Ghosh</td>
             <td>Injective \(C^*\)-algebras, Conditional Expectation: Tomiyama's Theorem, \(\mathscr{B}\)-dilation; Haagerup's Theorem, Kadison's Similarity Conjecture, Amenable Groups and Dixmier's Theorem</td>
             <td>Chapter 7 and 9 of Paulsen;
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/ETgbgwOoSGlHjJEq3zAK8cEBHIL6RM_HtAfWBBfS8wk3VQ?e=WiBhcE" target="_blank" class="">Indrajit's note</a>
+                <a href="https://drive.google.com/file/d/1jo8vUvcMMIKwcSTYZjrN78XaB-mNvboE/view?usp=drive_link" target="_blank" class="">Indrajit's note</a>
             </td>
         </tr>
         <tr>
@@ -179,7 +201,7 @@
             <td>IG + SN</td>
             <td>Derivation problem on \(C^*\)-algebras; Abstract Characterizations of Operator Systems and Operator Spaces</td>
             <td>Chapter 9 and 13 of Paulsen;
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/ETwY4RDh08tEh4T3FvMvuyoBE2g6crKR_TMa_i-YqNbR_w?e=l4vxZ2" target="_blank" class="">Indrajit's note</a>
+                <a href="https://drive.google.com/file/d/1cbqmrZPwG_AiFjurq6zEbl_NgR4dw_xy/view?usp=drive_link" target="_blank" class="">Indrajit's note</a>
             </td>
         </tr>
         <!-- <tr>

@@ -2,6 +2,7 @@
     Teaching page for the Website
     Author: Indrajit Ghosh
     Created On: Nov 14, 2023
+    Modified On: Jan 23, 2026
  -->
 
 {% extends 'base.html' %}
@@ -10,41 +11,66 @@
   
 {% block styles %}
     {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/teaching_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/course_style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
 {% endblock %}
  
   
 {% block content %}
 <section>
-    <div class="teaching-container">
-        <h1 class="heading page-title">Analysis of Several Variables (BMAT2), Odd Sem 2023</h1>
-        <b>Term:</b> Odd Semester 2023<br>
-        <b>Duration:</b> Aug 01, 2023 - Nov 25, 2023<br><br>
-        <b>Course Name:</b> Analysis of Several Variables (B. Math. II)<br>
-        <b>Course Description:</b> <a href="https://www.isibang.ac.in/~adean/infsys/database/Bmath/ASV.html" class="underlined-link">Link to ISI course archives</a><br>
-        <b>Instructor:</b>  Mathew Joseph<br>
-        <b>TA:</b> Indrajit Ghosh<br>
-        <b>Room:</b> G26<br>
-        <br>
+    <div class="container-course">
+        <div class="page-header">
+            <h1><i class="bi bi-graph-up"></i> Analysis of Several Variables (BMAT2)</h1>
+            <div class="course-meta">
+                <div class="meta-item">
+                    <div class="meta-item-label"><i class="bi bi-calendar-event"></i> Term</div>
+                    <div class="meta-item-value">Odd Semester 2023</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-item-label"><i class="bi bi-clock"></i> Duration</div>
+                    <div class="meta-item-value">Aug 01 - Nov 25, 2023</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-item-label"><i class="bi bi-person-fill"></i> Instructor</div>
+                    <div class="meta-item-value">Mathew Joseph</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-item-label"><i class="bi bi-person-badge"></i> TA</div>
+                    <div class="meta-item-value">Indrajit Ghosh</div>
+                </div>
+            </div>
+        </div>
 
-        <h2>Textbooks and other references</h2>
+        <div class="info-box">
+            <p><strong>Room:</strong> G26</p>
+        </div>
 
-        <ol>
-            <li>T. M. Apostol, <i>Mathematical Analysis.</i></li>
-            <li>T. M. Apostol, <i>Calculus (Vol 2).</i></li>
-            <li>S. Dineen, <i>Multivariate Calculus and Geometry.</i></li>
-            <li>R. R. Goldberg, <i>Methods of Real Analysis.</i></li>
-            <li>T. Tao, <i>Analysis I & II.</i></li>
-            <li>Bartle and Sherbert, <i>Introduction to Real Analysis.</i></li>
-            <li>H. Royden, <l>Real Analysis.</l></li>
-        </ol>
-        <br>
-        
-        <!-- A blank anchor tag for 'Back to Top' -->
-        <a id="top"></a>
-        <div>
-            <h2>Grading Scheme</h2>
-            <table class="grading-table">
+        <div class="info-box">
+            <p>
+                <strong>Course Description:</strong> <a href="https://www.isibang.ac.in/~adean/infsys/database/Bmath/ASV.html" target="_blank">
+                    View on ISI Course Archives <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+            </p>
+        </div>
+
+        <!-- Textbooks Section -->
+        <h2 class="section-heading"><i class="bi bi-book-fill"></i> Textbooks and References</h2>
+        <div class="textbooks-list">
+            <ol>
+                <li>T. M. Apostol, <i>Mathematical Analysis.</i></li>
+                <li>T. M. Apostol, <i>Calculus (Vol 2).</i></li>
+                <li>S. Dineen, <i>Multivariate Calculus and Geometry.</i></li>
+                <li>R. R. Goldberg, <i>Methods of Real Analysis.</i></li>
+                <li>T. Tao, <i>Analysis I & II.</i></li>
+                <li>Bartle and Sherbert, <i>Introduction to Real Analysis.</i></li>
+                <li>H. Royden, <i>Real Analysis.</i></li>
+            </ol>
+        </div>
+
+        <!-- Grading Section -->
+        <h2 class="section-heading"><i class="bi bi-percent"></i> Grading Scheme</h2>
+        <div class="grading-card">
+            <table>
                 <tr>
                     <th>Category</th>
                     <th>Marks</th>
@@ -67,43 +93,59 @@
                 </tr>
             </table>
         </div>
-        <br>
-            
 
-        <h2>Homeworks</h2>
-        <ul>
-            <li>
-                <a href="#homework-1" class="underlined-link">
-                    Homework 1
-                </a> (Due on: 
-                <span class="datestamp"> Aug 25, 2023</span>)
-            </li>
+        <!-- Assignments Section -->
+        <h2 class="section-heading"><i class="bi bi-clipboard-check"></i> Assignments</h2>
+        <div class="assignment-grid">
+            <div class="assignment-card">
+                <div class="assignment-number">Homework 1</div>
+                <a href="#homework-1" class="assignment-link">
+                    <i class="bi bi-arrow-down"></i> View
+                </a>
+                <div class="due-date">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Due: Aug 25, 2023</span>
+                </div>
+            </div>
 
-            <li>
-                <a href="#homework-2" class="underlined-link">
-                    Homework 2
-                </a> (Due on: 
-                <span class="datestamp"> Sep 06, 2023</span>)
-            </li>
+            <div class="assignment-card">
+                <div class="assignment-number">Homework 2</div>
+                <a href="#homework-2" class="assignment-link">
+                    <i class="bi bi-arrow-down"></i> View
+                </a>
+                <div class="due-date">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Due: Sep 06, 2023</span>
+                </div>
+            </div>
 
-            <li>
-                <a href="#homework-3" class="underlined-link">
-                    Homework 3
-                </a> (Due on: 
-                <span class="datestamp"> Oct 25, 2023</span>)
-            </li>
-            
-            <li>
-                <a href="#homework-4" class="underlined-link">
-                    Homework 4
-                </a> (Due on: 
-                <span class="datestamp"> Nov 10, 2023</span>)
-            </li>
-        </ul>
+            <div class="assignment-card">
+                <div class="assignment-number">Homework 3</div>
+                <a href="#homework-3" class="assignment-link">
+                    <i class="bi bi-arrow-down"></i> View
+                </a>
+                <div class="due-date">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Due: Oct 25, 2023</span>
+                </div>
+            </div>
+
+            <div class="assignment-card">
+                <div class="assignment-number">Homework 4</div>
+                <a href="#homework-4" class="assignment-link">
+                    <i class="bi bi-arrow-down"></i> View
+                </a>
+                <div class="due-date">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Due: Nov 10, 2023</span>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- Homeworks -->
+<section>
+    <!-- Homeworks -->
 <div class="assignment scrollspy" id="homework-1">
     <h2>Homework 1</h2>
     <p class="due-date">Due Date: Aug 25, 2023</p>
@@ -345,6 +387,7 @@
     </div>
     <a href="#top" class="indra-btn indra-btn back-to-top">Back to top</a>
 </div>
+</section>
 
 <!-- Add last updated information -->
 <p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Nov 01, 2023</p>

@@ -2,6 +2,7 @@
     Complex Analysis page for the Website
     Author: Indrajit Ghosh
     Created On: Nov 14, 2023
+    Modified On: Jan 23, 2026
  -->
 
  {% extends 'base.html' %}
@@ -10,82 +11,128 @@
   
  {% block styles %}
      {{ super() }}
-     <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/teaching_style.css') }}">
+     <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/course_style.css') }}">
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
  {% endblock %}
  
   
  {% block content %}
  <section>
-    <div class="teaching-container">
-        <h1 class="heading page-title">Complex Analysis I (BMAT3), Odd Sem 2022-2023</h1>
-        <b>Term:</b> Odd Semester 2022-23<br>
-        <b>Duration:</b> Aug 2022 - Nov 2022<br><br>
-        <b>Course Name:</b> Complex Analysis (B. Math. III)<br>
-        <b>Course Description:</b> <a href="https://www.isibang.ac.in/~adean/infsys/database/Bmath/CA.html">Link to ISI course archives</a><br>
-        <b>Instructor:</b>  Mathew Joseph<br>
-        <b>TA:</b> Indrajit Ghosh<br>
-        <br>
+     <div class="container-course">
+         <div class="page-header">
+             <h1><i class="bi bi-vector-pen"></i> Complex Analysis I (BMAT3)</h1>
+             <div class="course-meta">
+                 <div class="meta-item">
+                     <div class="meta-item-label"><i class="bi bi-calendar-event"></i> Term</div>
+                     <div class="meta-item-value">Odd Semester 2022-23</div>
+                 </div>
+                 <div class="meta-item">
+                     <div class="meta-item-label"><i class="bi bi-clock"></i> Duration</div>
+                     <div class="meta-item-value">Aug 2022 - Nov 2022</div>
+                 </div>
+                 <div class="meta-item">
+                     <div class="meta-item-label"><i class="bi bi-person-fill"></i> Instructor</div>
+                     <div class="meta-item-value">Mathew Joseph</div>
+                 </div>
+                 <div class="meta-item">
+                     <div class="meta-item-label"><i class="bi bi-person-badge"></i> TA</div>
+                     <div class="meta-item-value">Indrajit Ghosh</div>
+                 </div>
+             </div>
+         </div>
 
-        <!-- A blank anchor tag for 'Back to Top' -->
-        <a id="top"></a>
+         <div class="info-box">
+             <p>
+                 <strong>Course Description:</strong> <a href="https://www.isibang.ac.in/~adean/infsys/database/Bmath/CA.html" target="_blank">
+                     View on ISI Course Archives <i class="bi bi-box-arrow-up-right"></i>
+                 </a>
+             </p>
+         </div>
 
-        <h2>Textbooks and other references</h2>
+         <!-- Textbooks Section -->
+         <h2 class="section-heading"><i class="bi bi-book-fill"></i> Textbooks and References</h2>
+         <div class="textbooks-list">
+             <ol>
+                 <li>T. W. Gamelin, <i>Complex Analysis.</i></li>
+                 <li>D. Sarason, <i>Notes on Complex Function Theory.</i></li>
+                 <li>J. B. Conway, <i>Functions of one complex Variable</i>.</li>
+             </ol>
+         </div>
 
-        <ol>
-            <li>T. W. Gamelin, <i>Complex Analysis.</i></li>
-            <li>D. Sarason, <i>Notes on Complex Function Theory.</i></li>
-            <li>J. B. Conway, <i>Functions of one complex Variable</i>.</li>
-        </ol>
-        <br>
+         <!-- Assignments Section -->
+         <h2 class="section-heading"><i class="bi bi-clipboard-check"></i> Assignments</h2>
+         <div class="assignment-grid">
+             <div class="assignment-card">
+                 <div class="assignment-number">Homework 1</div>
+                 <a href="#homework-1" class="assignment-link">
+                     <i class="bi bi-arrow-down"></i> View
+                 </a>
+                 <div class="due-date">
+                     <i class="bi bi-calendar-check"></i>
+                     <span>Due: Aug 23, 2022</span>
+                 </div>
+             </div>
 
-        <h2>Homeworks</h2>
-        <ul>
-            <li>
-                <a href="#homework-1" class="underlined-link">
-                    Homework 1
-                </a> (Due on: 
-                <span class="datestamp"> Aug 23, 2022</span>)
-            </li>
+             <div class="assignment-card">
+                 <div class="assignment-number">Homework 2</div>
+                 <a href="#homework-2" class="assignment-link">
+                     <i class="bi bi-arrow-down"></i> View
+                 </a>
+                 <div class="due-date">
+                     <i class="bi bi-calendar-check"></i>
+                     <span>Due: Sep 01, 2022</span>
+                 </div>
+             </div>
 
-            <li>
-                <a href="#homework-2" class="underlined-link">
-                    Homework 2
-                </a> (Due on: 
-                <span class="datestamp"> Sep 01, 2022</span>)
-            </li>
+             <div class="assignment-card">
+                 <div class="assignment-number">Homework 3</div>
+                 <a href="#homework-3" class="assignment-link">
+                     <i class="bi bi-arrow-down"></i> View
+                 </a>
+                 <div class="due-date">
+                     <i class="bi bi-calendar-check"></i>
+                     <span>Due: Sep 15, 2022</span>
+                 </div>
+             </div>
 
-            <li>
-                <a href="#homework-3" class="underlined-link">
-                    Homework 3
-                </a> (Due on: 
-                <span class="datestamp"> Sep 15, 2022</span>)
-            </li>
-            
-            <li>
-                <a href="#homework-4" class="underlined-link">
-                    Homework 4
-                </a> (Due on: 
-                <span class="datestamp"> Oct 20, 2022</span>)
-            </li>
+             <div class="assignment-card">
+                 <div class="assignment-number">Homework 4</div>
+                 <a href="#homework-4" class="assignment-link">
+                     <i class="bi bi-arrow-down"></i> View
+                 </a>
+                 <div class="due-date">
+                     <i class="bi bi-calendar-check"></i>
+                     <span>Due: Oct 20, 2022</span>
+                 </div>
+             </div>
 
-            <li>
-                <a href="#homework-5" class="underlined-link">
-                    Homework 5
-                </a> (Due on: 
-                <span class="datestamp"> Nov 01, 2022</span>)
-            </li>
+             <div class="assignment-card">
+                 <div class="assignment-number">Homework 5</div>
+                 <a href="#homework-5" class="assignment-link">
+                     <i class="bi bi-arrow-down"></i> View
+                 </a>
+                 <div class="due-date">
+                     <i class="bi bi-calendar-check"></i>
+                     <span>Due: Nov 01, 2022</span>
+                 </div>
+             </div>
 
-            <li>
-                <a href="#homework-6" class="underlined-link">
-                    Homework 6
-                </a> (Due on: 
-                <span class="datestamp"> Nov 11, 2022</span>)
-            </li>
-        </ul>
-    </div>
-</section>
+             <div class="assignment-card">
+                 <div class="assignment-number">Homework 6</div>
+                 <a href="#homework-6" class="assignment-link">
+                     <i class="bi bi-arrow-down"></i> View
+                 </a>
+                 <div class="due-date">
+                     <i class="bi bi-calendar-check"></i>
+                     <span>Due: Nov 11, 2022</span>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </section>
 
-<!-- Homeworks -->
+<section>
+    <!-- Homeworks -->
 
 <div class="assignment scrollspy" id="homework-1">
     <h2>Homework 1</h2>
@@ -366,6 +413,7 @@
     <!-- Back to top -->
     <a href="#top" class="indra-btn indra-btn-dark back-to-top">Back to top</a>
 </div>
+</section>
 
 <!-- Add last updated information -->
 <p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Dec 09, 2023</p>

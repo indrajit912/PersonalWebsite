@@ -38,8 +38,8 @@ def index():
 def research():
     # These three things need to be calculated if the thesis gets modified.
     isi_thesis_link = "https://dspace.isical.ac.in/jspui/handle/10263/7620"
-    thesis_link = "https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EXHbeNS8ji5HuU0QhfWVNP0BZUG62aMsxPrDgp0ZBb9G0w?e=jpkLHE"
-    thesis_sig_link = "https://isibang-my.sharepoint.com/:u:/g/personal/rs_math1902_isibang_ac_in/EeiKVBiZA05BlL-aFibEp5wBhE0XWN4m-kmjqMsjPPiW4w?e=o3WF5z"
+    thesis_link = "https://drive.google.com/file/d/1aSTN-8lQRhZOpvXdCBl_RdmMjd3E8-hH/view?usp=drive_link"
+    thesis_sig_link = "https://drive.google.com/file/d/1uLupU8JHZbO-c1fTEx7wLu0rtCFrG2xz/view?usp=drive_link"
     thesis_sha256sum = "7efd68b7ba90c61f640b05886bbd12a8162c92ce4223d8bcdbcbe215185db664"
 
     return render_template(

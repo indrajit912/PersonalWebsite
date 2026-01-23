@@ -1,75 +1,113 @@
 <!-- 
+    Harmonic Analysis page for the Website
     Author: Indrajit Ghosh
     Created On: Dec 13, 2023
+    Modified On: Jan 23, 2026
  -->
 
 {% extends 'base.html' %}
 
-{% block title %}Analysis of Several Variables (BMAT2), Odd Sem 2023{% endblock %}
+{% block title %}A Course in Harmonic Analysis (BMAT3), Even Sem 2024{% endblock %}
    
 {% block styles %}
     {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/teaching_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/course_style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
 {% endblock %}
   
    
 {% block content %}
 <section> 
-   <div class="teaching-container">
-       <h1 class="heading page-title">A Course in Harmonic Analysis (BMAT3), Even Sem 2024</h1>
-       <b>Term:</b> Even Semester 2024<br>
-       <b>Duration:</b> Jan 2024 - Apr 2024<br><br>
-       <b>Course Name:</b> A Course in Harmonic Analysis (B. Math III)<br>
-       <b>Syllabus:</b>
-       <p>
-        <em>Main topics. </em> Review of Fourier series and Hilbert spaces, The Fourier Transform and the Poisson Summation Formula, Finite Abelian Groups, Metrizable LCA Groups, The Dual Group, The Plancherel Theorem, The Heisenberg Group.
-       </p>
-       <p>
-        <em>Additional topics.</em> Haar Integration, Banach Algebras, Representation theory of compact topological groups: Peter-Weyl theorem.
-       </p>
-       <b>Course Description:</b>
-       <p>
-        Before the class, participants are expected to review the assigned material. The session will be led by a main presenter who will comprehensively cover the results and proofs, with active contributions from other participants. Additionally, we will collectively work on solving the majority of exercises from the reference textbooks.
-       </p>
-       <b>Instructor:</b> Soumyashant Nayak (Asst. Prof.)<br>
-       <b>TA:</b> Indrajit Ghosh (SRF)<br>
-       <b>Room:</b> G24<br>
-       <b>Timing:</b> Fridays (12:00 pm - 01:00 pm and 02:00 pm - 03:00 pm) and Saturdays (10:00 am - 01:00 pm)<br>
-       <br>
+   <div class="container-course">
+       <div class="page-header">
+           <h1><i class="bi bi-music-note-beamed"></i> A Course in Harmonic Analysis (BMAT3)</h1>
+           <div class="course-meta">
+               <div class="meta-item">
+                   <div class="meta-item-label"><i class="bi bi-calendar-event"></i> Term</div>
+                   <div class="meta-item-value">Even Semester 2024</div>
+               </div>
+               <div class="meta-item">
+                   <div class="meta-item-label"><i class="bi bi-clock"></i> Duration</div>
+                   <div class="meta-item-value">Jan 2024 - Apr 2024</div>
+               </div>
+               <div class="meta-item">
+                   <div class="meta-item-label"><i class="bi bi-person-fill"></i> Instructor</div>
+                   <div class="meta-item-value">Soumyashant Nayak</div>
+               </div>
+               <div class="meta-item">
+                   <div class="meta-item-label"><i class="bi bi-person-badge"></i> TA</div>
+                   <div class="meta-item-value">Indrajit Ghosh</div>
+               </div>
+           </div>
+       </div>
 
-        <h2>Textbooks and other references</h2>
+       <div class="info-box">
+           <p style="margin-bottom: 0.8rem;"><strong>Main Topics:</strong></p>
+           <p>Review of Fourier series and Hilbert spaces, The Fourier Transform and the Poisson Summation Formula, Finite Abelian Groups, Metrizable LCA Groups, The Dual Group, The Plancherel Theorem, The Heisenberg Group.</p>
+       </div>
 
-        <ol>
-            <li>A. Deitmar, <i>A First Course in Harmonic Analysis.</i></li>
-            <li>A. Deitmar, S. Echterhoff, <i>Principles of Harmonic Analysis.</i></li>
-            <li>G. W. Mackey, <i><a href="https://drive.google.com/file/d/1DaE4-I50lX15hv53-JE0vYlffzBcwIwy/view?usp=drive_link" target="_blank">Harmonic analysis as the exploitation of symmetry - a historical survey</a>,</i> Bull. Amer. Math. Soc. <b>3</b> (1980), 543--698.</li>
-        </ol>
+       <div class="info-box">
+           <p style="margin-bottom: 0.8rem;"><strong>Additional Topics:</strong></p>
+           <p>Haar Integration, Banach Algebras, Representation theory of compact topological groups: Peter-Weyl theorem.</p>
+       </div>
 
-        <br>
+       <div class="info-box">
+           <p>
+               <strong>Room:</strong> G24<br>
+               <strong>Timing:</strong> Fridays (12:00 pm - 01:00 pm and 02:00 pm - 03:00 pm) and Saturdays (10:00 am - 01:00 pm)
+           </p>
+       </div>
 
-        <h2>Worksheets</h2>
-        <ul>
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EZjmxYRsPcBHlflNxLmiq2oBgR9DWu1TNTCuDbM5T8-TKw?e=LIxSNQ" target="_blank">Harmonic Analysis - Worksheet for Midterm</a>
-            </li>
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EQWcRzRxiItCr46WAOYmevgBncAp-n43QyxCqBdgpGb9Gw?e=Riz5ao" target="_blank">Harmonic Analysis - Worksheet for Final</a>
-            </li>
-        </ul>
+       <!-- Textbooks Section -->
+       <h2 class="section-heading"><i class="bi bi-book-fill"></i> Textbooks and References</h2>
+       <div class="textbooks-list">
+           <ol>
+               <li>A. Deitmar, <i>A First Course in Harmonic Analysis.</i></li>
+               <li>A. Deitmar, S. Echterhoff, <i>Principles of Harmonic Analysis.</i></li>
+               <li>G. W. Mackey, <i><a href="https://drive.google.com/file/d/1DaE4-I50lX15hv53-JE0vYlffzBcwIwy/view?usp=drive_link" target="_blank">Harmonic analysis as the exploitation of symmetry - a historical survey</a>,</i> Bull. Amer. Math. Soc. <b>3</b> (1980), 543--698.</li>
+           </ol>
+       </div>
 
-        <h2>Exam Paper</h2>
-        <ul>
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/Ec5IQLv1ruxIiqp5FbLG5M8B-WzCicnMHhA3ZHiqLDYFsQ?e=ijUGfP" target="_blank">Final Exam</a>
-            </li>
-        </ul>
-        
-        
-</div>
+       <!-- Resources Section -->
+       <h2 class="section-heading"><i class="bi bi-pencil-square"></i> Worksheets & Exams</h2>
+       <div class="assignment-grid">
+           <div class="assignment-card">
+               <div class="assignment-number">Midterm Worksheet</div>
+               <a href="https://drive.google.com/file/d/14SYM58NDWLqU-JhmqduaU5F27LJ6N_PN/view?usp=drive_link" target="_blank" class="assignment-link">
+                   <i class="bi bi-file-pdf"></i> Download
+               </a>
+               <div class="due-date">
+                   <i class="bi bi-calendar-check"></i>
+                   <span>Midterm Exam</span>
+               </div>
+           </div>
 
+           <div class="assignment-card">
+               <div class="assignment-number">Final Worksheet</div>
+               <a href="https://drive.google.com/file/d/1Mnb8tohVf6WOtFoaxcRs5kzFz4DOcx7s/view?usp=drive_link" target="_blank" class="assignment-link">
+                   <i class="bi bi-file-pdf"></i> Download
+               </a>
+               <div class="due-date">
+                   <i class="bi bi-calendar-check"></i>
+                   <span>Final Exam</span>
+               </div>
+           </div>
+
+           <div class="assignment-card">
+               <div class="assignment-number">Final Exam Paper</div>
+               <a href="https://drive.google.com/file/d/1CBnW3nuI0uuxavpzqf56QB6gbiUPiZBY/view?usp=drive_link" target="_blank" class="assignment-link">
+                   <i class="bi bi-file-pdf"></i> Download
+               </a>
+               <div class="due-date">
+                   <i class="bi bi-calendar-check"></i>
+                   <span>Final Exam Paper</span>
+               </div>
+           </div>
+       </div>
+   </div>
 </section>
 
 <!-- Add last updated information -->
-<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: May 07, 2024</p>
+<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Jan 23, 2026</p>
 
 {% endblock %}

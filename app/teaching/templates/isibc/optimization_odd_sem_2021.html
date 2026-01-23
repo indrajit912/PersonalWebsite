@@ -2,6 +2,7 @@
     Optimization page for the Website
     Author: Indrajit Ghosh
     Created On: Nov 14, 2023
+    Modified On: Jan 23, 2026
  -->
 
  {% extends 'base.html' %}
@@ -10,99 +11,163 @@
   
  {% block styles %}
      {{ super() }}
-     <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/teaching_style.css') }}">
+     <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/course_style.css') }}">
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
  {% endblock %}
  
   
  {% block content %}
  <section>
-    <div class="teaching-container">
-        <h1 class="heading page-title">Optimization (BMAT2) - Odd Semester 2021</h1>
-        <b>Term:</b> Odd Semester 2021<br>
-        <b>Duration:</b> Sep 21 - Dec 23, 2021<br><br>
-        <b>Course Name:</b> Optimization (B. Math. II)<br>
-        <b>Course Description:</b> <a href="https://www.isibang.ac.in/~adean/infsys/database/Bmath/Opti.html">Link to ISI course archives</a><br>
-        <b>Instructor:</b> Soumyashant Nayak<br>
-        <b>TA:</b> Indrajit Ghosh (Office: S6)<br>
-        <b>Class Schedule:</b> Tue 08:55 a.m. - 10:55 a.m., Thu 08:55 a.m. - 09:55 a.m. (Zoomlink shared over email)<br>
-        <br>
+    <div class="container-course">
+        <div class="page-header">
+            <h1><i class="bi bi-graph-up"></i> Optimization (BMAT2)</h1>
+            <div class="course-meta">
+                <div class="meta-item">
+                    <div class="meta-item-label"><i class="bi bi-calendar-event"></i> Term</div>
+                    <div class="meta-item-value">Odd Semester 2021</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-item-label"><i class="bi bi-clock"></i> Duration</div>
+                    <div class="meta-item-value">Sep 21 - Dec 23, 2021</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-item-label"><i class="bi bi-person-fill"></i> Instructor</div>
+                    <div class="meta-item-value">Soumyashant Nayak</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-item-label"><i class="bi bi-person-badge"></i> TA</div>
+                    <div class="meta-item-value">Indrajit Ghosh (S6)</div>
+                </div>
+            </div>
+        </div>
 
-        <h2>Textbooks:</h2>
+        <div style="background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(46, 128, 185, 0.1) 100%); border-left: 5px solid var(--secondary-color); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+            <p style="margin: 0 0 0.5rem 0; color: #2c3e50; font-weight: 600;">
+                <i class="bi bi-info-circle" style="color: var(--secondary-color); margin-right: 0.5rem;"></i> Class Schedule
+            </p>
+            <p style="margin: 0; color: #555;">
+                <strong>Tuesday:</strong> 8:55 a.m. - 10:55 a.m. | <strong>Thursday:</strong> 8:55 a.m. - 9:55 a.m. (Zoom link shared over email)
+            </p>
+        </div>
 
-        <ol>
-            <li>S. Boyd, L. Vandenberghe, <i><a href="https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf">Convex Optimization.</a></i></li>
-            <li>H. Karloff, <i>Linear Programming</i></li>
-            <li>M. J. Kochenderfer and Tim A. Wheeler, <i>Algorithms for Optimization</i></li>
-            <li>R. Schneider, <i>Convex bodies: the Brunn-Minkowski theory</i>, (Chapter 1)</li>
-        </ol>
-        <br>
-        <h2>Assignments</h2>
-        <ul>
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EU9uZBiKtkJCtF8K_mo0tB0BQXn8sCk642DbSb4oGOuBpg?e=U6R7yM" target="_blank" class="underlined-link">
-                    Assignment 1
-                </a> (Due on: 
-                <span class="datestamp"> Oct 11, 2021</span>)
-            </li>
+        <div style="background: #f0f7ff; border-left: 5px solid var(--accent-color); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+            <p style="margin: 0; color: #2c3e50;">
+                <strong>Course Description:</strong> <a href="https://www.isibang.ac.in/~adean/infsys/database/Bmath/Opti.html" style="color: var(--secondary-color); text-decoration: none; font-weight: 600;" target="_blank">
+                    View on ISI Course Archives <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+            </p>
+        </div>
 
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EUOt46BrGFZKjxN0RUzGkmcBq0Mj1J3Mk1gcQjKqY4o17A?e=fSW1IX" target="_blank" class="underlined-link">
-                    Assignment 2
-                </a> (Due on: 
-                <span class="datestamp"> Oct 20, 2021</span>)
-            </li>
+        <!-- Textbooks Section -->
+        <h2 class="section-heading"><i class="bi bi-book-fill"></i> Textbooks</h2>
+        <div class="textbooks-list">
+            <ol>
+                <li>S. Boyd, L. Vandenberghe, <i><a href="https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf" style="color: var(--secondary-color); text-decoration: none;" target="_blank">Convex Optimization <i class="bi bi-box-arrow-up-right" style="font-size: 0.8rem;"></i></a></i></li>
+                <li>H. Karloff, <i>Linear Programming</i></li>
+                <li>M. J. Kochenderfer and Tim A. Wheeler, <i>Algorithms for Optimization</i></li>
+                <li>R. Schneider, <i>Convex bodies: the Brunn-Minkowski theory</i> (Chapter 1)</li>
+            </ol>
+        </div>
 
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EaQcijmM-4ZPqNQev6UgsZgB7zdzI8E929vshizhVxf3xg?e=tVqegj" target="_blank" class="underlined-link">
-                    Assignment 3
-                </a> (Due on: 
-                <span class="datestamp"> Nov 11, 2021</span>)
-            </li>
+        <!-- Assignments Section -->
+        <h2 class="section-heading"><i class="bi bi-clipboard-check"></i> Assignments</h2>
+        <div class="assignment-grid">
+            <div class="assignment-card">
+                <div class="assignment-number">Assignment 1</div>
+                <a href="https://drive.google.com/file/d/167amYtcZTHhYpDNC7IScigzbk9VZtmpH/view?usp=drive_link" target="_blank" class="assignment-link">
+                    <i class="bi bi-file-pdf"></i> Download
+                </a>
+                <div class="due-date">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Due: Oct 11, 2021</span>
+                </div>
+            </div>
 
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/Ec54sXI8ft1HgHrKDxd7A4cBcJBK_M4b1M_8baFmaAHLcQ?e=QerJya" target="_blank" class="underlined-link">
-                    Assignment 4
-                </a> (Due on: 
-                <span class="datestamp"> Nov 27, 2021</span>)
-            </li>
+            <div class="assignment-card">
+                <div class="assignment-number">Assignment 2</div>
+                <a href="https://drive.google.com/file/d/1YQaZ7LLR36lAF5KbeIu8iTuPKrpMLV0q/view?usp=drive_link" target="_blank" class="assignment-link">
+                    <i class="bi bi-file-pdf"></i> Download
+                </a>
+                <div class="due-date">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Due: Oct 20, 2021</span>
+                </div>
+            </div>
 
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/ES5sKGMXY1JEhDZcJa3EaxwBH68HkEkmvOcEAdKBAathEQ?e=U3JXG9" target="_blank" class="underlined-link">
-                    Assignment 5
-                </a> (Due on: 
-                <span class="datestamp"> Dec 13, 2021</span>)
-            </li>
+            <div class="assignment-card">
+                <div class="assignment-number">Assignment 3</div>
+                <a href="https://drive.google.com/file/d/1ky5Amn-RFVsJ5L6bhndk62_YpmKNt5C2/view?usp=drive_link" target="_blank" class="assignment-link">
+                    <i class="bi bi-file-pdf"></i> Download
+                </a>
+                <div class="due-date">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Due: Nov 11, 2021</span>
+                </div>
+            </div>
 
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EWl6Nwl4zvRBtRvPrarWYHcBGrHpAlfdKiDB5wEIQ8HY8A?e=4As8PT" target="_blank" class="underlined-link">
-                    Assignment 6
-                </a> (Due on: 
-                <span class="datestamp"> Jan 02, 2021</span>)
-            </li>
-        </ul>
+            <div class="assignment-card">
+                <div class="assignment-number">Assignment 4</div>
+                <a href="https://drive.google.com/file/d/11GLhTrFLSBHwhqmRRUxthZYxW1MEZ0hD/view?usp=drive_link" target="_blank" class="assignment-link">
+                    <i class="bi bi-file-pdf"></i> Download
+                </a>
+                <div class="due-date">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Due: Nov 27, 2021</span>
+                </div>
+            </div>
 
-        <br>
-        <h2>Exams</h2>
-        <ul>
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EfDw-I1ZELdKloKw6zHUYFQBSU6qPAYUTISEScm94-_ujg?e=ggyirK" target="_blank" class="underlined-link">
-                    Midterm
-                </a> (Date: 
-                <span class="datestamp"> Nov 12-13, 2021</span>)
-            </li>
+            <div class="assignment-card">
+                <div class="assignment-number">Assignment 5</div>
+                <a href="https://drive.google.com/file/d/1EndQmnTvzNEHsMmGmMbUSD89mYHmKqfK/view?usp=drive_link" target="_blank" class="assignment-link">
+                    <i class="bi bi-file-pdf"></i> Download
+                </a>
+                <div class="due-date">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Due: Dec 13, 2021</span>
+                </div>
+            </div>
 
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EZ9FUYphDMREnot2MDDG_VUBUi4E8zvc9FJARk50jdFNag?e=8wwWhz" target="_blank" class="underlined-link">
-                    Final
-                </a> (Date: 
-                <span class="datestamp"> Jan 07, 2021</span>)
-            </li>
-        </ul>
+            <div class="assignment-card">
+                <div class="assignment-number">Assignment 6</div>
+                <a href="https://drive.google.com/file/d/1el1soZOwDghE2bgexJ63SLjH_JihSy1-/view?usp=drive_link" target="_blank" class="assignment-link">
+                    <i class="bi bi-file-pdf"></i> Download
+                </a>
+                <div class="due-date">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Due: Jan 02, 2021</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exams Section -->
+        <h2 class="section-heading"><i class="bi bi-pencil-square"></i> Exams</h2>
+        <div class="assignment-grid">
+            <div class="assignment-card" style="border-top-color: #27ae60;">
+                <div class="assignment-number" style="color: #27ae60;">Midterm Exam</div>
+                <a href="https://drive.google.com/file/d/1o2jjEkpNAbUHy_QiDirwrcDKdzr1tc6v/view?usp=drive_link" target="_blank" class="assignment-link">
+                    <i class="bi bi-file-pdf"></i> Download
+                </a>
+                <div class="due-date">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Date: Nov 12-13, 2021</span>
+                </div>
+            </div>
+
+            <div class="assignment-card" style="border-top-color: #e74c3c;">
+                <div class="assignment-number" style="color: #e74c3c;">Final Exam</div>
+                <a href="https://drive.google.com/file/d/1QBmBB2oE-MaAgr44WR2hmB53rUrBefZM/view?usp=drive_link" target="_blank" class="assignment-link">
+                    <i class="bi bi-file-pdf"></i> Download
+                </a>
+                <div class="due-date">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Date: Jan 07, 2021</span>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- Add last updated information -->
-<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Dec 10, 2023</p>
+<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Jan 23, 2026</p>
 
  {% endblock %}
   

@@ -2,6 +2,7 @@
     Functional Analysis page for the Website
     Author: Indrajit Ghosh
     Created On: Nov 14, 2023
+    Modified On: Jan 23, 2026
  -->
 
  {% extends 'base.html' %}
@@ -10,88 +11,140 @@
   
  {% block styles %}
      {{ super() }}
-     <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/teaching_style.css') }}">
+     <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/course_style.css') }}">
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
  {% endblock %}
  
   
  {% block content %}
  <section>
-    <div class="teaching-container">
-        <h1 class="heading page-title">Functional Analysis (MMAT1) - Even Semester 2021-2022</h1>
-        <b>Term:</b> Even Semester 2021-2022<br>
-        <b>Duration:</b> Jan 18 - Apr 28, 2022<br><br>
-        <b>Course Name:</b> Functional Analysis (M. Math. I)<br>
-        <b>Course Description:</b> <a href="https://www.isibang.ac.in/~adean/infsys/database/MMath/C7FA.html">Link to ISI course archives</a><br>
-        <b>Instructor:</b> Soumyashant Nayak<br>
-        <b>TA:</b> Indrajit Ghosh<br>
-        <b>Class Schedule:</b> Tue 08:55 a.m. - 10:55 a.m., Thu 09:55 a.m. - 10:55 a.m. (Zoomlink shared over email)<br>
-        <br>
+     <div class="container-course">
+         <div class="page-header">
+             <h1><i class="bi bi-function"></i> Functional Analysis (MMAT1)</h1>
+             <div class="course-meta">
+                 <div class="meta-item">
+                     <div class="meta-item-label"><i class="bi bi-calendar-event"></i> Term</div>
+                     <div class="meta-item-value">Even Semester 2021-22</div>
+                 </div>
+                 <div class="meta-item">
+                     <div class="meta-item-label"><i class="bi bi-clock"></i> Duration</div>
+                     <div class="meta-item-value">Jan 18 - Apr 28, 2022</div>
+                 </div>
+                 <div class="meta-item">
+                     <div class="meta-item-label"><i class="bi bi-person-fill"></i> Instructor</div>
+                     <div class="meta-item-value">Soumyashant Nayak</div>
+                 </div>
+                 <div class="meta-item">
+                     <div class="meta-item-label"><i class="bi bi-person-badge"></i> TA</div>
+                     <div class="meta-item-value">Indrajit Ghosh</div>
+                 </div>
+             </div>
+         </div>
 
-        <h2>Textbooks and other references</h2>
+         <div class="info-box">
+             <p>
+                 <strong>Course Description:</strong> <a href="https://www.isibang.ac.in/~adean/infsys/database/MMath/C7FA.html" target="_blank">
+                     View on ISI Course Archives <i class="bi bi-box-arrow-up-right"></i>
+                 </a>
+             </p>
+             <p><strong>Class Schedule:</strong> Tue 08:55 a.m. - 10:55 a.m., Thu 09:55 a.m. - 10:55 a.m. (Zoom link shared over email)</p>
+         </div>
 
-        <ol>
-            <li>W. Rudin, <i>Real and Complex Analysis</i>, (Chapters 1-3, 6).</li>
-            <li>R. Kadison and J. Ringrose, <i>Fundamentals of the Theory of Operator Algebras : Vol. I - Elementary Theory</i>, (Chapters 1-2).</li>
-            <li>J. Dieudonné, <i>History of Functional Analysis</i>, (General reference for understanding the origin of various ideas in functional analysis.)</li>
-        </ol>
-        <br>
+         <!-- Textbooks Section -->
+         <h2 class="section-heading"><i class="bi bi-book-fill"></i> Textbooks and References</h2>
+         <div class="textbooks-list">
+             <ol>
+                 <li>W. Rudin, <i>Real and Complex Analysis</i>, (Chapters 1-3, 6).</li>
+                 <li>R. Kadison and J. Ringrose, <i>Fundamentals of the Theory of Operator Algebras : Vol. I - Elementary Theory</i>, (Chapters 1-2).</li>
+                 <li>J. Dieudonné, <i>History of Functional Analysis</i>, (General reference for understanding the origin of various ideas in functional analysis.)</li>
+             </ol>
+         </div>
 
-        <h2>Assignments</h2>
-        <ul>
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EQwfUPlzIwxApM5VV2Vyl9YBvrSziS1S4rwzN8Dt0DKo6Q?e=7NvHLB" target="_blank" class="underlined-link">
-                    Assignment 1
-                </a> (Due on: 
-                <span class="datestamp"> Feb 14, 2022</span>)
-            </li>
+         <!-- Assignments Section -->
+         <h2 class="section-heading"><i class="bi bi-clipboard-check"></i> Assignments</h2>
+         <div class="assignment-grid">
+             <div class="assignment-card">
+                 <div class="assignment-number">Assignment 1</div>
+                 <a href="https://drive.google.com/file/d/1X8IseSdSrqvrK773MmD8z26uxQAxqpbT/view?usp=drive_link" target="_blank" class="assignment-link">
+                     <i class="bi bi-file-pdf"></i> Download
+                 </a>
+                 <div class="due-date">
+                     <i class="bi bi-calendar-check"></i>
+                     <span>Due: Feb 14, 2022</span>
+                 </div>
+             </div>
 
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EYdzeA0snLlDvn0RijqKXHMBlDCPC2fMvmL0NkZHEqJIbg?e=0kg5xv" target="_blank" class="underlined-link">
-                    Assignment 2
-                </a> (Due on: 
-                <span class="datestamp"> Feb 25, 2022</span>)
-            </li>
+             <div class="assignment-card">
+                 <div class="assignment-number">Assignment 2</div>
+                 <a href="https://drive.google.com/file/d/1blqGmZbSr15HXkCM9y8EDJMZYxSk4adw/view?usp=drive_link" target="_blank" class="assignment-link">
+                     <i class="bi bi-file-pdf"></i> Download
+                 </a>
+                 <div class="due-date">
+                     <i class="bi bi-calendar-check"></i>
+                     <span>Due: Feb 25, 2022</span>
+                 </div>
+             </div>
 
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EWx7PXcxrctAlcB8M7gjCzkBhxX9l5AnE_ptnrKEHIncnQ?e=rrDQ52" target="_blank" class="underlined-link">
-                    Assignment 3
-                </a> (Due on: 
-                <span class="datestamp"> Mar 06, 2022</span>)
-            </li>
-            
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EVNhftcBuGtJsER8t0FfGzMBJTA3pkxwwBcIX0msqLGtfw?e=SCq3XT" target="_blank" class="underlined-link">
-                    Assignment 4
-                </a> (Due on: 
-                <span class="datestamp"> Mar 24, 2022</span>)
-            </li>
+             <div class="assignment-card">
+                 <div class="assignment-number">Assignment 3</div>
+                 <a href="https://drive.google.com/file/d/1l3qeNFOKKRwIJYHgb9jVshw4EAePURmk/view?usp=drive_link" target="_blank" class="assignment-link">
+                     <i class="bi bi-file-pdf"></i> Download
+                 </a>
+                 <div class="due-date">
+                     <i class="bi bi-calendar-check"></i>
+                     <span>Due: Mar 06, 2022</span>
+                 </div>
+             </div>
 
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EXhu6ctOs4dPk1nbVQ0L2Y0Bw_EMuvdDt8I9fR3fTWrzwQ?e=gGXTZa" target="_blank" class="underlined-link">
-                    Assignment 5
-                </a> (Due on: 
-                <span class="datestamp"> Mar 31, 2022</span>)
-            </li>
+             <div class="assignment-card">
+                 <div class="assignment-number">Assignment 4</div>
+                 <a href="https://drive.google.com/file/d/1mgQvDdM1yBtwXGNFzrsjDbuwYDIdNDjj/view?usp=drive_link" target="_blank" class="assignment-link">
+                     <i class="bi bi-file-pdf"></i> Download
+                 </a>
+                 <div class="due-date">
+                     <i class="bi bi-calendar-check"></i>
+                     <span>Due: Mar 24, 2022</span>
+                 </div>
+             </div>
 
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EU9cPjw8hV9Nsd5OP8WxfIMBSwTo_NACjOzItwvBzaj8_A?e=fKsGxp" target="_blank" class="underlined-link">
-                    Assignment 6
-                </a> (Due on: 
-                <span class="datestamp"> Apr 22, 2022</span>)
-            </li>
+             <div class="assignment-card">
+                 <div class="assignment-number">Assignment 5</div>
+                 <a href="https://drive.google.com/file/d/11D1z6r3BxdWKXHdCjl69j-j7wBidev3z/view?usp=drive_link" target="_blank" class="assignment-link">
+                     <i class="bi bi-file-pdf"></i> Download
+                 </a>
+                 <div class="due-date">
+                     <i class="bi bi-calendar-check"></i>
+                     <span>Due: Mar 31, 2022</span>
+                 </div>
+             </div>
 
-            <li>
-                <a href="https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/EWFHQ5WFrRRCtGPYYYy_rc0BRoFXu-llZk_eIk-p5PD0nA?e=klyEQo" target="_blank" class="underlined-link">
-                    Assignment 7
-                </a> (Due on: 
-                <span class="datestamp"> May 05, 2022</span>)
-            </li>
-        </ul>
-    </div>
-</section>
+             <div class="assignment-card">
+                 <div class="assignment-number">Assignment 6</div>
+                 <a href="https://drive.google.com/file/d/1kKCW536PNcXzJzyHFC6NPYREk0P6PyIt/view?usp=drive_link" target="_blank" class="assignment-link">
+                     <i class="bi bi-file-pdf"></i> Download
+                 </a>
+                 <div class="due-date">
+                     <i class="bi bi-calendar-check"></i>
+                     <span>Due: Apr 22, 2022</span>
+                 </div>
+             </div>
+
+             <div class="assignment-card">
+                 <div class="assignment-number">Assignment 7</div>
+                 <a href="https://drive.google.com/file/d/1FaW_Mtzq1TbhElrhWLSXWkiWOUuFFd_M/view?usp=drive_link" target="_blank" class="assignment-link">
+                     <i class="bi bi-file-pdf"></i> Download
+                 </a>
+                 <div class="due-date">
+                     <i class="bi bi-calendar-check"></i>
+                     <span>Due: May 05, 2022</span>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </section>
 
 <!-- Add last updated information -->
-<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Dec 10, 2023</p>
+<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Jan 23, 2026</p>
 
  {% endblock %}
   
