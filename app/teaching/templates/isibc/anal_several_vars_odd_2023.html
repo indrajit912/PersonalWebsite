@@ -13,6 +13,14 @@
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/course_style.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        .grading-card table th,
+        .grading-card table td {
+            padding: 4px 18px;   /* vertical | horizontal gap */
+        }
+
+    </style>
 {% endblock %}
  
   
@@ -43,15 +51,14 @@
 
         <div class="info-box">
             <p><strong>Room:</strong> G26</p>
-        </div>
-
-        <div class="info-box">
             <p>
                 <strong>Course Description:</strong> <a href="https://www.isibang.ac.in/~adean/infsys/database/Bmath/ASV.html" target="_blank">
                     View on ISI Course Archives <i class="bi bi-box-arrow-up-right"></i>
                 </a>
             </p>
         </div>
+
+
 
         <!-- Textbooks Section -->
         <h2 class="section-heading"><i class="bi bi-book-fill"></i> Textbooks and References</h2>
