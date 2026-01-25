@@ -32,6 +32,7 @@
     margin: 0 0 1rem 0;
     text-transform: uppercase;
     letter-spacing: 1px;
+    color: var(--color-white);
 }
 
 .course-meta {
