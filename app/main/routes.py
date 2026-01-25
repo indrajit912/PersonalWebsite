@@ -27,7 +27,7 @@ INSTITUTE_EMAIL = "ic44000@imail.iitm.ac.in"
 @main_bp.route('/')
 def index():
     institute_email = INSTITUTE_EMAIL
-    indra_cv_link = "https://isibang-my.sharepoint.com/:b:/g/personal/rs_math1902_isibang_ac_in/IQBlopq8weVVQqUxjhFoiwmAARsPLq1vnENRQb95kux3fZ0?e=x33OZn"
+    indra_cv_link = "https://drive.google.com/file/d/1i_VkqshwZli-RYpMUhFNUbPapy9w_GXx/view?usp=drive_link"
     return render_template('index.html', indra_cv_link=indra_cv_link, institute_email=institute_email)
 
 

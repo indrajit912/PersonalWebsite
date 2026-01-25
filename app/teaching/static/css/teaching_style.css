@@ -40,7 +40,7 @@ body {
 .course__number {
   font-size: 5vw;
   font-weight: 600;
-  color: #001233;
+  color: var(--color-dark);
   padding: 10px 0;
   position: sticky;
   top: 0;
@@ -59,7 +59,7 @@ body {
 }
 
 .course-title {
-  color: #001233;
+  color: var(--color-dark);
 }
 
 .course__content .course-title {
