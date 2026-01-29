@@ -191,6 +191,76 @@
         padding-top: 0.5rem;
     }
 
+    /* -------------------------------
+       ORCID Badge
+    --------------------------------*/
+    .orcid-badge {
+        margin-top: 0.3rem;
+        margin-bottom: 1.2rem;
+        text-align: center;
+    }
+
+    .orcid-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.1rem;
+        font-size: 0.9rem;
+        color: #2a7f62; /* ORCID green tone */
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .orcid-link img {
+        width: 1em;
+        height: 1em;
+    }
+
+    .orcid-link:hover {
+        text-decoration: underline;
+    }
+
+    /* -------------------------------
+       Academic Profile Icons
+    --------------------------------*/
+    .profile-icons {
+        margin-top: 0.4rem;
+        display: flex;
+        justify-content: center;
+        gap: 0.7rem;
+    }
+
+    .profile-icons a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px;
+        border-radius: 4px;
+        transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .profile-icons img {
+        height: 28px;
+        width: auto;
+        opacity: 0.85;
+        filter: none !important;
+        opacity: 1 !important;
+    }
+
+    .profile-icons {
+        gap: 0.9rem;
+    }
+    
+    .profile-icons a:hover img {
+        filter: none;
+        opacity: 1;
+    }
+
+    .profile-icons a:hover {
+        background-color: #f2f4f7;
+        transform: translateY(-1px);
+    }
+
+
     /* Responsive */
     @media (max-width: 768px) {
         .research-container {
@@ -213,7 +283,42 @@
     <div class="page-container">
         <div class="page-heading">
             <h1><i class="bi bi-book"></i> Research</h1>
+
+            <div class="orcid-badge">
+                <a id="cy-effective-orcid-url" href="https://orcid.org/0009-0007-6353-6637" target="_blank"
+                    rel="me noopener noreferrer" class="orcid-link">
+                    <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID iD icon" />
+                    ORCID: 0009-0007-6353-6637
+                </a>
+            </div>
+        
+            <div class="profile-icons">
+                <a href="https://arxiv.org/a/ghosh_i_1.html" target="_blank" title="arXiv">
+                    <img src="{{ url_for('main.static', filename='images/arxiv-logo.png') }}"
+                         alt="arXiv">
+                </a>
+
+            
+                <a href="https://www.researchgate.net/profile/Indrajit-Ghosh-15" target="_blank" title="ResearchGate">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/ResearchGate_icon_SVG.svg" alt="ResearchGate">
+                </a>
+            
+                <!-- <a href="https://orcid.org/0009-0007-6353-6637" target="_blank" title="ORCID">
+                    <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID">
+                </a> -->
+            
+                <a href="https://scholar.google.com/citations?hl=en&user=6rwt6vAAAAAJ" target="_blank" title="Google Scholar">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg" alt="Google Scholar">
+                </a>
+            
+                <a href="https://mathscinet.ams.org/mathscinet/MRAuthorID/1641136" target="_blank" title="MathSciNet">
+                    <img src="{{ url_for('main.static', filename='images/ams-logo.jpg') }}" alt="MathSciNet">
+                </a>
+            </div>
+
+
         </div>
+
 
         <div class="research-container">
 
