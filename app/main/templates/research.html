@@ -260,6 +260,20 @@
         transform: translateY(-1px);
     }
 
+    @media (max-width: 768px) {
+        .profile-icons {
+            gap: 0.5rem;
+        }
+
+        .profile-icons a {
+            padding: 2px;
+        }
+
+        .profile-icons img {
+            height: 22px;
+        }
+    }
+
 
     /* Responsive */
     @media (max-width: 768px) {
@@ -306,16 +320,19 @@
                 <!-- <a href="https://orcid.org/0009-0007-6353-6637" target="_blank" title="ORCID">
                     <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID">
                 </a> -->
+
+                <a href="https://mathscinet.ams.org/mathscinet/MRAuthorID/1641136" target="_blank" title="MathSciNet">
+                    <img src="{{ url_for('main.static', filename='images/ams-logo.jpg') }}" alt="MathSciNet">
+                </a>
             
                 <a href="https://scholar.google.com/citations?hl=en&user=6rwt6vAAAAAJ" target="_blank" title="Google Scholar">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg" alt="Google Scholar">
                 </a>
-            
-                <a href="https://mathscinet.ams.org/mathscinet/MRAuthorID/1641136" target="_blank" title="MathSciNet">
-                    <img src="{{ url_for('main.static', filename='images/ams-logo.jpg') }}" alt="MathSciNet">
+
+                <a href="https://zbmath.org/authors/?q=ghosh.indrajit.1" target="_blank" title="ZbMath">
+                    <img src="{{ url_for('main.static', filename='images/zbmath-logo.png') }}" alt="ZbMath">
                 </a>
             </div>
-
 
         </div>
 
