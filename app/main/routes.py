@@ -19,7 +19,7 @@ from scripts.send_email_client import send_email_via_hermes
 from scripts.utils import encrypt_with_public_key, encrypt_file_with_public_key, format_size
 from config import APP_DATA_DIR, EmailConfig
 
-INSTITUTE_EMAIL = "ic44000@imail.iitm.ac.in"
+INSTITUTE_EMAIL = "indrajitg@iitk.ac.in"
 
 #######################################################
 #                      Homepage
@@ -27,7 +27,7 @@ INSTITUTE_EMAIL = "ic44000@imail.iitm.ac.in"
 @main_bp.route('/')
 def index():
     institute_email = INSTITUTE_EMAIL
-    indra_cv_link = "https://drive.google.com/file/d/1i_VkqshwZli-RYpMUhFNUbPapy9w_GXx/view?usp=drive_link"
+    indra_cv_link = "https://drive.google.com/file/d/17YPOjnIjTDw-lTRB5h47SqDj_vbOapHz/view?usp=sharing"
     return render_template('index.html', indra_cv_link=indra_cv_link, institute_email=institute_email)
 
 
