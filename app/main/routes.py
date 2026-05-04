@@ -37,7 +37,7 @@ def index():
 @main_bp.route('/research/')
 def research():
     # These three things need to be calculated if the thesis gets modified.
-    isi_thesis_link = "https://dspace.isical.ac.in/jspui/handle/10263/7620"
+    isi_thesis_link = "https://dspace.isical.ac.in/items/f3d082ef-5b12-4b44-8399-f0f282eddfa1"
     thesis_link = "https://drive.google.com/file/d/1aSTN-8lQRhZOpvXdCBl_RdmMjd3E8-hH/view?usp=drive_link"
     thesis_sig_link = "https://drive.google.com/file/d/1uLupU8JHZbO-c1fTEx7wLu0rtCFrG2xz/view?usp=drive_link"
     thesis_sha256sum = "7efd68b7ba90c61f640b05886bbd12a8162c92ce4223d8bcdbcbe215185db664"
