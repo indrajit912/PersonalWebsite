@@ -27,7 +27,7 @@ INSTITUTE_EMAIL = "indrajitg@iitk.ac.in"
 @main_bp.route('/')
 def index():
     institute_email = INSTITUTE_EMAIL
-    indra_academic_cv_link = "https://drive.google.com/file/d/17YPOjnIjTDw-lTRB5h47SqDj_vbOapHz/view?usp=drive_link"
+    indra_academic_cv_link = "https://drive.google.com/file/d/1cOzD2BP7CrsykZZ4H7i8CKvwj6yS5g86/view?usp=drive_link"
     indra_professional_cv_link = "https://drive.google.com/file/d/15SM1JLgfUYDlIaBEoUq_Bv3VFr34TYIG/view?usp=drive_link"
     return render_template(
         'index.html', 
