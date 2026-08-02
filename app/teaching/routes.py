@@ -16,6 +16,10 @@ def index():
     return render_template('teaching.html')
 
 
+@teaching_bp.route('/iitk/mth111m_26-27.html')
+def mth111m_26_27():
+    return render_template('iitk/mth111m_26-27.html')
+
 @teaching_bp.route('/isibc/intro_to_cp_even_2024.html')
 def intro_to_cp_even_2024():
     return render_template('isibc/intro_to_cp_even_2024.html')
