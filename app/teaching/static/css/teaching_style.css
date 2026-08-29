@@ -1,257 +1,277 @@
-/* Styles for teaching */
-
-
-body {
-  /* background: #444; */
-  /* color: #fff; */
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-}
-
+/* Styles for teaching page */
 :root {
-  --color-black: #000000;  
-  --color-white: #ffffff;
-  --color-dark: #353535;
-  --color-dark-variant: #555555;
+    --color-black: #0f172a;
+    --color-white: #ffffff;
+    --color-dark: #1e293b;
+    --color-dark-variant: #475569;
+    
+    --primary-color: #1a365d; /* Deep elegant navy */
+    --accent-color: #3182ce;  /* Bright blue for accents */
+    --secondary-color: #2b6cb0; /* Medium blue for icons/borders */
+    --light-bg: #f8fafc; /* Very soft slate-tinted white */
+    
+    --border-color: #e2e8f0;
+    --hover-shadow: 0 12px 30px rgba(49, 130, 206, 0.12); /* Blue tinted shadow */
+    --default-shadow: 0 4px 15px rgba(26, 54, 93, 0.05); /* Navy tinted shadow */
 }
 
-.teaching-heading {
-  text-align: center; 
-  margin-bottom: 20px;
+.page-header {
+    text-align: center;
+    padding: 2rem 2rem;
+    margin-bottom: 3rem;
 }
 
-.teaching-container {
-  width: 95%;
-  max-width: 1200px;
-  margin: 20px auto;
+.page-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 1px;
 }
 
-.course {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  position: relative;
-  margin: 20px auto;
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.course a {
-  text-decoration: none;
+.page-heading {
+    text-align: center;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 800px;
 }
 
-.course__number {
-  font-size: 5vw;
-  font-weight: 600;
-  color: var(--color-dark);
-  padding: 10px 0;
-  position: sticky;
-  top: 0;
-  text-align: center;
-  height: calc(10vw + 20px);
-  transition: all 0.2s ease-in;
+.page-heading h1 {
+    padding-bottom: 10px;
+    white-space: nowrap;
+    color: var(--primary-color);
 }
 
-.course__content {
-  border-top: 2px solid var(--color-dark);
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  grid-gap: 15px;
-  padding: 15px 0;
-  width: 90%;
+.page-heading h1 span {
+    font-weight: 100;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    margin-top: 2.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+.year-range {
+    font-size: 1rem;
+    color: #888;
+    font-weight: 400;
+    margin-left: 0.5rem;
+    white-space: nowrap;
+}
+
+.container-teaching {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.teaching-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* Course Card Modernization */
+.course-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--default-shadow);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+}
+
+/* Subtle top accent on hover */
+.course-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.course-card:hover {
+    box-shadow: var(--hover-shadow);
+    transform: translateY(-4px);
+    border-color: #ddd;
+}
+
+.course-card:hover::before {
+    transform: scaleX(1);
+}
+
+.course-card-header {
+    background: transparent;
+    color: var(--primary-color);
+    padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.course-number {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-white);
+    background-color: var(--primary-color);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    margin: 0;
 }
 
 .course-title {
-  color: var(--color-dark);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--primary-color);
 }
 
-.course__content .course-title {
-  font-weight: 600
+.course-card-body {
+    padding: 1rem 1.5rem;
+    flex-grow: 1;
 }
 
-.course__content .course-details {
-    line-height: 26px;
-    column-count: 2; /* Adjust the number of columns as needed */
-    column-gap: 10px; /* Adjust the gap between columns as needed */
-}
-
-.course-link {
-  width: 10rem;
-  height: 3rem;
-  font-size: 11px;
-}
-  
-
-@media (max-width: 600px) {
-  .course,
-  .teaching-container {
-    width: 100%;
-    column-gap: 10px;
-  }
-  .course__content {
-    grid-template-columns: 1fr;
-  }
-  .course__content .course-details {
-    font-size: 15px;
-    column-count: 1; /* Change to a single column on smaller screens */
-  }
-  .teaching-heading {
-      font-size: 5vw;
-  }
-  .course-details {
-    display: column;
-  }
-  .course__number {
-    font-size: 11vw;
-  }
-}
-
-@media (min-width: 1600px) {
-  .course-link {
-    font-size: 12px;
-  }
-}
-
-
-/* Additional styles for grading page */
-.grading-table {
-    width: 30%;
-    margin: 0 auto;
-    border-collapse: collapse;
-    border: 1px solid #ccc;
-    margin-top: 20px;
-    margin-left: 20px;
-}
-
-.grading-table th, .grading-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-}
-
-.grading-table th {
-    background-color: #f2f2f2;
-}
-
-.assignment {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    padding: 20px;
-    max-width: 1200px;
-}
-
-.assignment h2 {
-    color: #333;
-    font-size: 25px;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.problem {
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 15px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.problem b {
-    color: #555;
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.problem p {
-    color: #777;
-    font-size: 16px;
-}
-
-.problem ol {
-    color: #777;
-    font-size: 16px;
-}
-
-.due-date {
-    color: #999;
-    font-size: 14px;
-    text-align: center;
-    margin-top: -10px;
-}
-
-.custom-list {
-    list-style: none;
-    counter-reset: my-counter;
-}
-
-.custom-list li {
-    position: relative;
-    counter-increment: my-counter;
-    margin-bottom: 10px;
-    padding-left: 25px;
-    color: #777;
-    font-size: 16px;
-}
-
-.custom-list li::before {
-    content: "(" counter(my-counter, lower-alpha) ")";
-    position: absolute;
-    left: 0;
-}
-
-.center-img {
+.course-info {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #777;
-    height: 40vh; /* Set the height of the container to the viewport height for vertical centering */
-    width: 40vh;
-    margin: 10px auto;
+    align-items: flex-start;
+    margin-bottom: 0.8rem;
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
-.center-img img {
-    max-width: 100%; /* Limit the image width to the container's width */
-    max-height: 100%; /* Limit the image height to the container's height */
+.course-info i {
+    color: var(--secondary-color);
+    margin-right: 0.8rem;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
 }
 
-/* Styles for smaller screens */
-@media screen and (max-width: 768px) {
-    .assignment {
-        max-width: 92%;
-        padding: 10px;
+.course-card-footer {
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
+    text-align: left;
+    border-top: 1px solid var(--light-bg);
+}
+
+/* Button Modernization */
+.btn-course {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    background: transparent;
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary-color);
+    cursor: pointer;
+}
+
+.btn-course:hover {
+    background: var(--primary-color);
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+.btn-course i {
+    margin-right: 0.4rem;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.btn-course:hover i {
+    transform: translateX(3px);
+}
+
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 2rem;
     }
 
-    .problem {
-        padding: 15px;
-        align-items: center;
+    .section-title {
+        font-size: 1.5rem;
     }
 
-    /* Adjust font size for equations */
-    .problem p, .problem b, .problem {
-        font-size: 14px; /* You can adjust this value as needed */
+    .teaching-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
-    /* Adjust line heights and margins for equations */
-    .problem p, .problem b {
-        line-height: 1;
-        margin-bottom: 2px;
+    .course-card-header {
+        padding: 1.2rem 1.2rem 0.5rem 1.2rem;
+    }
+    
+    .course-card-body {
+        padding: 0.8rem 1.2rem;
+    }
+    
+    .course-card-footer {
+        padding: 1rem 1.2rem 1.2rem 1.2rem;
+    }
+
+    .course-title {
+        font-size: 1.1rem;
+    }
+
+    .btn-course {
+        width: 100%;
+        text-align: center;
+        padding: 0.7rem 1rem;
     }
 }
 
-.teaching-content {
-  margin-bottom: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 70%;
-  /* background-color: orange; */
-}
+@media (max-width: 480px) {
+    .page-header {
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+    }
 
-@media (max-width: 600px) {
-  .teaching-content {
-    width: 95%;
-  }
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
 
-  .page-title {
-    width: 100%;
-    font-size: 24px;
-  }
+    .course-info {
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .year-range {
+        display: block;
+        margin-left: 0;
+        margin-top: 0.2rem;
+    }
 }

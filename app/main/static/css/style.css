@@ -35,10 +35,10 @@ body {
 }
 
 :root {
-    --color-black: #000000;  
+    --color-black: #0f172a;  
     --color-white: #ffffff;
-    --color-dark: #353535;
-    --color-dark-variant: #555555;
+    --color-dark: #1e293b;
+    --color-dark-variant: #475569;
 
     --transition: .4s ease;
 }
@@ -589,23 +589,24 @@ header {
 
 /* ........................ Start Misc Styles ...................... */
 
-/* New styles for last updated information */
+/* Modern styles for last updated information (pill badge) */
 .last-updated {
-  color: #999;
-  font-size: 14px;
-  margin-top: 25px;
-  margin-bottom: 20px;
-  text-align: center;
-  padding: 10px;
-  background-color: #f5f5f5;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  font-family: "Source Code Pro", 'Courier New', monospace;
-  font-weight: 600;
-  width: 60%;
-  /* Center the last updated information */
-  margin-left: auto;
-  margin-right: auto;
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    margin: 3rem auto 2rem auto;
+    padding: 0.6rem 1.2rem;
+    max-width: max-content;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
 }
 
 a.back-to-top {
@@ -620,9 +621,7 @@ a.back-to-top {
 @media screen and (max-width: 768px) {
     /* Adjust the margin and font size for larger screens */
     .last-updated {
-      margin-top: 30px;
-      font-size: 12px;
-      width: 80%;
+      font-size: 0.8rem;
     }
 
     a.back-to-top {

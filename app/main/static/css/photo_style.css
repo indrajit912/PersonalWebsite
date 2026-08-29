@@ -1,40 +1,100 @@
-/* main/photo_style.css */
+/* Modern Masonry Gallery Styles */
+.gallery-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
 
-.pic-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.page-heading {
     text-align: center;
+    margin-bottom: 3rem;
 }
 
-.pic-container .gallery {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.page-heading h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e293b; /* Slate 800 */
 }
 
-.pic-container .gallery .gallery-col {
-    display: flex;
-    flex-direction: column;
-    width: 32.5%;
+.page-heading p {
+    color: #475569; /* Slate 600 */
+    max-width: 600px;
+    margin: 1rem auto 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
 }
 
-.pic-container .gallery .gallery-col img {
+.masonry-gallery {
+    column-count: 3;
+    column-gap: 1.5rem;
+}
+
+.gallery-item {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(26, 54, 93, 0.05); /* Navy tint shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #ffffff;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(49, 130, 206, 0.12); /* Blue tint shadow */
+}
+
+.img-wrapper {
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.gallery-item .img-wrapper img {
     width: 100%;
-    padding-bottom: 15px;
-    border-radius: 5px;
-    /* display: block;
-    height: auto; 
-    aspect-ratio: 1 / 1;
-    object-fit: cover; */
+    display: block;
+    transition: transform 0.5s ease;
 }
 
-@media only screen and (max-width:769px) {
-    .pic-container .gallery {
-        flex-direction: column;
+.gallery-item:hover .img-wrapper img {
+    transform: scale(1.05);
+}
+
+.gallery-caption {
+    padding: 1.2rem 1rem;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #475569;
+    font-weight: 500;
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* Fallback for images without captions to still have bottom radius */
+.gallery-item:not(:has(.gallery-caption)) .img-wrapper,
+.gallery-item:not(:has(.gallery-caption)) .img-wrapper img {
+    border-radius: 12px;
+}
+
+.gallery-item:has(.gallery-caption) .img-wrapper,
+.gallery-item:has(.gallery-caption) .img-wrapper img {
+    border-radius: 12px 12px 0 0;
+}
+
+@media (max-width: 992px) {
+    .masonry-gallery {
+        column-count: 2;
     }
-    .pic-container .gallery .gallery-col {
-        width: 100%;
+}
+
+@media (max-width: 600px) {
+    .masonry-gallery {
+        column-count: 1;
+    }
+    .gallery-container {
+        padding: 1.5rem 1rem;
+    }
+    .page-heading h1 {
+        font-size: 2rem;
     }
 }

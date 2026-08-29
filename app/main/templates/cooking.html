@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Cooking | Indrajit Ghosh{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('main.static', filename='css/photo_style.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="gallery-container">
+        <div class="page-heading">
+            <h1>My Cooking Journey</h1>
+            <p>I recently started learning how to cook by myself. It has been a fun (and sometimes chaotic) experience experimenting in the kitchen. Here is a small gallery documenting some of the dishes I have prepared along the way!</p>
+        </div>
+
+        <div class="masonry-gallery">
+            <div class="gallery-item">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/cooking/29.08.2026.jpg') }}" alt="A dish I cooked on August 29, 2026" loading="lazy">
+                </div>
+                <div class="gallery-caption">Aug 29, 2026</div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/cooking/09.08.2026.jpg') }}" alt="A dish I cooked on August 09, 2026" loading="lazy">
+                </div>
+                <div class="gallery-caption">Aug 09, 2026</div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/cooking/02.08.2026.jpg') }}" alt="A dish I cooked on August 02, 2026" loading="lazy">
+                </div>
+                <div class="gallery-caption">Aug 02, 2026</div>
+            </div>
+            
+            <div class="gallery-item">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/cooking/27.07.2026.jpg') }}" alt="A dish I cooked on July 27, 2026" loading="lazy">
+                </div>
+                <div class="gallery-caption">Jul 27, 2026</div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/cooking/22.05.2026.jpg') }}" alt="A dish I cooked on May 22, 2026" loading="lazy">
+                </div>
+                <div class="gallery-caption">May 22, 2026</div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/cooking/10.05.2026.jpg') }}" alt="A dish I cooked on May 10, 2026" loading="lazy">
+                </div>
+                <div class="gallery-caption">May 10, 2026</div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/cooking/19.04.2026.jpg') }}" alt="A dish I cooked on April 19, 2026" loading="lazy">
+                </div>
+                <div class="gallery-caption">Apr 19, 2026</div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/cooking/E4802FE4-5598-4721-8315-45EFAFA35E34.jpg') }}" alt="A dish I cooked recently" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

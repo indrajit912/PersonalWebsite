@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Photos{% endblock %}
+{% block title %}Photos | Indrajit Ghosh{% endblock %}
 
 {% block styles %}
     {{ super() }}
@@ -10,27 +10,56 @@
 {% block content %}
 
 <section>
+    <div class="gallery-container">
+        <div class="page-heading">
+            <h1>Photo Gallery</h1>
+            <p>A small collection of personal photographs and memories.</p>
+        </div>
 
-<div class="page-container pic-container">
-    <div class="page-heading">
-        <h1>Photo <span>Gallery</span></h1>
-    </div>
+        <div class="masonry-gallery">
+            <div class="gallery-item">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/IMG_8494.jpg') }}" alt="Recent photograph of Indrajit">
+                </div>
+            </div>
 
-    <div class="gallery">
-        <div class="gallery-col">
-            <img src="{{ url_for('main.static', filename='images/indrajit/herley.jpg') }}" alt='Indrajit writing on whiteboard'>
-            <img src="{{ url_for('main.static', filename='images/indrajit/airplane.jpg') }}" alt='Indrajit in ISI Campus'>
-        </div>
-        <div class="gallery-col">
-            <img src="{{ url_for('main.static', filename='images/indrajit/photo2.jpg') }}" alt='Indrajit in front of ISI Academic building' loading="lazy">
-            <img src="{{ url_for('main.static', filename='images/indrajit/kapoor_cafe.jpg') }}" alt='Indrajit in ISI Campus' loading="lazy">
-        </div>
-        <div class="gallery-col">
-            <img src="{{ url_for('main.static', filename='images/indrajit/blue_tokai.jpg') }}" alt='Indrajit in a restaurant' loading="lazy">
-            <img src="{{ url_for('main.static', filename='images/indra_library/books.jpg') }}" alt='Indrajits ISI Bookshelf' loading="lazy">
+            <div class="gallery-item">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/herley.jpg') }}" alt="Indrajit writing on whiteboard">
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/airplane.jpg') }}" alt="Indrajit in ISI Campus">
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/photo2.jpg') }}" alt="Indrajit in front of ISI Academic building" loading="lazy">
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/kapoor_cafe.jpg') }}" alt="Indrajit at a cafe" loading="lazy">
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/blue_tokai.jpg') }}" alt="Indrajit in a restaurant" loading="lazy">
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/indra_library/books.jpg') }}" alt="Indrajit's ISI Bookshelf" loading="lazy">
+                </div>
+            </div>
         </div>
     </div>
-</div>
 </section>
 
 {% endblock %}

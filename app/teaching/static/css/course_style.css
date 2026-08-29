@@ -1,72 +1,94 @@
 /* 
    Course Template Styles
-   Used for all course pages in /teaching/templates/isibc/
-   Author: Indrajit Ghosh
-   Created: Jan 23, 2026
+   Used for all course pages in /teaching/templates/isibc/ and iitk/
 */
 
 :root {
-    --color-black: #000000;
+    --color-black: #0f172a;
     --color-white: #ffffff;
-    --color-dark: #353535;
-    --color-dark-variant: #555555;
+    --color-dark: #1e293b;
+    --color-dark-variant: #475569;
     
-    --primary-color: var(--color-dark);
-    --accent-color: var(--color-dark-variant);
-    --secondary-color: var(--color-dark-variant);
-    --light-bg: #f8f9fa;
+    --primary-color: #1a365d; /* Deep elegant navy */
+    --accent-color: #3182ce;  /* Bright blue for accents */
+    --secondary-color: #2b6cb0; /* Medium blue for icons/borders */
+    --light-bg: #f8fafc; /* Very soft slate-tinted white */
+    
+    --border-color: #e2e8f0;
+    --hover-shadow: 0 12px 30px rgba(49, 130, 206, 0.12); /* Blue tinted shadow */
+    --default-shadow: 0 4px 15px rgba(26, 54, 93, 0.05); /* Navy tinted shadow */
+}
+
+.container-course {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 20px;
 }
 
 .page-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
-    color: white;
-    padding: 3rem 2rem;
+    background: var(--color-white);
+    color: var(--primary-color);
+    padding: 3rem 2.5rem;
     margin-bottom: 3rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--default-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Accent border at the top of the header */
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--primary-color);
 }
 
 .page-header h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 700;
-    margin: 0 0 1rem 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--color-white);
+    margin: 0 0 1.5rem 0;
+    letter-spacing: 0.5px;
 }
 
 .course-meta {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
-    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
 }
 
 .meta-item {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 1rem;
-    border-radius: 8px;
-    border-left: 4px solid var(--accent-color);
+    padding: 0.5rem 0;
 }
 
 .meta-item-label {
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    opacity: 0.9;
-    margin-bottom: 0.3rem;
+    color: #777;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .meta-item-value {
     font-size: 1rem;
     font-weight: 600;
+    color: var(--primary-color);
 }
 
 .section-heading {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: var(--primary-color);
-    margin-top: 2.5rem;
+    margin-top: 3rem;
     margin-bottom: 1.5rem;
     position: relative;
     padding-bottom: 0.5rem;
@@ -80,60 +102,69 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 50px;
+    width: 40px;
     height: 3px;
-    background: var(--accent-color);
+    background: var(--primary-color);
     border-radius: 2px;
 }
 
 .section-heading i {
-    font-size: 1.5rem;
-    color: var(--secondary-color);
+    font-size: 1.4rem;
+    color: var(--primary-color);
 }
 
 .textbooks-list {
-    background: white;
-    border-radius: 10px;
+    background: var(--color-white);
+    border-radius: 12px;
     padding: 2rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    margin-bottom: 2rem;
+    box-shadow: var(--default-shadow);
+    border: 1px solid var(--border-color);
+    margin-bottom: 2.5rem;
 }
 
 .textbooks-list ol {
     margin-bottom: 0;
+    padding-left: 1.5rem;
 }
 
 .textbooks-list li {
     margin-bottom: 1rem;
-    color: #555;
+    color: #444;
     line-height: 1.6;
 }
 
 .textbooks-list i {
     font-style: italic;
-    color: #333;
+    color: var(--primary-color);
 }
 
 .textbooks-list a {
-    color: var(--secondary-color);
+    color: var(--primary-color);
     text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
 }
 
 .textbooks-list a:hover {
-    text-decoration: underline;
+    border-color: var(--primary-color);
 }
 
 .info-box {
-    background: #f0f7ff;
-    border-left: 5px solid var(--accent-color);
+    background: var(--light-bg);
+    border-left: 4px solid var(--primary-color);
     padding: 1.5rem;
-    border-radius: 8px;
+    border-radius: 0 8px 8px 0;
     margin-bottom: 2rem;
+    border-top: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .info-box p {
     margin: 0.5rem 0;
-    color: #2c3e50;
+    color: #444;
+    line-height: 1.6;
 }
 
 .info-box p:first-child {
@@ -145,51 +176,74 @@
 }
 
 .info-box strong {
-    color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 .assignment-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .assignment-card {
-    background: white;
+    background: var(--color-white);
     border-radius: 10px;
     padding: 1.5rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    border-top: 4px solid var(--secondary-color);
+    box-shadow: var(--default-shadow);
+    border: 1px solid var(--border-color);
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.assignment-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
 }
 
 .assignment-card:hover {
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    transform: translateY(-3px);
+    box-shadow: var(--hover-shadow);
+    transform: translateY(-4px);
+    border-color: #ddd;
+}
+
+.assignment-card:hover::before {
+    transform: scaleX(1);
 }
 
 .assignment-number {
-    font-size: 0.9rem;
-    color: var(--secondary-color);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
 
 .assignment-link {
-    display: inline-block;
-    color: var(--secondary-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--primary-color);
     text-decoration: none;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 6px;
     transition: all 0.3s ease;
 }
 
 .assignment-link:hover {
-    color: var(--accent-color);
-    text-decoration: underline;
+    background: var(--primary-color);
+    color: var(--color-white);
 }
 
 .due-date {
@@ -197,95 +251,104 @@
     align-items: center;
     gap: 0.5rem;
     margin-top: 1rem;
-    color: #777;
-    font-size: 0.95rem;
+    color: #666;
+    font-size: 0.9rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border-color);
 }
 
 .due-date i {
-    color: var(--accent-color);
+    color: var(--primary-color);
 }
 
-.container-course {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
 
-.last-updated {
-    text-align: center;
-    color: #888;
-    font-size: 0.9rem;
-    margin-top: 3rem;
-}
 
 .assignment {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e8ecf1 100%);
+    background: var(--color-white);
     padding: 2.5rem;
     margin: 2rem 0;
     border-radius: 12px;
-    border-left: 6px solid var(--secondary-color);
-    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.1);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--default-shadow);
+    position: relative;
+}
+
+.assignment::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background: var(--primary-color);
+    border-radius: 12px 0 0 12px;
 }
 
 .assignment h2 {
     color: var(--primary-color);
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
     margin-top: 0;
     margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 3px solid var(--secondary-color);
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .assignment .due-date {
-    color: var(--accent-color);
-    font-weight: 600;
+    color: #666;
+    font-weight: 500;
     margin-bottom: 1.5rem;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    border-top: none;
+    padding-top: 0;
 }
 
 .problem {
-    background: white;
+    background: var(--light-bg);
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    border-left: 4px solid var(--accent-color);
+    border: 1px solid var(--border-color);
+}
+
+.problem:last-child {
+    margin-bottom: 0;
 }
 
 .problem b {
-    color: var(--secondary-color);
-    font-size: 1.1rem;
+    color: var(--primary-color);
+    font-size: 1.05rem;
     display: block;
     margin-bottom: 0.8rem;
 }
 
 .problem p {
-    color: #333;
+    color: #444;
     line-height: 1.7;
+    margin: 0;
 }
 
 .back-to-top {
     display: inline-block;
     margin-top: 1.5rem;
-    padding: 0.7rem 1.5rem;
-    background: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
-    color: white;
+    padding: 0.6rem 1.2rem;
+    background: transparent;
+    color: var(--primary-color);
     text-decoration: none;
     border-radius: 6px;
     font-weight: 600;
+    border: 1px solid var(--primary-color);
     transition: all 0.3s ease;
 }
 
 .back-to-top:hover {
-    background: linear-gradient(135deg, #2980b9 0%, #1e5fa3 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+    background: var(--primary-color);
+    color: var(--color-white);
 }
 
 .center-img {
     text-align: center;
-    margin: 1.5rem 0;
+    margin: 2rem 0;
 }
 
 .center-img img {
@@ -293,18 +356,47 @@
     width: 450px;
     height: auto;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: var(--default-shadow);
+    border: 1px solid var(--border-color);
 }
 
 .center-img figcaption {
-    margin-top: 0.8rem;
+    margin-top: 1rem;
     font-size: 0.9rem;
     color: #666;
     font-style: italic;
 }
 
+/* Custom Lists */
+.custom-list {
+    list-style: none;
+    counter-reset: my-counter;
+    padding-left: 0;
+}
+
+.custom-list li {
+    position: relative;
+    counter-increment: my-counter;
+    margin-bottom: 10px;
+    padding-left: 25px;
+    color: #444;
+    font-size: 1rem;
+}
+
+.custom-list li::before {
+    content: "(" counter(my-counter, lower-alpha) ")";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
+    .container-course {
+        padding: 1.5rem 15px;
+    }
+
     .page-header {
         padding: 2rem 1.5rem;
         margin-bottom: 2rem;
@@ -319,117 +411,51 @@
         gap: 1rem;
     }
 
-    .meta-item {
-        padding: 0.8rem;
-    }
-
     .assignment-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
     }
 
     .section-heading {
-        font-size: 1.3rem;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
+        font-size: 1.4rem;
+        margin-top: 2.5rem;
     }
 
     .textbooks-list {
         padding: 1.5rem;
     }
 
-    .textbooks-list li {
-        margin-bottom: 0.8rem;
+    .assignment {
+        padding: 1.5rem;
     }
 }
 
 @media (max-width: 480px) {
     .page-header {
         padding: 1.5rem 1rem;
-        margin-bottom: 1.5rem;
     }
 
     .page-header h1 {
-        font-size: 1.4rem;
-        margin-bottom: 0.8rem;
+        font-size: 1.5rem;
     }
 
     .course-meta {
         grid-template-columns: 1fr;
-        gap: 0.8rem;
+        gap: 1rem;
     }
-
+    
     .meta-item {
-        padding: 0.7rem;
-        border-left-width: 3px;
-    }
-
-    .meta-item-label {
-        font-size: 0.8rem;
-    }
-
-    .meta-item-value {
-        font-size: 0.95rem;
+        padding: 0;
     }
 
     .section-heading {
-        font-size: 1.2rem;
-        margin-top: 1.5rem;
-        margin-bottom: 1rem;
-        gap: 0.6rem;
-    }
-
-    .section-heading i {
-        font-size: 1.2rem;
-    }
-
-    .textbooks-list {
-        padding: 1.2rem;
-    }
-
-    .textbooks-list li {
-        margin-bottom: 0.8rem;
-        font-size: 0.95rem;
-    }
-
-    .assignment-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
-    .assignment-card {
-        padding: 1.2rem;
-        border-top-width: 3px;
-    }
-
-    .assignment-link {
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 
     .info-box {
         padding: 1.2rem;
-        border-left-width: 4px;
     }
-
-    .info-box p {
-        font-size: 0.95rem;
-    }
-
-    .assignment {
-        padding: 1.8rem;
-    }
-
-    .assignment h2 {
-        font-size: 1.4rem;
-        margin-bottom: 0.8rem;
-    }
-
+    
     .problem {
         padding: 1.2rem;
-        margin-bottom: 1.2rem;
-    }
-
-    .problem b {
-        font-size: 1rem;
     }
 }
