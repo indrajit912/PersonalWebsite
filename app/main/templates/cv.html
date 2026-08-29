@@ -5,496 +5,444 @@
 
 <head>
   <title>Dr. Indrajit Ghosh - CV</title>
+  <link rel="stylesheet" href="{{ url_for('main.static', filename='css/research_style.css') }}">
   <link rel="stylesheet" href="{{ url_for('main.static', filename='css/cv_style.css') }}">
-  <!-- The follwoing is for displaying logos for github, fb, twitter etc -->
+  
+  <!-- The following is for displaying logos for github, fb, twitter etc -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- The follwoing is for displaying LaTeX code outputs -->
+  <!-- The following is for displaying LaTeX code outputs -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
 </head>
 
 <body>
-  <div class="wrapper clearfix">
+  <div class="wrapper">
     <div class="left">
-
       <div class="name-hero">
-
         <div class="me-img"></div>
-
         <div class="name-text">
-
           <h1>Indrajit <em>Ghosh</em></h1>
           <p>Office 614, ESB-2,</p>
-          <p>Department of Mathematics & Statistics, Indian Institute of Technology</p>
-          <p>Kanpur, Uttar Pradesh 208 016, India.</p>
+          <p>Department of Mathematics & Statistics,</p>
+          <p>Indian Institute of Technology Kanpur,</p>
+          <p>Uttar Pradesh 208 016, India.</p>
           <p>{{ institute_email }}</p>
-          <p>
-            <a href="https://github.com/indrajit912" target="_blank"><i class="icon ion-social-github"></i></a> |
-            <a href="https://in.linkedin.com/in/indrajit-ghosh-a98988292" target="_blank"><i
-                class="icon ion-social-linkedin"></i></a> |
-            <a href="https://fb.com/indrajitghosh912" target="_blank"><i class="icon ion-social-facebook"></i></a> |
-            <a href="https://twitter.com/Meself_Indrajit" target="_blank"><i class="fa fa-twitter"></i></a> |
-            <a href="https://instagram.com/entangled.indra" target="_blank"><i
-                class="icon ion-social-instagram"></i></a>
-          </p>
-
+          
+          <div class="social-links">
+            <a href="https://github.com/indrajit912" target="_blank"><i class="icon ion-social-github"></i></a>
+            <a href="https://in.linkedin.com/in/indrajit-ghosh-a98988292" target="_blank"><i class="icon ion-social-linkedin"></i></a>
+            <a href="https://fb.com/indrajitghosh912" target="_blank"><i class="icon ion-social-facebook"></i></a>
+            <a href="https://twitter.com/Meself_Indrajit" target="_blank"><i class="fa fa-twitter"></i></a>
+            <a href="https://instagram.com/entangled.indra" target="_blank"><i class="icon ion-social-instagram"></i></a>
+          </div>
         </div>
-
       </div>
-
     </div>
 
     <div class="right">
-
       <div class="inner">
-
+        
         <section>
           <h1>Employment</h1>
-
-          <div
-            style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin-bottom: 2em;">
-            <!-- PhD -->
-            <em>Mar 2026 –  Present <span>| Institute Postdoctoral Fellow</span></em>
-            <p>
-              Department of Mathematics & Statistics, Indian Institute of Technology, Kanpur
-            </p>
-            <p>
-              <strong>Mentor:</strong>
-              <a href="https://sites.google.com/view/keshab-bakshi/home" target="_blank">
-                Prof. Keshab Chandra Bakshi
-              </a>
-            </p>
-
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Institute Postdoctoral Fellow</span>
+              <span class="cv-entry-date">Mar 2026 – Present</span>
+            </div>
+            <div class="cv-entry-subtitle">Department of Mathematics & Statistics, Indian Institute of Technology, Kanpur</div>
+            <p><strong>Mentor:</strong> <a href="https://sites.google.com/view/keshab-bakshi/home" target="_blank">Prof. Keshab Chandra Bakshi</a></p>
           </div>
 
-          <div
-            style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin-bottom: 2em;">
-            <!-- PhD -->
-            <em>Nov 2025 –  Feb 2026 <span>| Postdoctoral Researcher</span></em>
-            <p>
-              Department of Mathematics, Indian Institute of Technology, Madras
-            </p>
-            <p>
-              <strong>Mentor:</strong>
-              <a href="https://ioe.iitm.ac.in/people/kunal-krishna-mukherjee/" target="_blank">
-                Prof. Kunal Krishna Mukherjee
-              </a>
-            </p>
-
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Postdoctoral Researcher</span>
+              <span class="cv-entry-date">Nov 2025 – Feb 2026</span>
+            </div>
+            <div class="cv-entry-subtitle">Department of Mathematics, Indian Institute of Technology, Madras</div>
+            <p><strong>Mentor:</strong> <a href="https://ioe.iitm.ac.in/people/kunal-krishna-mukherjee/" target="_blank">Prof. Kunal Krishna Mukherjee</a></p>
           </div>
-
         </section>
 
         <section>
           <h1>Education</h1>
-          <div
-            style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin-bottom: 2em;">
-            <!-- PhD -->
-            <em>Jul 2019 – Oct 2025 <span>| Doctor of Philosophy</span></em>
-            <p>
-              Stat-Math Unit, Indian Statistical Institute, Bangalore
-            </p>
-            <p>
-              <strong>Thesis:</strong> On Algebraic Aspects and Functoriality of the Set of Unbounded Operators
-              Affiliated with a von Neumann Algebra
-            </p>
-            <p>
-              <strong>Advisor:</strong>
-              <a href="https://www.isibang.ac.in/~soumyashant/" target="_blank">
-                Prof. Soumyashant Nayak
-              </a>
-            </p>
-            <p>
-              <strong>Defended on:</strong> Oct 15, 2025 <br>
-              <strong>Awarded on:</strong> Feb 17, 2026
-            </p>
-
-            <br>
-
-            <!-- MSc -->
-            <em>2016 – 2018 <span>| MSc in Pure Mathematics</span></em>
-            <p>
-              Dept. of Pure Mathematics, University of Calcutta
-            </p>
-
-            <br>
-
-            <!-- BSc -->
-            <em>2013 – 2016 <span>| BSc (Hons.) in Mathematics</span></em>
-            <p>
-              Barasat Government College, West Bengal State University
-            </p>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Doctor of Philosophy</span>
+              <span class="cv-entry-date">Jul 2019 – Oct 2025</span>
+            </div>
+            <div class="cv-entry-subtitle">Stat-Math Unit, Indian Statistical Institute, Bangalore</div>
+            <p><strong>Thesis:</strong> On Algebraic Aspects and Functoriality of the Set of Unbounded Operators Affiliated with a von Neumann Algebra</p>
+            <p><strong>Advisor:</strong> <a href="https://www.isibang.ac.in/~soumyashant/" target="_blank">Prof. Soumyashant Nayak</a></p>
+            <p><small class="text-muted">Defended: Oct 15, 2025 &nbsp;&bull;&nbsp; Awarded: Feb 17, 2026</small></p>
           </div>
 
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">MSc in Pure Mathematics</span>
+              <span class="cv-entry-date">2016 – 2018</span>
+            </div>
+            <div class="cv-entry-subtitle">Dept. of Pure Mathematics, University of Calcutta</div>
+          </div>
+
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">BSc (Hons.) in Mathematics</span>
+              <span class="cv-entry-date">2013 – 2016</span>
+            </div>
+            <div class="cv-entry-subtitle">Barasat Government College, West Bengal State University</div>
+          </div>
         </section>
 
         <section>
           <h1>Research Interests</h1>
-          <p><em>Operator Algebras | </em>von-Neumann Algebras, Properly Infinite Factors, \(C^*\)-Algebras | <em>Operator
-              Theory</em> | <em>Topology</em></p>
+          <p><strong>Operator Algebras:</strong> von-Neumann Algebras, Properly Infinite Factors, \(C^*\)-Algebras</p>
+          <p><strong>General:</strong> Operator Theory, Topology</p>
         </section>
 
         <section>
           <h1>Publications</h1>
-          <p><em>A Complete Characterization of Regular Inclusions of Finite Dimensional \(C^*\)-algebras | </em> with K. C. Bakshi and S. Kumar |
-            <code>pre-print</code> | <em><a
-                href="https://arxiv.org/abs/2608.04572">arXiv:2608.04572</a> </em></p>
-            
-            <br>
-
-          <p><em>An Operator Theoretic Characterization of Properly Infinite von Neumann Algebras | </em> with K. K. Mukherjee |
-            <code>pre-print</code></p>
-            
-            <br>
-
-          <p><em>Algebraic aspects and functoriality of the set of affiliated operators | </em> with S. Nayak |
-            International Mathematics Research Notices, Volume 2024, Issue 21, Nov 2024, Pages 13525-13562 | <em><a
-                href="https://doi.org/10.1093/imrn/rnae203">doi:10.1093/imrn/rnae203</a> </em>| <em><a
-                href="https://arxiv.org/abs/2311.16170">arXiv:2311.16170</a> </em></p>
+          <ol class="reversed-list">
+            <li>
+                <div class="publication-card">
+                    <span class="publication-title">
+                        Algebraic aspects and functoriality of the set of affiliated operators
+                    </span><br>
+                    <span class="publication-authors publication-size">I. Ghosh and S. Nayak</span>
+                    <div class="publication-size">
+                        <cite>International Mathematics Research Notices</cite>, Volume 2024, Issue 21, 
+                        <span class="publication-date">Nov 2024</span>, Pages 13525–13562
+                    </div>
+                    <div class="links">
+                        <a href="https://doi.org/10.1093/imrn/rnae203" target="_blank">IMRN</a>
+                        <a href="https://arxiv.org/abs/2311.16170" target="_blank">arXiv</a>
+                        <a href="https://www.researchgate.net/publication/383623934_Algebraic_aspects_and_functoriality_of_the_set_of_affiliated_operators"
+                           target="_blank">ResearchGate</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="publication-card">
+                    <span class="publication-title">
+                        An Operator Theoretic Characterization of Properply Infinite von Neumann Algebras
+                    </span><br>
+                    <span class="publication-authors publication-size">I. Ghosh and K. K. Mukherjee</span>
+                    <div class="publication-size">
+                        <code>pre-print</code>, <span class="publication-date">Feb 2026</span>
+                    </div>
+                    <div class="links">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="publication-card">
+                    <span class="publication-title">
+                        A Complete Characterization of Regular Inclusions of Finite Dimensional \(C^*\)-algebras 
+                    </span><br>
+                    <span class="publication-authors publication-size">K. C. Bakshi, I. Ghosh and S. Kumar</span>
+                    <div class="publication-size">
+                        <code>pre-print</code>, <span class="publication-date">Aug 2026</span>
+                    </div>
+                    <div class="links">
+                        <a href="https://arxiv.org/abs/2608.04572" target="_blank">arXiv</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="publication-card">
+                    <span class="publication-title">
+                        A Complete Characterization of Cartan Inclusions of Finite Dimensional \(C^*\)-algebras 
+                    </span><br>
+                    <span class="publication-authors publication-size">I. Ghosh and S. Kumar</span>
+                    <div class="publication-size">
+                        <code>pre-print</code>, <span class="publication-date">Aug 2026</span>
+                    </div>
+                    <div class="links">
+                        <a href="https://arxiv.org/abs/2608.11711" target="_blank">arXiv</a>
+                    </div>
+                </div>
+            </li>
+          </ol>
         </section>
 
         <section>
           <h1>Fellowships and Achievements</h1>
-          <p> <em> NBHM PhD fellowship | </em> Dept. Of Atomic Energy, Govt. of India | 2019 Ref No.
-            0203/11/2019-R&D-II/9261.</p>
-          <p><em> Selected as JRF | </em> at Indian Statistical Institute | 2019</p>
-          <p><em> Selected as JRF | </em> at IIT Madras, India | 2019</p>
-          <p><em> Selected as JRF | </em> at IISER Bhopal, India | 2019</p>
-          <p><em> Qualified GATE | </em> in Mathematics (MA) | 2019</p>
-          <p><em> Joint CSIR-UGC NET JRF fellowship | </em> Govt. Of India | Dec 2018</p>
+          <p><strong>NBHM PhD fellowship</strong> | Dept. Of Atomic Energy, Govt. of India | 2019</p>
+          <p><strong>Selected as JRF</strong> | Indian Statistical Institute | 2019</p>
+          <p><strong>Selected as JRF</strong> | IIT Madras, India | 2019</p>
+          <p><strong>Selected as JRF</strong> | IISER Bhopal, India | 2019</p>
+          <p><strong>Qualified GATE</strong> | Mathematics (MA) | 2019</p>
+          <p><strong>Joint CSIR-UGC NET JRF fellowship</strong> | Govt. Of India | Dec 2018</p>
         </section>
 
         <section>
           <h1>Invited Talks</h1>
-
-          <p>Mar 24 - Mar 28, 2025<em> |
-              Young Mathematicians in Operator Algebras |
-              Indian Statistical Institute, Delhi, India </em> | Place: Stat-Math Unit, ISI Delhi.
-          </p>
-          <br>
-
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Young Mathematicians in Operator Algebras</span>
+              <span class="cv-entry-date">Mar 24 - 28, 2025</span>
+            </div>
+            <div class="cv-entry-subtitle">Stat-Math Unit, Indian Statistical Institute, Delhi, India</div>
+          </div>
         </section>
 
         <section>
           <h1>Contributed Talks</h1>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title"><a href="https://sites.google.com/view/rms2026/home" target="_blank">41st Annual Conference of Ramanujan Mathematical Society (RMS 2026)</a></span>
+              <span class="cv-entry-date">Jul 02 - 05, 2026</span>
+            </div>
+            <div class="cv-entry-subtitle">Manipal Institute of Technology, Bengaluru, India</div>
+          </div>
 
-          <p>Jul 02 - 05, 2026<em> |
-            <a href="https://sites.google.com/view/rms2026/home" target="_blank">41st Annual Conference of Ramanujan Mathematical Society (RMS 20260) </a> |
-            Manipal Institute of Technology </em> | Bengaluru, India
-          </p>
-          <br>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title"><a href="https://sites.google.com/view/ymcstara-2025" target="_blank">Young Mathematicians in \(C^*\)-Algebras</a></span>
+              <span class="cv-entry-date">Jul 21 - 25, 2025</span>
+            </div>
+            <div class="cv-entry-subtitle">University of Southern Denmark, Odense, Denmark</div>
+          </div>
 
-          <p>Jul 21 - 25, 2025<em> |
-            <a href="https://sites.google.com/view/ymcstara-2025" target="_blank">Young Mathematicians in \(C^*\)-Algebras</a> |
-            University of Southern Denmark </em> | Odense, Denmark
-          </p>
-          <br>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title"><a href="https://sites.google.com/view/coart-2025iitb/home" target="_blank">Conference on Operator Algebra and Related Topics COART-2025</a></span>
+              <span class="cv-entry-date">Feb 24 - 28, 2025</span>
+            </div>
+            <div class="cv-entry-subtitle">VMCC, Indian Institute of Technology, Bombay, India</div>
+          </div>
+          
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title"><a href="{{ url_for('misc.isi_symposium_25') }}" target="_blank">PDF-RS Annual Symposium</a></span>
+              <span class="cv-entry-date">Jan 29 - 31, 2025</span>
+            </div>
+            <div class="cv-entry-subtitle">Platinum Jubilee Auditorium, Indian Statistical Institute, Bangalore, India</div>
+          </div>
 
-          <p>Feb 24 - Feb 28, 2025<em> |
-            <a href="https://sites.google.com/view/coart-2025iitb/home" target="_blank">Conference on Operator Algebra and Related Topics COART-2025</a> |
-              Indian Institute of Technology, Bombay, India </em> | Place: VMCC, IIT Bombay 
-          </p>
-          <br>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Workshop on Completely Positive Maps</span>
+              <span class="cv-entry-date">Jan 15 - Apr 29, 2024</span>
+            </div>
+            <div class="cv-entry-subtitle">Stat-Math Unit, Indian Statistical Institute, Bangalore, India</div>
+          </div>
 
-          <p>Jan 29 - Jan 31, 2025<em> |
-              <a href="{{ url_for('misc.isi_symposium_25') }}" target="_blank">PDF-RS Annual Symposium</a> |
-              Indian Statistical Institute, Bangalore, India </em> | Place: Platinum Jubilee Auditorium, ISI Bangalore |
-            <a href="{{ url_for('misc.isi_symposium_25') }}#indrajit-abs" target="_blank">Abstract here.</a>
-          </p>
-          <br>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title"><a href="https://sites.google.com/view/ymoa/home" target="_blank">Young Mathematicians in Operator Algebras</a></span>
+              <span class="cv-entry-date">Feb 26 - Mar 02, 2024</span>
+            </div>
+            <div class="cv-entry-subtitle">Stat-Math Unit, Indian Statistical Institute, Delhi, India</div>
+          </div>
 
-          <p>Jan 15 - Apr 29, 2024<em> |
-              Workshop on Completely Positive Maps |
-              Indian Statistical Institute, Bangalore, India </em> | Place: Stat-Math Unit, ISI Bangalore | Course
-            Webpage: <a href="{{ url_for('teaching.intro_to_cp_even_2024') }}" target="_blank">link here</a>
-          </p>
-          <br>
-
-          <p>Feb 26 - Mar 02, 2024<em> |
-              <a href="https://sites.google.com/view/ymoa/home" target="_blank">Young Mathematicians in Operator
-                Algebras</a> |
-              Indian Statistical Institute, Delhi, India </em> | Place: Stat-Math Unit, ISI Delhi |
-            <a href="https://sites.google.com/view/ymoa/talks?authuser=0" target="_blank">Abstract here.</a>
-          </p>
-          <br>
-
-
-          <p>Nov 27 - 30, 2023<em> |
-              <a href="https://sites.google.com/view/icsat-23/" target="_blank">International Conference on Spectral and
-                Approximation Theory</a> |
-              Cochin University of Science and Technology, Kerala, India </em> | Place: Dept. of Math, Cochin University
-            of Science And Technology |
-            <a href="https://sites.google.com/view/icsat-23/abstracts?authuser=0" target="_blank">Abstract here.</a>
-          </p>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title"><a href="https://sites.google.com/view/icsat-23/" target="_blank">International Conference on Spectral and Approximation Theory</a></span>
+              <span class="cv-entry-date">Nov 27 - 30, 2023</span>
+            </div>
+            <div class="cv-entry-subtitle">Dept. of Math, Cochin University of Science and Technology, Kerala, India</div>
+          </div>
         </section>
 
         <section>
-          <h1>Conferences and Workshops Attended</h1>
+          <h1>Conferences & Workshops Attended</h1>
+          
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Young Mathematicians in Operator Algebras</span>
+              <span class="cv-entry-date">Apr 12 - 18, 2026</span>
+            </div>
+            <div class="cv-entry-subtitle">Indian Statistical Institute, Delhi, India</div>
+          </div>
 
-          <p>Apr 12 - Apr 18, 2026<em> |
-              <a>Young Mathematicians in Operator
-                Algebras</a> |
-              Indian Statistical Institute, Delhi, India </em> | Place: Stat-Math Unit, ISI Delhi 
-          </p>
-          <br>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title"><a href="https://sites.google.com/view/ymcstara-2025" target="_blank">Young Mathematicians in \(C^*\)-Algebras</a></span>
+              <span class="cv-entry-date">Jul 21 - 25, 2025</span>
+            </div>
+            <div class="cv-entry-subtitle">University of Southern Denmark, Odense, Denmark</div>
+          </div>
 
-          <p>Jul 21 - 25, 2025<em> |
-            <a href="https://sites.google.com/view/ymcstara-2025">Young Mathematicians in \(C^*\)-Algebras</a> |
-            University of Southern Denmark </em> | Odense, Denmark
-          </p>
-          <br>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Young Mathematicians in Operator Algebras</span>
+              <span class="cv-entry-date">Mar 24 - 28, 2025</span>
+            </div>
+            <div class="cv-entry-subtitle">Indian Statistical Institute, Delhi, India</div>
+          </div>
 
-          <p>Mar 24 - Mar 28, 2025<em> |
-              Young Mathematicians in Operator Algebras |
-              Indian Statistical Institute, Delhi, India </em> | Place: Stat-Math Unit, ISI Delhi.
-          </p>
-          <br>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title"><a href="https://sites.google.com/view/coart-2025iitb/home" target="_blank">Conference on Operator Algebra and Related Topics (COART) - 2025</a></span>
+              <span class="cv-entry-date">Feb 24 - 28, 2025</span>
+            </div>
+            <div class="cv-entry-subtitle">IIT Bombay, India</div>
+          </div>
 
-          <p>Feb 24 - Feb 28, 2025<em> |
-              <a href="https://sites.google.com/view/coart-2025iitb/home" target="_blank">Conference on Operator Algebra
-                and Related Topics (COART) - 2025</a> |
-              Indian Institute of Technology Bombay, India </em> | Place: Victor Menezes Convention Centre (VMCC), IIT
-            Bombay
-          </p>
-          <br>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title"><a href="https://www.isibang.ac.in/~jay/NC/NC.html" target="_blank">Noncommutative Mathematics and Applications (NCMA)</a></span>
+              <span class="cv-entry-date">Oct 24 - 26, 2024</span>
+            </div>
+            <div class="cv-entry-subtitle">Indian Statistical Institute, Bangalore, India</div>
+          </div>
 
-          <p>Oct 24 - 26, 2024<em> |
-              <a href="https://www.isibang.ac.in/~jay/NC/NC.html" target="_blank">Noncommutative Mathematics and
-                Applications (NCMA)</a> |
-              Indian Statistical Institute, Bangalore, India </em> | Place: Stat-Math Unit, ISI Bangalore.
-          </p>
-          <br>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title"><a href="https://sites.google.com/view/ymoa/home" target="_blank">Young Mathematicians in Operator Algebras</a></span>
+              <span class="cv-entry-date">Feb 26 - Mar 02, 2024</span>
+            </div>
+            <div class="cv-entry-subtitle">Indian Statistical Institute, Delhi, India</div>
+          </div>
 
-          <p>Feb 26 - Mar 02, 2024<em> |
-              <a href="https://sites.google.com/view/ymoa/home" target="_blank">Young Mathematicians in Operator
-                Algebras</a> |
-              Indian Statistical Institute, Delhi, India </em> | Place: Stat-Math Unit, ISI Delhi.
-          </p>
-          <br>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title"><a href="https://sites.google.com/view/icsat-23/" target="_blank">International Conference on Spectral and Approximation Theory</a></span>
+              <span class="cv-entry-date">Nov 27 - 30, 2023</span>
+            </div>
+            <div class="cv-entry-subtitle">Cochin University of Science and Technology, Kerala, India</div>
+          </div>
 
-          <p>Nov 27 - 30, 2023<em> |
-              <a href="https://sites.google.com/view/icsat-23/" target="_blank">International Conference on Spectral and
-                Approximation Theory</a> |
-              Cochin University of Science and Technology, Kerala, India </em> | Place: Dept. of Math, Cochin University
-            of Science And Technology
-          </p>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title"><a href="https://sites.google.com/view/cfart-2023-iitb/" target="_blank">Conference on Functional Analysis and Related Topics-2023</a></span>
+              <span class="cv-entry-date">Feb 21 - 25, 2023</span>
+            </div>
+            <div class="cv-entry-subtitle">IIT Bombay, India</div>
+          </div>
 
-          <br>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title"><a href="https://www.icts.res.in/program/ETDS2022" target="_blank">Ergodic Theory and Dynamical Systems</a></span>
+              <span class="cv-entry-date">Dec 05 - 16, 2022</span>
+            </div>
+            <div class="cv-entry-subtitle">International Centre for Theoretical Sciences, Bangalore, India</div>
+          </div>
 
-          <p>Feb 21 - 25, 2023<em> |
-              <a href="https://sites.google.com/view/cfart-2023-iitb/" target="_blank">Conference on Functional Analysis
-                and Related Topics-2023</a> |
-              Indian Institute of Technology Bombay, India </em> | Place: Victor Menezes Convention Centre (VMCC), IIT
-            Bombay
-          </p>
-
-          <br>
-
-          <p>Dec 05 - 16, 2022<em> |
-              <a href="https://www.icts.res.in/program/ETDS2022" target="_blank">Ergodic Theory and Dynamical
-                Systems</a> |
-              International Centre for Theoretical Sciences, Bangalore, India </em> | Place: Ramanujan Lecture Hall
-            (ICTS) and Online
-          </p>
-
-          <br>
-
-          <p>Aug 29 - Sep 02, 2022<em> |
-              <a href="https://www.impan.pl/en/activities/banach-center/conferences/22-babysteps" target="_blank">Baby
-                Steps Beyond the Horizon - school for students</a> |
-              Institute of Mathematics Polish Academy of Sciences, Warszawa, Poland </em> | Place: Online
-          </p>
-
-          <br>
-
-          <p>Aug 04 - 06, 2022<em> |
-              <a href="https://www.niser.ac.in/etvna/" target="_blank">A Conference on Ergodic Theory and von-Neumann
-                Algebra</a> |
-              National Institute of Science Education and Research, Odisha, India </em> | Place: Online
-          </p>
-
-          <br>
-
-          <p>Jun 01 - 12, 2022<em> |
-              <a href="https://ifcam.sciencesconf.org/" target="_blank">IFCAM Summer School - Mathematical Aspects of
-                Quantum Mechanics</a> |
-              Indian Institute of Science, Bangalore, India </em> | Place: Math Dept., IISc
-          </p>
-
-          <br>
-
-          <p>May, 2022<em> |
-              <a href="https://www.atmschools.org/school/2022/AIS/ala" target="_blank">Advanced Instructional School -
-                Advanced Linear Algebra</a> |
-              Indian Statistical Institute, Bangalore, India </em> | Place: Stat-Math Unit, ISI
-          </p>
-
-          <br>
-
-          <p>Jan 17 - 20, 2022<em> |
-              <a href="https://www.isibang.ac.in/~statmath/conferences/QPIDA-2022.html" target="_blank">Conference on
-                Quantum Probability and Infinite Dimensional Analysis</a> |
-              Indian Statistical Institute, Bangalore, India </em> | Place: Stat-Math Unit, ISI
-          </p>
-
-          <br>
-
-          <p>Nov 2021<em> |
-              <a href="https://drive.google.com/file/d/1FYd-6j_hwOMfc2Z9NIQiv2ZqSnF859J4/view" target="_blank">IWM Mini
-                Course on Approximate Solutions of Operator Equations and Eigenvalue Prob-
-                lems</a> |
-              Organiser: <a href="https://sites.google.com/site/iwmmath/">Indian Women and Mathematics</a> </em> |
-            Place: Online
-          </p>
-
-          <br>
-
-          <p>Sep, 2020<em> |
-              Online Workshop on Algebraic Number Theory |
-              Assam University, Assam, India </em> | Place: Online
-          </p>
-
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title"><a href="https://www.impan.pl/en/activities/banach-center/conferences/22-babysteps" target="_blank">Baby Steps Beyond the Horizon</a></span>
+              <span class="cv-entry-date">Aug 29 - Sep 02, 2022</span>
+            </div>
+            <div class="cv-entry-subtitle">Institute of Mathematics Polish Academy of Sciences, Warszawa, Poland (Online)</div>
+          </div>
         </section>
 
         <section>
-          <h1>Teaching Experiences</h1>
+          <h1>Teaching Experience</h1>
 
-          <p>Jan 01 - Apr 15, 2025 <em>| Teaching Assistant, Indian Statistical Institute |</em>
-            <a href="{{ url_for('teaching.optimization_even2025') }}" target="_blank">Optimization (B. Math. III)</a>
-            <em>| Instructure:</em> Soumyashant Nayak
-          </p>
+          <!-- IIT Kanpur -->
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Teaching Assistant: <a href="{{ url_for('teaching.mth111m_26_27') }}" target="_blank">Calculus I (MTH111M)</a></span>
+              <span class="cv-entry-date">Jul 2026 - Present</span>
+            </div>
+            <div class="cv-entry-subtitle">Indian Institute of Technology Kanpur | Instructors: Prof. Amit Kuber & Prof. Vikramjeet Singh Chandel</div>
+          </div>
 
-          <br>
+          <!-- ISI -->
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Teaching Assistant: <a href="{{ url_for('teaching.optimization_even2025') }}" target="_blank">Optimization (BMAT3)</a></span>
+              <span class="cv-entry-date">Jan 2025 - Apr 2025</span>
+            </div>
+            <div class="cv-entry-subtitle">Indian Statistical Institute | Instructor: Prof. Soumyashant Nayak</div>
+          </div>
 
-          <p>Jan 2024 - Present <em>| Teaching Assistant, Indian Statistical Institute |</em>
-            <a href="{{ url_for('teaching.course_harmonic_even2024') }}" target="_blank">A Course in Harmonic Analysis
-              (B. Math III)</a>
-            <em>| Instructure:</em> Soumyashant Nayak
-          </p>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Lecturer: <a href="{{ url_for('teaching.intro_to_cp_even_2024') }}" target="_blank">Workshop on Completely Positive Maps</a></span>
+              <span class="cv-entry-date">Jan 2024 - Jun 2024</span>
+            </div>
+            <div class="cv-entry-subtitle">Indian Statistical Institute | Co-lecturers: Gahin Maiti, Prof. Soumyashant Nayak</div>
+          </div>
 
-          <br>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Teaching Assistant: <a href="{{ url_for('teaching.course_harmonic_even2024') }}" target="_blank">A Course in Harmonic Analysis (BMAT3)</a></span>
+              <span class="cv-entry-date">Jan 2024 - Apr 2024</span>
+            </div>
+            <div class="cv-entry-subtitle">Indian Statistical Institute | Instructor: Prof. Soumyashant Nayak</div>
+          </div>
 
-          <p>Aug 01 - Nov 25, 2023 <em>| Teaching Assistant, Indian Statistical Institute |</em>
-            <a href="{{ url_for('teaching.anal_several_vars_odd_2023_ta') }}" target="_blank">Analysis of Several
-              Variables (B. Math II)</a>
-            <em>| Instructure:</em> Mathew Joseph
-          </p>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Teaching Assistant: <a href="{{ url_for('teaching.anal_several_vars_odd_2023_ta') }}" target="_blank">Analysis of Several Variables (BMAT2)</a></span>
+              <span class="cv-entry-date">Aug 2023 - Nov 2023</span>
+            </div>
+            <div class="cv-entry-subtitle">Indian Statistical Institute | Instructor: Prof. Mathew Joseph</div>
+          </div>
+          
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Teaching Assistant: <a href="{{ url_for('teaching.comp_anal_odd_sem_2022_ta') }}" target="_blank">Complex Analysis I (BMAT3)</a></span>
+              <span class="cv-entry-date">Aug 2022 - Nov 2022</span>
+            </div>
+            <div class="cv-entry-subtitle">Indian Statistical Institute | Instructor: Prof. Mathew Joseph</div>
+          </div>
 
-          <br>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Teaching Assistant: <a href="{{ url_for('teaching.func_anal_even_sem_2021_ta') }}" target="_blank">Functional Analysis (MMAT1)</a></span>
+              <span class="cv-entry-date">Jan 2022 - Apr 2022</span>
+            </div>
+            <div class="cv-entry-subtitle">Indian Statistical Institute | Instructor: Prof. Soumyashant Nayak</div>
+          </div>
 
-          <p>Aug 2022 - Nov 2022 <em>| Teaching Assistant, Indian Statistical Institute |</em>
-            <a href="{{ url_for('teaching.comp_anal_odd_sem_2022_ta') }}" target="_blank">Complex Analysis I (B. Math
-              III)</a>
-            <em>| Instructure:</em> Mathew Joseph
-          </p>
-
-          <br>
-
-          <p>Jan 2022 - Apr 2022 <em>| Teaching Assistant, Indian Statistical Institute |</em>
-            <a href="{{ url_for('teaching.func_anal_even_sem_2021_ta') }}" target="_blank">Functional Analysis (M. Math
-              I)</a>
-            <em>| Instructure:</em> Soumyashant Nayak
-          </p>
-
-          <br>
-
-          <p>Sep 21 - Dec 23, 2021 <em>| Teaching Assistant, Indian Statistical Institute |</em>
-            <a href="{{ url_for('teaching.optimization_odd_sem_2021_ta') }}" target="_blank">Optimization (B. Math
-              II)</a>
-            <em>| Instructure:</em> Soumyashant Nayak
-          </p>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title">Teaching Assistant: <a href="{{ url_for('teaching.optimization_odd_sem_2021_ta') }}" target="_blank">Optimization (BMAT2)</a></span>
+              <span class="cv-entry-date">Sep 2021 - Dec 2021</span>
+            </div>
+            <div class="cv-entry-subtitle">Indian Statistical Institute | Instructor: Prof. Soumyashant Nayak</div>
+          </div>
         </section>
 
         <section>
           <h1>Technical Skills</h1>
           <ul class="skill-set">
-            <li>Python (Flask, SQLAlchemy, Cryptography, Pandas, Matplotlib, NumPy)</li>
-            <li>Web Development (HTML, CSS, Bootstrap, JavaScript, Jinja2)</li>
-            <li>Database Design and Management (MySQL, SQLite)</li>
-            <li>REST API Development (Flask-RESTful, Flasgger)</li>
-            <li>Data Analysis and Visualization</li>
-            <li>End-to-End Encryption and Secure Authentication</li>
-            <li>Version Control (Git, GitHub)</li>
-            <li>LaTeX (Academic and Scientific Writing)</li>
-            <li>Basic C Programming</li>
+            <li>Python (Flask, Pandas, NumPy, SQLAlchemy)</li>
+            <li>Web Development (HTML, CSS, Bootstrap, JS)</li>
+            <li>Databases (MySQL, SQLite)</li>
+            <li>REST API Development</li>
+            <li>Encryption & Cryptography</li>
+            <li>Version Control (Git)</li>
+            <li>LaTeX</li>
           </ul>
         </section>
 
         <section>
-          <h1>Software Projects and Development Work</h1>
-          <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6;">
+          <h1>Software Projects</h1>
+          <div class="cv-entry">
+            <div class="cv-entry-title"><a href="https://github.com/indrajit912/Hermes" target="_blank">Hermes</a></div>
+            <p>A secure API for sending emails from applications without setting up your own mail server. Features personal API keys and Admin approval workflows.</p>
+            <p><small class="text-muted">Tech Stack: Python, Flask, SQLAlchemy</small></p>
+          </div>
 
-            <p>
-              <strong><a href="https://github.com/indrajit912/Hermes" target="_blank">Hermes</a></strong> — A free, secure, and developer-friendly API for sending emails from your applications.
-It simplifies email automation by providing personal API keys, EmailBot management, and admin approval workflows—no need to set up your own mail server.
-            <br><em>Tech Stack:</em> Python, Flask, SQLAlchemy.
-            </p>
+          <div class="cv-entry">
+            <div class="cv-entry-title"><a href="https://github.com/indrajit912/Slotify" target="_blank">Slotify</a></div>
+            <p>A web app for hostel washing machine slot booking with role-based access and visual slot management.</p>
+            <p><small class="text-muted">Tech Stack: Flask, SQLAlchemy, Bootstrap</small></p>
+          </div>
 
-            <p>
-              <strong><a href="https://github.com/indrajit912/Slotify" target="_blank">Slotify</a></strong> — A Flask-based web app for hostel washing machine slot booking with role-based access, admin dashboards, email verification, and visual slot management.
-              <br><em>Tech Stack:</em> Flask, SQLAlchemy, Bootstrap, Flasgger.
-            </p>
-
-            <p>
-              <strong><a href="https://github.com/indrajit912/VaultSafe" target="_blank">VaultSafe</a></strong> — A secure and user-friendly command-line application to manage credentials with state-of-the-art encryption algorithms. It ensures end-to-end protection of sensitive information through robust cryptographic design.
-              <br><em>Tech Stack:</em> Python, Cryptography, Command-Line Interface (CLI).
-            </p>
-
-            <p>
-              <strong><a href="https://github.com/indrajit912/MindCanvas" target="_blank">MindCanvas</a></strong> — A Flask-based encrypted journaling app allowing users to securely record daily thoughts and experiences. Features include encrypted entries, tagging, keyword search, LaTeX support, and data export/import.
-              <br><em>Tech Stack:</em> Flask, SQLAlchemy, Cryptography, Bootstrap, Jinja2.
-            </p>
-
+          <div class="cv-entry">
+            <div class="cv-entry-title"><a href="https://github.com/indrajit912/VaultSafe" target="_blank">VaultSafe</a></div>
+            <p>A secure CLI application to manage credentials with state-of-the-art encryption algorithms.</p>
+            <p><small class="text-muted">Tech Stack: Python, Cryptography</small></p>
+          </div>
+          
+          <div class="cv-entry">
+            <div class="cv-entry-title"><a href="https://github.com/indrajit912/MindCanvas" target="_blank">MindCanvas</a></div>
+            <p>An encrypted journaling app with tagging, LaTeX support, and search capabilities.</p>
+            <p><small class="text-muted">Tech Stack: Flask, SQLAlchemy, Cryptography</small></p>
           </div>
         </section>
 
-        <section>
-          <h1>Personal Interests</h1>
-          <ul class="skill-set">
-            <li>Reading</li>
-            <li>Coding and Open Source Development</li>
-            <li>Collecting Books</li>
-            <li>Badminton</li>
-            <li>Table Tennis</li>
-          </ul>
-        </section>
-
-        <!-- <section>
-          <h1>References</h1>
-          <p>Prof. Soumyashant Nayak | <em>SMU, Indian Statistical Institute Bangalore | Assistant Professor</em></p>
-          <p>Office: A-14 | soumyashant@isibang.ac.com</p>
-
-          <br>
-
-          <p>Prof. B. V. Rajaram Bhat | <em>SMU, Indian Statistical Institute Bangalore | Professor</em></p>
-          <p> | bvrajaramabhat@gmail.com</p>
-
-          <br>
-
-          <p>Prof. Jaydeb Sarkar | <em>SMU, Indian Statistical Institute Bangalore | Professor</em></p>
-          <p> | jaydeb@gmail.com</p>
-
-          <br>
-
-
-          <p>Prof. Atasi Deb Ray | <em>Dept. Of Pure Math, University of Calcutta | Associate Professor</em></p>
-          <p>Kolkata | adrpm@caluniv.ac.in</p>
-
-          <br>
-
-          <p>Prof. Nisith Chandra Das | <em>Dept. Of Math, Barasat Govt. College | HOD, Associate Professor</em></p>
-          <p>(+91) 9830-156147 | dasnisith@gmail.com</p>
-        </section> -->
-
       </div>
-
     </div>
-
   </div>
 
-  <!-- MathJax congigauration -->
   <script type="text/x-mathjax-config">
           MathJax.Hub.Config({
               tex2jax: {
@@ -504,8 +452,6 @@ It simplifies email automation by providing personal API keys, EmailBot manageme
                   processClass: "mathjax"
               }
           });
-        </script>
-
+  </script>
 </body>
-
 </html>

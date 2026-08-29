@@ -1,172 +1,210 @@
-/* Styles for CV */
+/* Modern Styles for CV */
+
+:root {
+    --primary-color: #1a365d;
+    --accent-color: #3182ce;
+    --secondary-color: #2b6cb0;
+    --text-color: #334155;
+    --light-bg: #f8fafc;
+    --border-color: #e2e8f0;
+    --card-shadow: 0 4px 15px rgba(26, 54, 93, 0.05);
+}
 
 *, *:before, *:after {
- -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+    box-sizing: border-box;
 }
+
 * {
- margin: 0;
- padding: 0;
- box-sizing: border-box;
- text-decoration: none;
- font-family: "Poppins", sans-serif;
- border: none;
- outline: none;
- letter-spacing: .4px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
 }
   
-  html
-  {
-      font-size:100%;
-  }
+body {
+    -webkit-font-smoothing: antialiased;
+    color: var(--text-color);
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    background-color: #ffffff;
+}
+
+h1 {
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+a {
+    color: var(--secondary-color);
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+/* Layout */
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+}
   
-  body
-  {
-      -webkit-font-smoothing:antialiased;
-      color:#333332;
-      font-size:18px;
-      font-weight:400;
-      line-height:1.4;
-      text-rendering:optimizeLegibility;
-  }
+.left {
+    background-color: var(--light-bg);
+    border-right: 1px solid var(--border-color);
+    width: 32%;
+    position: fixed;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
   
-  .skill-set li:hover
-  {
-      background:#3498db;
-  }
+.right {
+    margin-left: 32%;
+    width: 68%;
+    padding: 4rem 5rem;
+}
+
+/* Profile Section */
+.name-hero {
+    text-align: center;
+}
   
-  h1
-  {
-      color:rgba(0,0,0,.75);
-  }
-  
-  .wrapper
-  {
-      height:100%;
-  }
-  
-  .left
-  {
-      background-color:rgba(0,0,0,.025);
-      border-right:1px solid rgba(0,0,0,.05);
-      float:right;
-      height:100%;
-      margin-left:-1px;
-      min-width:256px;
-      position:fixed;
-      width:33.33%;
-    
-  }
-  
-  .right
-  {
-      float:right;
-      height:100%;
-      position:relative;
-      width:66.66%;
-  }
-  
-  
-  .name-hero
-  {
-      background:rgba(0,0,0,.001);
-      bottom:0;
-      height:290px;
-      left:0;
-      margin:auto;
-      position:absolute;
-      right:0;
-      top:0;
-      width:85%;
-  }
-  
-  .me-img {
+.me-img {
     background: url("../images/profile.jpg") no-repeat center center;
     background-size: cover;
     border-radius: 50%;
-    height: 250px;
-    width: 250px;
-    margin: 0 auto;
-    position: relative;
+    height: 220px;
+    width: 220px;
+    margin: 0 auto 1.5rem auto;
+    border: 4px solid #ffffff;
+    box-shadow: var(--card-shadow);
 }
   
-  .name-hero h1
-  {
-      font-family:Open Sans, sans-serif;
-      font-size:2em;
-      text-align:center;
-  }
+.name-hero h1 {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 2.2rem;
+    border: none;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
   
-  .name-hero h1 em
-  {
-      color:rgba(0,0,0,.3);
-      font-style:normal;
-      font-weight:700;
-  }
+.name-hero h1 em {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--accent-color);
+}
   
-  .name-hero p
-  {
-      color:rgba(0,0,0,.75);
-      font-size:.90em;
-      line-height:1.5;
-      margin:0 8px 0 0;
-      text-align:center;
-  }
-  
-  .name-hero .name-text
-  {
-      margin:0 auto;
-      width:85%;
-  }
-  
-  .inner
-  {
-      margin:0 auto;
-      max-width:975px;
-      padding:3em;
-  }
-  
-  .inner h1
-  {
-      font-size:1.75em;
-  }
-  
-  .inner p
-  {
-      color:rgba(0,0,0,.5);
-  }
-  
-  .inner p em
-  {
-      color:rgba(0,0,0,1);
-      font-style:normal;
-  }
-  
-  .inner section
-  {
-      margin:100px auto;
-  }
-  
-  ul
-  {
-      list-style-type:none;
-      margin-top:-10px;
-      max-width:570px;
-      padding:0;
-  }
-  
-  .skill-set li
-  {
-      background:rgba(0,0,0,.75);
-      border-radius:5px;
-      color:#FFF;
-      display:inline-block;
-      list-style:none;
-      margin:15px 15px 0 0;
-      padding:10px;
-      text-align:justify;
-  }
+.name-hero p {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 0.3rem;
+}
 
-  /* Twitter X icon */
+.name-hero .social-links {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.name-hero .social-links a {
+    color: #64748b;
+    font-size: 1.2rem;
+}
+
+.name-hero .social-links a:hover {
+    color: var(--accent-color);
+}
+  
+/* Content Sections */
+.inner section {
+    margin-bottom: 3.5rem;
+}
+
+.inner p {
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.inner p em {
+    color: var(--primary-color);
+    font-style: normal;
+    font-weight: 600;
+}
+
+/* Entries */
+.cv-entry {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.cv-entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.3rem;
+}
+
+.cv-entry-title {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.cv-entry-date {
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.cv-entry-subtitle {
+    font-weight: 500;
+    color: #475569;
+    margin-bottom: 0.5rem;
+}
+
+/* Skills */
+ul.skill-set {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+  
+.skill-set li {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--primary-color);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.skill-set li:hover {
+    background: var(--light-bg);
+    border-color: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
+/* Twitter X icon */
 .fa.fa-twitter::before {
     display: inline-block;
     width: 1em;
@@ -178,27 +216,21 @@
     background-position: center 3px;
 }
   
-  @media screen and (max-width: 48em) {
-    .right, .left {
-        float: none;
-        position: relative !important;
+@media screen and (max-width: 992px) {
+    .wrapper {
+        flex-direction: column;
+    }
+    .left {
         width: 100%;
-        min-height: 500px;
+        position: relative;
+        height: auto;
+        padding: 4rem 2rem;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
     }
-    .handmade {
-        text-align: center !important;
-        margin-top: 0px !important;
-    }
-}
-
-@media screen and (max-width: 75em) {
-    body {
-        font-size: 16px;
-    }
-}
-
-@media screen and (max-width: 60em) {
-    body {
-        font-size: 14px;
+    .right {
+        margin-left: 0;
+        width: 100%;
+        padding: 3rem 2rem;
     }
 }

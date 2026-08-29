@@ -333,15 +333,19 @@ li {
     }
 
     .profile-icons {
-        gap: 0.8rem;
+        gap: 0.4rem;
+        flex-wrap: nowrap;
+        overflow-x: auto; /* Just in case it's extremely small */
+        padding-bottom: 0.5rem; /* For scrollbar if needed */
     }
 
     .profile-icons a {
-        padding: 6px;
+        padding: 4px;
+        flex-shrink: 0;
     }
 
     .profile-icons img {
-        height: 26px;
+        height: 18px;
     }
 }
 
