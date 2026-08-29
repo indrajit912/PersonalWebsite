@@ -2,6 +2,7 @@
     Research Page for the Website
     Author: Indrajit Ghosh
     Improved Layout — October 2025
+    Updated — August 2026
 -->
 
 {% extends 'base.html' %}
@@ -11,7 +12,7 @@
 {% block meta_tags %}
 {{ super() }}
 <meta name="keywords"
-    content="operator algebra, von Neumann algebra, C*-algebra, ISI Bangalore, Indrajit Ghosh research, functional analysis, quantum theory">
+    content="operator algebra, von Neumann algebra, C*-algebra, ISI Bangalore, IIT Kanpur, IIT Madras, Indrajit Ghosh research, functional analysis">
 {% endblock %}
 
 {% block styles %}
@@ -35,202 +36,121 @@
         
             <div class="profile-icons">
                 <a href="https://arxiv.org/a/ghosh_i_1.html" target="_blank" title="arXiv">
-                    <img src="{{ url_for('main.static', filename='images/arxiv-logo.png') }}"
-                         alt="arXiv">
+                    <img src="{{ url_for('main.static', filename='images/arxiv-logo.png') }}" alt="arXiv">
                 </a>
-
-            
                 <a href="https://www.researchgate.net/profile/Indrajit-Ghosh-15" target="_blank" title="ResearchGate">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/ResearchGate_icon_SVG.svg" alt="ResearchGate">
                 </a>
-            
-                <!-- <a href="https://orcid.org/0009-0007-6353-6637" target="_blank" title="ORCID">
-                    <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID">
-                </a> -->
-
                 <a href="https://mathscinet.ams.org/mathscinet/MRAuthorID/1641136" target="_blank" title="MathSciNet">
                     <img src="{{ url_for('main.static', filename='images/ams-logo.jpg') }}" alt="MathSciNet">
                 </a>
-            
                 <a href="https://scholar.google.com/citations?hl=en&user=6rwt6vAAAAAJ" target="_blank" title="Google Scholar">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg" alt="Google Scholar">
                 </a>
-
                 <a href="https://zbmath.org/authors/?q=ghosh.indrajit.1" target="_blank" title="ZbMath">
                     <img src="{{ url_for('main.static', filename='images/zbmath-logo.png') }}" alt="ZbMath">
                 </a>
             </div>
-
         </div>
 
 
         <div class="research-container">
 
             <p>
-                Operator algebras—particularly von Neumann algebras—offer a powerful framework for studying
-                infinite-dimensional linear operators, with deep connections to quantum mechanics, functional analysis,
-                and noncommutative geometry. Originally introduced by von Neumann to formalize quantum theory,
-                these algebras now play central roles in ergodic theory, quantum probability, and operator K-theory.
+                My research is broadly focused on <strong>Operator Algebras</strong> and <strong>Operator Theory</strong>. 
+                I study infinite-dimensional linear operators and algebraic structures, with a particular emphasis on von Neumann algebras, properly infinite factors, and \(C^*\)-algebras. These areas provide a robust mathematical framework that originated in the formalization of quantum mechanics and now has deep connections to functional analysis and noncommutative geometry.
             </p>
 
-            <p>
-                I recently submitted my PhD thesis titled 
-                <em>On Algebraic Aspects and Functoriality of the Set of Unbounded Operators Affiliated with a von Neumann Algebra</em> 
-                at the Theoretical Statistics and Mathematics Unit, Indian Statistical Institute, Bangalore. 
-                My work investigates algebraic structures underlying unbounded operators affiliated with von Neumann algebras 
-                and proposes a functorial framework for understanding these operators in broader categorical and analytical settings.
-            </p>
+            <h2>Research Journey</h2>
 
-            <div class="preprints-container">
-                <h2 id="publications">Publications</h2>
-                <div class="links">
-                    <a href="https://arxiv.org/a/ghosh_i_1.html" target="_blank">arXiv</a>
-                    <a href="https://www.researchgate.net/profile/Indrajit-Ghosh-15" target="_blank">ResearchGate</a>
-                    <a href="https://orcid.org/0009-0007-6353-6637" target="_blank">ORCID</a>
-                    <a href="https://scholar.google.com/citations?hl=en&user=6rwt6vAAAAAJ" target="_blank">GoogleScholar</a>
-                    <a href="https://mathscinet.ams.org/mathscinet/MRAuthorID/1641136" target="_blank">MathSciNet</a>
+            <div class="research-timeline">
+                
+                <!-- Current Position -->
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <span class="timeline-role">Institute Postdoc Fellow</span>
+                        <span class="timeline-date">Mar 2026 – Present</span>
+                    </div>
+                    <span class="timeline-inst">Indian Institute of Technology Kanpur</span>
+                    <div class="timeline-body">
+                        <p>Department of Mathematics and Statistics.</p>
+                        <p>Working with <a href="https://sites.google.com/view/keshab-bakshi/home" target="_blank">Prof. Keshab Chandra Bakshi</a>.</p>
+                    </div>
                 </div>
+
+                <!-- Postdoc Madras -->
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <span class="timeline-role">Postdoctoral Researcher</span>
+                        <span class="timeline-date">Nov 2025 – Feb 2026</span>
+                    </div>
+                    <span class="timeline-inst">Indian Institute of Technology Madras</span>
+                    <div class="timeline-body">
+                        <p>Worked with <a href="https://ioe.iitm.ac.in/people/kunal-krishna-mukherjee/" target="_blank">Prof. Kunal Krishna Mukherjee</a>.</p>
+                        <p>Research focus: <strong>Properly infinite von Neumann algebras</strong>.</p>
+                        <p>During this period, together with Prof. Mukherjee, we obtained an operator-theoretic characterization of properly infinite von Neumann algebras.</p>
+                    </div>
+                </div>
+
+                <!-- PhD -->
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <span class="timeline-role">Doctor of Philosophy</span>
+                        <span class="timeline-date">Jul 2019 – Oct 2025</span>
+                    </div>
+                    <span class="timeline-inst">Indian Statistical Institute, Bangalore</span>
+                    <div class="timeline-body">
+                        <p>Theoretical Stat-Math Unit. Thesis defended on October 15, 2025.</p>
+                        <p>Primary research interests during PhD: <strong>von Neumann algebras</strong> and <strong>affiliated operators</strong>.</p>
+                        <p>Advisor: <a href="https://www.isibang.ac.in/~soumyashant/" target="_blank">Prof. Soumyashant Nayak</a>.</p>
+                    </div>
+                </div>
+
             </div>
 
-            <ol class="reversed-list">
-                <!-- First paper (IMRN)-->
-                <li>
-                    <div class="publication-card">
-                        <span class="publication-title">
-                            Algebraic aspects and functoriality of the set of affiliated operators
-                        </span><br>
-                        <span class="publication-authors publication-size">I. Ghosh and S. Nayak</span>
-                        <div class="publication-size">
-                            <cite>International Mathematics Research Notices</cite>, Volume 2024, Issue 21, 
-                            <span class="publication-date">Nov 2024</span>, Pages 13525–13562
-                        </div>
-                        <div class="links">
-                            <a href="https://doi.org/10.1093/imrn/rnae203" target="_blank">IMRN</a>
-                            <a href="https://arxiv.org/abs/2311.16170" target="_blank">arXiv</a>
-                            <a href="https://www.researchgate.net/publication/383623934_Algebraic_aspects_and_functoriality_of_the_set_of_affiliated_operators"
-                               target="_blank">ResearchGate</a>
-                        </div>
-                    </div>
-                </li>
-                <!-- Second paper-->
-                <li>
-                    <div class="publication-card">
-                        <span class="publication-title">
-                            An Operator Theoretic Characterization of Properply Infinite von Neumann Algebras
-                        </span><br>
-                        <span class="publication-authors publication-size">I. Ghosh and K. K. Mukherjee</span>
-                        <div class="publication-size">
-                            <code>pre-print</code>, <span class="publication-date">Feb 2026</span>
-                        </div>
-                        <div class="links">
-                            <!-- <a href="#" target="_blank">arXiv</a>
-                            <a href="#"
-                               target="_blank">ResearchGate</a> -->
-                        </div>
-                    </div>
-                </li>
-                <!-- Third paper-->
-                <li>
-                    <div class="publication-card">
-                        <span class="publication-title">
-                            A Complete Characterization of Regular Inclusions of Finite Dimensional \(C^*\)-algebras 
-                        </span><br>
-                        <span class="publication-authors publication-size">K. C. Bakshi, I. Ghosh and S. Kumar</span>
-                        <div class="publication-size">
-                            <code>pre-print</code>, <span class="publication-date">Aug 2026</span>
-                        </div>
-                        <div class="links">
-                            <a href="https://arxiv.org/abs/2608.04572" target="_blank">arXiv</a>
-                            <!-- <a href="#"
-                               target="_blank">ResearchGate
-                            </a> -->
-                        </div>
-                    </div>
-                </li>
+            <div class="continuous-pub-wrapper">
 
-                <!-- Fourth paper-->
-                <li>
-                    <div class="publication-card">
-                        <span class="publication-title">
-                            A Complete Characterization of Cartan Inclusions of Finite Dimensional \(C^*\)-algebras 
-                        </span><br>
-                        <span class="publication-authors publication-size">I. Ghosh and S. Kumar</span>
-                        <div class="publication-size">
-                            <code>pre-print</code>, <span class="publication-date">Aug 2026</span>
-                        </div>
-                        <div class="links">
-                            <a href="https://arxiv.org/abs/2608.11711" target="_blank">arXiv</a>
-                            <!-- <a href="#"
-                               target="_blank">ResearchGate
-                            </a> -->
-                        </div>
-                    </div>
-                </li>
-            </ol>
-
-            
-            <div class="preprints-container" id="thesis">
-                <h2 class="scrollspy">PhD Thesis</h2>
-                <div class="links">
-                    <a href="{{ isi_thesis_link }}" target="_blank">ISI</a>
-                    <a href="{{ thesis_link }}" target="_blank">PDF</a>
-                    <a href="javascript:void(0)" onclick="document.getElementById('checksum-box').classList.toggle('d-none')">SHA-256</a>
-                    <a href="{{ thesis_sig_link }}" target="_blank">GPG Sign</a>
-                    <a href="javascript:void(0)" onclick="document.getElementById('verify-instructions').classList.toggle('d-none')">Verify Sign</a>
-                </div>
-            </div>
-            <div class="thesis-entry">
-            
-                <div class="thesis-header">
-    <h3 class="publication-title mb-1">
-        On Algebraic Aspects and Functoriality of the Set of Unbounded Operators Affiliated with a von Neumann Algebra
-    </h3>
-    <p class="publication-size mb-2">
-        <strong>PhD Thesis</strong>, Indian Statistical Institute, Bangalore<br>
-        Advisor: <a href="https://www.isibang.ac.in/~soumyashant/" target="_blank">Prof. Soumyashant Nayak</a><br>
-        <small class="text-muted">
-            Submitted: May 19, 2025 &nbsp;&bull;&nbsp; Defended: Oct 15, 2025 &nbsp;&bull;&nbsp; Awarded: Feb 17, 2026
-        </small>
-    </p>
-</div>
-
-            
-                <!-- Hidden content -->
-                <div id="checksum-box" class="d-none" style="margin-top: 5px;">
-                    <code class="checksum-value">{{ thesis_sha256sum }}</code>
-                </div>
-            
-                <div id="verify-instructions" class="d-none" style="margin-top: 5px;">
-                    <ol class="publication-size">
-                        <li>Download both the <strong>PDF</strong> and its <strong>GPG signature</strong>.</li>
-                        <li>Import my public key from <a href="{{ url_for('main.gpgkey') }}" target="_blank">here</a>: 
-                            <code>gpg --import indrajit_gpg_public_key.asc</code>
-                        </li>
-                        <li>Verify the signature:
-                            <code>gpg --verify "Indrajit_Ghosh_PhD_Thesis_2025.pdf.asc" "Indrajit_Ghosh_PhD_Thesis_2025.pdf"</code>
-                        </li>
-                        <li>Optionally, check file integrity:
-                            <code>sha256sum Indrajit_Ghosh_PhD_Thesis_2025.pdf</code>
-                        </li>
+                <!-- Oldest: Publications -->
+                <div>
+                    <h2>Publications</h2>
+                    <ol class="continuous-pub-list">
+                        {% include '_publications.html' %}
                     </ol>
                 </div>
-            
+
+                <!-- Middle: Preprints -->
+                <div>
+                    <h2>Preprints</h2>
+                    <ol class="continuous-pub-list">
+                        {% include '_preprints.html' %}
+                    </ol>
+                </div>
+
+                <!-- Newest: Ongoing Work -->
+                <div>
+                    <h2>Ongoing Work</h2>
+                    <ol class="continuous-pub-list">
+                        {% include '_ongoing_work.html' %}
+                    </ol>
+                </div>
+
             </div>
-
             
-
+            <br>
+            
             <h2>Doctoral Research</h2>
             <p>
+                During my PhD, I developed a <strong>generalization of Murray–von Neumann affiliated operators for a general von Neumann algebra</strong>.
+            </p>
+            <p>
                 The classical notion of affiliated operators with a von
-                Neumann algebra—in the sense of Murray and von Neumann—has long been studied in the literature (see <a
-                    href="#MvN-I">[R36, 37, 40, 43]</a>, <a href="#kr_i">[R97]</a>, <a href="#kadison_liu_2014">[R14]</a>). However, these constructions lack
+                Neumann algebra—in the sense of Murray and von Neumann—has long been studied in the literature. However, these constructions lack
                 a fully satisfactory algebraic formulation, especially for general von Neumann algebras and independent
                 of Hilbert space representations.
             </p>
 
             <p>
-                In joint work with <a href="https://www.isibang.ac.in/~soumyashant/" target="_blank">Prof. Soumyashant
-                    Nayak</a> <a href="#ghosh_nayak_2024">[R24]</a>, I introduced a new class of unbounded operators
+                In joint work with <a href="https://www.isibang.ac.in/~soumyashant/" target="_blank">Prof. Soumyashant Nayak</a>, I introduced a new class of unbounded operators
                 denoted \( \mathscr{M}_{\mathrm{aff}} \), defined for a von Neumann algebra \( \mathscr{M} \subseteq
                 \mathcal{B}(\mathcal{H}) \) as the set of operators expressible as quotients \( T = AB^\dagger \) where
                 \( A, B \in \mathscr{M} \) and the null space of \( B \) is contained in that of \( A \). The Kaufman
@@ -256,19 +176,58 @@
                     and similarly for Krein extensions.</li>
             </ul>
             </p>
+            
+            <!-- Thesis box section -->
+            <div class="preprints-container" id="thesis" style="margin-top: 2rem;">
+                <h2 class="scrollspy" style="margin-top: 0;">PhD Thesis</h2>
+                <div class="links">
+                    <a href="{{ isi_thesis_link }}" target="_blank">ISI</a>
+                    <a href="{{ thesis_link }}" target="_blank">PDF</a>
+                    <a href="javascript:void(0)" onclick="document.getElementById('checksum-box').classList.toggle('d-none')">SHA-256</a>
+                    <a href="{{ thesis_sig_link }}" target="_blank">GPG Sign</a>
+                    <a href="javascript:void(0)" onclick="document.getElementById('verify-instructions').classList.toggle('d-none')">Verify Sign</a>
+                </div>
+            </div>
+            
+            <div class="thesis-entry">
+                <div class="thesis-header">
+                    <h3 class="publication-title mb-1">
+                        On Algebraic Aspects and Functoriality of the Set of Unbounded Operators Affiliated with a von Neumann Algebra
+                    </h3>
+                    <p class="publication-size mb-2">
+                        <strong>PhD Thesis</strong>, Indian Statistical Institute, Bangalore<br>
+                        Advisor: <a href="https://www.isibang.ac.in/~soumyashant/" target="_blank">Prof. Soumyashant Nayak</a><br>
+                        <small class="text-muted">
+                            Defended: Oct 15, 2025 &nbsp;&bull;&nbsp; Awarded: Feb 17, 2026
+                        </small>
+                    </p>
+                </div>
+            
+                <!-- Hidden content -->
+                <div id="checksum-box" class="d-none" style="margin-top: 5px;">
+                    <code class="checksum-value">{{ thesis_sha256sum }}</code>
+                </div>
+            
+                <div id="verify-instructions" class="d-none" style="margin-top: 5px;">
+                    <ol class="publication-size">
+                        <li>Download both the <strong>PDF</strong> and its <strong>GPG signature</strong>.</li>
+                        <li>Import my public key from <a href="{{ url_for('main.gpgkey') }}" target="_blank">here</a>: 
+                            <code>gpg --import indrajit_gpg_public_key.asc</code>
+                        </li>
+                        <li>Verify the signature:
+                            <code>gpg --verify "Indrajit_Ghosh_PhD_Thesis_2025.pdf.asc" "Indrajit_Ghosh_PhD_Thesis_2025.pdf"</code>
+                        </li>
+                        <li>Optionally, check file integrity:
+                            <code>sha256sum Indrajit_Ghosh_PhD_Thesis_2025.pdf</code>
+                        </li>
+                    </ol>
+                </div>
+            </div>
 
-            <p>
-                These results were published in <em>International Mathematics Research Notices</em> <a
-                    href="#ghosh_nayak_2024">[R24]</a>.
-            </p>
-
-            <br>
-
-            <h2>References</h2>
-            {% include '_references.html' %}
+            <!-- Removed References section from the old block as it pertained specifically to the thesis description and was outdated. The doctoral research section was condensed. -->
         </div>
     </div>
 </section>
 
-<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Aug 11, 2026</p>
+<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Aug 29, 2026</p>
 {% endblock %}

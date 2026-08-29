@@ -384,3 +384,184 @@ li {
     color: var(--primary-color);
     font-weight: 600;
 }
+/* -------------------------------
+   Research Timeline
+--------------------------------*/
+.research-timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 2rem 0 3rem 0;
+    padding-left: 2rem;
+    border-left: 3px solid var(--border-color);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.75rem;
+    top: 0.25rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    border: 3px solid #ffffff;
+    box-shadow: 0 0 0 2px var(--border-color);
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-role {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.timeline-date {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    background: var(--light-bg);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.timeline-inst {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-dark-variant);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.timeline-body p {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.timeline-body p:last-child {
+    margin-bottom: 0;
+}
+
+/* -------------------------------
+   Abstract Toggle
+--------------------------------*/
+details.abstract-details {
+    margin-top: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: #f8fafc;
+    overflow: hidden;
+}
+
+details.abstract-details summary {
+    padding: 0.6rem 1rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+details.abstract-details summary:hover {
+    background: #edf2f7;
+}
+
+details.abstract-details summary::before {
+    content: '▶';
+    display: inline-block;
+    margin-right: 0.5rem;
+    font-size: 0.7rem;
+    transition: transform 0.2s ease;
+}
+
+details.abstract-details[open] summary::before {
+    transform: rotate(90deg);
+}
+
+details.abstract-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.abstract-content {
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.95rem;
+    color: #475569;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.ongoing-badge {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+/* -------------------------------
+   Continuous Auto-Numbering Publications
+--------------------------------*/
+.continuous-pub-wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    counter-reset: global-pub-counter 0;
+}
+
+.continuous-pub-list {
+    display: flex;
+    flex-direction: column-reverse;
+    padding-left: 0;
+    margin-bottom: 2rem;
+}
+
+.continuous-pub-list li {
+    list-style: none;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 2rem;
+}
+
+.continuous-pub-list li::before {
+    counter-increment: global-pub-counter;
+    content: counter(global-pub-counter) ".";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent-color);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* -------------------------------
+   User Name Highlight
+--------------------------------*/
+.my-name {
+    font-weight: 800;
+    font-family: "Georgia", serif;
+    color: var(--accent-color);
+}
