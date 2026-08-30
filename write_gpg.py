@@ -1,4 +1,6 @@
-<!-- gpgkey.html -->
+import sys
+
+new_content = '''<!-- gpgkey.html -->
 {% extends 'base.html' %}
 
 {% block title %}GPG Key{% endblock %}
@@ -275,3 +277,7 @@
     }
 </script>
 {% endblock %}
+'''
+
+with open(r'C:\Users\indra\Documents\hello_world\PersonalWebsite\app\main\templates\gpgkey.html', 'w', encoding='utf-8') as f:
+    f.write(new_content)

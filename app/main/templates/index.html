@@ -110,4 +110,7 @@
 </section>
 <!-- About Section End -->
 
+{% endblock %}{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('main.static', filename='js/index_effects.js') }}"></script>
 {% endblock %}
