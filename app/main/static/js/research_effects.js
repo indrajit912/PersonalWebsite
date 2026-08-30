@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // 1. Equations specifically from your research
+    // 1. Equations specifically from my research
     const equations = [
         String.raw`\(\mathrm{d}_{\textrm{KK}}(u\Delta u^*,v\Delta v^*)=\sin\alpha(u\Delta u^*,v\Delta v^*)\)`,
         String.raw`\(e^u e^v = (u\otimes\bar{u}) \left(e^{\mathbb{I}_n}e^{u^*v}\right) (u\otimes\bar{u})^*\)`,
@@ -20,8 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
         String.raw`\(\Phi_{\textrm{aff}}(S^{\textbf{Fr}})=\Phi_{\textrm{aff}}(S)^{\textbf{Fr}}\)`,
         String.raw`\(\sum_{i=1}^{l} \Lambda_{ij} \leq 1\)`,
         String.raw`\(P_{\vec{n}}^{\vec{d}}(x_1, x_2, \dots, x_l) := \prod_{j=1}^k \left( x_1^{d_j} + x_2^{d_j} + \dots + x_l^{d_j} \right)\)`,
-        // String.raw`\(u = \begin{pmatrix} \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} & -\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{6}} \\ \frac{1}{\sqrt{3}} & 0 & -\frac{2}{\sqrt{6}} \end{pmatrix}\)`,
-
         String.raw`\(\mathscr{M}_{\textrm{aff}}^{\textrm{MvN}} = \mathscr{M}_{\textrm{aff}}^{c}\)`,
         String.raw`\(\Phi_{\textrm{aff}}(T_1 + T_2) = \Phi_{\textrm{aff}}(T_1) + \Phi_{\textrm{aff}}(T_2)\)`,
         String.raw`\(\Phi_{\textrm{aff}}(T_1 T_2) = \Phi_{\textrm{aff}}(T_1) \Phi_{\textrm{aff}}(T_2)\)`,
