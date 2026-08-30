@@ -810,3 +810,43 @@ a.back-to-top {
 }
 
 /* ........................ End Footer Section ...................... */
+/* -------------------------------
+   Mathematical Background Elements
+--------------------------------*/
+#math-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.math-symbol {
+    position: absolute;
+    color: var(--accent-color, #2c3e50);
+    opacity: 0;
+    font-family: "Georgia", "Times New Roman", serif;
+    user-select: none;
+    animation: floatMath linear infinite;
+    transform: translateY(130vh); 
+}
+
+@keyframes floatMath {
+    0% {
+        transform: translateY(130vh) rotate(-2deg) scale(0.9);
+        opacity: 0;
+    }
+    10% {
+        opacity: var(--math-opacity, 0.22);
+    }
+    90% {
+        opacity: var(--math-opacity, 0.22);
+    }
+    100% {
+        transform: translateY(-20vh) rotate(2deg) scale(1.1);
+        opacity: 0;
+    }
+}

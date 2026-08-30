@@ -245,3 +245,7 @@
 </section>
 
 {% endblock %}
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('teaching.static', filename='js/teaching_effects.js') }}"></script>
+{% endblock %}

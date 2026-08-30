@@ -109,3 +109,7 @@
 <p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: May 07, 2024</p>
 
 {% endblock %}
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('teaching.static', filename='js/teaching_effects.js') }}"></script>
+{% endblock %}
