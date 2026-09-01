@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Equations specifically from my research
     const equations = [
-        String.raw`\(\mathrm{d}_{\textrm{KK}}(u\Delta u^*,v\Delta v^*)=\sin\alpha(u\Delta u^*,v\Delta v^*)\)`,
+        // String.raw`\(\mathrm{d}_{\textrm{KK}}(u\Delta u^*,v\Delta v^*)=\sin\alpha(u\Delta u^*,v\Delta v^*)\)`,
         String.raw`\(e^u e^v = (u\otimes\bar{u}) \left(e^{\mathbb{I}_n}e^{u^*v}\right) (u\otimes\bar{u})^*\)`,
-        String.raw`\(\cos\alpha\left(u\Delta^{(n)}u^*,v\Delta^{(n)}v^*\right) = \frac{n}{n-1} \left\| \left[ |u^*v|^{\circ 2}\circ(u^*v) -\frac{1}{n}u^*v \right] \right\|_{\mathrm{op}}\)`,
+        // String.raw`\(\cos\alpha\left(u\Delta^{(n)}u^*,v\Delta^{(n)}v^*\right) = \frac{n}{n-1} \left\| \left[ |u^*v|^{\circ 2}\circ(u^*v) -\frac{1}{n}u^*v \right] \right\|_{\mathrm{op}}\)`,
         String.raw`\(\Phi_{\textrm{aff}}(S^{\textbf{Fr}})=\Phi_{\textrm{aff}}(S)^{\textbf{Fr}}\)`,
         String.raw`\(\sum_{i=1}^{l} \Lambda_{ij} \leq 1\)`,
         String.raw`\(P_{\vec{n}}^{\vec{d}}(x_1, x_2, \dots, x_l) := \prod_{j=1}^k \left( x_1^{d_j} + x_2^{d_j} + \dots + x_l^{d_j} \right)\)`,
