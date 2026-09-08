@@ -19,7 +19,13 @@
         .grading-card table td {
             padding: 4px 18px;   /* vertical | horizontal gap */
         }
-
+        
+        .group-photo img {
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+            display: block;
+        }
     </style>
 {% endblock %}
  
@@ -28,7 +34,7 @@
 <section>
     <div class="container-course">
         <div class="page-header">
-            <h1><i class="bi bi-graph-up"></i> Calculus I (MTH11M 26-27)</h1>
+            <h1><i class="bi bi-graph-up"></i> Calculus I (MTH111M 26-27)</h1>
             <div class="course-meta">
                 <div class="meta-item">
                     <div class="meta-item-label"><i class="bi bi-calendar-event"></i> Term</div>
@@ -59,7 +65,12 @@
             </p>
         </div>
 
-
+        <!-- Course Group Photo -->
+        <figure class="center-img group-photo">
+            <img src="{{ url_for('teaching.static', filename='images/mth111m_group_2026.webp') }}" 
+                 alt="MTH111M Class of 2026-27 Group Photograph">
+            <figcaption><i class="bi bi-camera"></i> The best way to end the course is capturing a nice picture with these lovely students!</figcaption>
+        </figure>
 
         <!-- Textbooks Section -->
         <h2 class="section-heading"><i class="bi bi-book-fill"></i> Textbooks and References</h2>
