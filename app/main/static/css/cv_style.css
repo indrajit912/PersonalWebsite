@@ -234,3 +234,24 @@ ul.skill-set {
         padding: 3rem 2rem;
     }
 }
+
+/* Custom last-updated style for CV page */
+.last-updated {
+    text-align: right;
+    color: #64748b;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-top: 4rem;
+    margin-bottom: 0;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.last-updated i {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+}
