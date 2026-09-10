@@ -4,7 +4,7 @@
     "name": "Indrajit Ghosh",
     "website": "https://sites.google.com/view/exploring-infinity-within",
     "connections": ["snayak", "kkmukherjee", "kcbakshi", "skumar"],
-    "ongoing_connections": ["gmaiti", "vpgupta"]
+    "ongoing_connections": ["gmaiti", "vpgupta", "skbanik"]
   },
   {
     "id": "snayak",
@@ -28,7 +28,7 @@
   {
     "id": "skumar",
     "name": "Sumit Kumar",
-    "website": "",
+    "website": "https://www.researchgate.net/profile/Sumit-Kumar-303",
     "connections": []
   },
   {
@@ -42,5 +42,11 @@
     "name": "Ved Prakash Gupta",
     "website": "https://sites.google.com/view/ved-prakash-gupta",
     "connections": ["skumar", "kcbakshi"]
+  },
+  {
+    "id": "skbanik",
+    "name": "Sayan Kansa Banik",
+    "website": "",
+    "connections": []
   }
 ]
