@@ -1,0 +1,46 @@
+[
+  {
+    "id": "me",
+    "name": "Indrajit Ghosh",
+    "website": "https://sites.google.com/view/exploring-infinity-within",
+    "connections": ["snayak", "kkmukherjee", "kcbakshi", "skumar"],
+    "ongoing_connections": ["gmaiti", "vpgupta"]
+  },
+  {
+    "id": "snayak",
+    "name": "Soumyashant Nayak",
+    "website": "https://www.isibang.ac.in/~soumyashant/",
+    "connections": ["kcbakshi"],
+    "ongoing_connections": ["gmaiti"]
+  },
+  {
+    "id": "kkmukherjee",
+    "name": "Kunal Krishna Mukherjee",
+    "website": "https://ioe.iitm.ac.in/people/kunal-krishna-mukherjee/",
+    "connections": []
+  },
+  {
+    "id": "kcbakshi",
+    "name": "Keshab Chandra Bakshi",
+    "website": "https://sites.google.com/view/keshab-bakshi/home",
+    "connections": ["skumar"]
+  },
+  {
+    "id": "skumar",
+    "name": "Sumit Kumar",
+    "website": "",
+    "connections": []
+  },
+  {
+    "id": "gmaiti",
+    "name": "Gahin Maiti",
+    "website": "",
+    "connections": []
+  },
+  {
+    "id": "vpgupta",
+    "name": "Ved Prakash Gupta",
+    "website": "https://sites.google.com/view/ved-prakash-gupta",
+    "connections": ["skumar", "kcbakshi"]
+  }
+]

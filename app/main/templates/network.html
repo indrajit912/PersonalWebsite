@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Research Network{% endblock %}
+
+{% block meta_tags %}
+{{ super() }}
+<meta name="description" content="An interactive visualization of Indrajit Ghosh's research collaborations and network.">
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('main.static', filename='css/network_style.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="page-container" style="max-width: 1200px; margin: 0 auto; padding: 2rem 15px;">
+    
+    <div class="page-heading">
+        <h1><i class="bi bi-diagram-3"></i> Research Network</h1>
+        <p style="color: #666; font-size: 1.05rem; margin-top: 0.5rem; line-height: 1.6;">
+            An interactive, force-directed graph visualizing my research collaborations. 
+            Scroll to zoom in/out, drag to pan the network, and click on nodes to view collaborator profiles.
+        </p>
+        <p style="color: #666; font-size: 0.95rem; margin-top: 0.5rem; line-height: 1.6;">
+            <i class="bi bi-info-circle"></i> <em>Solid lines represent established collaborations, while flowing dotted lines indicate ongoing works in progress.</em>
+        </p>
+    </div>
+
+    <!-- Container for D3 Graph -->
+    <div id="network-container" data-source="{{ url_for('main.static', filename='data/collaborators.json') }}">
+        
+        <!-- Interactive Information Card for Collaborator details -->
+        <div id="collaborator-card">
+            <button id="collab-close" aria-label="Close">&times;</button>
+            <h3 id="collab-name">Collaborator Name</h3>
+            <a href="#" id="collab-website" target="_blank" rel="noopener noreferrer">
+                <i class="bi bi-box-arrow-up-right"></i> View Website
+            </a>
+        </div>
+        
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<!-- Import D3.js -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<!-- Network Visualization Logic -->
+<script src="{{ url_for('main.static', filename='js/network_graph.js') }}"></script>
+{% endblock %}

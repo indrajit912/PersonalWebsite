@@ -11,6 +11,13 @@
 {% block styles %}
 {{ super() }}
 <!-- Additional styles specific to this template go here -->
+<style>
+    @media (max-width: 768px) {
+        .hide-on-mobile {
+            display: none !important;
+        }
+    }
+</style>
 {% endblock %}
 
 
@@ -32,6 +39,7 @@
             <span class="email-address">Email: {{ institute_email }}</span>
             <div class="header-action-area">
                 <a href="#about-me" class="indra-btn indra-btn-dark">About me</a>
+                <a href="{{ url_for('main.network') }}" class="indra-btn indra-btn-dark hide-on-mobile" style="background-color: #3182ce; border-color: #3182ce;"><i class="bi bi-diagram-3"></i> Network</a>
                 <a href="{{ url_for('main.contact') }}" class="indra-btn">Contact</a>
             </div>
             <div class="header-social">
