@@ -595,3 +595,25 @@ details.abstract-details[open] .abstract-content {
     font-family: "Georgia", serif;
     color: var(--accent-color);
 }
+
+.ongoing-work-list {
+    display: flex;
+    flex-direction: column-reverse;
+    padding-left: 0;
+    margin-bottom: 2rem;
+}
+
+.ongoing-work-list li {
+    list-style: none;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 2rem;
+}
+
+.ongoing-work-list li::before {
+    content: "\23F3"; /* Hourglass icon for in progress */
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-size: 1.1rem;
+}
