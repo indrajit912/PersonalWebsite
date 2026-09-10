@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .attr("fill", d => d.id === "me" ? colorMe : colorCollab)
                 .on("click", (event, d) => {
                     event.stopPropagation(); // prevent svg click
-                    showCard(d, event.pageX, event.pageY);
+                    showCard(d, event);
                 })
                 .on("mouseover", function(event, d) {
                     if (activeNodeId !== d.id) {
@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     .attr("fill", d => d.id === "me" ? colorMe : colorCollab);
             }
 
-            function showCard(d, pageX, pageY) {
+            function showCard(d, event) {
                 activeNodeId = d.id;
                 resetNodeColors();
                 
@@ -203,19 +203,31 @@ document.addEventListener("DOMContentLoaded", () => {
                     websiteEl.style.display = "none";
                 }
 
-                // Calculate position relative to container
-                const containerRect = container.getBoundingClientRect();
-                let x = pageX - containerRect.left + 15;
-                let y = pageY - containerRect.top + 15;
+                // Show temporarily to measure dimensions if needed
+                card.classList.add("show");
                 
-                // Prevent card from going off right edge
-                if (x + 240 > containerRect.width) {
-                    x -= 260; // show on left
+                // Get node's screen position
+                const nodeRect = event.target.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+                const cardRect = card.getBoundingClientRect();
+                
+                // Position horizontally centered above the node
+                let x = (nodeRect.left - containerRect.left) + (nodeRect.width / 2) - (cardRect.width / 2);
+                let y = (nodeRect.top - containerRect.top) - cardRect.height - 15;
+                
+                // Keep within container bounds horizontally
+                if (x < 10) x = 10;
+                if (x + cardRect.width + 10 > containerRect.width) {
+                    x = containerRect.width - cardRect.width - 10;
+                }
+                
+                // If it goes off the top edge, place it below the node instead
+                if (y < 10) {
+                    y = (nodeRect.bottom - containerRect.top) + 15;
                 }
 
                 card.style.left = x + "px";
                 card.style.top = y + "px";
-                card.classList.add("show");
             }
         })
         .catch(err => console.error("Error loading network data:", err));
