@@ -1,39 +1,16 @@
 <!-- Paste the work one after another the oldest one is on the top -->
- <li>
-    <div class="publication-card" style="border-left: 5px solid var(--accent-color);">
-        <span class="ongoing-badge">Work in Progress</span><br>
-        <span class="publication-title">
-            A Royal Road to the Basic Theory of Unbounded Operators on Hilbert Space
-        </span>
-        <span class="publication-authors publication-size"><span class="my-name">I. Ghosh</span>, S. Nayak and G. Maiti</span>
-    </div>
-</li>
+{% for work in ongoing_works %}
 <li>
     <div class="publication-card" style="border-left: 5px solid var(--accent-color);">
         <span class="ongoing-badge">Work in Progress</span><br>
         <span class="publication-title">
-            On Kadison-Kastler Distance
+            {{ work.title|safe }}
         </span>
-        <span class="publication-authors publication-size"><span class="my-name">I. Ghosh</span> and S. Kumar</span>
+        <span class="publication-authors publication-size">
+            {% for author in work.authors %}
+                {% if author.is_me %}<span class="my-name">{{ author.name }}</span>{% else %}{{ author.name }}{% endif %}{% if not loop.last %}{% if loop.revindex0 == 1 %} and {% else %}, {% endif %}{% endif %}
+            {% endfor %}
+        </span>
     </div>
 </li>
- <li>
-    <div class="publication-card" style="border-left: 5px solid var(--accent-color);">
-        <span class="ongoing-badge">Work in Progress</span><br>
-        <span class="publication-title">
-            On Connes-Størmer Entropy
-        </span>
-        <span class="publication-authors publication-size">K. C. Bakshi, <span class="my-name">I. Ghosh</span> and S. Nayak</span>
-    </div>
-</li>
-
- <li>
-    <div class="publication-card" style="border-left: 5px solid var(--accent-color);">
-        <span class="ongoing-badge">Work in Progress</span><br>
-        <span class="publication-title">
-            On Interior Angle Between Intermediate Subalgebras
-        </span>
-        <span class="publication-authors publication-size">K. C. Bakshi, <span class="my-name">I. Ghosh</span> and V. P. Gupta</span>
-    </div>
-</li>
-
+{% endfor %}

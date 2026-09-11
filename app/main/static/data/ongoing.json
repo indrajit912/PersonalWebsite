@@ -1,0 +1,129 @@
+[
+  {
+    "id": "7923b8a94da64eb2",
+    "title": "A Royal Road to the Basic Theory of Unbounded Operators on Hilbert Space",
+    "subtitle": null,
+    "abstract": null,
+    "year": null,
+    "display_order": 0,
+    "publication_date": null,
+    "journal_conference": null,
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "doi": null,
+    "arxiv_id": null,
+    "researchgate_url": null,
+    "authors": [
+      {
+        "name": "I. Ghosh",
+        "is_me": true,
+        "order": 1
+      },
+      {
+        "name": "G. Maiti",
+        "is_me": false,
+        "order": 3
+      },
+      {
+        "name": "S. Nayak",
+        "is_me": false,
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "030dcd0451ac4259",
+    "title": "On Kadison-Kastler Distance",
+    "subtitle": null,
+    "abstract": null,
+    "year": null,
+    "display_order": 0,
+    "publication_date": null,
+    "journal_conference": null,
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "doi": null,
+    "arxiv_id": null,
+    "researchgate_url": null,
+    "authors": [
+      {
+        "name": "I. Ghosh",
+        "is_me": true,
+        "order": 1
+      },
+      {
+        "name": "S. Kumar",
+        "is_me": false,
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "2dbc8cf7701541b0",
+    "title": "On Connes-St\u00f8rmer Entropy",
+    "subtitle": null,
+    "abstract": null,
+    "year": null,
+    "display_order": 0,
+    "publication_date": null,
+    "journal_conference": null,
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "doi": null,
+    "arxiv_id": null,
+    "researchgate_url": null,
+    "authors": [
+      {
+        "name": "K. C. Bakshi",
+        "is_me": false,
+        "order": 1
+      },
+      {
+        "name": "I. Ghosh",
+        "is_me": true,
+        "order": 2
+      },
+      {
+        "name": "S. Nayak",
+        "is_me": false,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "4c34452338d64614",
+    "title": "On Interior Angle Between Intermediate Subalgebras",
+    "subtitle": null,
+    "abstract": null,
+    "year": null,
+    "display_order": 0,
+    "publication_date": null,
+    "journal_conference": null,
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "doi": null,
+    "arxiv_id": null,
+    "researchgate_url": null,
+    "authors": [
+      {
+        "name": "K. C. Bakshi",
+        "is_me": false,
+        "order": 1
+      },
+      {
+        "name": "I. Ghosh",
+        "is_me": true,
+        "order": 2
+      },
+      {
+        "name": "V. P. Gupta",
+        "is_me": false,
+        "order": 3
+      }
+    ]
+  }
+]

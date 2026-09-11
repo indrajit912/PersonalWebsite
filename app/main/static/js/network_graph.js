@@ -31,6 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const card = document.getElementById("collaborator-card");
     const nameEl = document.getElementById("collab-name");
     const websiteEl = document.getElementById("collab-website");
+    const instEl = document.getElementById("collab-institution");
+    const emailEl = document.getElementById("collab-email");
+    const orcidEl = document.getElementById("collab-orcid");
     const closeBtn = document.getElementById("collab-close");
     let activeNodeId = null;
 
@@ -196,6 +199,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 nameEl.innerText = d.name;
                 
+                if (d.institution && d.institution.trim() !== "") {
+                    instEl.style.display = "block";
+                    instEl.querySelector("span").innerText = d.institution;
+                } else {
+                    instEl.style.display = "none";
+                }
+                
+                if (d.email && d.email.trim() !== "") {
+                    emailEl.style.display = "block";
+                    emailEl.querySelector("a").innerText = d.email;
+                    emailEl.querySelector("a").href = "mailto:" + d.email;
+                } else {
+                    emailEl.style.display = "none";
+                }
+                
+                if (d.orcid && d.orcid.trim() !== "") {
+                    orcidEl.style.display = "block";
+                    orcidEl.querySelector("a").innerText = d.orcid;
+                    orcidEl.querySelector("a").href = "https://orcid.org/" + d.orcid;
+                } else {
+                    orcidEl.style.display = "none";
+                }
+                
                 if (d.website && d.website.trim() !== "") {
                     websiteEl.style.display = "inline-flex";
                     websiteEl.href = d.website;
@@ -232,3 +258,5 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(err => console.error("Error loading network data:", err));
 });
+
+

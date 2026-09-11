@@ -1,102 +1,32 @@
 <!-- Paste the work one after another the oldest one is on the top -->
+{% for work in preprints %}
 <li>
     <div class="publication-card">
         <span class="publication-title">
-            An Operator Theoretic Characterization of Properly Infinite von Neumann Algebras
+            {{ work.title|safe }}
         </span>
-        <span class="publication-authors publication-size"><span class="my-name">I. Ghosh</span> and K. K. Mukherjee</span>
+        <span class="publication-authors publication-size">
+            {% for author in work.authors %}
+                {% if author.is_me %}<span class="my-name">{{ author.name }}</span>{% else %}{{ author.name }}{% endif %}{% if not loop.last %}{% if loop.revindex0 == 1 %} and {% else %}, {% endif %}{% endif %}
+            {% endfor %}
+        </span>
         <div class="publication-size">
-            <code>pre-print</code>, <span class="publication-date">Feb 2026</span>
+            <code>pre-print</code>, <span class="publication-date">{{ work.publication_date }}</span>
         </div>
         <div class="links">
-        </div>
-    </div>
-</li>
-<li>
-    <div class="publication-card">
-        <span class="publication-title">
-            A Complete Characterization of Regular Inclusions of Finite Dimensional \(C^*\)-algebras
-        </span>
-        <span class="publication-authors publication-size">K. C. Bakshi, <span class="my-name">I. Ghosh</span> and S. Kumar</span>
-        <div class="publication-size">
-            <code>pre-print</code>, <span class="publication-date">Aug 2026</span>
-        </div>
-        <div class="links">
-            <a href="https://arxiv.org/abs/2608.04572" target="_blank">arXiv</a>
-            <a href="https://www.researchgate.net/publication/411714884_A_Complete_Characterization_of_Regular_Inclusions_of_Finite_Dimensional_C-algebras"
-               target="_blank">ResearchGate</a>
+            {% if work.arxiv_id %}
+            <a href="https://arxiv.org/abs/{{ work.arxiv_id }}" target="_blank">arXiv</a>
+            {% endif %}
+            {% if work.researchgate_url %}
+            <a href="{{ work.researchgate_url }}" target="_blank">ResearchGate</a>
+            {% endif %}
         </div>
         <details class="abstract-details">
             <summary>Abstract</summary>
             <div class="abstract-content">
-                We give a complete characterization of regular (in the sense of Kumjian and Renault) unital inclusions of finite-dimensional \(C^*\)-algebras. For subalgebras \(\bigoplus_j( \mathbb{M}_{d_j}(\mathbb{C}) \otimes \mathbb{I}_{p_j})\) of \(\mathbb{M}_n(\mathbb{C})\), we show that regularity depends only on equality of the multiplicities \(p_j\), while unitary regularity—characterized recently by the first author and Silambarasan—additionally requires equality of the \(d_j\); we recover the latter via a streamlined alternative proof. Extending this to inclusions of arbitrary finite-dimensional \(C^*\)-algebras, encoded by an inclusion matrix \(\Lambda\), we show that regularity is equivalent to an explicit row/column condition on \(\Lambda\)—coinciding with the normalizer matrix introduced by the first author and Silambarasan—so that the device used there to detect unitary regularity is shown to characterize regularity in general; unitary regularity is recovered by a further dimension-equality condition.
+                {{ work.abstract|safe }}
             </div>
         </details>
     </div>
 </li>
-<li>
-    <div class="publication-card">
-        <span class="publication-title">
-            A Complete Characterization of Cartan Inclusions of Finite Dimensional \(C^*\)-algebras
-        </span>
-        <span class="publication-authors publication-size"><span class="my-name">I. Ghosh</span> and S. Kumar</span>
-        <div class="publication-size">
-            <code>pre-print</code>, <span class="publication-date">Aug 2026</span>
-        </div>
-        <div class="links">
-            <a href="https://arxiv.org/abs/2608.11711" target="_blank">arXiv</a>
-            <a href="https://www.researchgate.net/publication/412212199_A_Complete_Characterization_of_Cartan_Inclusions_of_Finite_Dimensional_C-algebras"
-               target="_blank">ResearchGate</a>
-        </div>
-        <details class="abstract-details">
-            <summary>Abstract</summary>
-            <div class="abstract-content">
-                We give a complete characterization of Cartan inclusions of finite dimensional \(C^*\)-algebras in terms of their inclusion matrices. More precisely, for a unital inclusion \(\mathcal{B}\subseteq\mathcal{A}\) with inclusion matrix \(\Lambda=(\Lambda_{ij})\), where Cartan means that \(\mathcal{B}\) is a generalized Cartan subalgebra of \(\mathcal{A}\) in the sense of Exel, we prove that the inclusion is Cartan if and only if
-                \[ \sum_i \Lambda_{ij}\leq 1 \]
-                for every \(j\). We call matrices satisfying this condition multiplicity free. Thus, our characterization provides a purely combinatorial criterion for determining when a finite dimensional inclusion is Cartan. We further prove that every Cartan inclusion admits a unique conditional expectation from \(\mathcal{A}\) onto \(\mathcal{B}\). Conversely, we show that, for unital inclusions of finite dimensional \(C^*\)-algebras, the uniqueness of the conditional expectation is sufficient for the inclusion to be Cartan. Consequently, a unital inclusion \(\mathcal{B}\subseteq\mathcal{A}\) of finite dimensional \(C^*\)-algebras is Cartan if and only if there exists a unique conditional expectation from \(\mathcal{A}\) onto \(\mathcal{B}\).
-            </div>
-        </details>
-    </div>
-</li>
-<li>
-    <div class="publication-card">
-        <span class="publication-title">
-            Regularity for Subfactors
-        </span>
-        <span class="publication-authors publication-size">K. C. Bakshi and <span class="my-name">I. Ghosh</span></span>
-        <div class="publication-size">
-            <code>pre-print</code>, <span class="publication-date">Sep 2026</span>
-        </div>
-        <div class="links">
-            <a href="https://arxiv.org/abs/2609.10118" target="_blank">arXiv</a>
-        </div>
-        <details class="abstract-details">
-            <summary>Abstract</summary>
-            <div class="abstract-content">
-                
-We study three naturally associated notions of regularity for a unital inclusion of von Neumann algebras \(\mathcal{B} \subseteq \mathcal{M}\): regularity, groupoid regularity, and unitary regularity. We first observe that regularity and groupoid regularity are unconditionally equivalent by showing that the standard normaliser and the groupoid normaliser of \(\mathcal{B}\) in \(\mathcal M\) generate the same linear span. The central question addressed in this work is whether regularity implies unitary regularity. For arbitrary von Neumann subalgebras, we demonstrate that this implication fails dramatically; we construct explicit examples to show that every factor (of type \(\mathrm{I}_\infty\), \(\mathrm{II}_1\), \(\mathrm{II}_\infty\), and \(\mathrm{III}\)) contains a regular von Neumann subalgebra that is not unitarily regular. In stark contrast, we prove that the behaviour changes completely in the setting of subfactors. For subfactor inclusions across all these types, regularity always implies unitary regularity, and thus all three notions of regularity coincide. Finally, we establish an analogous result for irreducible unital inclusions of simple \(C^*\)-algebras admitting a conditional expectation of finite Watatani index. In this setting, we prove that regularity, unitary regularity, being a generalised Cartan subalgebra, and arising from a crossed product by a finite group are all mutually equivalent conditions.
-            </div>
-        </details>
-    </div>
-</li>
-<!-- <li>
-    <div class="publication-card" style="border-left: 5px solid var(--accent-color);">
-        <span class="publication-title">
-            Kadison-Kastler Distance and Interior Angle for Masas: Connections with Entropy and Probabilistic Index
-        </span>
-        <span class="publication-authors publication-size"><span class="my-name">I. Ghosh</span> and S. Kumar</span>
-        <div class="links">
-            <a href="#" target="_blank">arXiv</a>
-        </div>
-        <details class="abstract-details">
-            <summary>Abstract</summary>
-            <div class="abstract-content">
-                We study the Kadison--Kastler distance and the interior angle between masas in finite-dimensional matrix algebras. In \(\mathbb{M}_2(\mathbb{C})\), we obtain an explicit formula for the Kadison--Kastler distance between two masas and show that every value in \([0,1]\) occurs as \(\mathrm{d}_{\textrm{KK}}(\Delta,u\Delta u^*)\). Moreover, the distance attains its maximal value precisely when the relative unitary is a Hadamard unitary. We further establish the identity
-                \[ \mathrm{d}_{\textrm{KK}}(u\Delta u^*,v\Delta v^*)=\sin\alpha(u\Delta u^*,v\Delta v^*) \]
-                and show that the Kadison--Kastler distance between \(\Delta\) and \(v\Delta v^*\) takes only its minimal or maximal value when \(v\) belongs to the groupoid normaliser of \(\Delta\). Most notably, in \(\mathbb{M}_2(\mathbb{C})\) we establish the equivalence, for any unitaries \(u,v\), of maximal Kadison--Kastler distance, maximal interior angle, maximal Connes--Størmer modified entropy, and minimal Popa probabilistic index; namely,
-                \[ \mathrm{d}_{\mathrm{KK}}(u\Delta u^*,v\Delta v^*)=1 \iff h(u\Delta u^*,v\Delta v^*)=\log 2 \iff \alpha(u\Delta u^*,v\Delta v^*)=\frac{\pi}{2} \iff \lambda(u\Delta u^*,v\Delta v^*)=\frac12. \]
-                For general \(\mathbb{M}_n(\mathbb{C})\), we prove a unitary invariance property for the interior angle and derive an explicit formula for the angle between arbitrary masas of the form \(u\Delta^{(n)}u^*\) and \(v\Delta^{(n)}v^*\). As a consequence, the interior angle is \(\frac{\pi}{2}\) precisely when \(u^*v\) is a Hadamard unitary. Finally, we show that every value in \(\left[ 0,\frac{\pi}{2} \right]\) occurs as the interior angle between a pair of masas in \(\mathbb{M}_n(\mathbb{C})\).
-            </div>
-        </details>
-    </div>
-</li> -->
+{% endfor %}

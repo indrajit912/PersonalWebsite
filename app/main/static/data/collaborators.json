@@ -1,52 +1,174 @@
 [
   {
     "id": "me",
+    "uuid": "357204612b674009",
     "name": "Indrajit Ghosh",
-    "website": "https://sites.google.com/view/exploring-infinity-within",
-    "connections": ["snayak", "kkmukherjee", "kcbakshi", "skumar"],
-    "ongoing_connections": ["gmaiti", "vpgupta", "skbanik"]
+    "email": "",
+    "website": "https://indrajitghosh.onrender.com",
+    "institution": "Indian Institute of Technology Kanpur",
+    "department": "",
+    "position": "",
+    "affiliation": "",
+    "orcid": "",
+    "bio": "",
+    "distance": 0,
+    "is_me": true,
+    "connections": [
+      "skumar",
+      "snayak",
+      "kkmukherjee",
+      "kcbakshi"
+    ],
+    "ongoing_connections": [
+      "skbanik",
+      "vpgupta",
+      "gmaiti"
+    ]
   },
   {
     "id": "snayak",
+    "uuid": "fec3abbfd7724854",
     "name": "Soumyashant Nayak",
+    "email": "soumyashant@isibc.ac.in",
     "website": "https://www.isibang.ac.in/~soumyashant/",
-    "connections": ["kcbakshi"],
-    "ongoing_connections": ["gmaiti"]
+    "institution": "Indian Statistical Institute, Bangalore",
+    "department": "",
+    "position": "",
+    "affiliation": "",
+    "orcid": "",
+    "bio": "",
+    "distance": 1,
+    "is_me": false,
+    "connections": [
+      "me"
+    ],
+    "ongoing_connections": [
+      "gmaiti",
+      "kcbakshi"
+    ]
   },
   {
     "id": "kkmukherjee",
+    "uuid": "6d9d6525d7284562",
     "name": "Kunal Krishna Mukherjee",
+    "email": "kunal@iitm.ac.in",
     "website": "https://ioe.iitm.ac.in/people/kunal-krishna-mukherjee/",
-    "connections": []
+    "institution": "Indian Institute of Technology Madras",
+    "department": "",
+    "position": "",
+    "affiliation": "",
+    "orcid": "",
+    "bio": "",
+    "distance": 1,
+    "is_me": false,
+    "connections": [
+      "me"
+    ],
+    "ongoing_connections": []
   },
   {
     "id": "kcbakshi",
+    "uuid": "a0c17643af9d4e0d",
     "name": "Keshab Chandra Bakshi",
+    "email": "keshab@iitk.ac.in",
     "website": "https://sites.google.com/view/keshab-bakshi/home",
-    "connections": ["skumar"]
+    "institution": "Indian Institute of Technology Kanpur",
+    "department": "",
+    "position": "",
+    "affiliation": "",
+    "orcid": "",
+    "bio": "",
+    "distance": 1,
+    "is_me": false,
+    "connections": [
+      "skumar",
+      "me",
+      "vpgupta"
+    ],
+    "ongoing_connections": [
+      "snayak"
+    ]
   },
   {
     "id": "skumar",
+    "uuid": "05f9bc33a9cc4b38",
     "name": "Sumit Kumar",
+    "email": "sumitkumar.sk809@gmail.com",
     "website": "https://www.researchgate.net/profile/Sumit-Kumar-303",
-    "connections": []
+    "institution": "Indian Institute of Technology Kanpur",
+    "department": "",
+    "position": "",
+    "affiliation": "",
+    "orcid": "",
+    "bio": "",
+    "distance": 1,
+    "is_me": false,
+    "connections": [
+      "vpgupta",
+      "me",
+      "kcbakshi"
+    ],
+    "ongoing_connections": []
   },
   {
     "id": "gmaiti",
+    "uuid": "f88c0baa7c954868",
     "name": "Gahin Maiti",
+    "email": "rs_math2203@isibc.ac.in",
     "website": "",
-    "connections": []
+    "institution": "Indian Statistical Institute, Bangalore",
+    "department": "",
+    "position": "",
+    "affiliation": "",
+    "orcid": "",
+    "bio": "",
+    "distance": 1,
+    "is_me": false,
+    "connections": [],
+    "ongoing_connections": [
+      "me",
+      "snayak"
+    ]
   },
   {
     "id": "vpgupta",
+    "uuid": "d78f20d80205434d",
     "name": "Ved Prakash Gupta",
+    "email": "vedgupta@jnu.ac.in",
     "website": "https://sites.google.com/view/ved-prakash-gupta",
-    "connections": ["skumar", "kcbakshi"]
+    "institution": "Jawaharlal Nehru University",
+    "department": "",
+    "position": "",
+    "affiliation": "",
+    "orcid": "",
+    "bio": "",
+    "distance": 1,
+    "is_me": false,
+    "connections": [
+      "kcbakshi",
+      "skumar"
+    ],
+    "ongoing_connections": [
+      "me"
+    ]
   },
   {
     "id": "skbanik",
+    "uuid": "9bd0fa7c28f14b82",
     "name": "Sayan Kansa Banik",
-    "website": "https://in.linkedin.com/in/sayan-kansabanik-20729a252",
-    "connections": []
+    "email": "",
+    "website": "",
+    "institution": "Indian Institute of Technology Delhi",
+    "department": "",
+    "position": "",
+    "affiliation": "",
+    "orcid": "",
+    "bio": "",
+    "distance": 1,
+    "is_me": false,
+    "connections": [],
+    "ongoing_connections": [
+      "me"
+    ]
   }
 ]

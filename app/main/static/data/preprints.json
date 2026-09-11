@@ -1,0 +1,119 @@
+[
+  {
+    "id": "c1af944790844abe",
+    "title": "An Operator Theoretic Characterization of Properly Infinite von Neumann Algebras",
+    "subtitle": null,
+    "abstract": "",
+    "year": 2026,
+    "display_order": 2,
+    "publication_date": "Feb 2026",
+    "journal_conference": null,
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "doi": null,
+    "arxiv_id": null,
+    "researchgate_url": null,
+    "authors": [
+      {
+        "name": "I. Ghosh",
+        "is_me": true,
+        "order": 1
+      },
+      {
+        "name": "K. K. Mukherjee",
+        "is_me": false,
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "eca1eaa246a64e30",
+    "title": "A Complete Characterization of Regular Inclusions of Finite Dimensional \\(C^*\\)-algebras",
+    "subtitle": null,
+    "abstract": "We give a complete characterization of regular (in the sense of Kumjian and Renault) unital inclusions of finite-dimensional \\(C^*\\)-algebras. For subalgebras \\(\\bigoplus_j( \\mathbb{M}_{d_j}(\\mathbb{C}) \\otimes \\mathbb{I}_{p_j})\\) of \\(\\mathbb{M}_n(\\mathbb{C})\\), we show that regularity depends only on equality of the multiplicities \\(p_j\\), while unitary regularity\u2014characterized recently by the first author and Silambarasan\u2014additionally requires equality of the \\(d_j\\); we recover the latter via a streamlined alternative proof. Extending this to inclusions of arbitrary finite-dimensional \\(C^*\\)-algebras, encoded by an inclusion matrix \\(\\Lambda\\), we show that regularity is equivalent to an explicit row/column condition on \\(\\Lambda\\)\u2014coinciding with the normalizer matrix introduced by the first author and Silambarasan\u2014so that the device used there to detect unitary regularity is shown to characterize regularity in general; unitary regularity is recovered by a further dimension-equality condition.",
+    "year": 2026,
+    "display_order": 3,
+    "publication_date": "Aug 2026",
+    "journal_conference": null,
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "doi": null,
+    "arxiv_id": "2608.04572",
+    "researchgate_url": "https://www.researchgate.net/publication/411714884_A_Complete_Characterization_of_Regular_Inclusions_of_Finite_Dimensional_C-algebras",
+    "authors": [
+      {
+        "name": "K. C. Bakshi",
+        "is_me": false,
+        "order": 1
+      },
+      {
+        "name": "I. Ghosh",
+        "is_me": true,
+        "order": 2
+      },
+      {
+        "name": "S. Kumar",
+        "is_me": false,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "0fa533302dd242b0",
+    "title": "A Complete Characterization of Cartan Inclusions of Finite Dimensional \\(C^*\\)-algebras",
+    "subtitle": null,
+    "abstract": "We give a complete characterization of Cartan inclusions of finite dimensional \\(C^*\\)-algebras in terms of their inclusion matrices. More precisely, for a unital inclusion \\(\\mathcal{B}\\subseteq\\mathcal{A}\\) with inclusion matrix \\(\\Lambda=(\\Lambda_{ij})\\), where Cartan means that \\(\\mathcal{B}\\) is a generalized Cartan subalgebra of \\(\\mathcal{A}\\) in the sense of Exel, we prove that the inclusion is Cartan if and only if\n                \\[ \\sum_i \\Lambda_{ij}\\leq 1 \\]\n                for every \\(j\\). We call matrices satisfying this condition multiplicity free. Thus, our characterization provides a purely combinatorial criterion for determining when a finite dimensional inclusion is Cartan. We further prove that every Cartan inclusion admits a unique conditional expectation from \\(\\mathcal{A}\\) onto \\(\\mathcal{B}\\). Conversely, we show that, for unital inclusions of finite dimensional \\(C^*\\)-algebras, the uniqueness of the conditional expectation is sufficient for the inclusion to be Cartan. Consequently, a unital inclusion \\(\\mathcal{B}\\subseteq\\mathcal{A}\\) of finite dimensional \\(C^*\\)-algebras is Cartan if and only if there exists a unique conditional expectation from \\(\\mathcal{A}\\) onto \\(\\mathcal{B}\\).",
+    "year": 2026,
+    "display_order": 4,
+    "publication_date": "Aug 2026",
+    "journal_conference": null,
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "doi": null,
+    "arxiv_id": "2608.11711",
+    "researchgate_url": "https://www.researchgate.net/publication/412212199_A_Complete_Characterization_of_Cartan_Inclusions_of_Finite_Dimensional_C-algebras",
+    "authors": [
+      {
+        "name": "I. Ghosh",
+        "is_me": true,
+        "order": 1
+      },
+      {
+        "name": "S. Kumar",
+        "is_me": false,
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "5edda06eb8fb4634",
+    "title": "Regularity for Subfactors",
+    "subtitle": null,
+    "abstract": "\nWe study three naturally associated notions of regularity for a unital inclusion of von Neumann algebras \\(\\mathcal{B} \\subseteq \\mathcal{M}\\): regularity, groupoid regularity, and unitary regularity. We first observe that regularity and groupoid regularity are unconditionally equivalent by showing that the standard normaliser and the groupoid normaliser of \\(\\mathcal{B}\\) in \\(\\mathcal M\\) generate the same linear span. The central question addressed in this work is whether regularity implies unitary regularity. For arbitrary von Neumann subalgebras, we demonstrate that this implication fails dramatically; we construct explicit examples to show that every factor (of type \\(\\mathrm{I}_\\infty\\), \\(\\mathrm{II}_1\\), \\(\\mathrm{II}_\\infty\\), and \\(\\mathrm{III}\\)) contains a regular von Neumann subalgebra that is not unitarily regular. In stark contrast, we prove that the behaviour changes completely in the setting of subfactors. For subfactor inclusions across all these types, regularity always implies unitary regularity, and thus all three notions of regularity coincide. Finally, we establish an analogous result for irreducible unital inclusions of simple \\(C^*\\)-algebras admitting a conditional expectation of finite Watatani index. In this setting, we prove that regularity, unitary regularity, being a generalised Cartan subalgebra, and arising from a crossed product by a finite group are all mutually equivalent conditions.",
+    "year": 2026,
+    "display_order": 5,
+    "publication_date": "Sep 2026",
+    "journal_conference": null,
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "doi": null,
+    "arxiv_id": "2609.10118",
+    "researchgate_url": null,
+    "authors": [
+      {
+        "name": "K. C. Bakshi",
+        "is_me": false,
+        "order": 1
+      },
+      {
+        "name": "I. Ghosh",
+        "is_me": true,
+        "order": 2
+      }
+    ]
+  }
+]

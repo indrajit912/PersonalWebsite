@@ -40,8 +40,24 @@ def index():
 #######################################################
 #                      Research
 #######################################################
+import json
+import os
+from flask import current_app
+
 @main_bp.route('/research/')
 def research():
+    # Load works data from JSON
+    data_dir = os.path.join(current_app.root_path, 'main', 'static', 'data')
+    
+    with open(os.path.join(data_dir, 'publications.json'), encoding='utf-8') as f:
+        publications = json.load(f)
+        
+    with open(os.path.join(data_dir, 'preprints.json'), encoding='utf-8') as f:
+        preprints = json.load(f)
+        
+    with open(os.path.join(data_dir, 'ongoing.json'), encoding='utf-8') as f:
+        ongoing_works = json.load(f)
+
     # These three things need to be calculated if the thesis gets modified.
     isi_thesis_link = "https://dspace.isical.ac.in/items/f3d082ef-5b12-4b44-8399-f0f282eddfa1"
     thesis_link = "https://drive.google.com/file/d/1aSTN-8lQRhZOpvXdCBl_RdmMjd3E8-hH/view?usp=drive_link"
@@ -53,7 +69,10 @@ def research():
         thesis_link=thesis_link,
         thesis_sig_link=thesis_sig_link,
         thesis_sha256sum=thesis_sha256sum,
-        isi_thesis_link=isi_thesis_link
+        isi_thesis_link=isi_thesis_link,
+        publications=publications,
+        preprints=preprints,
+        ongoing_works=ongoing_works
     )
 
 ######################################################################
@@ -62,7 +81,26 @@ def research():
 @main_bp.route('/cv/')
 def cv():
     institute_email = INSTITUTE_EMAIL
-    return render_template('cv.html', institute_email=institute_email)
+    
+    # Load works data from JSON
+    data_dir = os.path.join(current_app.root_path, 'main', 'static', 'data')
+    
+    with open(os.path.join(data_dir, 'publications.json'), encoding='utf-8') as f:
+        publications = json.load(f)
+        
+    with open(os.path.join(data_dir, 'preprints.json'), encoding='utf-8') as f:
+        preprints = json.load(f)
+        
+    with open(os.path.join(data_dir, 'ongoing.json'), encoding='utf-8') as f:
+        ongoing_works = json.load(f)
+        
+    return render_template(
+        'cv.html', 
+        institute_email=institute_email,
+        publications=publications,
+        preprints=preprints,
+        ongoing_works=ongoing_works
+    )
 
 ######################################################################
 #                       Photos
@@ -282,7 +320,14 @@ def download_attachment(filename):
 ######################################################################
 @main_bp.route('/network/')
 def network():
-    return render_template('network.html')
+    import os
+    import datetime
+    json_path = os.path.join(os.path.dirname(__file__), 'static', 'data', 'collaborators.json')
+    last_updated = ""
+    if os.path.exists(json_path):
+        mtime = os.path.getmtime(json_path)
+        last_updated = datetime.datetime.fromtimestamp(mtime).strftime("%b %d, %Y")
+    return render_template('network.html', last_updated=last_updated)
 
 
 ######################################################################
@@ -363,3 +408,4 @@ def devtest():
 @main_bp.route('/thankyou/')
 def thankyou():
     return render_template('thank_you.html')
+
