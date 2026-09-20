@@ -5,6 +5,48 @@
 {% block styles %}
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('main.static', filename='css/photo_style.css') }}">
+    <style>
+        .cooking-quote-wrapper {
+            margin: 2rem auto 3rem;
+            max-width: 750px;
+            position: relative;
+        }
+        .cooking-quote-wrapper::before {
+            content: "\201C";
+            font-family: Georgia, serif;
+            font-size: 6rem;
+            color: var(--primary-color, #2c3e50);
+            opacity: 0.15;
+            position: absolute;
+            top: -2.5rem;
+            left: -1.5rem;
+            z-index: 0;
+        }
+        .cooking-quote {
+            position: relative;
+            z-index: 1;
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #555;
+            font-style: italic;
+            text-align: left;
+            padding: 1.5rem 2rem;
+            border-left: 4px solid var(--primary-color, #2c3e50);
+            background: rgba(249, 250, 251, 0.8);
+            border-radius: 8px;
+        }
+        .cooking-quote footer {
+            margin-top: 1.2rem;
+            font-weight: bold;
+            font-style: normal;
+            font-size: 1rem;
+            color: #2c3e50;
+            text-align: right;
+        }
+        .cooking-quote footer::before {
+            content: "\2014 \0020";
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -13,7 +55,12 @@
     <div class="gallery-container">
         <div class="page-heading">
             <h1>Indrajit's Kitchen</h1>
-            <p>I recently started learning how to cook by myself. It has been a fun (and sometimes chaotic) experience experimenting in the kitchen. Here is a small gallery documenting some of the dishes I have prepared along the way!</p>
+            <div class="cooking-quote-wrapper">
+                <blockquote class="cooking-quote">
+                    Cooking is a very nice hobby of mine. I absolutely love preparing meals and serving them to friends and loved ones—it gives me immense pleasure to share these moments and creations with them.
+                    <footer>Indrajit Ghosh</footer>
+                </blockquote>
+            </div>
         </div>
 
         <div class="masonry-gallery">

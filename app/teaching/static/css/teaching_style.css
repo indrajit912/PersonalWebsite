@@ -59,6 +59,9 @@
     margin-top: 2.5rem;
     position: relative;
     padding-bottom: 0.5rem;
+    clear: both;
+    display: block;
+    width: 100%;
 }
 
 .section-title::before {
