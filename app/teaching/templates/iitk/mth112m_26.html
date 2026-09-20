@@ -1,0 +1,129 @@
+<!-- 
+    Teaching page for the Website
+    Author: Indrajit Ghosh
+    Created On: Nov 14, 2023
+    Modified On: Jan 23, 2026
+ -->
+
+{% extends 'base.html' %}
+
+{% block title %}MTH111M 26-27, Odd Sem{% endblock %}
+  
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/course_style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        .grading-card table th,
+        .grading-card table td {
+            padding: 4px 18px;   /* vertical | horizontal gap */
+        }
+        
+        .group-photo img {
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+            display: block;
+        }
+    </style>
+{% endblock %}
+ 
+  
+{% block content %}
+<section>
+    <div class="container-course">
+        <div class="page-header">
+            <h1><i class="bi bi-graph-up"></i> Applications of single and several variable calculus (MTH112M 26-27)</h1>
+            <div class="course-meta">
+                <div class="meta-item">
+                    <div class="meta-item-label"><i class="bi bi-calendar-event"></i> Term</div>
+                    <div class="meta-item-value">Semester I</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-item-label"><i class="bi bi-clock"></i> Duration</div>
+                    <div class="meta-item-value">Sep 22, 2026 - present</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-item-label"><i class="bi bi-person-fill"></i> Instructor</div>
+                    <div class="meta-item-value">Debasis Sen  and  Abhijit Pal</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-item-label"><i class="bi bi-person-badge"></i> TA</div>
+                    <div class="meta-item-value">Indrajit Ghosh</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <p><strong>Room:</strong> L18</p>
+            <p><strong>Class Timing:</strong> Tue 10-10:50</p>
+            <p>
+                <strong>Course Description:</strong> <a href="https://sites.google.com/view/mth-112/home" target="_blank">
+                    Website <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+            </p>
+            <p>
+                <strong>Office Hours:</strong> <a href="https://meet.google.com/jjp-mkxp-xmf" target="_blank">
+                      Google Meet <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+            </p>
+        </div>
+
+        <!-- Course Group Photo -->
+        <!-- <figure class="center-img group-photo">
+            <img src="#" 
+                 alt="MTH112M Class of 2026-27 Group Photograph">
+            <figcaption><i class="bi bi-camera"></i> The best way to end the course is capturing a nice picture with these lovely students!</figcaption>
+        </figure> -->
+
+        <!-- Textbooks Section -->
+        <h2 class="section-heading"><i class="bi bi-book-fill"></i> Textbooks and References</h2>
+        <div class="textbooks-list">
+            <ol>
+                <li>George B. Thomas Jr., Maurice D. Weir & Joel R. Hass., <i>Thomas Calculus, (15th edition).</i></li>
+            </ol>
+            <ol>
+                <li>Robert G. Bartle & Donald R. Sherbert., <i>Introduction to Real Analysis.</i></li>
+            </ol>
+        </div>
+
+        <!-- Lectures Section -->
+        <!-- <h2 class="section-heading"><i class="bi bi-clipboard-check"></i> Lectures</h2>
+        <p><strong>Disclaimer:</strong> The lecture notes are for reference only and may not cover all the material discussed in class. Also this notes may contain omission or sketchy parts.</p>
+        <div class="assignment-grid">
+            <div class="assignment-card">
+                <div class="assignment-number">Lecture 1</div>
+                <a href="https://drive.google.com/file/d/1qYw4Fx4DiVPEavhPJ0o0d6B5tqrbiw19/view?usp=drive_link" class="assignment-link">
+                    <i class="bi bi-arrow-down"></i> View
+                </a>
+                <div class="due-date">
+                   <i class="bi bi-calendar-check"></i>
+                   <span>Date: Aug 04, 2026</span>
+               </div>
+            </div>
+        </div> -->
+        <!-- Assignments Section -->
+        <h2 class="section-heading"><i class="bi bi-clipboard-check"></i> Assignments</h2>
+        <div class="assignment-grid">
+            <div class="assignment-card">
+                <div class="assignment-number">Assignment 1</div>
+                <a href="https://drive.google.com/file/d/1u6y9NR-0Cs0a1G5fcYgxrNEYp0Siojjx/view?usp=drive_link" class="assignment-link">
+                    <i class="bi bi-arrow-down"></i> View
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Add last updated information -->
+<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Sep 20, 2026</p>
+
+{% endblock %}
+  
+ 
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('teaching.static', filename='js/teaching_effects.js') }}"></script>
+{% endblock %}
