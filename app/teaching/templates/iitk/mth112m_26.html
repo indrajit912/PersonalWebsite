@@ -105,20 +105,107 @@
         </div> -->
         <!-- Assignments Section -->
         <h2 class="section-heading"><i class="bi bi-clipboard-check"></i> Assignments</h2>
-        <div class="assignment-grid">
-            <div class="assignment-card">
-                <div class="assignment-number">Assignment 1</div>
-                <a href="https://drive.google.com/file/d/1u6y9NR-0Cs0a1G5fcYgxrNEYp0Siojjx/view?usp=drive_link" class="assignment-link">
-                    <i class="bi bi-arrow-down"></i> View
-                </a>
+        
+        <details class="assignment-content" style="background: #fff; padding: 25px 35px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); margin-top: 20px; font-size: 1.05rem; line-height: 1.7; border: 1px solid #eaeaea;">
+            <summary style="cursor: pointer; margin-top: 0; color: var(--primary-color, #2c3e50); font-size: 1.4rem; border-bottom: 2px solid #eee; padding-bottom: 12px; font-weight: 600; list-style-position: inside;">
+                <i class="bi bi-journal-text"></i> Assignment 1: Polar Coordinates, Applications of Integrations <span style="font-size: 0.9rem; font-weight: normal; color: #777; float: right; margin-top: 5px;">(Click to view)</span>
+            </summary>
+            <div style="margin-top: 25px;">
+                <div style="text-align: right; margin-bottom: 20px;">
+                    <a href="https://drive.google.com/file/d/1u6y9NR-0Cs0a1G5fcYgxrNEYp0Siojjx/view?usp=drive_link" target="_blank" style="display: inline-block; background-color: #2c3e50; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 500; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <i class="bi bi-file-earmark-pdf"></i> Original PDF
+                    </a>
+                </div>
+            <ol class="problem-list" style="padding-left: 20px; color: #333;">
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Find the area of the region in the first quadrant bounded on the left by the \(y\)-axis, 
+                    below by the curve \(x = 2\sqrt{y}\), above left by the curve \(x = (y - 1)^2\), 
+                    and above right by the line \(x = 3 - y\).
+                </li>
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Sketch the graph of the following curves, given in polar coordinates, in the Cartesian plane:
+                    <div style="overflow-x: auto; text-align: center; margin: 15px 0;">
+                        \[ r = \frac{\sin \theta}{2}, \quad r^2 = -\cos \theta, \quad r = e^{\theta/10}, \quad r = \frac{1}{2} + \sin \theta, \quad r = -|\cos \theta|. \]
+                    </div>
+                </li>
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Find the area of the region that is inside the circle \(r = 3\sin\theta\) and also inside \(r = 1 + \sin\theta\).
+                </li>
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Find the intersection points between the curves \(r = \cos 2\theta\) and \(r = \sin 2\theta\).
+                </li>
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Find the lengths of the polar curves:
+                    <ol style="list-style-type: lower-roman; margin-top: 12px; padding-left: 25px;">
+                        <li style="margin-bottom: 10px;">\(r(\theta) = \frac{6}{1 + \cos\theta}, \quad 0 \leq \theta \leq \frac{\pi}{2}\),</li>
+                        <li style="margin-bottom: 10px;">\(r(\theta) = \frac{a\sin^2\theta}{2}, \quad 0 \leq \theta \leq \pi, \quad a > 0\).</li>
+                    </ol>
+                </li>
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    <strong>(Non-rectifiable curve)</strong> Let \(g : [0, 1] \to [0, 1]\) be defined by
+                    <div style="overflow-x: auto; text-align: center; margin: 15px 0;">
+                        \[
+                        g(t) = 
+                        \begin{cases} 
+                        t \cos \left(\frac{\pi}{2t}\right), & t \neq 0, \\ 
+                        0, & t = 0. 
+                        \end{cases}
+                        \]
+                    </div>
+                    Show that \(g\) is continuous. Consider the curve \(\alpha : [0, 1] \longrightarrow \mathbb{R}^2, \alpha(t) = (t, g(t))\). 
+                    Show that the curve is non-rectifiable i.e., it has infinite length.
+                    
+                    <div class="hint-text" style="font-size: 0.95rem; color: #444; background: #f8f9fa; padding: 18px 22px; border-left: 4px solid #6c757d; margin-top: 20px; border-radius: 0 6px 6px 0;">
+                        <strong style="color: #495057;">Hint:</strong> Recall that the length of a continuous curve \(\alpha : [0, 1] \to \mathbb{R}^2\) is defined by
+                        <div style="overflow-x: auto; text-align: center; margin: 15px 0;">
+                            \[
+                            L(\alpha) = \sup_{0 = s_0 < s_1 < \cdots < s_m = 1} \sum_{j=0}^{m-1} ||\alpha(s_j) - \alpha(s_{j+1})||, \quad (1)
+                            \]
+                        </div>
+                        where the supremum is taken over all possible partitions \(0 = s_0 < s_1 < \cdots < s_m = 1\) of the interval \([0, 1]\) (no bound on \(m\)). For our specific example, take the partitions
+                        <div style="overflow-x: auto; text-align: center; margin: 15px 0;">
+                            \[
+                            P_n = \left\{0, \frac{1}{2n}, \frac{1}{2n - 1}, \ldots, \frac{1}{3}, \frac{1}{2}, 1\right\}, \quad n \in \mathbb{N}.
+                            \]
+                        </div>
+                        Let \(\ell_n\) denote the length of the polygonal path inscribed in the curve using this partition. Prove that
+                        <div style="overflow-x: auto; text-align: center; margin: 15px 0;">
+                            \[
+                            \ell_n > \sum_{k=1}^{2n} \frac{1}{k}
+                            \]
+                        </div>
+                        and deduce that the curve \(\alpha\) is not rectifiable.
+                    </div>
+                </li>
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Consider the curve \(C\) defined by \(x(t) = \cos^3 t, y(t) = \sin^3 t, \quad 0 \leq t \leq \frac{\pi}{2}\).
+                    <ol style="list-style-type: lower-alpha; margin-top: 12px; padding-left: 25px;">
+                        <li style="margin-bottom: 10px;">Find the length of the curve.</li>
+                        <li style="margin-bottom: 10px;">Find the area of the surface generated by revolving \(C\) about the \(x\)-axis.</li>
+                    </ol>
+                </li>
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Let \(C\) denote the circular disc of radius \(b\) centered at \((a, 0)\) where \(0 < b < a\). Find the volume of the torus that is generated by revolving \(C\) around the \(y\)-axis using
+                    <ol style="list-style-type: lower-alpha; margin-top: 12px; padding-left: 25px;">
+                        <li style="margin-bottom: 10px;">the Washer Method</li>
+                        <li style="margin-bottom: 10px;">the Shell Method.</li>
+                    </ol>
+                </li>
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    A curved wedge is cut from a right circular cylinder of radius 3 by two planes. One plane is perpendicular to the axis of the cylinder and passes through the centre; the second plane also passes through the centre and meets the first plane at a \(45^\circ\) angle. Find the volume of the wedge (the region of the cylinder between the two planes).
+                </li>
+                <li style="margin-bottom: 10px; padding-left: 10px;">
+                    Using the theorem of Pappus, find the centroid of a thin, flat plate covering the region enclosed by the parabolas \(y = 2x^2\) and \(y = 3 - x^2\).
+                </li>
+            </ol>
             </div>
-        </div>
+        </details>
     </div>
 </section>
 
 
 <!-- Add last updated information -->
-<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Sep 20, 2026</p>
+<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Sep 21, 2026</p>
 
 {% endblock %}
   
@@ -126,4 +213,17 @@
 {% block scripts %}
 {{ super() }}
 <script src="{{ url_for('teaching.static', filename='js/teaching_effects.js') }}"></script>
+<!-- MathJax for rendering mathematics -->
+<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 {% endblock %}
