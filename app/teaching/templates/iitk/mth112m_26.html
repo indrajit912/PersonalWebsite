@@ -11,22 +11,48 @@
   
 {% block styles %}
     {{ super() }}
+    
+    <style>
+        .polar-animation-container canvas {
+            max-width: 100%;
+            height: auto;
+        }
+        .polar-animation-container {
+            padding: 10px !important;
+        }
+        @media (max-width: 768px) {
+            .polar-animation-container > div {
+                gap: 15px !important;
+            }
+            .polar-animation-container h5 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+
+
     <link rel="stylesheet" href="{{ url_for('teaching.static', filename='css/course_style.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
 
+    
     <style>
-        .grading-card table th,
-        .grading-card table td {
-            padding: 4px 18px;   /* vertical | horizontal gap */
+        .polar-animation-container canvas {
+            max-width: 100%;
+            height: auto;
         }
-        
-        .group-photo img {
-            width: 100%;
-            max-width: 850px;
-            margin: 0 auto;
-            display: block;
+        .polar-animation-container {
+            padding: 10px !important;
+        }
+        @media (max-width: 768px) {
+            .polar-animation-container > div {
+                gap: 15px !important;
+            }
+            .polar-animation-container h5 {
+                font-size: 1.1rem;
+            }
         }
     </style>
+
 {% endblock %}
  
   
@@ -136,7 +162,249 @@
                         \[ r = \frac{\sin \theta}{2}, \quad r^2 = -\cos \theta, \quad r = e^{\theta/10}, \quad r = \frac{1}{2} + \sin \theta, \quad r = -|\cos \theta|. \]
                     </div>
                 </li>
-                <li style="margin-bottom: 25px; padding-left: 10px;">
+                
+                    <div class="polar-animation-container" style="position: relative; z-index: 10000; text-align: center; margin: 30px 0; background: #fafafa; padding: 20px; border-radius: 8px; border: 1px solid #eaeaea;">
+                        <div style="margin-bottom: 20px;">
+                            <label for="curveSelector" style="font-weight: 600; color: var(--primary-color, #2c3e50); margin-right: 10px;">Select Curve to Animate:</label>
+                            <select id="curveSelector" onchange="startPolarAnimation()" style="padding: 5px 10px; border-radius: 4px; border: 1px solid #ccc; font-family: monospace;">
+                                <option value="1">r = sin(&theta;) / 2</option>
+                                <option value="2" selected>r&sup2; = -cos(&theta;)</option>
+                                <option value="3">r = e^(&theta;/10)</option>
+                                <option value="4">r = 1/2 + sin(&theta;)</option>
+                                <option value="5">r = -|cos(&theta;)|</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 30px;">
+                            
+                            <!-- New Theta Graph -->
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <div style="font-weight: bold; color: #555; margin-bottom: 5px; font-size: 0.95rem;">Angle &theta;</div>
+                                <canvas id="thetaGraphCanvas" width="150" height="150" style="position: relative; z-index: 10000; background: #fff; background: #fff; border: 1px solid #ddd; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.05);"></canvas>
+                            </div>
+
+                            <!-- Main Polar Curve -->
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <div style="font-weight: bold; color: #555; margin-bottom: 5px; font-size: 0.95rem;">Polar Curve</div>
+                                <canvas id="polarAnimationCanvas" width="300" height="300" style="position: relative; z-index: 10000; background: #fff; background: #fff; border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);"></canvas>
+                            </div>
+                            
+                            <div style="text-align: left; font-family: monospace; background: #fff; padding: 15px 20px; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 2px 5px rgba(0,0,0,0.03); min-width: 160px;">
+                                <div style="font-weight: bold; color: #555; margin-bottom: 8px; font-size: 0.95rem;">Live &theta; Value:</div>
+                                <div id="thetaDisplay" style="color: #e74c3c; font-size: 1.4rem; font-weight: bold; margin-bottom: 8px;">0.00 &pi;</div>
+                                <input type="range" id="thetaSlider" min="0" max="100" value="0" oninput="onSliderChange()" style="width: 100%; cursor: pointer;">
+                                <div id="thetaInterval" style="font-size: 0.85rem; color: #888; margin-top: 8px; font-family: sans-serif;">Interval: [0, 2&pi;]</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <button onclick="resumeOrRestart()" style="padding: 8px 20px; background: #2c3e50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.95rem; font-weight: 500; transition: background 0.2s;">
+                                <i class="bi bi-play-circle"></i> Play / Resume
+                            </button>
+                        </div>
+                    </div>
+                    <script>
+                        let polarAnimId;
+                        let animIsPlaying = true;
+                        let currentCurveType = "2";
+                        
+                        let scale = 110; 
+                        let minTheta = 0;
+                        let maxTheta = 2 * Math.PI;
+                        let dTheta = 0.02;
+                        let hasTwoPetals = false;
+                        let currentTheta = 0;
+
+                        function getR(t, type, petal) {
+                            if (type === "1") return Math.sin(t) / 2;
+                            if (type === "2") {
+                                let val = -Math.cos(t);
+                                if (val < 0) val = 0;
+                                return petal === 1 ? Math.sqrt(val) : -Math.sqrt(val);
+                            }
+                            if (type === "3") return Math.exp(t / 10);
+                            if (type === "4") return 0.5 + Math.sin(t);
+                            if (type === "5") return -Math.abs(Math.cos(t));
+                            return 0;
+                        }
+
+                        function initCurveParams(curveType) {
+                            if (curveType === "1") {
+                                scale = 200; minTheta = 0; maxTheta = Math.PI; dTheta = 0.02; hasTwoPetals = false;
+                            } else if (curveType === "2") {
+                                scale = 110; minTheta = Math.PI / 2; maxTheta = 3 * Math.PI / 2; dTheta = 0.02; hasTwoPetals = true;
+                            } else if (curveType === "3") {
+                                scale = 30; minTheta = 0; maxTheta = 4 * Math.PI; dTheta = 0.04; hasTwoPetals = false;
+                            } else if (curveType === "4") {
+                                scale = 75; minTheta = 0; maxTheta = 2 * Math.PI; dTheta = 0.02; hasTwoPetals = false;
+                            } else if (curveType === "5") {
+                                scale = 110; minTheta = 0; maxTheta = 2 * Math.PI; dTheta = 0.02; hasTwoPetals = false;
+                            }
+                        }
+
+                        function drawThetaGraph(targetTheta) {
+                            const tCanvas = document.getElementById('thetaGraphCanvas');
+                            if (!tCanvas) return;
+                            const tCtx = tCanvas.getContext('2d');
+                            const tcx = tCanvas.width / 2;
+                            const tcy = tCanvas.height / 2;
+                            const tRadius = 60; 
+
+                            tCtx.clearRect(0, 0, tCanvas.width, tCanvas.height);
+
+                            tCtx.beginPath();
+                            tCtx.strokeStyle = '#e0e0e0';
+                            tCtx.lineWidth = 1;
+                            tCtx.moveTo(0, tcy); tCtx.lineTo(tCanvas.width, tcy);
+                            tCtx.moveTo(tcx, 0); tCtx.lineTo(tcx, tCanvas.height);
+                            tCtx.stroke();
+
+                            tCtx.beginPath();
+                            tCtx.strokeStyle = '#bbb';
+                            tCtx.arc(tcx, tcy, tRadius, 0, 2*Math.PI);
+                            tCtx.stroke();
+
+                            let span = targetTheta - minTheta;
+                            if (span > 0) {
+                                tCtx.beginPath();
+                                tCtx.fillStyle = 'rgba(39, 174, 96, 0.2)'; 
+                                tCtx.moveTo(tcx, tcy);
+                                tCtx.arc(tcx, tcy, tRadius, -minTheta, -targetTheta, true); 
+                                tCtx.fill();
+                            }
+
+                            tCtx.beginPath();
+                            tCtx.strokeStyle = '#27ae60'; 
+                            tCtx.lineWidth = 2.5;
+                            tCtx.moveTo(tcx, tcy);
+                            tCtx.lineTo(tcx + tRadius * Math.cos(targetTheta), tcy - tRadius * Math.sin(targetTheta));
+                            tCtx.stroke();
+                            
+                            tCtx.beginPath();
+                            tCtx.fillStyle = '#c0392b';
+                            tCtx.arc(tcx + tRadius * Math.cos(targetTheta), tcy - tRadius * Math.sin(targetTheta), 4, 0, 2*Math.PI);
+                            tCtx.fill();
+                        }
+
+                        function drawSceneUpTo(targetTheta) {
+                            drawThetaGraph(targetTheta);
+
+                            const canvas = document.getElementById('polarAnimationCanvas');
+                            if (!canvas) return;
+                            const ctx = canvas.getContext('2d');
+                            const cx = canvas.width / 2;
+                            const cy = canvas.height / 2;
+
+                            ctx.clearRect(0, 0, canvas.width, canvas.height);
+                            
+                            ctx.beginPath();
+                            ctx.strokeStyle = '#e0e0e0';
+                            ctx.lineWidth = 1;
+                            ctx.moveTo(0, cy); ctx.lineTo(canvas.width, cy);
+                            ctx.moveTo(cx, 0); ctx.lineTo(cx, canvas.height);
+                            ctx.stroke();
+
+                            ctx.beginPath();
+                            ctx.strokeStyle = '#f0f0f0';
+                            ctx.arc(cx, cy, scale, 0, 2*Math.PI);
+                            ctx.stroke();
+
+                            if (targetTheta <= minTheta) return;
+
+                            ctx.beginPath();
+                            ctx.strokeStyle = '#e74c3c'; 
+                            ctx.lineWidth = 2.5;
+                            ctx.lineCap = 'round';
+                            let drewP1 = false;
+                            
+                            for (let t = minTheta; t <= targetTheta; t += dTheta) {
+                                let r1 = getR(t, currentCurveType, 1);
+                                let x = cx + r1 * Math.cos(t) * scale;
+                                let y = cy - r1 * Math.sin(t) * scale;
+                                if (!drewP1) { ctx.moveTo(x, y); drewP1 = true; }
+                                else { ctx.lineTo(x, y); }
+                            }
+                            ctx.stroke();
+
+                            if (hasTwoPetals) {
+                                ctx.beginPath();
+                                ctx.strokeStyle = '#3498db'; 
+                                ctx.lineWidth = 2.5;
+                                ctx.lineCap = 'round';
+                                let drewP2 = false;
+                                for (let t = minTheta; t <= targetTheta; t += dTheta) {
+                                    let r2 = getR(t, currentCurveType, 2);
+                                    let x = cx + r2 * Math.cos(t) * scale;
+                                    let y = cy - r2 * Math.sin(t) * scale;
+                                    if (!drewP2) { ctx.moveTo(x, y); drewP2 = true; }
+                                    else { ctx.lineTo(x, y); }
+                                }
+                                ctx.stroke();
+                            }
+                        }
+
+                        function updateUI(theta) {
+                            document.getElementById('thetaDisplay').innerHTML = (theta / Math.PI).toFixed(2) + " &pi;";
+                            let progress = ((theta - minTheta) / (maxTheta - minTheta)) * 100;
+                            document.getElementById('thetaSlider').value = progress;
+                        }
+
+                        function animLoop() {
+                            if (!animIsPlaying) return;
+                            
+                            currentTheta += dTheta;
+                            if (currentTheta >= maxTheta) {
+                                currentTheta = maxTheta;
+                                animIsPlaying = false;
+                            }
+                            
+                            drawSceneUpTo(currentTheta);
+                            updateUI(currentTheta);
+
+                            if (animIsPlaying) {
+                                polarAnimId = requestAnimationFrame(animLoop);
+                            }
+                        }
+
+                        function startPolarAnimation() {
+                            currentCurveType = document.getElementById('curveSelector').value;
+                            initCurveParams(currentCurveType);
+                            
+                            const thetaInterval = document.getElementById('thetaInterval');
+                            if (currentCurveType === "1") thetaInterval.innerHTML = "Interval: [0, &pi;]";
+                            else if (currentCurveType === "2") thetaInterval.innerHTML = "Interval: [&pi;/2, 3&pi;/2]";
+                            else if (currentCurveType === "3") thetaInterval.innerHTML = "Interval: [0, 4&pi;]";
+                            else thetaInterval.innerHTML = "Interval: [0, 2&pi;]";
+
+                            currentTheta = minTheta;
+                            animIsPlaying = true;
+                            cancelAnimationFrame(polarAnimId);
+                            animLoop();
+                        }
+
+                        function onSliderChange() {
+                            animIsPlaying = false; 
+                            cancelAnimationFrame(polarAnimId);
+                            
+                            let progress = document.getElementById('thetaSlider').value;
+                            currentTheta = minTheta + (progress / 100) * (maxTheta - minTheta);
+                            
+                            document.getElementById('thetaDisplay').innerHTML = (currentTheta / Math.PI).toFixed(2) + " &pi;";
+                            drawSceneUpTo(currentTheta);
+                        }
+                        
+                        function resumeOrRestart() {
+                            if (currentTheta >= maxTheta - 0.05) {
+                                currentTheta = minTheta;
+                            }
+                            animIsPlaying = true;
+                            cancelAnimationFrame(polarAnimId);
+                            animLoop();
+                        }
+
+                        document.addEventListener("DOMContentLoaded", () => {
+                            setTimeout(startPolarAnimation, 500);
+                        });
+                    </script>
+<li style="margin-bottom: 25px; padding-left: 10px;">
                     Find the area of the region that is inside the circle \(r = 3\sin\theta\) and also inside \(r = 1 + \sin\theta\).
                 </li>
                 <li style="margin-bottom: 25px; padding-left: 10px;">
@@ -190,6 +458,179 @@
                     <ol style="list-style-type: lower-alpha; margin-top: 12px; padding-left: 25px;">
                         <li style="margin-bottom: 10px;">Find the length of the curve.</li>
                         <li style="margin-bottom: 10px;">Find the area of the surface generated by revolving \(C\) about the \(x\)-axis.</li>
+                    <div class="polar-animation-container" style="position: relative; z-index: 10000; text-align: center; margin: 30px 0; background: #fafafa; padding: 20px; border-radius: 8px; border: 1px solid #eaeaea;">
+                        <h5 style="color: var(--primary-color, #2c3e50); margin-bottom: 15px; font-weight: 600;">
+                            3D Surface of Revolution: Astroid about x-axis
+                        </h5>
+                        <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 30px;">
+                            <canvas id="astroid3DCanvas" width="350" height="300" style="position: relative; z-index: 10000; background: #fff; background: #222; border: 1px solid #111; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"></canvas>
+                            
+                            <div style="text-align: left; font-family: monospace; background: #fff; padding: 15px 20px; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 2px 5px rgba(0,0,0,0.03); min-width: 160px;">
+                                <div style="font-weight: bold; color: #555; margin-bottom: 8px; font-size: 0.95rem;">Sweep Angle &phi;:</div>
+                                <div id="phiDisplay" style="color: #27ae60; font-size: 1.4rem; font-weight: bold; margin-bottom: 8px;">0.00 &pi;</div>
+                                <input type="range" id="phiSlider" min="0" max="100" value="0" oninput="onPhiSliderChange()" style="width: 100%; cursor: pointer;">
+                                <div style="font-size: 0.85rem; color: #888; margin-top: 8px; font-family: sans-serif;">Interval: [0, 2&pi;]</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <button onclick="resumeAstroidAnimation()" style="padding: 8px 20px; background: #2c3e50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.95rem; font-weight: 500; transition: background 0.2s;">
+                                <i class="bi bi-play-circle"></i> Play / Resume
+                            </button>
+                        </div>
+                    </div>
+                    <script>
+                        let astroidAnimId;
+                        let astroidIsPlaying = true;
+                        let currentPhi = 0;
+                        const maxPhi = 2 * Math.PI;
+                        const dPhi = 0.03;
+
+                        function drawAstroidScene(targetPhi) {
+                            const canvas = document.getElementById('astroid3DCanvas');
+                            if (!canvas) return;
+                            const ctx = canvas.getContext('2d');
+                            const width = canvas.width;
+                            const height = canvas.height;
+                            const cx = width / 2;
+                            const cy = height / 2;
+
+                            ctx.clearRect(0, 0, width, height);
+
+                            const scale = 120;
+                            function project(X, Y, Z) {
+                                X *= scale; Y *= scale; Z *= scale;
+                                let angleY = -Math.PI / 4; 
+                                let x1 = X * Math.cos(angleY) - Z * Math.sin(angleY);
+                                let z1 = X * Math.sin(angleY) + Z * Math.cos(angleY);
+                                
+                                let angleX = Math.PI / 6; 
+                                let y2 = Y * Math.cos(angleX) - z1 * Math.sin(angleX);
+                                let z2 = Y * Math.sin(angleX) + z1 * Math.cos(angleX);
+                                
+                                let D = 600;
+                                let p = D / (D + z2);
+                                return {
+                                    x: cx + x1 * p - 20,
+                                    y: cy - y2 * p + 20
+                                };
+                            }
+
+                            function drawLine(p1, p2, color, lw=1) {
+                                ctx.beginPath();
+                                ctx.strokeStyle = color;
+                                ctx.lineWidth = lw;
+                                ctx.moveTo(p1.x, p1.y);
+                                ctx.lineTo(p2.x, p2.y);
+                                ctx.stroke();
+                            }
+
+                            drawLine(project(-1.2, 0, 0), project(1.5, 0, 0), '#666'); 
+                            drawLine(project(0, -1.2, 0), project(0, 1.5, 0), '#666'); 
+                            drawLine(project(0, 0, -1.2), project(0, 0, 1.5), '#666'); 
+                            
+                            ctx.fillStyle = '#aaa';
+                            ctx.font = '14px monospace';
+                            let px = project(1.6, 0, 0); ctx.fillText('X', px.x, px.y);
+                            let py = project(0, 1.6, 0); ctx.fillText('Y', py.x, py.y);
+                            let pz = project(0, 0, 1.6); ctx.fillText('Z', pz.x, pz.y);
+
+                            if (targetPhi <= 0) return;
+
+                            ctx.strokeStyle = 'rgba(46, 204, 113, 0.7)'; 
+                            ctx.lineWidth = 1.2;
+
+                            for (let phi_i = 0; phi_i <= targetPhi; phi_i += Math.PI/8) {
+                                ctx.beginPath();
+                                for (let t = 0; t <= Math.PI/2; t += 0.05) {
+                                    let X = Math.pow(Math.cos(t), 3);
+                                    let Y = Math.pow(Math.sin(t), 3) * Math.cos(phi_i);
+                                    let Z = Math.pow(Math.sin(t), 3) * Math.sin(phi_i);
+                                    let p = project(X, Y, Z);
+                                    if (t === 0) ctx.moveTo(p.x, p.y);
+                                    else ctx.lineTo(p.x, p.y);
+                                }
+                                ctx.stroke();
+                            }
+
+                            ctx.strokeStyle = 'rgba(52, 152, 219, 0.4)'; 
+                            for (let t = 0; t <= Math.PI/2; t += Math.PI/12) {
+                                ctx.beginPath();
+                                for (let phi_i = 0; phi_i <= targetPhi; phi_i += 0.05) {
+                                    let X = Math.pow(Math.cos(t), 3);
+                                    let Y = Math.pow(Math.sin(t), 3) * Math.cos(phi_i);
+                                    let Z = Math.pow(Math.sin(t), 3) * Math.sin(phi_i);
+                                    let p = project(X, Y, Z);
+                                    if (phi_i === 0) ctx.moveTo(p.x, p.y);
+                                    else ctx.lineTo(p.x, p.y);
+                                }
+                                ctx.stroke();
+                            }
+                            
+                            ctx.beginPath();
+                            ctx.strokeStyle = '#f1c40f'; 
+                            ctx.lineWidth = 2.5;
+                            for (let t = 0; t <= Math.PI/2; t += 0.05) {
+                                let X = Math.pow(Math.cos(t), 3);
+                                let Y = Math.pow(Math.sin(t), 3) * Math.cos(targetPhi);
+                                let Z = Math.pow(Math.sin(t), 3) * Math.sin(targetPhi);
+                                let p = project(X, Y, Z);
+                                if (t === 0) ctx.moveTo(p.x, p.y);
+                                else ctx.lineTo(p.x, p.y);
+                            }
+                            ctx.stroke();
+                        }
+
+                        function updateAstroidUI(phi) {
+                            document.getElementById('phiDisplay').innerHTML = (phi / Math.PI).toFixed(2) + " &pi;";
+                            let progress = (phi / maxPhi) * 100;
+                            document.getElementById('phiSlider').value = progress;
+                        }
+
+                        function astroidLoop() {
+                            if (!astroidIsPlaying) return;
+                            
+                            currentPhi += dPhi;
+                            if (currentPhi >= maxPhi) {
+                                currentPhi = maxPhi;
+                                astroidIsPlaying = false;
+                            }
+                            
+                            drawAstroidScene(currentPhi);
+                            updateAstroidUI(currentPhi);
+
+                            if (astroidIsPlaying) {
+                                astroidAnimId = requestAnimationFrame(astroidLoop);
+                            }
+                        }
+
+                        function onPhiSliderChange() {
+                            astroidIsPlaying = false; 
+                            cancelAnimationFrame(astroidAnimId);
+                            
+                            let progress = document.getElementById('phiSlider').value;
+                            currentPhi = (progress / 100) * maxPhi;
+                            
+                            drawAstroidScene(currentPhi);
+                            updateAstroidUI(currentPhi);
+                        }
+                        
+                        function resumeAstroidAnimation() {
+                            if (currentPhi >= maxPhi - 0.05) {
+                                currentPhi = 0;
+                            }
+                            astroidIsPlaying = true;
+                            cancelAnimationFrame(astroidAnimId);
+                            astroidLoop();
+                        }
+
+                        document.addEventListener("DOMContentLoaded", () => {
+                            setTimeout(() => {
+                                currentPhi = 0;
+                                astroidIsPlaying = true;
+                                astroidLoop();
+                            }, 1000);
+                        });
+                    </script>
                     </ol>
                 </li>
                 <li style="margin-bottom: 25px; padding-left: 10px;">
@@ -199,21 +640,541 @@
                         <li style="margin-bottom: 10px;">the Shell Method.</li>
                     </ol>
                 </li>
+                    <div class="polar-animation-container" style="position: relative; z-index: 10000; text-align: center; margin: 30px 0; background: #fafafa; padding: 20px; border-radius: 8px; border: 1px solid #eaeaea;">
+                        <h5 style="color: var(--primary-color, #2c3e50); margin-bottom: 15px; font-weight: 600;">
+                            3D Torus Volume: Washer vs Shell Method
+                        </h5>
+                        <div style="margin-bottom: 20px;">
+                            <label for="torusMethod" style="font-weight: 600; color: var(--primary-color, #2c3e50); margin-right: 10px;">Integration Method:</label>
+                            <select id="torusMethod" onchange="startTorusAnimation()" style="padding: 5px 10px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit;">
+                                <option value="washer" selected>Washer Method (Sweep y)</option>
+                                <option value="shell">Shell Method (Sweep x)</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 30px;">
+                            <canvas id="torus3DCanvas" width="350" height="300" style="position: relative; z-index: 10000; background: #fff; background: #222; border: 1px solid #111; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"></canvas>
+                            
+                            <div style="text-align: left; font-family: monospace; background: #fff; padding: 15px 20px; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 2px 5px rgba(0,0,0,0.03); min-width: 170px;">
+                                <div style="font-weight: bold; color: #555; margin-bottom: 8px; font-size: 0.95rem;">Sweep Progress:</div>
+                                <div id="torusVarDisplay" style="color: #27ae60; font-size: 1.4rem; font-weight: bold; margin-bottom: 8px;">y = -0.80</div>
+                                <input type="range" id="torusSlider" min="0" max="100" value="0" oninput="onTorusSliderChange()" style="width: 100%; cursor: pointer;">
+                                <div id="torusIntervalDisplay" style="font-size: 0.85rem; color: #888; margin-top: 8px; font-family: sans-serif;">Interval: y &in; [-0.8, 0.8]</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <button onclick="resumeTorusAnimation()" style="padding: 8px 20px; background: #2c3e50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.95rem; font-weight: 500; transition: background 0.2s;">
+                                <i class="bi bi-play-circle"></i> Play / Resume
+                            </button>
+                        </div>
+                    </div>
+                    <script>
+                        let torusAnimId;
+                        let torusIsPlaying = true;
+                        let currentT = 0; 
+                        const dT = 0.005;
+
+                        const A = 2.0; 
+                        const B = 0.8; 
+
+                        function drawTorusScene(progress) {
+                            const canvas = document.getElementById('torus3DCanvas');
+                            if (!canvas) return;
+                            const ctx = canvas.getContext('2d');
+                            const width = canvas.width;
+                            const height = canvas.height;
+                            const cx = width / 2;
+                            const cy = height / 2;
+
+                            ctx.clearRect(0, 0, width, height);
+
+                            const method = document.getElementById('torusMethod').value;
+                            const scale = 45;
+                            
+                            function project(X, Y, Z) {
+                                X *= scale; Y *= scale; Z *= scale;
+                                let angleY = -Math.PI / 4; 
+                                let x1 = X * Math.cos(angleY) - Z * Math.sin(angleY);
+                                let z1 = X * Math.sin(angleY) + Z * Math.cos(angleY);
+                                
+                                let angleX = Math.PI / 6; 
+                                let y2 = Y * Math.cos(angleX) - z1 * Math.sin(angleX);
+                                let z2 = Y * Math.sin(angleX) + z1 * Math.cos(angleX);
+                                
+                                let D = 800;
+                                let p = D / (D + z2);
+                                return {
+                                    x: cx + x1 * p,
+                                    y: cy - y2 * p
+                                };
+                            }
+
+                            function drawLine(p1, p2, color, lw=1) {
+                                ctx.beginPath();
+                                ctx.strokeStyle = color;
+                                ctx.lineWidth = lw;
+                                ctx.moveTo(p1.x, p1.y);
+                                ctx.lineTo(p2.x, p2.y);
+                                ctx.stroke();
+                            }
+
+                            drawLine(project(-3.5, 0, 0), project(3.5, 0, 0), '#666'); 
+                            drawLine(project(0, -1.5, 0), project(0, 1.5, 0), '#999', 2); 
+                            drawLine(project(0, 0, -3.5), project(0, 0, 3.5), '#666'); 
+                            
+                            ctx.fillStyle = '#aaa';
+                            ctx.font = '14px monospace';
+                            let py = project(0, 1.8, 0); ctx.fillText('Y (Axis)', py.x - 20, py.y);
+
+                            if (progress <= 0) return;
+
+                            ctx.lineWidth = 1;
+
+                            if (method === "washer") {
+                                let currentY = -B + progress * (2 * B);
+                                
+                                ctx.strokeStyle = 'rgba(52, 152, 219, 0.4)'; 
+                                for (let y = -B; y <= currentY; y += 0.1) {
+                                    let val = B*B - y*y; if (val<0) val=0;
+                                    let R_out = A + Math.sqrt(val);
+                                    ctx.beginPath();
+                                    for (let th = 0; th <= 2*Math.PI; th += 0.1) {
+                                        let p = project(R_out * Math.cos(th), y, R_out * Math.sin(th));
+                                        if (th === 0) ctx.moveTo(p.x, p.y);
+                                        else ctx.lineTo(p.x, p.y);
+                                    }
+                                    ctx.closePath(); ctx.stroke();
+                                }
+                                
+                                ctx.strokeStyle = 'rgba(231, 76, 60, 0.4)'; 
+                                for (let y = -B; y <= currentY; y += 0.1) {
+                                    let val = B*B - y*y; if (val < 0) val = 0;
+                                    let R_in = A - Math.sqrt(val);
+                                    ctx.beginPath();
+                                    for (let th = 0; th <= 2*Math.PI; th += 0.1) {
+                                        let p = project(R_in * Math.cos(th), y, R_in * Math.sin(th));
+                                        if (th === 0) ctx.moveTo(p.x, p.y);
+                                        else ctx.lineTo(p.x, p.y);
+                                    }
+                                    ctx.closePath(); ctx.stroke();
+                                }
+
+                                ctx.strokeStyle = '#f1c40f';
+                                ctx.lineWidth = 2;
+                                let val = B*B - currentY*currentY; if(val<0)val=0;
+                                let R_out = A + Math.sqrt(val);
+                                let R_in = A - Math.sqrt(val);
+                                
+                                ctx.beginPath();
+                                for (let th = 0; th <= 2*Math.PI; th += 0.1) {
+                                    let p = project(R_out * Math.cos(th), currentY, R_out * Math.sin(th));
+                                    if (th === 0) ctx.moveTo(p.x, p.y);
+                                    else ctx.lineTo(p.x, p.y);
+                                }
+                                ctx.closePath(); ctx.stroke();
+                                
+                                ctx.beginPath();
+                                for (let th = 0; th <= 2*Math.PI; th += 0.1) {
+                                    let p = project(R_in * Math.cos(th), currentY, R_in * Math.sin(th));
+                                    if (th === 0) ctx.moveTo(p.x, p.y);
+                                    else ctx.lineTo(p.x, p.y);
+                                }
+                                ctx.closePath(); ctx.stroke();
+                                
+                            } else {
+                                let currentX = (A - B) + progress * (2 * B);
+                                
+                                ctx.strokeStyle = 'rgba(46, 204, 113, 0.4)'; 
+                                for (let x = A - B; x <= currentX; x += 0.1) {
+                                    let val = B*B - (x-A)*(x-A); if(val<0)val=0;
+                                    let H = Math.sqrt(val);
+                                    ctx.beginPath();
+                                    for (let th = 0; th <= 2*Math.PI; th += 0.1) {
+                                        let p = project(x * Math.cos(th), H, x * Math.sin(th));
+                                        if (th === 0) ctx.moveTo(p.x, p.y);
+                                        else ctx.lineTo(p.x, p.y);
+                                    }
+                                    ctx.closePath(); ctx.stroke();
+                                }
+                                
+                                ctx.strokeStyle = 'rgba(155, 89, 182, 0.4)'; 
+                                for (let x = A - B; x <= currentX; x += 0.1) {
+                                    let val = B*B - (x-A)*(x-A); if(val<0)val=0;
+                                    let H = Math.sqrt(val);
+                                    ctx.beginPath();
+                                    for (let th = 0; th <= 2*Math.PI; th += 0.1) {
+                                        let p = project(x * Math.cos(th), -H, x * Math.sin(th));
+                                        if (th === 0) ctx.moveTo(p.x, p.y);
+                                        else ctx.lineTo(p.x, p.y);
+                                    }
+                                    ctx.closePath(); ctx.stroke();
+                                }
+
+                                let val = B*B - (currentX-A)*(currentX-A); if(val<0)val=0;
+                                let H = Math.sqrt(val);
+                                
+                                ctx.strokeStyle = '#e67e22'; 
+                                ctx.lineWidth = 2;
+                                ctx.beginPath();
+                                for (let th = 0; th <= 2*Math.PI; th += 0.1) {
+                                    let p = project(currentX * Math.cos(th), H, currentX * Math.sin(th));
+                                    if (th === 0) ctx.moveTo(p.x, p.y);
+                                    else ctx.lineTo(p.x, p.y);
+                                }
+                                ctx.closePath(); ctx.stroke();
+                                
+                                ctx.beginPath();
+                                for (let th = 0; th <= 2*Math.PI; th += 0.1) {
+                                    let p = project(currentX * Math.cos(th), -H, currentX * Math.sin(th));
+                                    if (th === 0) ctx.moveTo(p.x, p.y);
+                                    else ctx.lineTo(p.x, p.y);
+                                }
+                                ctx.closePath(); ctx.stroke();
+                                
+                                for (let th = 0; th < 2*Math.PI; th += Math.PI/4) {
+                                    let p1 = project(currentX * Math.cos(th), H, currentX * Math.sin(th));
+                                    let p2 = project(currentX * Math.cos(th), -H, currentX * Math.sin(th));
+                                    drawLine(p1, p2, 'rgba(230, 126, 34, 0.6)', 1.5);
+                                }
+                            }
+                        }
+
+                        function updateTorusUI(progress) {
+                            const method = document.getElementById('torusMethod').value;
+                            if (method === "washer") {
+                                let currentY = -B + progress * (2 * B);
+                                document.getElementById('torusVarDisplay').innerHTML = "y = " + currentY.toFixed(2);
+                                document.getElementById('torusIntervalDisplay').innerHTML = `Interval: y &in; [${-B.toFixed(1)}, ${B.toFixed(1)}]`;
+                            } else {
+                                let currentX = (A - B) + progress * (2 * B);
+                                document.getElementById('torusVarDisplay').innerHTML = "x = " + currentX.toFixed(2);
+                                document.getElementById('torusIntervalDisplay').innerHTML = `Interval: x &in; [${(A-B).toFixed(1)}, ${(A+B).toFixed(1)}]`;
+                            }
+                            document.getElementById('torusSlider').value = progress * 100;
+                        }
+
+                        function torusLoop() {
+                            if (!torusIsPlaying) return;
+                            
+                            currentT += dT;
+                            if (currentT >= 1.0) {
+                                currentT = 1.0;
+                                torusIsPlaying = false;
+                            }
+                            
+                            drawTorusScene(currentT);
+                            updateTorusUI(currentT);
+
+                            if (torusIsPlaying) {
+                                torusAnimId = requestAnimationFrame(torusLoop);
+                            }
+                        }
+
+                        function onTorusSliderChange() {
+                            torusIsPlaying = false; 
+                            cancelAnimationFrame(torusAnimId);
+                            
+                            let val = document.getElementById('torusSlider').value;
+                            currentT = val / 100;
+                            
+                            drawTorusScene(currentT);
+                            updateTorusUI(currentT);
+                        }
+                        
+                        function resumeTorusAnimation() {
+                            if (currentT >= 0.99) {
+                                currentT = 0;
+                            }
+                            torusIsPlaying = true;
+                            cancelAnimationFrame(torusAnimId);
+                            torusLoop();
+                        }
+                        
+                        function startTorusAnimation() {
+                            currentT = 0;
+                            torusIsPlaying = true;
+                            cancelAnimationFrame(torusAnimId);
+                            torusLoop();
+                        }
+
+                        document.addEventListener("DOMContentLoaded", () => {
+                            setTimeout(() => {
+                                currentT = 0;
+                                torusIsPlaying = true;
+                                torusLoop();
+                            }, 1500);
+                        });
+                    </script>
                 <li style="margin-bottom: 25px; padding-left: 10px;">
                     A curved wedge is cut from a right circular cylinder of radius 3 by two planes. One plane is perpendicular to the axis of the cylinder and passes through the centre; the second plane also passes through the centre and meets the first plane at a \(45^\circ\) angle. Find the volume of the wedge (the region of the cylinder between the two planes).
                 </li>
+                    <div class="polar-animation-container" style="position: relative; z-index: 10000; text-align: center; margin: 30px 0; background: #fafafa; padding: 20px; border-radius: 8px; border: 1px solid #eaeaea;">
+                        <h5 style="color: var(--primary-color, #2c3e50); margin-bottom: 15px; font-weight: 600;">
+                            3D Slicing Method: Volume of a Cylindrical Wedge
+                        </h5>
+                        <p style="font-size: 0.95rem; color: #555; margin-bottom: 20px;">
+                            This visualization matches your lecture notes. It shows the static, transparent wedge while the slicing right triangle sweeps across the \(x\)-axis to accumulate the volume.
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 30px;">
+                            <canvas id="wedge3DCanvas" width="450" height="300" style="position: relative; z-index: 10000; background: #fff; background: #fff; border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);"></canvas>
+                            
+                            <div style="text-align: left; font-family: monospace; background: #fff; padding: 15px 20px; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 2px 5px rgba(0,0,0,0.03); min-width: 170px;">
+                                <div style="font-weight: bold; color: #555; margin-bottom: 8px; font-size: 0.95rem;">Cross-Section Slice:</div>
+                                <div id="wedgeVarDisplay" style="color: #e67e22; font-size: 1.4rem; font-weight: bold; margin-bottom: 8px;">x = -3.00</div>
+                                <input type="range" id="wedgeSlider" min="0" max="100" value="0" oninput="onWedgeSliderChange()" style="width: 100%; cursor: pointer;">
+                                <div style="font-size: 0.85rem; color: #888; margin-top: 8px; font-family: sans-serif;">Interval: x &in; [-3, 3]</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <button onclick="resumeWedgeAnimation()" style="padding: 8px 20px; background: #2c3e50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.95rem; font-weight: 500; transition: background 0.2s;">
+                                <i class="bi bi-play-circle"></i> Sweep Slices
+                            </button>
+                        </div>
+                    </div>
+                    <script>
+                        let wedgeAnimId;
+                        let wedgeIsPlaying = true;
+                        let currentXVal = -3;
+                        const dx = 0.04;
+
+                        function drawWedgeScene(targetX) {
+                            const canvas = document.getElementById('wedge3DCanvas');
+                            if (!canvas) return;
+                            const ctx = canvas.getContext('2d');
+                            const cx = canvas.width / 2;
+                            const cy = canvas.height / 2 + 50; 
+
+                            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                            function project(X, Y, Z) {
+                                // Oblique projection matching the lecture notes precisely
+                                let px = cx + X * 45 + Y * 20;
+                                let py = cy - Z * 45 - Y * 15;
+                                return { x: px, y: py };
+                            }
+
+                            function drawLine(p1, p2, color, lw=1, dash=[]) {
+                                ctx.beginPath();
+                                ctx.strokeStyle = color;
+                                ctx.lineWidth = lw;
+                                ctx.setLineDash(dash);
+                                ctx.moveTo(p1.x, p1.y);
+                                ctx.lineTo(p2.x, p2.y);
+                                ctx.stroke();
+                                ctx.setLineDash([]); // reset
+                            }
+
+                            // 1. Draw Axes
+                            drawLine(project(-3.5, 0, 0), project(4.5, 0, 0), '#888', 1.5); // X-axis
+                            drawLine(project(0, 0, 0), project(0, 4.5, 0), '#888', 1.5); // Y-axis
+                            drawLine(project(0, 0, 0), project(0, 0, 4.5), '#888', 1.5); // Z-axis
+
+                            ctx.fillStyle = '#444';
+                            ctx.font = 'bold 14px sans-serif';
+                            let pxText = project(4.7, 0, 0); ctx.fillText('x', pxText.x, pxText.y);
+                            let pyText = project(0, 4.7, 0); ctx.fillText('y', pyText.x, pyText.y);
+                            let pzText = project(0, 0, 4.7); ctx.fillText('z', pzText.x, pzText.y);
+
+                            // 2. Draw static glass wedge (bounding box)
+                            // Base semi-circle (on XY plane)
+                            ctx.fillStyle = 'rgba(100, 150, 250, 0.1)';
+                            ctx.beginPath();
+                            ctx.moveTo(project(-3, 0, 0).x, project(-3, 0, 0).y);
+                            for (let x = -3; x <= 3; x += 0.1) {
+                                let y = Math.sqrt(9 - x*x);
+                                let p = project(x, y, 0);
+                                ctx.lineTo(p.x, p.y);
+                            }
+                            ctx.lineTo(project(3, 0, 0).x, project(3, 0, 0).y);
+                            ctx.fill();
+
+                            // Top slanted ellipse edge (z = y)
+                            ctx.strokeStyle = '#e74c3c'; // red upper lip
+                            ctx.lineWidth = 2;
+                            ctx.beginPath();
+                            for (let x = -3; x <= 3; x += 0.05) {
+                                let y = Math.sqrt(9 - x*x);
+                                let p = project(x, y, y);
+                                if(x === -3) ctx.moveTo(p.x, p.y);
+                                else ctx.lineTo(p.x, p.y);
+                            }
+                            ctx.stroke();
+
+                            // Base edge
+                            ctx.strokeStyle = '#3498db'; // blue base lip
+                            ctx.lineWidth = 1.5;
+                            ctx.beginPath();
+                            for (let x = -3; x <= 3; x += 0.05) {
+                                let y = Math.sqrt(9 - x*x);
+                                let p = project(x, y, 0);
+                                if(x === -3) ctx.moveTo(p.x, p.y);
+                                else ctx.lineTo(p.x, p.y);
+                            }
+                            ctx.stroke();
+
+                            // Faint vertical lines showing the cylinder wall
+                            ctx.strokeStyle = 'rgba(100, 100, 100, 0.2)';
+                            ctx.lineWidth = 1;
+                            for (let x = -2.5; x <= 2.5; x += 0.5) {
+                                let y = Math.sqrt(9 - x*x);
+                                drawLine(project(x, y, 0), project(x, y, y), ctx.strokeStyle);
+                            }
+
+                            // 3. Draw the sliding triangular slice
+                            let ty = Math.sqrt(9 - targetX*targetX);
+                            let pA = project(targetX, 0, 0);
+                            let pB = project(targetX, ty, 0);
+                            let pC = project(targetX, ty, ty);
+
+                            // The solid triangle
+                            ctx.fillStyle = 'rgba(241, 196, 15, 0.8)'; // vibrant yellow/orange
+                            ctx.strokeStyle = '#d35400';
+                            ctx.lineWidth = 2;
+                            ctx.beginPath();
+                            ctx.moveTo(pA.x, pA.y);
+                            ctx.lineTo(pB.x, pB.y);
+                            ctx.lineTo(pC.x, pC.y);
+                            ctx.closePath();
+                            ctx.fill();
+                            ctx.stroke();
+
+                            // Highlight the slice position on the x-axis
+                            ctx.fillStyle = '#c0392b';
+                            ctx.beginPath();
+                            ctx.arc(pA.x, pA.y, 4, 0, 2*Math.PI);
+                            ctx.fill();
+                        }
+
+                        function updateWedgeUI(xVal) {
+                            document.getElementById('wedgeVarDisplay').innerHTML = "x = " + xVal.toFixed(2);
+                            let progress = ((xVal + 3) / 6) * 100;
+                            document.getElementById('wedgeSlider').value = progress;
+                        }
+
+                        function wedgeLoop() {
+                            if (!wedgeIsPlaying) return;
+                            
+                            currentXVal += dx;
+                            if (currentXVal >= 3.0) {
+                                currentXVal = 3.0;
+                                wedgeIsPlaying = false;
+                            }
+                            
+                            drawWedgeScene(currentXVal);
+                            updateWedgeUI(currentXVal);
+
+                            if (wedgeIsPlaying) {
+                                wedgeAnimId = requestAnimationFrame(wedgeLoop);
+                            }
+                        }
+
+                        function onWedgeSliderChange() {
+                            wedgeIsPlaying = false; 
+                            cancelAnimationFrame(wedgeAnimId);
+                            
+                            let val = document.getElementById('wedgeSlider').value;
+                            currentXVal = -3 + (val / 100) * 6;
+                            
+                            drawWedgeScene(currentXVal);
+                            updateWedgeUI(currentXVal);
+                        }
+                        
+                        function resumeWedgeAnimation() {
+                            if (currentXVal >= 2.95) {
+                                currentXVal = -3;
+                            }
+                            wedgeIsPlaying = true;
+                            cancelAnimationFrame(wedgeAnimId);
+                            wedgeLoop();
+                        }
+
+                        document.addEventListener("DOMContentLoaded", () => {
+                            setTimeout(() => {
+                                currentXVal = -3;
+                                wedgeIsPlaying = true;
+                                wedgeLoop();
+                            }, 1000);
+                        });
+                    </script>
                 <li style="margin-bottom: 10px; padding-left: 10px;">
                     Using the theorem of Pappus, find the centroid of a thin, flat plate covering the region enclosed by the parabolas \(y = 2x^2\) and \(y = 3 - x^2\).
                 </li>
             </ol>
             </div>
         </details>
+        <details class="assignment-content" style="background: #fff; padding: 25px 35px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); margin-top: 20px; font-size: 1.05rem; line-height: 1.7; border: 1px solid #eaeaea;">
+            <summary style="cursor: pointer; margin-top: 0; color: var(--primary-color, #2c3e50); font-size: 1.4rem; border-bottom: 2px solid #eee; padding-bottom: 12px; font-weight: 600; list-style-position: inside;">
+                <i class="bi bi-journal-text"></i> Assignment 2: Vectors, Curves, Surfaces, Vector Equations <span style="font-size: 0.9rem; font-weight: normal; color: #777; float: right; margin-top: 5px;">(Click to view)</span>
+            </summary>
+            <div style="margin-top: 25px;">
+                <div style="text-align: right; margin-bottom: 20px;">
+                    <a href="https://drive.google.com/file/d/1o5P36m_teALiIeK8xfaOq8xapOBW1_09/view?usp=drive_link" target="_blank" style="display: inline-block; background-color: #2c3e50; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 500; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <i class="bi bi-file-earmark-pdf"></i> Original PDF
+                    </a>
+                </div>
+            <ol class="problem-list" style="padding-left: 20px; color: #333;">
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Consider the planes
+                    <div style="overflow-x: auto; text-align: center; margin: 15px 0;">
+                        \[ x + y + z = 1, \]
+                        \[ 2x + ay + 3z = 4, \]
+                        \[ x + 2y + 2z = b, \]
+                    </div>
+                    where \(a\) and \(b\) are parameters. Determine the values of \(a\) and \(b\) such that the three planes
+                    <ol style="list-style-type: lower-alpha; margin-top: 12px; padding-left: 25px;">
+                        <li style="margin-bottom: 10px;">intersect at a single point,</li>
+                        <li style="margin-bottom: 10px;">intersect in a line,</li>
+                        <li style="margin-bottom: 10px;">intersect (taken two at a time) in three distinct parallel lines.</li>
+                    </ol>
+                </li>
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Evaluate the distance between the lines
+                    <div style="overflow-x: auto; text-align: center; margin: 15px 0;">
+                        \[ \frac{x - 2}{4} = \frac{y - 7}{-4} = \frac{z + 2}{3} \quad \text{and} \quad \frac{x + 1}{1} = \frac{y + 2}{4} = \frac{z - 1}{-3}. \]
+                    </div>
+                </li>
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Show that the distance between the point \(Q = (x_0, y_0, z_0)\) and the plane
+                    <div style="overflow-x: auto; text-align: center; margin: 15px 0;">
+                        \[ (x, y, z) \cdot \mathbf{n} = d \]
+                    </div>
+                    is given by
+                    <div style="overflow-x: auto; text-align: center; margin: 15px 0;">
+                        \[ \frac{|\mathbf{n} \cdot (x_0, y_0, z_0) - d|}{||\mathbf{n}||}. \]
+                    </div>
+                </li>
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    <ol style="list-style-type: lower-alpha; margin-top: 0; padding-left: 20px;">
+                        <li style="margin-bottom: 15px;">Find an equation for the surface consisting of all points that are equidistant from the point \((-1, 0, 0)\) and the plane \(x = 1\).</li>
+                        <li style="margin-bottom: 15px;">Find an equation for the cylinder generated by a line through the curve
+                        <div style="overflow-x: auto; text-align: center; margin: 15px 0;">
+                            \[ x^2 + y^2 = 4x, \quad z = 0 \]
+                        </div>
+                        moving parallel to the vector \(\mathbf{i} + \mathbf{j} + \mathbf{k}\).</li>
+                    </ol>
+                </li>
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Find the arc-length re-parametrization and then compute the curvature of the curve \(\alpha(t) = (e^t \cos t, e^t \sin t)\), \(t \in \mathbb{R}\).
+                </li>
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Let \(\alpha : (a, b) \to \mathbb{R}^2\) be a plane differentiable curve such that \(\alpha'(t) \neq 0\) for all \(t \in (a, b)\) and all its normals pass through a fixed point in \(\mathbb{R}^2\). Show that the image of \(\alpha\) lies on a circle.
+                </li>
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Show that the parabola \(y = ax^2\), \(a \neq 0\) has its largest curvature at its vertex and has no minimum curvature.
+                </li>
+                <li style="margin-bottom: 10px; padding-left: 10px;">
+                    Find the point on the curve \(c(t) = (5 \sin t)\vec{i} + (5 \cos t)\vec{j} + (12t)\vec{k}\) at a distance \(26\pi\) units from \((0, 5, 0)\) along the curve in the direction of increasing arc length.
+                </li>
+            </ol>
+            </div>
+        </details>
+
+</details>
     </div>
 </section>
 
 
 <!-- Add last updated information -->
-<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Sep 22, 2026</p>
+<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Sep 27, 2026</p>
 
 {% endblock %}
   
@@ -234,4 +1195,71 @@
     };
 </script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<!-- Background Butterfly Curve -->
+<canvas id="bgPolarCanvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; pointer-events: none; opacity: 0.65;"></canvas>
+<script>
+    const bgCanvas = document.getElementById('bgPolarCanvas');
+    const bgCtx = bgCanvas.getContext('2d');
+    
+    function resizeBg() {
+        bgCanvas.width = window.innerWidth;
+        bgCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeBg);
+    resizeBg();
+
+    let bgTheta = 0;
+    const bgDTheta = 0.05;
+    let bgPoints = [];
+    
+    function drawBgPolar() {
+        let cx = bgCanvas.width / 2;
+        let cy = bgCanvas.height / 2;
+        let scale = Math.min(cx, cy) / 5.5; // scale to fit
+        
+        // Butterfly Curve
+        let x, y;
+        if (window.bgCurveChoice === undefined) {
+            window.bgCurveChoice = Math.random() < 0.5 ? 'butterfly' : 'lissajous';
+        }
+        
+        if (window.bgCurveChoice === 'butterfly') {
+            let scale = Math.min(cx, cy) / 5;
+            let r = Math.exp(Math.cos(bgTheta)) - 2 * Math.cos(4 * bgTheta) + Math.pow(Math.sin(bgTheta / 12), 5);
+            x = cx + r * Math.sin(bgTheta) * scale;
+            y = cy - r * Math.cos(bgTheta) * scale;
+        } else {
+            // 5x4 Lissajous Curve
+            x = cx + Math.sin(4 * bgTheta) * (cx * 0.8);
+            y = cy + Math.sin(5 * bgTheta + Math.PI / 4) * (cy * 0.8);
+        }
+        
+        bgPoints.push({x: x, y: y});
+        if (bgPoints.length > 2500) { 
+            bgPoints.shift(); // Keep a fading comet tail
+        }
+        
+        bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+        
+        if (bgPoints.length > 1) {
+            bgCtx.beginPath();
+            bgCtx.moveTo(bgPoints[0].x, bgPoints[0].y);
+            for (let i = 1; i < bgPoints.length; i++) {
+                bgCtx.lineTo(bgPoints[i].x, bgPoints[i].y);
+            }
+            
+            // Faint elegant math blue color
+            let hue = (bgTheta * 12) % 360;
+            bgCtx.strokeStyle = `hsla(${hue}, 85%, 60%, 0.3)`; 
+            bgCtx.lineWidth = 1.5;
+            bgCtx.stroke();
+        }
+        
+        bgTheta += bgDTheta;
+        requestAnimationFrame(drawBgPolar);
+    }
+    
+    requestAnimationFrame(drawBgPolar);
+</script>
 {% endblock %}
