@@ -24,7 +24,98 @@
 <section>
     <div class="page-container">
         <div class="page-heading">
-            <h1><i class="bi bi-book"></i> Research</h1>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 1.5rem; flex-wrap: wrap;">
+    <canvas id="particleIconCanvas" width="90" height="90" style="border-radius: 50%; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border: 1px solid #eaeaea; cursor: crosshair;"></canvas>
+    <h1 style="margin: 0; font-size: 3.5rem; font-weight: 800; color: #2c3e50; letter-spacing: -1px;">Research</h1>
+</div>
+<script>
+    const pCanvas = document.getElementById('particleIconCanvas');
+    const pCtx = pCanvas.getContext('2d');
+    let nodes = [];
+    const numNodes = 30;
+    
+    for (let i = 0; i < numNodes; i++) {
+        nodes.push({
+            x: Math.random() * pCanvas.width,
+            y: Math.random() * pCanvas.height,
+            vx: (Math.random() - 0.5) * 1.2,
+            vy: (Math.random() - 0.5) * 1.2,
+            radius: Math.random() * 2 + 1
+        });
+    }
+
+    let pMouse = { x: null, y: null };
+    pCanvas.addEventListener('mousemove', (e) => {
+        const rect = pCanvas.getBoundingClientRect();
+        pMouse.x = e.clientX - rect.left;
+        pMouse.y = e.clientY - rect.top;
+    });
+    pCanvas.addEventListener('mouseleave', () => {
+        pMouse.x = null;
+        pMouse.y = null;
+    });
+
+    function animateNodes() {
+        pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+        
+        for (let i = 0; i < nodes.length; i++) {
+            let p = nodes[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            
+            // Bounce off walls
+            if (p.x < 0 || p.x > pCanvas.width) p.vx *= -1;
+            if (p.y < 0 || p.y > pCanvas.height) p.vy *= -1;
+            
+            // Draw Node
+            pCtx.beginPath();
+            pCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            pCtx.fillStyle = '#3498db';
+            pCtx.fill();
+            
+            // Connect to mouse
+            if (pMouse.x != null) {
+                let dx = pMouse.x - p.x;
+                let dy = pMouse.y - p.y;
+                let dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < 45) {
+                    pCtx.beginPath();
+                    pCtx.moveTo(p.x, p.y);
+                    pCtx.lineTo(pMouse.x, pMouse.y);
+                    pCtx.strokeStyle = `rgba(231, 76, 60, ${1 - dist/45})`; // Reddish connection to mouse
+                    pCtx.lineWidth = 1.5;
+                    pCtx.stroke();
+                }
+            }
+            
+            // Connect to other nodes
+            for (let j = i + 1; j < nodes.length; j++) {
+                let p2 = nodes[j];
+                let dx = p.x - p2.x;
+                let dy = p.y - p2.y;
+                let dist = Math.sqrt(dx*dx + dy*dy);
+                
+                if (dist < 30) {
+                    pCtx.beginPath();
+                    pCtx.moveTo(p.x, p.y);
+                    pCtx.lineTo(p2.x, p2.y);
+                    pCtx.strokeStyle = `rgba(44, 62, 80, ${1 - dist/30})`;
+                    pCtx.lineWidth = 0.5;
+                    pCtx.stroke();
+                }
+            }
+        }
+        
+        requestAnimationFrame(animateNodes);
+    }
+    animateNodes();
+</script>
+        <div class="page-quote-wrapper">
+            <blockquote class="page-quote">
+                A mathematician, like a painter or a poet, is a maker of patterns. If his patterns are more permanent than theirs, it is because they are made with ideas.
+                <footer>G. H. Hardy</footer>
+            </blockquote>
+        </div>
 
             <div class="orcid-badge">
                 <a id="cy-effective-orcid-url" href="https://orcid.org/0009-0007-6353-6637" target="_blank"
@@ -238,7 +329,7 @@
     </div>
 </section>
 
-<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Sep 10, 2026</p>
+<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Sep 27, 2026</p>
 {% endblock %}
 {% block scripts %}
 {{ super() }}

@@ -33,34 +33,6 @@
     ]
   },
   {
-    "id": "030dcd0451ac4259",
-    "title": "On Kadison-Kastler Distance",
-    "subtitle": null,
-    "abstract": null,
-    "year": null,
-    "display_order": 0,
-    "publication_date": null,
-    "journal_conference": null,
-    "volume": null,
-    "issue": null,
-    "pages": null,
-    "doi": null,
-    "arxiv_id": null,
-    "researchgate_url": null,
-    "authors": [
-      {
-        "name": "I. Ghosh",
-        "is_me": true,
-        "order": 1
-      },
-      {
-        "name": "S. Kumar",
-        "is_me": false,
-        "order": 2
-      }
-    ]
-  },
-  {
     "id": "2dbc8cf7701541b0",
     "title": "On the Value of Connes-St\u00f8rmer Entropy",
     "subtitle": null,

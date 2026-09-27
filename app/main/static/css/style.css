@@ -991,3 +991,154 @@ a.back-to-top {
     transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(0,0,0,0.1);
 }
+
+/* Page Quote Styles */
+.page-quote-wrapper {
+    margin: 2rem auto 3rem;
+    max-width: 750px;
+    position: relative;
+}
+.page-quote-wrapper::before {
+    content: "\201C";
+    font-family: Georgia, serif;
+    font-size: 6rem;
+    color: var(--primary-color, #2c3e50);
+    opacity: 0.15;
+    position: absolute;
+    top: -2.5rem;
+    left: -1.5rem;
+    z-index: 0;
+}
+.page-quote {
+    position: relative;
+    z-index: 1;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #555;
+    font-style: italic;
+    text-align: left;
+    padding: 1.5rem 2rem;
+    border-left: 4px solid var(--primary-color, #2c3e50);
+    background: rgba(249, 250, 251, 0.8);
+    border-radius: 8px;
+    margin: 0;
+}
+.page-quote footer {
+    margin-top: 1.2rem;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 1rem;
+    color: #2c3e50;
+    text-align: right;
+}
+.page-quote footer::before {
+    content: "\2014 \0020";
+}
+
+
+@media (max-width: 768px) {
+    .page-quote-wrapper {
+        margin: 1.5rem auto 2.5rem !important;
+        padding-left: 1rem !important;
+    }
+    .page-quote-wrapper::before {
+        font-size: 4rem !important;
+        top: -1.8rem !important;
+        left: -0.5rem !important;
+    }
+    .page-quote {
+        font-size: 1.05rem !important;
+        padding: 1.2rem 1.5rem !important;
+        border-width: 3px !important;
+    }
+    .page-quote footer {
+        font-size: 0.9rem !important;
+    }
+}
+
+
+/* Creative Research Title */
+.creative-research-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-size: 3.5rem !important;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(120deg, #2c3e50, #3498db, #8e44ad, #2c3e50);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine-gradient 6s linear infinite;
+}
+.math-icon {
+    font-size: 3.8rem;
+    display: inline-block;
+    animation: float-pulse 4s ease-in-out infinite;
+}
+@keyframes shine-gradient {
+    to { background-position: 200% center; }
+}
+@keyframes float-pulse {
+    0% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-5px) scale(1.05); }
+    100% { transform: translateY(0px) scale(1); }
+}
+@media (max-width: 768px) {
+    .creative-research-title {
+        font-size: 2.5rem !important;
+    }
+    .math-icon {
+        font-size: 2.8rem;
+    }
+}
+
+
+/* Bouncy Ball Drop Animation for Home Page Social Icons */
+@keyframes bounceDropPhysics {
+    0% {
+        opacity: 0;
+        transform: translateY(-500px);
+        animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    }
+    30% {
+        opacity: 1;
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    50% {
+        transform: translateY(-60px);
+        animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    }
+    70% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    85% {
+        transform: translateY(-20px);
+        animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    }
+    95% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    98% {
+        transform: translateY(-5px);
+        animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.header-social a {
+    display: inline-block;
+    animation: bounceDropPhysics 1.5s both;
+}
+
+.header-social a:nth-child(1) { animation-delay: 0.1s; }
+.header-social a:nth-child(2) { animation-delay: 0.25s; }
+.header-social a:nth-child(3) { animation-delay: 0.4s; }
+.header-social a:nth-child(4) { animation-delay: 0.55s; }
+.header-social a:nth-child(5) { animation-delay: 0.7s; }

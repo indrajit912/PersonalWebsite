@@ -115,5 +115,33 @@
         "order": 2
       }
     ]
+  },
+  {
+    "id": "030dcd0451ac4259",
+    "title": "Kadison-Kastler Distance and Interior Angle for Masas: Connections with Entropy and Probabilistic Index",
+    "subtitle": null,
+    "abstract": null,
+    "year": null,
+    "display_order": 6,
+    "publication_date": "Aug 2026",
+    "journal_conference": null,
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "doi": null,
+    "arxiv_id": null,
+    "researchgate_url": null,
+    "authors": [
+      {
+        "name": "I. Ghosh",
+        "is_me": true,
+        "order": 1
+      },
+      {
+        "name": "S. Kumar",
+        "is_me": false,
+        "order": 2
+      }
+    ]
   }
 ]
