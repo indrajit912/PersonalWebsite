@@ -25,27 +25,19 @@ document.addEventListener('DOMContentLoaded', () => {
         String.raw`\(\Phi_{\textrm{aff}}(T_1 T_2) = \Phi_{\textrm{aff}}(T_1) \Phi_{\textrm{aff}}(T_2)\)`,
         String.raw`\(\mathrm{dom} \big( \Phi_{\textrm{aff}}(T) \big) = \Phi_{\textrm{aff}}^s \big( \mathrm{dom} (T) \big)\)`,
         String.raw`\((A/B)^* = (B^*)^\dagger A^*\)`,
-        String.raw`\(\textrm{Graph}\left(\Phi_{\textrm{aff}}(T)\right) = (\Phi_{(2)})^{s}_{\textrm{aff}} \left( \textrm{Graph}(T) \right)\)`
-    ];
-
-    // 2. Generic symbols from Operator Algebras
-    const symbols = [
-        String.raw`\(\mathscr{M}\)`,
-        String.raw`\(\int f \, d\mu\)`,
-        String.raw`\(L^\infty(\Omega, \mu)\)`,
-        String.raw`\(\mathbb{C}^n\)`,
-        String.raw`\(\mathcal{B}(\mathcal{H})\)`,
-        String.raw`\(C^*\)`,
-        String.raw`\(W^*\)`,
-        String.raw`\(\sigma(T)\)`,
-        String.raw`\(\lambda\)`,
-        String.raw`\(\otimes\)`,
-        String.raw`\(\oplus\)`,
-        String.raw`\(\tau\)`
+        String.raw`\(\textrm{Graph}\left(\Phi_{\textrm{aff}}(T)\right) = (\Phi_{(2)})^{s}_{\textrm{aff}} \left( \textrm{Graph}(T) \right)\)`,
+        String.raw`\(\mathrm{d}_{\mathrm{MT}}(\mathscr{R}_{\mathsf{H}_\alpha},\mathscr{R}_{\mathsf{H}_\beta}) = \vert{}\sin(\alpha-\beta)\vert{}\)`,
+        String.raw`\(\mathrm{d}_{\mathrm{MT}}(L(\langle a \rangle),uL(\langle a \rangle)u^*) = \sqrt{1-\vert{}\tau(u)\vert{}^4}\)`,
+        String.raw`\(\mathrm{d}_{\mathrm{MT}}(\mathscr{R}_{\mathsf{H}_\alpha},\mathscr{R}_{\mathsf{H}_\beta}) = \sqrt{1-\cos\left( \alpha_{\mathscr{R}_{\mathsf{H}_\alpha}\cap\mathscr{R}_{\mathsf{H}_\beta}}^{\mathscr{R}} (\mathscr{R}_{\mathsf{H}_\alpha},\mathscr{R}_{\mathsf{H}_\beta}) \right)}\)`,
+        String.raw`\(\mathsf{H}_\alpha :=\frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1\\ e^{i\alpha} & -e^{i\alpha} \end{bmatrix} \in\mathbb{H}^u_{2}\)`,
+        String.raw`\([\mathscr{R}:\mathscr{R}_{\mathsf{H}_\alpha}\cap\mathscr{R}_{\mathsf{H}_\beta}]=4\)`,
+        String.raw`\(\mathbb{H}^u_{2}/\sim\, = \Big\{ [\mathsf{H}_\alpha]_{\sim}:\alpha\in[0,\pi) \Big\}\)`,
+        String.raw`\(\begin{array}{ccc} \mathscr{R}_{\mathsf{H}_\alpha}  & \subset & \mathscr{R} \\ \cup && \cup \\ \mathscr{R}_{\mathsf{H}_\alpha} \cap \mathscr{R}_{\mathsf{H}_\beta} & \subset & \mathscr{R}_{\mathsf{H}_\beta} \end{array}\)`,
+        String.raw`\(\begin{array}{ccc} u\Delta_n u^* & \subset & \mathbb{M}_n(\mathbb{C}) \\ \cup && \cup \\ \mathbb{C} & \subset & v\Delta_n v^* \end{array}\)`
     ];
 
     // Combine both lists so every item appears exactly once on screen (no repetition)
-    const items = [...equations, ...symbols];
+    const items = [...equations];
 
     // Shuffle items to randomize the layout each time the page loads
     items.sort(() => Math.random() - 0.5);
@@ -54,9 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
     bgContainer.id = 'math-background';
     bgContainer.setAttribute('aria-hidden', 'true');
     document.body.appendChild(bgContainer);
-
-    // Responsive adjustments for mobile
-    const isMobile = window.innerWidth < 768;
+    // Determine screen width and number of columns to use
+    const screenW = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    const isMobile = screenW < 768;
     const numCols = isMobile ? 1 : 3;
     
     // Render fewer items on mobile to guarantee large vertical gaps and prevent overlap
@@ -67,16 +59,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const span = document.createElement('span');
         span.className = 'math-symbol';
         
-        // Pick the exact item from the shuffled array (no Math.random() here)
         span.innerHTML = items[i];
         
         // Distribute uniformly across columns to prevent X-overlap
         const col = i % numCols;
-        const colWidth = 80 / numCols;
+        const colWidth = 90 / numCols; 
         const baseLeft = col * colWidth; 
         
-        // Give some random wiggle room, a bit more on mobile since it's only 1 column
-        const wiggle = isMobile ? 15 : 5;
+        // Randomize slightly within the column
+        const wiggle = colWidth * 0.5;
         span.style.left = `${baseLeft + Math.random() * wiggle + 2}vw`;
         
         // Make font size slightly smaller on mobile to prevent horizontal overflow
