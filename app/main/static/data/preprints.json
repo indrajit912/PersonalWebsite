@@ -143,5 +143,33 @@
         "order": 2
       }
     ]
+  },
+  {
+    "id": "a7b24a317a084410",
+    "title": "Distances Between von Neumann Subalgebras: Spin Models, Commuting Squares, and Free Group Factors",
+    "subtitle": null,
+    "abstract": "We investigate the relative position of von Neumann subalgebras by studying their Mashood-Taylor ($\\mathrm{d}_{\\mathrm{MT}}$) and Kadison-Kastler ($\\mathrm{d}_{\\mathrm{KK}}$) distances, alongside the interior angle. For the continuous family $(\\mathscr{R}_{\\mathsf{H}_\\alpha})_{\\alpha\\in[0,\\pi)}$ of $2\\times 2$ spin model subfactors of the hyperfinite $\\mathrm{II}_1$-factor $\\mathscr{R}$, we establish the exact formula\n\\[\n\\mathrm{d}_{\\mathrm{MT}}(\\mathscr{R}_{\\mathsf{H}_\\alpha},\\mathscr{R}_{\\mathsf{H}_\\beta})\n= \\vert{}\\sin(\\alpha-\\beta)\\vert{}.\n\\]\nFurthermore, we prove that a pair of such spin model subfactors forms a commuting square over their intersection if and only if they are maximally distant ($\\mathrm{d}_{\\mathrm{MT}} = 1$). Motivated by this, we establish general structural results showing that commuting squares of $\\mathrm{II}_1$-factors (under natural index conditions) force maximal distance, yielding $\\mathrm{d}_{\\mathrm{KK}} = 1 = \\mathrm{d}_{\\mathrm{MT}}$. We also show that two diffuse subalgebras that are orthogonal in the sense of Popa must be maximally distant. In contrast, we observe that no two subfactors in the family $(\\mathscr{R}_{\\mathsf{H}_\\alpha})_{\\alpha\\in[0,\\pi)}$ are orthogonal in the sense of Popa. Nevertheless, whenever two such spin model subfactors are maximally distant, their interior angle over their intersection is $\\pi/2$, showing that `orthogonality' in terms of the interior angle is distinct from orthogonality in the sense of Popa. Finally, in the free group factor $L(\\mathbb{F}_2) = L(\\langle a, b \\rangle)$, we establish the explicit formula\n\\[\n\\mathrm{d}_{\\mathrm{MT}}(L(\\langle a \\rangle),uL(\\langle a \\rangle)u^*)\n= \\sqrt{1-\\vert{}\\tau(u)\\vert{}^4}\n\\]\nfor $u \\in L(\\langle b \\rangle)$. Finally, we construct maximally distant masas in $L(\\mathbb{F}_2)$ that do not arise from subgroups of $\\mathbb{F}_2$.",
+    "year": 2026,
+    "display_order": 7,
+    "publication_date": "Sep 2026",
+    "journal_conference": null,
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "doi": null,
+    "arxiv_id": "2609.34856",
+    "researchgate_url": null,
+    "authors": [
+      {
+        "name": "I. Ghosh",
+        "is_me": true,
+        "order": 1
+      },
+      {
+        "name": "S. Kumar",
+        "is_me": false,
+        "order": 2
+      }
+    ]
   }
 ]
