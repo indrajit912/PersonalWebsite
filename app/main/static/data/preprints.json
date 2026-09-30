@@ -89,40 +89,12 @@
     ]
   },
   {
-    "id": "5edda06eb8fb4634",
-    "title": "Regularity for Subfactors",
-    "subtitle": null,
-    "abstract": "\nWe study three naturally associated notions of regularity for a unital inclusion of von Neumann algebras \\(\\mathcal{B} \\subseteq \\mathcal{M}\\): regularity, groupoid regularity, and unitary regularity. We first observe that regularity and groupoid regularity are unconditionally equivalent by showing that the standard normaliser and the groupoid normaliser of \\(\\mathcal{B}\\) in \\(\\mathcal M\\) generate the same linear span. The central question addressed in this work is whether regularity implies unitary regularity. For arbitrary von Neumann subalgebras, we demonstrate that this implication fails dramatically; we construct explicit examples to show that every factor (of type \\(\\mathrm{I}_\\infty\\), \\(\\mathrm{II}_1\\), \\(\\mathrm{II}_\\infty\\), and \\(\\mathrm{III}\\)) contains a regular von Neumann subalgebra that is not unitarily regular. In stark contrast, we prove that the behaviour changes completely in the setting of subfactors. For subfactor inclusions across all these types, regularity always implies unitary regularity, and thus all three notions of regularity coincide. Finally, we establish an analogous result for irreducible unital inclusions of simple \\(C^*\\)-algebras admitting a conditional expectation of finite Watatani index. In this setting, we prove that regularity, unitary regularity, being a generalised Cartan subalgebra, and arising from a crossed product by a finite group are all mutually equivalent conditions.",
-    "year": 2026,
-    "display_order": 5,
-    "publication_date": "Sep 2026",
-    "journal_conference": null,
-    "volume": null,
-    "issue": null,
-    "pages": null,
-    "doi": null,
-    "arxiv_id": "2609.10118",
-    "researchgate_url": null,
-    "authors": [
-      {
-        "name": "K. C. Bakshi",
-        "is_me": false,
-        "order": 1
-      },
-      {
-        "name": "I. Ghosh",
-        "is_me": true,
-        "order": 2
-      }
-    ]
-  },
-  {
     "id": "030dcd0451ac4259",
     "title": "Kadison-Kastler Distance and Interior Angle for Masas: Connections with Entropy and Probabilistic Index",
     "subtitle": null,
     "abstract": null,
     "year": null,
-    "display_order": 6,
+    "display_order": 5,
     "publication_date": "Aug 2026",
     "journal_conference": null,
     "volume": null,
@@ -145,10 +117,38 @@
     ]
   },
   {
+    "id": "5edda06eb8fb4634",
+    "title": "Regularity for Subfactors",
+    "subtitle": null,
+    "abstract": "\nWe study three naturally associated notions of regularity for a unital inclusion of von Neumann algebras \\(\\mathcal{B} \\subseteq \\mathcal{M}\\): regularity, groupoid regularity, and unitary regularity. We first observe that regularity and groupoid regularity are unconditionally equivalent by showing that the standard normaliser and the groupoid normaliser of \\(\\mathcal{B}\\) in \\(\\mathcal M\\) generate the same linear span. The central question addressed in this work is whether regularity implies unitary regularity. For arbitrary von Neumann subalgebras, we demonstrate that this implication fails dramatically; we construct explicit examples to show that every factor (of type \\(\\mathrm{I}_\\infty\\), \\(\\mathrm{II}_1\\), \\(\\mathrm{II}_\\infty\\), and \\(\\mathrm{III}\\)) contains a regular von Neumann subalgebra that is not unitarily regular. In stark contrast, we prove that the behaviour changes completely in the setting of subfactors. For subfactor inclusions across all these types, regularity always implies unitary regularity, and thus all three notions of regularity coincide. Finally, we establish an analogous result for irreducible unital inclusions of simple \\(C^*\\)-algebras admitting a conditional expectation of finite Watatani index. In this setting, we prove that regularity, unitary regularity, being a generalised Cartan subalgebra, and arising from a crossed product by a finite group are all mutually equivalent conditions.",
+    "year": 2026,
+    "display_order": 6,
+    "publication_date": "Sep 2026",
+    "journal_conference": null,
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "doi": null,
+    "arxiv_id": "2609.10118",
+    "researchgate_url": null,
+    "authors": [
+      {
+        "name": "K. C. Bakshi",
+        "is_me": false,
+        "order": 1
+      },
+      {
+        "name": "I. Ghosh",
+        "is_me": true,
+        "order": 2
+      }
+    ]
+  },
+  {
     "id": "a7b24a317a084410",
     "title": "Distances Between von Neumann Subalgebras: Spin Models, Commuting Squares, and Free Group Factors",
     "subtitle": null,
-    "abstract": "We investigate the relative position of von Neumann subalgebras by studying their Mashood-Taylor ($\\mathrm{d}_{\\mathrm{MT}}$) and Kadison-Kastler ($\\mathrm{d}_{\\mathrm{KK}}$) distances, alongside the interior angle. For the continuous family $(\\mathscr{R}_{\\mathsf{H}_\\alpha})_{\\alpha\\in[0,\\pi)}$ of $2\\times 2$ spin model subfactors of the hyperfinite $\\mathrm{II}_1$-factor $\\mathscr{R}$, we establish the exact formula\n\\[\n\\mathrm{d}_{\\mathrm{MT}}(\\mathscr{R}_{\\mathsf{H}_\\alpha},\\mathscr{R}_{\\mathsf{H}_\\beta})\n= \\vert{}\\sin(\\alpha-\\beta)\\vert{}.\n\\]\nFurthermore, we prove that a pair of such spin model subfactors forms a commuting square over their intersection if and only if they are maximally distant ($\\mathrm{d}_{\\mathrm{MT}} = 1$). Motivated by this, we establish general structural results showing that commuting squares of $\\mathrm{II}_1$-factors (under natural index conditions) force maximal distance, yielding $\\mathrm{d}_{\\mathrm{KK}} = 1 = \\mathrm{d}_{\\mathrm{MT}}$. We also show that two diffuse subalgebras that are orthogonal in the sense of Popa must be maximally distant. In contrast, we observe that no two subfactors in the family $(\\mathscr{R}_{\\mathsf{H}_\\alpha})_{\\alpha\\in[0,\\pi)}$ are orthogonal in the sense of Popa. Nevertheless, whenever two such spin model subfactors are maximally distant, their interior angle over their intersection is $\\pi/2$, showing that `orthogonality' in terms of the interior angle is distinct from orthogonality in the sense of Popa. Finally, in the free group factor $L(\\mathbb{F}_2) = L(\\langle a, b \\rangle)$, we establish the explicit formula\n\\[\n\\mathrm{d}_{\\mathrm{MT}}(L(\\langle a \\rangle),uL(\\langle a \\rangle)u^*)\n= \\sqrt{1-\\vert{}\\tau(u)\\vert{}^4}\n\\]\nfor $u \\in L(\\langle b \\rangle)$. Finally, we construct maximally distant masas in $L(\\mathbb{F}_2)$ that do not arise from subgroups of $\\mathbb{F}_2$.",
+    "abstract": "We investigate the relative position of von Neumann subalgebras by studying their Mashood--Taylor ($\\mathrm{d}_{\\mathrm{MT}}$) and Kadison--Kastler ($\\mathrm{d}_{\\mathrm{KK}}$) distances, alongside the interior angle. For each $n\\in\\mathbb{N}$, we show that the hyperfinite $\\mathrm{II}_1$-factor $\\mathscr{R}$ contains an uncountable family of pairwise distinct regular $n\\times n$ spin model subfactors. In particular, this yields a continuous family $(\\mathscr{R}_{\\mathsf{H}_\\alpha})_{\\alpha\\in[0,\\pi)}$ of $2\\times2$ spin model subfactors, for which we establish the exact formula\n\\[\n\\mathrm{d}_{\\mathrm{MT}}(\\mathscr{R}_{\\mathsf{H}_\\alpha},\\mathscr{R}_{\\mathsf{H}_\\beta})\n= \\vert\\sin(\\alpha-\\beta)\\vert.\n\\]\nFurthermore, we prove that a pair of such spin model subfactors forms a commuting square over their intersection if and only if they are maximally distant ($\\mathrm{d}_{\\mathrm{MT}}=1$). Motivated by this, we establish general structural results showing that commuting squares of $\\mathrm{II}_1$-factors (under natural index conditions) force maximal distance, yielding $\\mathrm{d}_{\\mathrm{KK}}=1=\\mathrm{d}_{\\mathrm{MT}}$. We also show that two diffuse subalgebras that are orthogonal in the sense of Popa must be maximally distant. In contrast, we observe that no two subfactors in the family $(\\mathscr{R}_{\\mathsf{H}_\\alpha})_{\\alpha\\in[0,\\pi)}$ are orthogonal in the sense of Popa. Nevertheless, whenever two such spin model subfactors are maximally distant, their interior angle over their intersection is $\\pi/2$, showing that `orthogonality' in terms of the interior angle is distinct from orthogonality in the sense of Popa. Finally, in the free group factor $L(\\mathbb{F}_2)=L(\\langle a,b\\rangle)$, we establish the explicit formula\n\\[\n\\mathrm{d}_{\\mathrm{MT}}(L(\\langle a\\rangle),uL(\\langle a\\rangle)u^*)\n= \\sqrt{1-\\vert\\tau(u)\\vert^4}\n\\]\nfor $u\\in L(\\langle b\\rangle)$. We also construct maximally distant masas in $L(\\mathbb{F}_2)$ that do not arise from subgroups of $\\mathbb{F}_2$.",
     "year": 2026,
     "display_order": 7,
     "publication_date": "Sep 2026",
