@@ -89,40 +89,12 @@
     ]
   },
   {
-    "id": "030dcd0451ac4259",
-    "title": "Kadison-Kastler Distance and Interior Angle for Masas: Connections with Entropy and Probabilistic Index",
-    "subtitle": null,
-    "abstract": null,
-    "year": null,
-    "display_order": 5,
-    "publication_date": "Aug 2026",
-    "journal_conference": null,
-    "volume": null,
-    "issue": null,
-    "pages": null,
-    "doi": null,
-    "arxiv_id": null,
-    "researchgate_url": null,
-    "authors": [
-      {
-        "name": "I. Ghosh",
-        "is_me": true,
-        "order": 1
-      },
-      {
-        "name": "S. Kumar",
-        "is_me": false,
-        "order": 2
-      }
-    ]
-  },
-  {
     "id": "5edda06eb8fb4634",
     "title": "Regularity for Subfactors",
     "subtitle": null,
     "abstract": "\nWe study three naturally associated notions of regularity for a unital inclusion of von Neumann algebras \\(\\mathcal{B} \\subseteq \\mathcal{M}\\): regularity, groupoid regularity, and unitary regularity. We first observe that regularity and groupoid regularity are unconditionally equivalent by showing that the standard normaliser and the groupoid normaliser of \\(\\mathcal{B}\\) in \\(\\mathcal M\\) generate the same linear span. The central question addressed in this work is whether regularity implies unitary regularity. For arbitrary von Neumann subalgebras, we demonstrate that this implication fails dramatically; we construct explicit examples to show that every factor (of type \\(\\mathrm{I}_\\infty\\), \\(\\mathrm{II}_1\\), \\(\\mathrm{II}_\\infty\\), and \\(\\mathrm{III}\\)) contains a regular von Neumann subalgebra that is not unitarily regular. In stark contrast, we prove that the behaviour changes completely in the setting of subfactors. For subfactor inclusions across all these types, regularity always implies unitary regularity, and thus all three notions of regularity coincide. Finally, we establish an analogous result for irreducible unital inclusions of simple \\(C^*\\)-algebras admitting a conditional expectation of finite Watatani index. In this setting, we prove that regularity, unitary regularity, being a generalised Cartan subalgebra, and arising from a crossed product by a finite group are all mutually equivalent conditions.",
     "year": 2026,
-    "display_order": 6,
+    "display_order": 5,
     "publication_date": "Sep 2026",
     "journal_conference": null,
     "volume": null,
@@ -130,7 +102,7 @@
     "pages": null,
     "doi": null,
     "arxiv_id": "2609.10118",
-    "researchgate_url": null,
+    "researchgate_url": "https://www.researchgate.net/publication/414159965_Regularity_for_Subfactors",
     "authors": [
       {
         "name": "K. C. Bakshi",
@@ -140,6 +112,34 @@
       {
         "name": "I. Ghosh",
         "is_me": true,
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "030dcd0451ac4259",
+    "title": "Kadison-Kastler Distance and Interior Angle for Masas: Connections with Entropy and Probabilistic Index",
+    "subtitle": null,
+    "abstract": "We study the Kadison--Kastler distance and the interior angle between masas in finite-dimensional matrix algebras. In \\(\\mathbb{M}_2(\\mathbb{C})\\), we obtain an explicit formula for the Kadison--Kastler distance between two masas and show that every value in \\([0,1]\\) is attained by \\(\\mathrm{d}_{\\textrm{KK}}(\\Delta,u\\Delta u^*)\\). We further prove that the distance attains its maximal value precisely when the relative unitary is a Hadamard unitary. In addition, for every $v$ in the groupoid normaliser of $\\Delta$, the Kadison--Kastler distance between \\(\\Delta\\) and \\(v\\Delta v^*\\) assumes either its minimal or maximal possible value. We also establish the identity\n\\[\n\\mathrm{d}_{\\textrm{KK}}(\\mathcal{A},\\mathcal{B})=\\sin\\alpha(\\mathcal{A},\\mathcal{B})\n\\]\nfor any two intermediate subalgebras \\(\\mathbb{C}\\subsetneq\\mathcal{A},\\mathcal{B}\\subsetneq\\mathbb{M}_2(\\mathbb{C})\\).\nMost notably, for any unitaries \\(u,v\\in\\mathbb{M}_2(\\mathbb{C})\\), we establish the equivalence of maximal Kadison--Kastler distance, maximal interior angle, maximal Connes--St\\o rmer modified entropy, and minimal Popa probabilistic index:\n\\[\n\\mathrm{d}_{\\textrm{KK}}(u\\Delta u^*,v\\Delta v^*)=1\n\\iff\nh(u\\Delta u^*,v\\Delta v^*)=\\log 2\n\\iff\n\\alpha(u\\Delta u^*,v\\Delta v^*)=\\frac{\\pi}{2}\n\\iff\n\\lambda(u\\Delta u^*,v\\Delta v^*)=\\frac{1}{2}.\n\\]\nFor general \\(\\mathbb{M}_n(\\mathbb{C})\\), we prove a unitary invariance property for the interior angle and derive an explicit formula for the angle between arbitrary masas of the form \\(u\\Delta^{(n)}u^*\\) and \\(v\\Delta^{(n)}v^*\\). As a consequence, the interior angle is \\(\\frac{\\pi}{2}\\) precisely when the relative unitary \\(u^*v\\) is a Hadamard unitary. Finally, we show that every value in \\(\\left[0,\\frac{\\pi}{2}\\right]\\) is attained as the interior angle between a pair of masas in \\(\\mathbb{M}_n(\\mathbb{C})\\). Interestingly, for \\(n\\geq 3\\), the interior angle need not be an invariant of the underlying \\(C^*\\)-algebras: it can vanish even for distinct masas. This contrasts with the situation for \\(\\mathrm{II}_1\\)-subfactors and for \\(\\mathbb{M}_2(\\mathbb{C})\\), where vanishing of the interior angle implies equality of the corresponding subalgebras.",
+    "year": null,
+    "display_order": 6,
+    "publication_date": "Sep 2026",
+    "journal_conference": null,
+    "volume": null,
+    "issue": null,
+    "pages": null,
+    "doi": null,
+    "arxiv_id": "2609.38206",
+    "researchgate_url": "https://www.researchgate.net/publication/415074438_Kadison-Kastler_Distance_and_Interior_Angle_for_Masas_Connections_with_Entropy_and_Probabilistic_Index",
+    "authors": [
+      {
+        "name": "I. Ghosh",
+        "is_me": true,
+        "order": 1
+      },
+      {
+        "name": "S. Kumar",
+        "is_me": false,
         "order": 2
       }
     ]
@@ -158,7 +158,7 @@
     "pages": null,
     "doi": null,
     "arxiv_id": "2609.34856",
-    "researchgate_url": null,
+    "researchgate_url": "https://www.researchgate.net/publication/414927733_Distances_Between_von_Neumann_Subalgebras_Spin_Models_Commuting_Squares_and_Free_Group_Factors",
     "authors": [
       {
         "name": "I. Ghosh",
