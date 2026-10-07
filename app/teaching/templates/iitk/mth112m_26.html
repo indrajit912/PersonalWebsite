@@ -160,7 +160,7 @@
                     <a href="#" class="assignment-link" target="_blank" style="flex: 1; text-align: center; font-size: 0.85rem; padding: 8px 5px;">
                         <i class="bi bi-easel"></i> Live Note (Null!)
                     </a>
-                    <a href="https://drive.google.com/file/d/1GoFFToJwrmUvejD8Lc3qqVPBVTZxZEm6/view?usp=drive_link" class="assignment-link" target="_blank" style="flex: 1; text-align: center; font-size: 0.85rem; padding: 8px 5px;">
+                    <a href="https://drive.google.com/file/d/1vbcej1yW_uQ_382CHlL3SjMueFEdu-Dx/view?usp=drive_link" class="assignment-link" target="_blank" style="flex: 1; text-align: center; font-size: 0.85rem; padding: 8px 5px;">
                         <i class="bi bi-filetype-pdf"></i> Typeset Note
                     </a>
                 </div>
@@ -1204,12 +1204,82 @@
         </details>
 
 </details>
+        <details class="assignment-content" style="background: #fff; padding: 25px 35px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); margin-top: 20px; font-size: 1.05rem; line-height: 1.7; border: 1px solid #eaeaea;">
+            <summary style="cursor: pointer; margin-top: 0; color: var(--primary-color, #2c3e50); font-size: 1.4rem; border-bottom: 2px solid #eee; padding-bottom: 12px; font-weight: 600; list-style-position: inside;">
+                <i class="bi bi-journal-text"></i> Assignment 3: Functions of several variables <span style="font-size: 0.9rem; font-weight: normal; color: #777; float: right; margin-top: 5px;">(Click to view)</span>
+            </summary>
+            <div style="margin-top: 25px;">
+            <ol class="problem-list" style="padding-left: 20px; color: #333;">
+                <!-- Problem 1 -->
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Identify the points, if any, where the following functions fail to be continuous:
+                    <ol style="list-style-type: lower-alpha; margin-top: 12px; padding-left: 25px;">
+                        <li style="margin-bottom: 10px;">
+                            \[ f(x, y) = \begin{cases} xy & \text{if } xy \ge 0 \\ -xy & \text{if } xy < 0 \end{cases} \]
+                            (<b>Ans:</b> Continuous everywhere)
+                        </li>
+                        <li style="margin-bottom: 10px;">
+                            \[ f(x, y) = \begin{cases} xy & \text{if } xy \text{ is rational} \\ -xy & \text{if } xy \text{ is irrational.} \end{cases} \]
+                            (<b>Ans:</b> Discontinuous at points other than \(x\) axis and \(y\)-axis)
+                        </li>
+                    </ol>
+                </li>
+                
+                <!-- Problem 2 -->
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Consider the function \(f : \mathbb{R}^2 \longrightarrow \mathbb{R}\) defined by
+                    \[ f(x, y) = \begin{cases} \frac{x^2y^2}{x^2y^2+(x-y)^2} & \text{if } (x, y) \neq (0, 0) \\ 0 & \text{if } (x, y) = (0, 0) \end{cases} \]
+                    Show that the function satisfy the following:
+                    <ol style="list-style-type: lower-alpha; margin-top: 12px; padding-left: 25px;">
+                        <li style="margin-bottom: 10px;">The iterated limits \(\displaystyle \lim_{x \to 0} \left[ \lim_{y \to 0} f(x, y) \right]\) and \(\displaystyle \lim_{y \to 0} \left[ \lim_{x \to 0} f(x, y) \right]\) exist and equals 0;</li>
+                        <li style="margin-bottom: 10px;">The function is continuous restricted to any line passing through origin,</li>
+                        <li style="margin-bottom: 10px;">The limit \(\displaystyle \lim_{(x,y) \to (0,0)} f(x, y)\) does not exist. (So the function \(f(x, y)\) is not continuous at \((0, 0)\);)</li>
+                        <li style="margin-bottom: 10px;">The partial derivatives of \(f\) exist at \((0, 0)\).</li>
+                    </ol>
+                </li>
+
+                <!-- Problem 3 -->
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Let
+                    \[ f(x, y) = \begin{cases} (x^2 + y^2) \sin \frac{1}{x^2+y^2} & \text{if } (x, y) \neq (0, 0) \\ 0 & \text{if } (x, y) = (0, 0). \end{cases} \]
+                    Show that \(f\) is differentiable at every point of \(\mathbb{R}^2\) but the partial derivatives are not continuous at \((0, 0)\).
+                </li>
+
+                <!-- Problem 4 -->
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Let \(f(x, y) = |xy|\) for all \((x, y) \in \mathbb{R}^2\). Show that
+                    <ol style="list-style-type: lower-alpha; margin-top: 12px; padding-left: 25px;">
+                        <li style="margin-bottom: 10px;">\(f\) is differentiable at \((0, 0)\).</li>
+                        <li style="margin-bottom: 10px;">\(f_x(0, y_0)\) does not exist if \(y_0 \neq 0\).</li>
+                    </ol>
+                </li>
+
+                <!-- Problem 5 -->
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Suppose \(f : \mathbb{R}^2 \to \mathbb{R}\) is a function with \(f_x(x, y) = f_y(x, y) = 0\) for all \((x, y)\). Then show that \(f(x, y) = c\), a constant.
+                </li>
+
+                <!-- Problem 6 -->
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Consider the function \(f : \mathbb{R}^2 \to \mathbb{R}\) defined by
+                    \[ f(x, y) = \begin{cases} \frac{x^2y\sqrt{|y|}}{x^4+y^2} & \text{if } (x, y) \neq (0, 0), \\ 0 & \text{if } (x, y) = (0, 0). \end{cases} \]
+                    Is \(f\) continuous at \((0, 0)\)? Do the directional derivatives of \(f\) at \((0, 0)\) exist along any direction? Is \(f\) differentiable at \((0, 0)\)? Justfy your answers.
+                </li>
+
+                <!-- Problem 7 -->
+                <li style="margin-bottom: 25px; padding-left: 10px;">
+                    Consider the function \(F : \mathbb{R} \to \mathbb{R}^2,\quad F(t) = (\cos t, \sin t)\). Then show that there doest not exist \(0 < c < 2\pi\) such that \(F(2\pi) - F(0) = (2\pi - 0)F'(c)\).<br><br>
+                    [Remark: Thus classical Mean Value Theorem (MVT) does not hold for vector-valued functions. But we always have \(||F(b) - F(a)|| \le (b - a) \sup_c ||F'(c)||\).]
+                </li>
+            </ol>
+            </div>
+        </details>
     </div>
 </section>
 
 
 <!-- Add last updated information -->
-<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Oct 06, 2026</p>
+<p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Oct 07, 2026</p>
 
 {% endblock %}
   
