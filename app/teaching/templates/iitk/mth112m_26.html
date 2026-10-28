@@ -28,6 +28,19 @@
                 font-size: 1.1rem;
             }
         }
+        .assignment-link.inactive {
+            background: #f1f3f5 !important;
+            color: #adb5bd !important;
+            border-color: #dee2e6 !important;
+            cursor: not-allowed !important;
+            pointer-events: none !important;
+            text-decoration: none !important;
+        }
+        .assignment-link.inactive:hover {
+            background: #f1f3f5 !important;
+            color: #adb5bd !important;
+            border-color: #dee2e6 !important;
+        }
     </style>
 
 
@@ -208,7 +221,7 @@
                     <i class="bi bi-person-badge-fill"></i> Delivered by <a href="https://www.researchgate.net/profile/Sumit-Kumar-303" target="_blank" style="color: #b91c1c; text-decoration: underline; font-weight: bold;">Sumit Kumar <i class="bi bi-box-arrow-up-right" style="font-size: 0.75rem;"></i></a>
                 </div>
                 <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                    <a href="#" class="assignment-link" style="flex: 1; text-align: center; font-size: 0.85rem; padding: 8px 5px;">
+                    <a href="javascript:void(0)" class="assignment-link inactive" tabindex="-1" aria-disabled="true" style="flex: 1; text-align: center; justify-content: center; font-size: 0.85rem; padding: 8px 5px; background: #f1f3f5; color: #adb5bd; border-color: #dee2e6; pointer-events: none; cursor: not-allowed;">
                         <i class="bi bi-easel"></i> Live Note
                     </a>
                     <a href="https://drive.google.com/file/d/1Swi8XKYQy60Ec7FHy3hzXrnlDZkqYCHY/view?usp=drive_link" class="assignment-link" target="_blank" style="flex: 1; text-align: center; font-size: 0.85rem; padding: 8px 5px;">
@@ -223,12 +236,36 @@
 
             <div class="assignment-card">
                 <div class="assignment-number">Lecture 7</div>
-                <div style="margin-bottom: 15px; font-size: 0.85rem; font-weight: 600; color: #b91c1c; background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 6px 10px; text-align: center;">
+                <div style="margin-bottom: 12px; font-size: 0.85rem; font-weight: 600; color: #b91c1c; background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 6px 10px; text-align: center;">
                     <i class="bi bi-person-badge-fill"></i> Delivered by <a href="https://sites.google.com/view/suvankarmajee/home" target="_blank" style="color: #b91c1c; text-decoration: underline; font-weight: bold;">Suvankar Majee <i class="bi bi-box-arrow-up-right" style="font-size: 0.75rem;"></i></a>
+                </div>
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <a href="javascript:void(0)" class="assignment-link inactive" tabindex="-1" aria-disabled="true" style="flex: 1; text-align: center; justify-content: center; font-size: 0.85rem; padding: 8px 5px; background: #f1f3f5; color: #adb5bd; border-color: #dee2e6; pointer-events: none; cursor: not-allowed;">
+                        <i class="bi bi-easel"></i> Live Note
+                    </a>
+                    <a href="javascript:void(0)" class="assignment-link inactive" tabindex="-1" aria-disabled="true" style="flex: 1; text-align: center; justify-content: center; font-size: 0.85rem; padding: 8px 5px; background: #f1f3f5; color: #adb5bd; border-color: #dee2e6; pointer-events: none; cursor: not-allowed;">
+                        <i class="bi bi-filetype-pdf"></i> Typeset Note
+                    </a>
                 </div>
                 <div class="due-date">
                    <i class="bi bi-calendar-event"></i>
                    <span>Date: Nov 10, 2026</span>
+               </div>
+            </div>
+
+            <div class="assignment-card">
+                <div class="assignment-number">Lecture 8</div>
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <a href="javascript:void(0)" class="assignment-link inactive" tabindex="-1" aria-disabled="true" style="flex: 1; text-align: center; justify-content: center; font-size: 0.85rem; padding: 8px 5px; background: #f1f3f5; color: #adb5bd; border-color: #dee2e6; pointer-events: none; cursor: not-allowed;">
+                        <i class="bi bi-easel"></i> Live Note
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ezPGeoRSX6tn_fgTRORMq9MG-Gz3PX1Z/view?usp=drive_link" class="assignment-link" target="_blank" style="flex: 1; text-align: center; font-size: 0.85rem; padding: 8px 5px;">
+                        <i class="bi bi-filetype-pdf"></i> Typeset Note
+                    </a>
+                </div>
+                <div class="due-date">
+                   <i class="bi bi-calendar-event"></i>
+                   <span>Date: Nov 17, 2026</span>
                </div>
             </div>
 

@@ -5,152 +5,878 @@
 {% block styles %}
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('main.static', filename='css/photo_style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
     
+    <style>
+        /* Cooking Page Custom Stylish Enhancements */
+        :root {
+            --culinary-primary: #e67e22;
+            --culinary-dark: #2c3e50;
+            --culinary-bg: #fffbf7;
+        }
+
+        .gallery-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 4rem;
+        }
+
+        .cooking-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .cooking-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .cooking-title {
+            margin: 0;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #2c3e50;
+            letter-spacing: -1px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .cooking-subtitle {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05rem;
+            color: #7f8c8d;
+            background: #fff8f0;
+            padding: 6px 18px;
+            border-radius: 30px;
+            border: 1px solid #fce3ce;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .cooking-subtitle i {
+            color: #e67e22;
+        }
+
+        /* Filter Tabs */
+        .cooking-filter-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 2rem 0 2.5rem;
+        }
+
+        .filter-btn {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        .filter-btn:hover {
+            border-color: #cbd5e1;
+            background: #f8fafc;
+            color: #1e293b;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: #2c3e50;
+            color: #ffffff;
+            border-color: #2c3e50;
+            box-shadow: 0 4px 12px rgba(44, 62, 80, 0.2);
+        }
+
+        .filter-btn .badge-count {
+            background: rgba(0,0,0,0.06);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .filter-btn.active .badge-count {
+            background: rgba(255,255,255,0.25);
+            color: #ffffff;
+        }
+
+        /* Masonry Grid Layout */
+        .masonry-gallery {
+            column-count: 3;
+            column-gap: 1.8rem;
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 2rem;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #ffffff;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, opacity 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 36px rgba(44, 62, 80, 0.12);
+            border-color: #e2e8f0;
+        }
+
+        .img-wrapper {
+            position: relative;
+            overflow: hidden;
+            background: #f8fafc;
+        }
+
+        .gallery-item .img-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+        }
+
+        .gallery-item:hover .img-wrapper img {
+            transform: scale(1.04);
+        }
+
+        /* Overlay icon on hover */
+        .img-zoom-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .img-zoom-overlay i {
+            color: #ffffff;
+            font-size: 2rem;
+            background: rgba(0, 0, 0, 0.45);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            backdrop-filter: blur(4px);
+            transform: scale(0.85);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .img-zoom-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover .img-zoom-overlay i {
+            transform: scale(1);
+        }
+
+        /* Dish Card Caption */
+        .gallery-caption {
+            padding: 1.3rem 1.4rem;
+            background: #ffffff;
+            text-align: left;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .dish-badge-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .dish-badge {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            padding: 3px 10px;
+            border-radius: 6px;
+            background: #fff8f0;
+            color: #d35400;
+            border: 1px solid #fad7b8;
+        }
+
+        .dish-badge.mains {
+            background: #fef2f2;
+            color: #b91c1c;
+            border-color: #fecaca;
+        }
+
+        .dish-badge.brunch {
+            background: #f0fdf4;
+            color: #15803d;
+            border-color: #bbf7d0;
+        }
+
+        .dish-badge.rice {
+            background: #fffbe6;
+            color: #b78103;
+            border-color: #ffe58f;
+        }
+
+        .dish-badge.bakes {
+            background: #fdf4ff;
+            color: #a21caf;
+            border-color: #f5d0fe;
+        }
+
+        .dish-title {
+            margin: 0 0 6px 0;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.4;
+        }
+
+        .dish-desc {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.55;
+        }
+
+        /* Modal Lightbox */
+        .cooking-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cooking-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content-wrap {
+            max-width: 900px;
+            width: 100%;
+            max-height: 94vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            background: #1e293b;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalPop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-img-container {
+            width: 100%;
+            max-height: 72vh;
+            overflow: hidden;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-img-container img {
+            max-width: 100%;
+            max-height: 72vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .modal-caption-area {
+            width: 100%;
+            padding: 1.2rem 1.8rem;
+            background: #1e293b;
+            color: #f8fafc;
+            text-align: left;
+            box-sizing: border-box;
+        }
+
+        .modal-caption-area h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .modal-caption-area p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .modal-close-btn:hover {
+            background: #e74c3c;
+            transform: scale(1.1);
+        }
+
+        .modal-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .modal-nav-btn:hover {
+            background: #2c3e50;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .modal-nav-prev { left: 20px; }
+        .modal-nav-next { right: 20px; }
+
+        @media (max-width: 992px) {
+            .masonry-gallery {
+                column-count: 2;
+            }
+            .cooking-title {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .masonry-gallery {
+                column-count: 1;
+            }
+            .cooking-title {
+                font-size: 2.2rem;
+            }
+            .gallery-container {
+                padding: 1.5rem 1rem;
+            }
+            .modal-nav-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 1.2rem;
+            }
+            .modal-nav-prev { left: 10px; }
+            .modal-nav-next { right: 10px; }
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
 
 <section>
     <div class="gallery-container">
-        <div class="page-heading">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 1.5rem; flex-wrap: wrap;">
-    <canvas id="cookingIconCanvas" width="90" height="90" style="border-radius: 50%; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border: 1px solid #eaeaea; cursor: crosshair;"></canvas>
-    <h1 style="margin: 0; font-size: 3.5rem; font-weight: 800; color: #2c3e50; letter-spacing: -1px;">Indrajit's Kitchen</h1>
-</div>
-<script>
-    const cCanvas = document.getElementById('cookingIconCanvas');
-    const cCtx = cCanvas.getContext('2d');
-    let bubbles = [];
-    
-    let cMouse = { x: -100, y: -100 };
-    cCanvas.addEventListener('mousemove', (e) => {
-        const rect = cCanvas.getBoundingClientRect();
-        cMouse.x = e.clientX - rect.left;
-        cMouse.y = e.clientY - rect.top;
-    });
-    cCanvas.addEventListener('mouseleave', () => {
-        cMouse.x = -100; cMouse.y = -100;
-    });
+        
+        <!-- Header Section -->
+        <div class="cooking-header">
+            <div class="cooking-title-row">
+                <canvas id="cookingIconCanvas" width="90" height="90" style="border-radius: 50%; background: #ffffff; box-shadow: 0 6px 16px rgba(0,0,0,0.08); border: 1px solid #eaeaea; cursor: pointer;" title="Stir the pot!"></canvas>
+                <h1 class="cooking-title">Indrajit's Kitchen</h1>
+            </div>
+            
+            <div class="cooking-subtitle">
+                <i class="bi bi-fire"></i> Fresh ingredients, homemade aromas, &amp; culinary experiments
+            </div>
 
-    function animateCooking() {
-        cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
-        
-        if (Math.random() < 0.2) {
-            bubbles.push({
-                x: 20 + Math.random() * 50,
-                y: 90,
-                radius: Math.random() * 4 + 2,
-                vy: -Math.random() * 1.5 - 0.5,
-                wobble: Math.random() * Math.PI * 2
-            });
-        }
-        
-        // Draw Pot
-        cCtx.fillStyle = '#7f8c8d';
-        cCtx.fillRect(25, 75, 40, 15);
-        
-        for (let i = bubbles.length - 1; i >= 0; i--) {
-            let b = bubbles[i];
-            b.y += b.vy;
-            b.x += Math.sin(b.wobble) * 0.5;
-            b.wobble += 0.1;
-            
-            let dx = cMouse.x - b.x;
-            let dy = cMouse.y - b.y;
-            if (dx*dx + dy*dy < 400) {
-                b.radius -= 0.5; 
-            }
-            
-            if (b.y < 0 || b.radius <= 0) {
-                bubbles.splice(i, 1);
-                continue;
-            }
-            
-            cCtx.beginPath();
-            cCtx.arc(b.x, b.y, b.radius, 0, Math.PI*2);
-            cCtx.strokeStyle = 'rgba(52, 152, 219, 0.7)';
-            cCtx.lineWidth = 1.5;
-            cCtx.stroke();
-        }
-        
-        requestAnimationFrame(animateCooking);
-    }
-    animateCooking();
-</script>
             <div class="page-quote-wrapper">
                 <blockquote class="page-quote">
                     One cannot think well, love well, sleep well, if one has not dined well.
                     <footer>Virginia Woolf</footer>
                 </blockquote>
             </div>
+
+            <!-- Filter Buttons -->
+            <div class="cooking-filter-bar">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="bi bi-grid-fill"></i> All Creations <span class="badge-count">12</span>
+                </button>
+                <button class="filter-btn" data-filter="mains">
+                    <i class="bi bi-cup-hot-fill"></i> Curries &amp; Mains <span class="badge-count">5</span>
+                </button>
+                <button class="filter-btn" data-filter="rice">
+                    <i class="bi bi-layers-fill"></i> Rice &amp; Skillet <span class="badge-count">3</span>
+                </button>
+                <button class="filter-btn" data-filter="brunch">
+                    <i class="bi bi-egg-fried"></i> Healthy Brunch <span class="badge-count">3</span>
+                </button>
+                <button class="filter-btn" data-filter="bakes">
+                    <i class="bi bi-pie-chart-fill"></i> Bakes &amp; Comfort <span class="badge-count">1</span>
+                </button>
+            </div>
         </div>
 
-        <div class="masonry-gallery">
-            <div class="gallery-item">
+        <!-- Masonry Grid with 12 Dishes -->
+        <div class="masonry-gallery" id="galleryGrid">
+
+            <!-- 1. Pizza (24.10.2026.jpg) -->
+            <div class="gallery-item" data-category="bakes" data-title="Artisanal Veggie &amp; Paneer Pizza" data-desc="Crispy golden crust loaded with paneer cubes, sweet corn, colorful bell peppers, red onions, and melted cheese seasoned with Italian herbs." data-img="{{ url_for('main.static', filename='images/cooking/24.10.2026.jpg') }}">
                 <div class="img-wrapper">
-                    <img src="{{ url_for('main.static', filename='images/cooking/12.09.2026.jpg') }}" alt="A dish I cooked on September 12, 2026" loading="lazy">
+                    <img src="{{ url_for('main.static', filename='images/cooking/24.10.2026.jpg') }}" alt="Artisanal Veggie &amp; Paneer Pizza with Sweet Corn and Bell Peppers" loading="lazy">
+                    <div class="img-zoom-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
                 </div>
-                <div class="gallery-caption">Sep 12, 2026</div>
+                <div class="gallery-caption">
+                    <div class="dish-badge-row">
+                        <span class="dish-badge bakes"><i class="bi bi-pie-chart-fill"></i> Fresh Bake</span>
+                    </div>
+                    <h3 class="dish-title">Artisanal Veggie &amp; Paneer Pizza</h3>
+                    <p class="dish-desc">Crispy crust loaded with paneer, sweet corn, tricolor peppers, and herbs.</p>
+                </div>
             </div>
 
-            <div class="gallery-item">
+            <!-- 2. Bhuna Chicken (20.10.2026.jpg) -->
+            <div class="gallery-item" data-category="mains" data-title="Spicy Bhuna Chicken Curry" data-desc="Tender chicken simmered in a slow-roasted onion and tomato gravy with cumin seeds and fresh coriander, served with long-grain basmati rice." data-img="{{ url_for('main.static', filename='images/cooking/20.10.2026.jpg') }}">
                 <div class="img-wrapper">
-                    <img src="{{ url_for('main.static', filename='images/cooking/29.08.2026.jpg') }}" alt="A dish I cooked on August 29, 2026" loading="lazy">
+                    <img src="{{ url_for('main.static', filename='images/cooking/20.10.2026.jpg') }}" alt="Spicy Bhuna Chicken Curry with Steamed Basmati Rice" loading="lazy">
+                    <div class="img-zoom-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
                 </div>
-                <div class="gallery-caption">Aug 29, 2026</div>
+                <div class="gallery-caption">
+                    <div class="dish-badge-row">
+                        <span class="dish-badge mains"><i class="bi bi-cup-hot-fill"></i> Main Course</span>
+                    </div>
+                    <h3 class="dish-title">Homestyle Bhuna Chicken &amp; Rice</h3>
+                    <p class="dish-desc">Slow-simmered chicken in rich roasted onion-tomato gravy with basmati rice.</p>
+                </div>
             </div>
 
-            <div class="gallery-item">
+            <!-- 3. Shahi Paneer Thali (11.10.2026.jpg) -->
+            <div class="gallery-item" data-category="mains" data-title="Creamy Shahi Paneer, Egg Pulao &amp; Spinach Paratha" data-desc="Velvety paneer cubes in an aromatic malai cashew gravy, paired with egg fried rice topped with golden fried onions (birista) and handmade spinach flatbread." data-img="{{ url_for('main.static', filename='images/cooking/11.10.2026.jpg') }}">
                 <div class="img-wrapper">
-                    <img src="{{ url_for('main.static', filename='images/cooking/09.08.2026.jpg') }}" alt="A dish I cooked on August 09, 2026" loading="lazy">
+                    <img src="{{ url_for('main.static', filename='images/cooking/11.10.2026.jpg') }}" alt="Creamy Shahi Paneer, Egg Pulao &amp; Spinach Paratha" loading="lazy">
+                    <div class="img-zoom-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
                 </div>
-                <div class="gallery-caption">Aug 09, 2026</div>
+                <div class="gallery-caption">
+                    <div class="dish-badge-row">
+                        <span class="dish-badge mains"><i class="bi bi-star-fill"></i> Special Thali</span>
+                    </div>
+                    <h3 class="dish-title">Shahi Paneer, Egg Pulao &amp; Palak Paratha</h3>
+                    <p class="dish-desc">Velvety paneer in cashew malai gravy with caramelized onion egg rice and flatbread.</p>
+                </div>
             </div>
 
-            <div class="gallery-item">
+            <!-- 4. Chicken Kosha (12.09.2026.jpg) -->
+            <div class="gallery-item" data-category="mains" data-title="Bengali Style Chicken Kosha with Steamed Rice" data-desc="Traditional slow-cooked spicy chicken curry infused with whole garam masala, caramelized onions, and fragrant bay leaf, accompanied by steamed rice." data-img="{{ url_for('main.static', filename='images/cooking/12.09.2026.jpg') }}">
                 <div class="img-wrapper">
-                    <img src="{{ url_for('main.static', filename='images/cooking/10.05.2026.jpg') }}" alt="A dish I cooked on May 10, 2026" loading="lazy">
+                    <img src="{{ url_for('main.static', filename='images/cooking/12.09.2026.jpg') }}" alt="Slow-Cooked Bengali Chicken Kosha with Steamed Rice" loading="lazy">
+                    <div class="img-zoom-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
                 </div>
-                <div class="gallery-caption">May 10, 2026</div>
+                <div class="gallery-caption">
+                    <div class="dish-badge-row">
+                        <span class="dish-badge mains"><i class="bi bi-cup-hot-fill"></i> Main Course</span>
+                    </div>
+                    <h3 class="dish-title">Slow-Cooked Chicken Kosha &amp; Rice</h3>
+                    <p class="dish-desc">Traditional slow-roasted spicy chicken curry infused with whole spices and bay leaf.</p>
+                </div>
             </div>
 
-            
-            
-            <div class="gallery-item">
+            <!-- 5. Chicken Malai Tikka (29.08.2026.jpg) -->
+            <div class="gallery-item" data-category="mains" data-title="Pan-Seared Chicken Malai Tikka" data-desc="Tender chicken marinated in yogurt, cream, and freshly cracked black pepper, pan-seared and garnished with fresh lime, served with rice and crisp cucumbers." data-img="{{ url_for('main.static', filename='images/cooking/29.08.2026.jpg') }}">
                 <div class="img-wrapper">
-                    <img src="{{ url_for('main.static', filename='images/cooking/27.07.2026.jpg') }}" alt="A dish I cooked on July 27, 2026" loading="lazy">
+                    <img src="{{ url_for('main.static', filename='images/cooking/29.08.2026.jpg') }}" alt="Pan-Seared Chicken Malai Tikka with Basmati Rice &amp; Cucumber Salad" loading="lazy">
+                    <div class="img-zoom-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
                 </div>
-                <div class="gallery-caption">Jul 27, 2026</div>
+                <div class="gallery-caption">
+                    <div class="dish-badge-row">
+                        <span class="dish-badge mains"><i class="bi bi-fire"></i> Grilled</span>
+                    </div>
+                    <h3 class="dish-title">Chicken Malai Tikka with Fresh Salad</h3>
+                    <p class="dish-desc">Yogurt-cream marinated chicken seared with lemon pepper, served with basmati rice.</p>
+                </div>
             </div>
 
-            <div class="gallery-item">
+            <!-- 6. Paneer Fried Rice (09.08.2026.jpg) -->
+            <div class="gallery-item" data-category="rice" data-title="Tawa Paneer &amp; Vegetable Fried Rice" data-desc="A vibrant wok toss of basmati rice, pan-fried paneer cubes, crisp bell peppers, sweet carrots, and cilantro with whole aromatic spices." data-img="{{ url_for('main.static', filename='images/cooking/09.08.2026.jpg') }}">
                 <div class="img-wrapper">
-                    <img src="{{ url_for('main.static', filename='images/cooking/22.05.2026.jpg') }}" alt="A dish I cooked on May 22, 2026" loading="lazy">
+                    <img src="{{ url_for('main.static', filename='images/cooking/09.08.2026.jpg') }}" alt="Golden Paneer &amp; Vegetable Fried Rice" loading="lazy">
+                    <div class="img-zoom-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
                 </div>
-                <div class="gallery-caption">May 22, 2026</div>
+                <div class="gallery-caption">
+                    <div class="dish-badge-row">
+                        <span class="dish-badge rice"><i class="bi bi-layers-fill"></i> Wok Stir-Fry</span>
+                    </div>
+                    <h3 class="dish-title">Tawa Paneer &amp; Garden Veggie Rice</h3>
+                    <p class="dish-desc">Basmati rice stir-fried with golden paneer cubes, crunchy peppers, and carrots.</p>
+                </div>
             </div>
 
-            <div class="gallery-item">
+            <!-- 7. Butter Chicken (02.08.2026.jpg) -->
+            <div class="gallery-item" data-category="mains" data-title="Velvety Butter Chicken with Steamed Basmati Rice" data-desc="Tender spiced chicken pieces immersed in a velvety tomato and butter makhani gravy, finished with fresh cream drizzle and fragrant basmati rice." data-img="{{ url_for('main.static', filename='images/cooking/02.08.2026.jpg') }}">
                 <div class="img-wrapper">
-                    <img src="{{ url_for('main.static', filename='images/cooking/02.08.2026.jpg') }}" alt="A dish I cooked on August 02, 2026" loading="lazy">
+                    <img src="{{ url_for('main.static', filename='images/cooking/02.08.2026.jpg') }}" alt="Velvety Butter Chicken with Steamed Basmati Rice" loading="lazy">
+                    <div class="img-zoom-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
                 </div>
-                <div class="gallery-caption">Aug 02, 2026</div>
+                <div class="gallery-caption">
+                    <div class="dish-badge-row">
+                        <span class="dish-badge mains"><i class="bi bi-cup-hot-fill"></i> Main Course</span>
+                    </div>
+                    <h3 class="dish-title">Classic Butter Chicken &amp; Basmati Rice</h3>
+                    <p class="dish-desc">Rich and velvety makhani sauce with a touch of fresh cream and coriander.</p>
+                </div>
             </div>
 
-            <div class="gallery-item">
+            <!-- 8. Cheesy Garden Toast (27.07.2026.jpg) -->
+            <div class="gallery-item" data-category="brunch" data-title="Cheesy Garden Toast &amp; Nutrition Platter" data-desc="Golden whole wheat toast topped with melted mozzarella and bell peppers, accompanied by ripe sliced avocado, boiled eggs, citrus, pomegranate, and dry fruits." data-img="{{ url_for('main.static', filename='images/cooking/27.07.2026.jpg') }}">
                 <div class="img-wrapper">
-                    <img src="{{ url_for('main.static', filename='images/cooking/19.04.2026.jpg') }}" alt="A dish I cooked on April 19, 2026" loading="lazy">
+                    <img src="{{ url_for('main.static', filename='images/cooking/27.07.2026.jpg') }}" alt="Cheesy Garden Toast with Avocado, Boiled Eggs &amp; Fresh Fruits" loading="lazy">
+                    <div class="img-zoom-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
                 </div>
-                <div class="gallery-caption">Apr 19, 2026</div>
+                <div class="gallery-caption">
+                    <div class="dish-badge-row">
+                        <span class="dish-badge brunch"><i class="bi bi-egg-fried"></i> Healthy Brunch</span>
+                    </div>
+                    <h3 class="dish-title">Cheesy Veggie Toast &amp; Avocado Bowl</h3>
+                    <p class="dish-desc">Melted cheese toast paired with avocado, boiled eggs, and fresh seasonal fruit.</p>
+                </div>
             </div>
 
-            <div class="gallery-item">
+            <!-- 9. Golden Pancake & Smoothie (22.05.2026.jpg) -->
+            <div class="gallery-item" data-category="brunch" data-title="Golden Pancake with Summer Fruits &amp; Mango Shake" data-desc="Nutrient-rich golden pancake garnished with roasted cashews and almonds, served with fresh watermelon, apples, sweet lime, and a creamy mango shake." data-img="{{ url_for('main.static', filename='images/cooking/22.05.2026.jpg') }}">
                 <div class="img-wrapper">
-                    <img src="{{ url_for('main.static', filename='images/cooking/E4802FE4-5598-4721-8315-45EFAFA35E34.jpg') }}" alt="A dish I cooked recently" loading="lazy">
+                    <img src="{{ url_for('main.static', filename='images/cooking/22.05.2026.jpg') }}" alt="Golden Pancake with Summer Fruits &amp; Mango Smoothie" loading="lazy">
+                    <div class="img-zoom-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
+                </div>
+                <div class="gallery-caption">
+                    <div class="dish-badge-row">
+                        <span class="dish-badge brunch"><i class="bi bi-heart-fill"></i> Wholesome</span>
+                    </div>
+                    <h3 class="dish-title">Nutty Pancake &amp; Mango Smoothie</h3>
+                    <p class="dish-desc">Nut-topped golden pancake with crisp summer fruits and a frosty mango shake.</p>
                 </div>
             </div>
+
+            <!-- 10. Savory French Toast Platter (10.05.2026.jpg) -->
+            <div class="gallery-item" data-category="brunch" data-title="Savory French Toast &amp; Fruit Parfait" data-desc="Herbed egg-coated French toast pan-browned with onions and fresh herbs, served alongside fresh tropical fruit slices, whole almonds, and chilled oats parfait." data-img="{{ url_for('main.static', filename='images/cooking/10.05.2026.jpg') }}">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/cooking/10.05.2026.jpg') }}" alt="Savory Egg French Toast with Fruit Salad &amp; Overnight Oats Parfait" loading="lazy">
+                    <div class="img-zoom-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
+                </div>
+                <div class="gallery-caption">
+                    <div class="dish-badge-row">
+                        <span class="dish-badge brunch"><i class="bi bi-egg-fried"></i> Power Breakfast</span>
+                    </div>
+                    <h3 class="dish-title">Savory Egg French Toast &amp; Parfait</h3>
+                    <p class="dish-desc">Golden egg toast accompanied by fresh fruit cuts and an overnight oats jar.</p>
+                </div>
+            </div>
+
+            <!-- 11. Grilled Chicken & Greens (19.04.2026.jpg) -->
+            <div class="gallery-item" data-category="brunch" data-title="Spiced Grilled Chicken with Sautéed Veggies" data-desc="Juicy chicken breast fillets marinated with warm spices and seared, paired with tender sautéed broccoli florets, carrots, french beans, and scrambled paneer." data-img="{{ url_for('main.static', filename='images/cooking/19.04.2026.jpg') }}">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/cooking/19.04.2026.jpg') }}" alt="Spiced Grilled Chicken Breast with Sautéed Broccoli &amp; Garden Vegetables" loading="lazy">
+                    <div class="img-zoom-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
+                </div>
+                <div class="gallery-caption">
+                    <div class="dish-badge-row">
+                        <span class="dish-badge brunch"><i class="bi bi-heart-pulse-fill"></i> High Protein</span>
+                    </div>
+                    <h3 class="dish-title">Herb-Grilled Chicken &amp; Sautéed Veggies</h3>
+                    <p class="dish-desc">Spiced seared chicken breast served with crunchy broccoli, carrots, and beans.</p>
+                </div>
+            </div>
+
+            <!-- 12. Skillet Fried Rice (E4802FE4-5598-4721-8315-45EFAFA35E34.jpg) -->
+            <div class="gallery-item" data-category="rice" data-title="Skillet Chicken &amp; Egg Fried Rice" data-desc="A sizzling skillet of basmati rice wok-tossed with tender chicken chunks, scrambled eggs, sweet bell peppers, carrots, and scallions." data-img="{{ url_for('main.static', filename='images/cooking/E4802FE4-5598-4721-8315-45EFAFA35E34.jpg') }}">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/cooking/E4802FE4-5598-4721-8315-45EFAFA35E34.jpg') }}" alt="Skillet Chicken &amp; Egg Fried Rice with Tossed Vegetables" loading="lazy">
+                    <div class="img-zoom-overlay"><i class="bi bi-arrows-angle-expand"></i></div>
+                </div>
+                <div class="gallery-caption">
+                    <div class="dish-badge-row">
+                        <span class="dish-badge rice"><i class="bi bi-layers-fill"></i> One-Pot Meal</span>
+                    </div>
+                    <h3 class="dish-title">Skillet Chicken &amp; Egg Fried Rice</h3>
+                    <p class="dish-desc">Wok-tossed basmati rice with shredded chicken, scrambled eggs, and veggies.</p>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
+
+<!-- Lightbox Modal -->
+<div class="cooking-modal" id="cookingModal" role="dialog" aria-modal="true" aria-label="Dish Preview">
+    <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close Preview">&times;</button>
+    <button class="modal-nav-btn modal-nav-prev" id="modalPrevBtn" aria-label="Previous Dish"><i class="bi bi-chevron-left"></i></button>
+    <button class="modal-nav-btn modal-nav-next" id="modalNextBtn" aria-label="Next Dish"><i class="bi bi-chevron-right"></i></button>
+    <div class="modal-content-wrap">
+        <div class="modal-img-container">
+            <img src="" id="modalImg" alt="Culinary creation preview">
+        </div>
+        <div class="modal-caption-area">
+            <h3 id="modalTitle">Dish Title</h3>
+            <p id="modalDesc">Dish Description</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- 1. Dynamic Culinary Icon Animation ---
+    const cCanvas = document.getElementById('cookingIconCanvas');
+    const cCtx = cCanvas.getContext('2d');
+    let steamParticles = [];
+    let potHover = false;
+    
+    cCanvas.addEventListener('mouseenter', () => { potHover = true; });
+    cCanvas.addEventListener('mouseleave', () => { potHover = false; });
+    cCanvas.addEventListener('click', () => {
+        // Burst of celebratory herb/spice particles on click
+        for (let i = 0; i < 15; i++) {
+            steamParticles.push({
+                x: 45 + (Math.random() - 0.5) * 20,
+                y: 50,
+                radius: Math.random() * 3 + 1.5,
+                vx: (Math.random() - 0.5) * 2.5,
+                vy: -Math.random() * 2.5 - 1.5,
+                color: Math.random() < 0.5 ? '#e67e22' : '#27ae60',
+                alpha: 1
+            });
+        }
+    });
+
+    function renderCookingIcon() {
+        cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
+        
+        // Spawn gentle steam particles
+        if (Math.random() < (potHover ? 0.45 : 0.2)) {
+            steamParticles.push({
+                x: 45 + (Math.random() - 0.5) * 24,
+                y: 52,
+                radius: Math.random() * 3.5 + 1.5,
+                vx: (Math.random() - 0.5) * 0.7,
+                vy: -Math.random() * 1.2 - 0.6,
+                color: potHover ? '#e67e22' : '#bdc3c7',
+                alpha: 0.8
+            });
+        }
+
+        // Draw stove flame base
+        cCtx.beginPath();
+        cCtx.fillStyle = '#e74c3c';
+        cCtx.arc(45, 78, 12, 0, Math.PI);
+        cCtx.fill();
+        cCtx.beginPath();
+        cCtx.fillStyle = '#f39c12';
+        cCtx.arc(45, 76, 7, 0, Math.PI);
+        cCtx.fill();
+
+        // Draw Cooking Pot
+        // Pot body
+        cCtx.fillStyle = '#34495e';
+        cCtx.beginPath();
+        cCtx.roundRect(24, 52, 42, 22, [2, 2, 8, 8]);
+        cCtx.fill();
+
+        // Pot rim
+        cCtx.fillStyle = '#2c3e50';
+        cCtx.beginPath();
+        cCtx.roundRect(21, 48, 48, 6, 3);
+        cCtx.fill();
+
+        // Pot handles
+        cCtx.strokeStyle = '#7f8c8d';
+        cCtx.lineWidth = 2.5;
+        cCtx.beginPath();
+        cCtx.arc(20, 58, 4, Math.PI * 0.5, Math.PI * 1.5);
+        cCtx.stroke();
+        cCtx.beginPath();
+        cCtx.arc(70, 58, 4, -Math.PI * 0.5, Math.PI * 0.5);
+        cCtx.stroke();
+
+        // Simmering stew surface inside
+        cCtx.fillStyle = potHover ? '#e67e22' : '#d35400';
+        cCtx.beginPath();
+        cCtx.ellipse(45, 51, 19, 3, 0, 0, Math.PI * 2);
+        cCtx.fill();
+
+        // Draw and update steam particles
+        for (let i = steamParticles.length - 1; i >= 0; i--) {
+            let p = steamParticles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.alpha -= 0.016;
+
+            if (p.alpha <= 0 || p.y < 5) {
+                steamParticles.splice(i, 1);
+                continue;
+            }
+
+            cCtx.beginPath();
+            cCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            cCtx.fillStyle = p.color;
+            cCtx.globalAlpha = Math.max(0, p.alpha);
+            cCtx.fill();
+            cCtx.globalAlpha = 1.0;
+        }
+
+        requestAnimationFrame(renderCookingIcon);
+    }
+    renderCookingIcon();
+
+    // --- 2. Interactive Category Filtering ---
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filterValue = btn.getAttribute('data-filter');
+
+            galleryItems.forEach(item => {
+                const category = item.getAttribute('data-category');
+                if (filterValue === 'all' || category === filterValue) {
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, 20);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(15px)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 200);
+                }
+            });
+        });
+    });
+
+    // --- 3. Lightbox Modal Preview ---
+    const modal = document.getElementById('cookingModal');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const modalPrevBtn = document.getElementById('modalPrevBtn');
+    const modalNextBtn = document.getElementById('modalNextBtn');
+
+    let visibleItems = [];
+    let currentIndex = 0;
+
+    function getVisibleItems() {
+        return Array.from(galleryItems).filter(item => item.style.display !== 'none');
+    }
+
+    function openModal(index) {
+        visibleItems = getVisibleItems();
+        if (index < 0 || index >= visibleItems.length) return;
+        currentIndex = index;
+
+        const target = visibleItems[currentIndex];
+        const imgSrc = target.getAttribute('data-img');
+        const title = target.getAttribute('data-title');
+        const desc = target.getAttribute('data-desc');
+
+        modalImg.src = imgSrc;
+        modalTitle.textContent = title;
+        modalDesc.textContent = desc;
+
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    function showNext() {
+        visibleItems = getVisibleItems();
+        currentIndex = (currentIndex + 1) % visibleItems.length;
+        openModal(currentIndex);
+    }
+
+    function showPrev() {
+        visibleItems = getVisibleItems();
+        currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+        openModal(currentIndex);
+    }
+
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            visibleItems = getVisibleItems();
+            const idx = visibleItems.indexOf(item);
+            if (idx !== -1) openModal(idx);
+        });
+    });
+
+    modalCloseBtn.addEventListener('click', closeModal);
+    modalPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+    modalNextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('show')) return;
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowRight') showNext();
+        if (e.key === 'ArrowLeft') showPrev();
+    });
+</script>
 
 {% endblock %}
