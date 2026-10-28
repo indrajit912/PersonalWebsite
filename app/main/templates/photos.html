@@ -5,72 +5,81 @@
 {% block styles %}
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('main.static', filename='css/photo_style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
 
 <section>
     <div class="gallery-container">
+        
+        <!-- Header Section -->
         <div class="page-heading">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 1.5rem; flex-wrap: wrap;">
-    <canvas id="photoIconCanvas" width="90" height="90" style="border-radius: 50%; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border: 1px solid #eaeaea; cursor: crosshair;"></canvas>
-    <h1 style="margin: 0; font-size: 3.5rem; font-weight: 800; color: #2c3e50; letter-spacing: -1px;">Photography</h1>
-</div>
-<script>
-    const phCanvas = document.getElementById('photoIconCanvas');
-    const phCtx = phCanvas.getContext('2d');
-    let phMouseDist = 0;
-    
-    phCanvas.addEventListener('mousemove', (e) => {
-        const rect = phCanvas.getBoundingClientRect();
-        let dx = (e.clientX - rect.left) - 45;
-        let dy = (e.clientY - rect.top) - 45;
-        phMouseDist = Math.sqrt(dx*dx + dy*dy);
-    });
-    phCanvas.addEventListener('mouseleave', () => {
-        phMouseDist = 0;
-    });
+            <div class="photo-title-row">
+                <canvas id="photoIconCanvas" width="90" height="90" style="border-radius: 50%; background: #ffffff; box-shadow: 0 6px 16px rgba(0,0,0,0.08); border: 1px solid #eaeaea; cursor: crosshair;"></canvas>
+                <h1 class="photo-title">Photography</h1>
+            </div>
 
-    function animateAperture() {
-        phCtx.clearRect(0, 0, phCanvas.width, phCanvas.height);
-        
-        let targetRadius = 5 + (phMouseDist / 60) * 20; 
-        if (targetRadius > 25) targetRadius = 25;
-        
-        phCtx.beginPath();
-        phCtx.arc(45, 45, 38, 0, Math.PI*2);
-        phCtx.strokeStyle = '#333';
-        phCtx.lineWidth = 3;
-        phCtx.stroke();
+            <div class="photo-subtitle">
+                <i class="bi bi-camera-fill"></i> Moments, journeys, &amp; visual memories
+            </div>
 
-        phCtx.strokeStyle = '#555';
-        phCtx.lineWidth = 1.5;
-        for(let i=0; i<6; i++) {
-            let angle = (i / 6) * Math.PI * 2;
-            let nextAngle = ((i+1) / 6) * Math.PI * 2;
-            
-            let innerX = 45 + Math.cos(angle) * targetRadius;
-            let innerY = 45 + Math.sin(angle) * targetRadius;
-            
-            let outerX = 45 + Math.cos(nextAngle + 0.5) * 38;
-            let outerY = 45 + Math.sin(nextAngle + 0.5) * 38;
-            
-            phCtx.beginPath();
-            phCtx.moveTo(innerX, innerY);
-            phCtx.lineTo(outerX, outerY);
-            phCtx.stroke();
-        }
-        
-        phCtx.beginPath();
-        phCtx.arc(45, 45, targetRadius, 0, Math.PI*2);
-        phCtx.strokeStyle = '#333';
-        phCtx.lineWidth = 2;
-        phCtx.stroke();
-        
-        requestAnimationFrame(animateAperture);
-    }
-    animateAperture();
-</script>
+            <script>
+                const phCanvas = document.getElementById('photoIconCanvas');
+                const phCtx = phCanvas.getContext('2d');
+                let phMouseDist = 0;
+                
+                phCanvas.addEventListener('mousemove', (e) => {
+                    const rect = phCanvas.getBoundingClientRect();
+                    let dx = (e.clientX - rect.left) - 45;
+                    let dy = (e.clientY - rect.top) - 45;
+                    phMouseDist = Math.sqrt(dx*dx + dy*dy);
+                });
+                phCanvas.addEventListener('mouseleave', () => {
+                    phMouseDist = 0;
+                });
+
+                function animateAperture() {
+                    phCtx.clearRect(0, 0, phCanvas.width, phCanvas.height);
+                    
+                    let targetRadius = 5 + (phMouseDist / 60) * 20; 
+                    if (targetRadius > 25) targetRadius = 25;
+                    
+                    phCtx.beginPath();
+                    phCtx.arc(45, 45, 38, 0, Math.PI*2);
+                    phCtx.strokeStyle = '#333';
+                    phCtx.lineWidth = 3;
+                    phCtx.stroke();
+
+                    phCtx.strokeStyle = '#555';
+                    phCtx.lineWidth = 1.5;
+                    for(let i=0; i<6; i++) {
+                        let angle = (i / 6) * Math.PI * 2;
+                        let nextAngle = ((i+1) / 6) * Math.PI * 2;
+                        
+                        let innerX = 45 + Math.cos(angle) * targetRadius;
+                        let innerY = 45 + Math.sin(angle) * targetRadius;
+                        
+                        let outerX = 45 + Math.cos(nextAngle + 0.5) * 38;
+                        let outerY = 45 + Math.sin(nextAngle + 0.5) * 38;
+                        
+                        phCtx.beginPath();
+                        phCtx.moveTo(innerX, innerY);
+                        phCtx.lineTo(outerX, outerY);
+                        phCtx.stroke();
+                    }
+                    
+                    phCtx.beginPath();
+                    phCtx.arc(45, 45, targetRadius, 0, Math.PI*2);
+                    phCtx.strokeStyle = '#333';
+                    phCtx.lineWidth = 2;
+                    phCtx.stroke();
+                    
+                    requestAnimationFrame(animateAperture);
+                }
+                animateAperture();
+            </script>
+
             <div class="page-quote-wrapper">
                 <blockquote class="page-quote">
                     To photograph is to hold one's breath, when all faculties converge to capture fleeting reality.
@@ -79,50 +88,300 @@
             </div>
         </div>
 
+        <!-- Masonry Gallery -->
         <div class="masonry-gallery">
-            <div class="gallery-item">
+
+            <!-- 1. Shantiniketan -->
+            <div class="gallery-item" data-title="Shantiniketan" data-desc="Channeling my inner Tagore in Shantiniketan." data-img="{{ url_for('main.static', filename='images/indrajit/IMG_8494.jpg') }}">
                 <div class="img-wrapper">
-                    <img src="{{ url_for('main.static', filename='images/indrajit/IMG_8494.jpg') }}" alt="Recent photograph of Indrajit">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/IMG_8494.jpg') }}" alt="Trip to Shantiniketan" loading="lazy">
+                    <div class="img-zoom-overlay">
+                        <i class="bi bi-arrows-fullscreen"></i>
+                    </div>
+                </div>
+                <div class="gallery-caption">
+                    <div class="photo-badge-row">
+                        <span class="photo-badge portraits"><i class="bi bi-geo-alt-fill"></i> Shantiniketan</span>
+                    </div>
+                    <h4 class="photo-card-title">Shantiniketan</h4>
+                    <p class="photo-card-desc">Channeling my inner Tagore in Shantiniketan.</p>
                 </div>
             </div>
 
-            <div class="gallery-item">
+            <!-- 2. Cafe in Bangalore -->
+            <div class="gallery-item" data-title="Bangalore Cafe" data-desc="Plotting ideas over coffee at a cozy Bangalore cafe." data-img="{{ url_for('main.static', filename='images/indrajit/herley.jpg') }}">
                 <div class="img-wrapper">
-                    <img src="{{ url_for('main.static', filename='images/indrajit/herley.jpg') }}" alt="Indrajit writing on whiteboard">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/herley.jpg') }}" alt="Cafe in Bangalore" loading="lazy">
+                    <div class="img-zoom-overlay">
+                        <i class="bi bi-arrows-fullscreen"></i>
+                    </div>
+                </div>
+                <div class="gallery-caption">
+                    <div class="photo-badge-row">
+                        <span class="photo-badge travel"><i class="bi bi-cup-hot-fill"></i> Cafe</span>
+                    </div>
+                    <h4 class="photo-card-title">Bangalore Cafe</h4>
+                    <p class="photo-card-desc">Plotting ideas over coffee at a cozy Bangalore cafe.</p>
                 </div>
             </div>
 
-            <div class="gallery-item">
+            <!-- 3. Flight to ISI Delhi -->
+            <div class="gallery-item" data-title="Flight to ISI Delhi" data-desc="Window seat at 35,000 ft, en route to ISI Delhi." data-img="{{ url_for('main.static', filename='images/indrajit/airplane.jpg') }}">
                 <div class="img-wrapper">
-                    <img src="{{ url_for('main.static', filename='images/indrajit/airplane.jpg') }}" alt="Indrajit in ISI Campus">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/airplane.jpg') }}" alt="Flight to ISI Delhi" loading="lazy">
+                    <div class="img-zoom-overlay">
+                        <i class="bi bi-arrows-fullscreen"></i>
+                    </div>
+                </div>
+                <div class="gallery-caption">
+                    <div class="photo-badge-row">
+                        <span class="photo-badge travel"><i class="bi bi-airplane-fill"></i> In Flight</span>
+                    </div>
+                    <h4 class="photo-card-title">Flight to ISI Delhi</h4>
+                    <p class="photo-card-desc">Window seat at 35,000 ft, en route to ISI Delhi.</p>
                 </div>
             </div>
 
-            <div class="gallery-item">
+            <!-- 4. ISI Academic Building -->
+            <div class="gallery-item" data-title="ISI Academic Building" data-desc="Outside the Stat-Math building, ISI Bangalore." data-img="{{ url_for('main.static', filename='images/indrajit/photo2.jpg') }}">
                 <div class="img-wrapper">
-                    <img src="{{ url_for('main.static', filename='images/indrajit/photo2.jpg') }}" alt="Indrajit in front of ISI Academic building" loading="lazy">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/photo2.jpg') }}" alt="ISI Bangalore Academic building" loading="lazy">
+                    <div class="img-zoom-overlay">
+                        <i class="bi bi-arrows-fullscreen"></i>
+                    </div>
+                </div>
+                <div class="gallery-caption">
+                    <div class="photo-badge-row">
+                        <span class="photo-badge campus"><i class="bi bi-bank"></i> ISI Bangalore</span>
+                    </div>
+                    <h4 class="photo-card-title">ISI Academic Building</h4>
+                    <p class="photo-card-desc">Outside the Stat-Math building, ISI Bangalore.</p>
                 </div>
             </div>
 
-            <div class="gallery-item">
+            <!-- 5. ISI Campus near D-Quarters -->
+            <div class="gallery-item" data-title="Near D-Quarters" data-desc="Greenery and calm strolls by D-Quarters, ISI Bangalore." data-img="{{ url_for('main.static', filename='images/indrajit/photo_near_dqtrs.jpg') }}">
                 <div class="img-wrapper">
-                    <img src="{{ url_for('main.static', filename='images/indrajit/kapoor_cafe.jpg') }}" alt="Indrajit at a cafe" loading="lazy">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/photo_near_dqtrs.jpg') }}" alt="Near D-Quarters, ISI Bangalore" loading="lazy">
+                    <div class="img-zoom-overlay">
+                        <i class="bi bi-arrows-fullscreen"></i>
+                    </div>
+                </div>
+                <div class="gallery-caption">
+                    <div class="photo-badge-row">
+                        <span class="photo-badge campus"><i class="bi bi-tree-fill"></i> ISI Campus</span>
+                    </div>
+                    <h4 class="photo-card-title">Near D-Quarters</h4>
+                    <p class="photo-card-desc">Greenery and calm strolls by D-Quarters, ISI Bangalore.</p>
                 </div>
             </div>
 
-            <div class="gallery-item">
+            <!-- 6. Secrets of Bangalore -->
+            <div class="gallery-item" data-title="Secrets of Bangalore" data-desc="Cracking culinary secrets at Secrets of Bangalore." data-img="{{ url_for('main.static', filename='images/indrajit/photo_sob.jpg') }}">
                 <div class="img-wrapper">
-                    <img src="{{ url_for('main.static', filename='images/indrajit/blue_tokai.jpg') }}" alt="Indrajit in a restaurant" loading="lazy">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/photo_sob.jpg') }}" alt="Secrets of Bangalore restaurant" loading="lazy">
+                    <div class="img-zoom-overlay">
+                        <i class="bi bi-arrows-fullscreen"></i>
+                    </div>
+                </div>
+                <div class="gallery-caption">
+                    <div class="photo-badge-row">
+                        <span class="photo-badge travel"><i class="bi bi-cup-straw"></i> Restaurant</span>
+                    </div>
+                    <h4 class="photo-card-title">Secrets of Bangalore</h4>
+                    <p class="photo-card-desc">Cracking culinary secrets at Secrets of Bangalore.</p>
                 </div>
             </div>
 
-            <div class="gallery-item">
+            <!-- 7. Kapoor's Cafe -->
+            <div class="gallery-item" data-title="Kapoor's Cafe" data-desc="Stuffed parathas and chilled lassi at Kapoor's Cafe, Bangalore." data-img="{{ url_for('main.static', filename='images/indrajit/kapoor_cafe.jpg') }}">
                 <div class="img-wrapper">
-                    <img src="{{ url_for('main.static', filename='images/indra_library/books.jpg') }}" alt="Indrajit's ISI Bookshelf" loading="lazy">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/kapoor_cafe.jpg') }}" alt="Evening at Kapoor's Cafe in Bangalore" loading="lazy">
+                    <div class="img-zoom-overlay">
+                        <i class="bi bi-arrows-fullscreen"></i>
+                    </div>
+                </div>
+                <div class="gallery-caption">
+                    <div class="photo-badge-row">
+                        <span class="photo-badge travel"><i class="bi bi-cup-hot-fill"></i> Kapoor's Cafe</span>
+                    </div>
+                    <h4 class="photo-card-title">Kapoor's Cafe</h4>
+                    <p class="photo-card-desc">Stuffed parathas and chilled lassi on a Bangalore evening.</p>
                 </div>
             </div>
+
+            <!-- 8. Blue Tokai Cafe in Bangalore -->
+            <div class="gallery-item" data-title="Blue Tokai Cafe" data-desc="Pour-overs and deep thoughts at Blue Tokai, Bangalore." data-img="{{ url_for('main.static', filename='images/indrajit/blue_tokai.jpg') }}">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/blue_tokai.jpg') }}" alt="Blue Tokai Cafe in Bangalore" loading="lazy">
+                    <div class="img-zoom-overlay">
+                        <i class="bi bi-arrows-fullscreen"></i>
+                    </div>
+                </div>
+                <div class="gallery-caption">
+                    <div class="photo-badge-row">
+                        <span class="photo-badge travel"><i class="bi bi-cup-straw"></i> Blue Tokai</span>
+                    </div>
+                    <h4 class="photo-card-title">Blue Tokai Cafe</h4>
+                    <p class="photo-card-desc">Pour-overs and deep thoughts at Blue Tokai, Bangalore.</p>
+                </div>
+            </div>
+
+            <!-- 9. Bangalore Airport to Bombay -->
+            <div class="gallery-item" data-title="Bangalore Airport" data-desc="Waiting for the Bombay flight at Bangalore Airport lounge." data-img="{{ url_for('main.static', filename='images/indrajit/lounge.jpg') }}">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/lounge.jpg') }}" alt="Bangalore Airport lounge on journey to Bombay" loading="lazy">
+                    <div class="img-zoom-overlay">
+                        <i class="bi bi-arrows-fullscreen"></i>
+                    </div>
+                </div>
+                <div class="gallery-caption">
+                    <div class="photo-badge-row">
+                        <span class="photo-badge travel"><i class="bi bi-airplane-fill"></i> Airport Lounge</span>
+                    </div>
+                    <h4 class="photo-card-title">Bangalore Airport</h4>
+                    <p class="photo-card-desc">Waiting for the Bombay flight at Bangalore Airport lounge.</p>
+                </div>
+            </div>
+
+            <!-- 10. Bangalore Fair -->
+            <div class="gallery-item" data-title="Bangalore Fair" data-desc="Hunting for literary treasures at a fair in Bangalore." data-img="{{ url_for('main.static', filename='images/indrajit/photo_bookfair.jpg') }}">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/photo_bookfair.jpg') }}" alt="Fair in Bangalore" loading="lazy">
+                    <div class="img-zoom-overlay">
+                        <i class="bi bi-arrows-fullscreen"></i>
+                    </div>
+                </div>
+                <div class="gallery-caption">
+                    <div class="photo-badge-row">
+                        <span class="photo-badge portraits"><i class="bi bi-book-half"></i> Bangalore Fair</span>
+                    </div>
+                    <h4 class="photo-card-title">Bangalore Fair</h4>
+                    <p class="photo-card-desc">Hunting for literary treasures at a fair in Bangalore.</p>
+                </div>
+            </div>
+
+            <!-- 11. Campus Cat -->
+            <div class="gallery-item" data-title="Campus Cat" data-desc="Bribing the ISI campus cat for good research karma." data-img="{{ url_for('main.static', filename='images/indrajit/photo_with_cat.jpg') }}">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/indrajit/photo_with_cat.jpg') }}" alt="Campus cat at ISI Bangalore" loading="lazy">
+                    <div class="img-zoom-overlay">
+                        <i class="bi bi-arrows-fullscreen"></i>
+                    </div>
+                </div>
+                <div class="gallery-caption">
+                    <div class="photo-badge-row">
+                        <span class="photo-badge portraits"><i class="bi bi-heart-fill"></i> Campus Life</span>
+                    </div>
+                    <h4 class="photo-card-title">Campus Cat</h4>
+                    <p class="photo-card-desc">Bribing the ISI campus cat for good research karma.</p>
+                </div>
+            </div>
+
+            <!-- 12. Bookshelf in ISI Hostel Room -->
+            <div class="gallery-item" data-title="Hostel Bookshelf" data-desc="My ISI hostel room bookshelf: mostly math, plus literature." data-img="{{ url_for('main.static', filename='images/indra_library/books.jpg') }}">
+                <div class="img-wrapper">
+                    <img src="{{ url_for('main.static', filename='images/indra_library/books.jpg') }}" alt="Personal bookshelf in ISI hostel room" loading="lazy">
+                    <div class="img-zoom-overlay">
+                        <i class="bi bi-arrows-fullscreen"></i>
+                    </div>
+                </div>
+                <div class="gallery-caption">
+                    <div class="photo-badge-row">
+                        <span class="photo-badge campus"><i class="bi bi-bookmark-star-fill"></i> Hostel Room</span>
+                    </div>
+                    <h4 class="photo-card-title">Hostel Bookshelf</h4>
+                    <p class="photo-card-desc">My ISI hostel room bookshelf: mostly math, plus literature.</p>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
+
+<!-- Modal Lightbox Preview -->
+<div id="photoModal" class="photo-modal" aria-hidden="true">
+    <div class="modal-content-wrap">
+        <button id="modalCloseBtn" class="modal-close-btn" aria-label="Close modal">&times;</button>
+        <button id="modalPrevBtn" class="modal-nav-btn modal-nav-prev" aria-label="Previous image">&#10094;</button>
+        <button id="modalNextBtn" class="modal-nav-btn modal-nav-next" aria-label="Next image">&#10095;</button>
+
+        <div class="modal-img-container">
+            <img id="modalImg" src="" alt="Full preview">
+        </div>
+        
+        <div class="modal-caption-area">
+            <h3 id="modalTitle"></h3>
+            <p id="modalDesc"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- Lightbox Modal Preview ---
+    const modal = document.getElementById('photoModal');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const modalPrevBtn = document.getElementById('modalPrevBtn');
+    const modalNextBtn = document.getElementById('modalNextBtn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    let currentIndex = 0;
+
+    function openModal(index) {
+        if (index < 0 || index >= galleryItems.length) return;
+        currentIndex = index;
+
+        const target = galleryItems[currentIndex];
+        const imgSrc = target.getAttribute('data-img');
+        const title = target.getAttribute('data-title');
+        const desc = target.getAttribute('data-desc');
+
+        modalImg.src = imgSrc;
+        modalTitle.textContent = title;
+        modalDesc.textContent = desc;
+
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    function showNext() {
+        currentIndex = (currentIndex + 1) % galleryItems.length;
+        openModal(currentIndex);
+    }
+
+    function showPrev() {
+        currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+        openModal(currentIndex);
+    }
+
+    galleryItems.forEach((item, idx) => {
+        item.addEventListener('click', () => {
+            openModal(idx);
+        });
+    });
+
+    modalCloseBtn.addEventListener('click', closeModal);
+    modalPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+    modalNextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('show')) return;
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowRight') showNext();
+        if (e.key === 'ArrowLeft') showPrev();
+    });
+</script>
 
 {% endblock %}

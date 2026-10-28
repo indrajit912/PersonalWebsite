@@ -24,325 +24,466 @@
 <section>
     <div class="page-container">
         <div class="page-heading">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 1.5rem; flex-wrap: wrap;">
-    <canvas id="teachingIconCanvas" width="90" height="90" style="border-radius: 50%; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border: 1px solid #eaeaea; cursor: crosshair;"></canvas>
-    <h1 style="margin: 0; font-size: 3.5rem; font-weight: 800; color: #2c3e50; letter-spacing: -1px;">Teaching</h1>
-</div>
-<script>
-    const tCanvas = document.getElementById('teachingIconCanvas');
-    const tCtx = tCanvas.getContext('2d');
-    
-    let targetAngle1 = Math.PI / 5;
-    let targetAngle2 = Math.PI / 5;
-    let currentAngle1 = Math.PI / 5;
-    let currentAngle2 = Math.PI / 5;
-    
-    tCanvas.addEventListener('mousemove', (e) => {
-        const rect = tCanvas.getBoundingClientRect();
-        let mx = e.clientX - rect.left;
-        let my = e.clientY - rect.top;
-        targetAngle1 = (mx / 90) * Math.PI;
-        targetAngle2 = ((90 - my) / 90) * Math.PI; 
-    });
-    
-    tCanvas.addEventListener('mouseleave', () => {
-        targetAngle1 = Math.PI / 5;
-        targetAngle2 = Math.PI / 5;
-    });
+            <div class="teaching-title-row">
+                <canvas id="teachingIconCanvas" width="90" height="90" style="border-radius: 50%; background: #ffffff; box-shadow: 0 6px 16px rgba(0,0,0,0.08); border: 1px solid #eaeaea; cursor: crosshair;"></canvas>
+                <h1 class="teaching-title">Teaching</h1>
+            </div>
+            
+            <div class="teaching-subtitle">
+                <i class="bi bi-mortarboard-fill"></i> Academic Teaching & TA Portfolio
+            </div>
 
-    function drawTree(x, y, len, angle, depth) {
-        if (depth === 0) return;
-        
-        let endX = x + len * Math.cos(angle);
-        let endY = y + len * Math.sin(angle);
-        
-        tCtx.beginPath();
-        tCtx.moveTo(x, y);
-        tCtx.lineTo(endX, endY);
-        let r = Math.floor(139 - (139-39)*(1 - depth/7));
-        let g = Math.floor(69 + (174-69)*(1 - depth/7));
-        let b = Math.floor(19 + (96-19)*(1 - depth/7));
-        tCtx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${0.4 + (depth/7)*0.6})`;
-        tCtx.lineWidth = depth * 0.4;
-        tCtx.lineCap = 'round';
-        tCtx.stroke();
-        
-        drawTree(endX, endY, len * 0.72, angle - currentAngle1, depth - 1);
-        drawTree(endX, endY, len * 0.72, angle + currentAngle2, depth - 1);
-    }
+            <script>
+                const tCanvas = document.getElementById('teachingIconCanvas');
+                const tCtx = tCanvas.getContext('2d');
+                
+                let targetAngle1 = Math.PI / 5;
+                let targetAngle2 = Math.PI / 5;
+                let currentAngle1 = Math.PI / 5;
+                let currentAngle2 = Math.PI / 5;
+                
+                tCanvas.addEventListener('mousemove', (e) => {
+                    const rect = tCanvas.getBoundingClientRect();
+                    let mx = e.clientX - rect.left;
+                    let my = e.clientY - rect.top;
+                    targetAngle1 = (mx / 90) * Math.PI;
+                    targetAngle2 = ((90 - my) / 90) * Math.PI; 
+                });
+                
+                tCanvas.addEventListener('mouseleave', () => {
+                    targetAngle1 = Math.PI / 5;
+                    targetAngle2 = Math.PI / 5;
+                });
 
-    function animateTeaching() {
-        tCtx.clearRect(0, 0, tCanvas.width, tCanvas.height);
-        
-        currentAngle1 += (targetAngle1 - currentAngle1) * 0.08;
-        currentAngle2 += (targetAngle2 - currentAngle2) * 0.08;
-        
-        drawTree(45, 90, 22, -Math.PI / 2, 7);
-        
-        requestAnimationFrame(animateTeaching);
-    }
-    animateTeaching();
-</script>
-            <div class="page-quote-wrapper">
+                function drawTree(x, y, len, angle, depth) {
+                    if (depth === 0) return;
+                    
+                    let endX = x + len * Math.cos(angle);
+                    let endY = y + len * Math.sin(angle);
+                    
+                    tCtx.beginPath();
+                    tCtx.moveTo(x, y);
+                    tCtx.lineTo(endX, endY);
+                    let r = Math.floor(139 - (139-39)*(1 - depth/7));
+                    let g = Math.floor(69 + (174-69)*(1 - depth/7));
+                    let b = Math.floor(19 + (96-19)*(1 - depth/7));
+                    tCtx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${0.4 + (depth/7)*0.6})`;
+                    tCtx.lineWidth = depth * 0.4;
+                    tCtx.lineCap = 'round';
+                    tCtx.stroke();
+                    
+                    drawTree(endX, endY, len * 0.72, angle - currentAngle1, depth - 1);
+                    drawTree(endX, endY, len * 0.72, angle + currentAngle2, depth - 1);
+                }
+
+                function animateTeaching() {
+                    tCtx.clearRect(0, 0, tCanvas.width, tCanvas.height);
+                    
+                    currentAngle1 += (targetAngle1 - currentAngle1) * 0.08;
+                    currentAngle2 += (targetAngle2 - currentAngle2) * 0.08;
+                    
+                    drawTree(45, 90, 22, -Math.PI / 2, 7);
+                    
+                    requestAnimationFrame(animateTeaching);
+                }
+                animateTeaching();
+            </script>
+
+            <!-- <div class="page-quote-wrapper">
                 <blockquote class="page-quote">
                     I cannot teach anybody anything. I can only make them think.
                     <footer>Socrates</footer>
                 </blockquote>
+            </div> -->
+        </div>
+
+        <!-- Academic Highlights Stats Bar -->
+        <div class="teaching-stats-bar">
+            <div class="stat-item">
+                <div class="stat-number">9</div>
+                <div class="stat-label">Courses</div>
             </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Institutes (IITK & ISI)</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-number" style="font-size: 1.15rem; font-weight: 700; color: #1e293b;">B.Tech • B.Math • M.Math</div>
+                <div class="stat-label">Student Cohorts</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-number" style="color: #059669; font-size: 1.25rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <span class="pulse-dot"></span> MTH 112M
+                </div>
+                <div class="stat-label">Current Course (2026-27)</div>
+            </div>
+        </div>
+
+        <!-- Interactive Course Filter Bar -->
+        <div class="teaching-filter-bar">
+            <button class="filter-btn active" data-filter="all">
+                <i class="bi bi-grid-fill"></i> All Courses <span class="badge-count">9</span>
+            </button>
+            <button class="filter-btn" data-filter="ongoing">
+                <span class="pulse-dot"></span> Ongoing <span class="badge-count">1</span>
+            </button>
+            <button class="filter-btn" data-filter="iitk">
+                <i class="bi bi-building"></i> IIT Kanpur <span class="badge-count">2</span>
+            </button>
+            <button class="filter-btn" data-filter="isi">
+                <i class="bi bi-bank"></i> ISI Bangalore <span class="badge-count">7</span>
+            </button>
         </div>
 
     <div class="container-teaching">
 
-        <h2 class="section-title"><i class="bi bi-building"></i> Indian Institute of Technology Kanpur <span class="year-range">(2026 - present)</span></h2>
-        
-        <div class="teaching-grid">
+        <!-- IIT Kanpur Section -->
+        <div class="teaching-section" data-section-inst="iitk">
+            <h2 class="section-title"><i class="bi bi-building"></i> Indian Institute of Technology Kanpur <span class="year-range">(2026 - present)</span></h2>
             
+            <div class="teaching-grid">
+                
+                <div class="course-card" data-inst="iitk" data-status="ongoing">
+                    <div class="course-card-top-bar">
+                        <span class="badge-code"><i class="bi bi-mortarboard"></i> IITK • MTH112M</span>
+                        <span class="badge-status ongoing"><span class="pulse-dot"></span> Ongoing</span>
+                    </div>
+                    <div class="course-card-header">
+                        <div class="course-number">02</div>
+                        <h3 class="course-title">Applications of single and several variable calculus (MTH112M 26-27)</h3>
+                    </div>
+                    <div class="course-card-body">
+                        <div class="course-info">
+                            <i class="bi bi-person-fill"></i>
+                            <div><strong>Instructors:</strong> Debasis Sen and Abhijit Pal</div>
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-person-badge"></i>
+                            <div><strong>TA:</strong> Indrajit Ghosh</div>
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-calendar-event"></i>
+                            <div><strong>Duration:</strong> Sep 2026 - present</div>
+                        </div>
+                    </div>
+                    <div class="course-card-footer">
+                        <a class="btn-course" href="{{ url_for('teaching.mth112m_26_27') }}">
+                            <i class="bi bi-arrow-right"></i> View Course
+                        </a>
+                    </div>
+                </div>
 
-            <div class="course-card">
-                <div class="course-card-header">
-                    <div class="course-number">02</div>
-                    <h3 class="course-title">Applications of single and several variable calculus (MTH112M 26-27)</h3>
-                </div>
-                <div class="course-card-body">
-                    <div class="course-info">
-                        <i class="bi bi-person-fill"></i>
-                        <div><strong>Instructors:</strong> Debasis Sen  and  Abhijit Pal</div>
+                
+                <div class="course-card" data-inst="iitk" data-status="completed">
+                    <div class="course-card-top-bar">
+                        <span class="badge-code"><i class="bi bi-mortarboard"></i> IITK • MTH111M</span>
+                        <span class="badge-status completed"><i class="bi bi-check2-circle"></i> Completed</span>
                     </div>
-                    <div class="course-info">
-                        <i class="bi bi-person-badge"></i>
-                        <div><strong>TA:</strong> Indrajit Ghosh</div>
+                    <div class="course-card-header">
+                        <div class="course-number">01</div>
+                        <h3 class="course-title">Calculus I (MTH111M 26-27)</h3>
                     </div>
-                    <div class="course-info">
-                        <i class="bi bi-calendar-event"></i>
-                        <div><strong>Duration:</strong> Sep 2026 - present</div>
+                    <div class="course-card-body">
+                        <div class="course-info">
+                            <i class="bi bi-person-fill"></i>
+                            <div><strong>Instructors:</strong> Amit Kuber and Vikramjeet Singh Chandel</div>
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-person-badge"></i>
+                            <div><strong>TA:</strong> Indrajit Ghosh</div>
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-calendar-event"></i>
+                            <div><strong>Duration:</strong> Jul 2026 - Sep 2026</div>
+                        </div>
+                    </div>
+                    <div class="course-card-footer">
+                        <a class="btn-course" href="{{ url_for('teaching.mth111m_26_27') }}">
+                            <i class="bi bi-arrow-right"></i> View Course
+                        </a>
                     </div>
                 </div>
-                <div class="course-card-footer">
-                    <a class="btn-course" href="{{ url_for('teaching.mth112m_26_27') }}">
-                        <i class="bi bi-arrow-right"></i> View Course
-                    </a>
-                </div>
+
             </div>
-
-            
-            <div class="course-card">
-                <div class="course-card-header">
-                    <div class="course-number">01</div>
-                    <h3 class="course-title">Calculus I (MTH111M 26-27)</h3>
-                </div>
-                <div class="course-card-body">
-                    <div class="course-info">
-                        <i class="bi bi-person-fill"></i>
-                        <div><strong>Instructors:</strong> Amit Kuber and Vikramjeet Singh Chandel</div>
-                    </div>
-                    <div class="course-info">
-                        <i class="bi bi-person-badge"></i>
-                        <div><strong>TA:</strong> Indrajit Ghosh</div>
-                    </div>
-                    <div class="course-info">
-                        <i class="bi bi-calendar-event"></i>
-                        <div><strong>Duration:</strong> Jul 2026 - Sep 2026</div>
-                    </div>
-                </div>
-                <div class="course-card-footer">
-                    <a class="btn-course" href="{{ url_for('teaching.mth111m_26_27') }}">
-                        <i class="bi bi-arrow-right"></i> View Course
-                    </a>
-                </div>
-            </div>
-
         </div>
 
 
 
-        <!-- Teaching Assistantship Section -->
-        <h2 class="section-title"><i class="bi bi-building"></i> Indian Statistical Institute <span class="year-range">(2021 - 2025)</span></h2>
+        <!-- ISI Bangalore Section -->
+        <div class="teaching-section" data-section-inst="isi">
+            <h2 class="section-title"><i class="bi bi-bank"></i> Indian Statistical Institute <span class="year-range">(2021 - 2025)</span></h2>
 
-        <div class="teaching-grid">
-            <div class="course-card">
-                <div class="course-card-header">
-                    <div class="course-number">07</div>
-                    <h3 class="course-title">Optimization (BMAT3)</h3>
+            <div class="teaching-grid">
+                
+                <div class="course-card" data-inst="isi" data-status="completed">
+                    <div class="course-card-top-bar">
+                        <span class="badge-code"><i class="bi bi-bank"></i> ISI • BMAT3</span>
+                        <span class="badge-status completed"><i class="bi bi-check2-circle"></i> Completed</span>
+                    </div>
+                    <div class="course-card-header">
+                        <div class="course-number">07</div>
+                        <h3 class="course-title">Optimization (BMAT3)</h3>
+                    </div>
+                    <div class="course-card-body">
+                        <div class="course-info">
+                            <i class="bi bi-person-fill"></i>
+                            <div><strong>Instructor:</strong> Soumyashant Nayak</div>
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-person-badge"></i>
+                            <div><strong>TA:</strong> Indrajit Ghosh</div>
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-calendar-event"></i>
+                            <div><strong>Duration:</strong> Jan 2025 - Apr 2025</div>
+                        </div>
+                    </div>
+                    <div class="course-card-footer">
+                        <a class="btn-course" href="{{ url_for('teaching.optimization_even2025') }}">
+                            <i class="bi bi-arrow-right"></i> View Course
+                        </a>
+                    </div>
                 </div>
-                <div class="course-card-body">
-                    <div class="course-info">
+
+               
+                <div class="course-card" data-inst="isi" data-status="completed">
+                    <div class="course-card-top-bar">
+                        <span class="badge-code"><i class="bi bi-bank"></i> ISI • Workshop</span>
+                        <span class="badge-status completed"><i class="bi bi-check2-circle"></i> Completed</span>
+                    </div>
+                    <div class="course-card-header">
+                      <div class="course-number">06</div>
+                      <h3 class="course-title">Workshop on Completely Positive Maps</h3>
+                    </div>
+                    <div class="course-card-body">
+                      <div class="course-info">
                         <i class="bi bi-person-fill"></i>
-                        <div><strong>Instructor:</strong> Soumyashant Nayak</div>
-                    </div>
-                    <div class="course-info">
-                        <i class="bi bi-person-badge"></i>
-                        <div><strong>TA:</strong> Indrajit Ghosh</div>
-                    </div>
-                    <div class="course-info">
+                        <div><strong>Lecturers:</strong> Indrajit Ghosh, Gahin Maiti, Soumyashant Nayak</div>
+                      </div>
+                      <div class="course-info">
                         <i class="bi bi-calendar-event"></i>
-                        <div><strong>Duration:</strong> Jan 2025 - Apr 2025</div>
+                        <div><strong>Duration:</strong> Jan 2024 - Jun 2024</div>
+                      </div>
                     </div>
-                </div>
-                <div class="course-card-footer">
-                    <a class="btn-course" href="{{ url_for('teaching.optimization_even2025') }}">
+                    <div class="course-card-footer">
+                      <a class="btn-course" href="{{ url_for('teaching.intro_to_cp_even_2024') }}">
                         <i class="bi bi-arrow-right"></i> View Course
-                    </a>
+                      </a>
+                    </div>
                 </div>
-            </div>
 
-           
-              <div class="course-card">
-                <div class="course-card-header">
-                  <div class="course-number">06</div>
-                  <h3 class="course-title">Workshop on Completely Positive Maps</h3>
+                <div class="course-card" data-inst="isi" data-status="completed">
+                    <div class="course-card-top-bar">
+                        <span class="badge-code"><i class="bi bi-bank"></i> ISI • BMAT3</span>
+                        <span class="badge-status completed"><i class="bi bi-check2-circle"></i> Completed</span>
+                    </div>
+                    <div class="course-card-header">
+                        <div class="course-number">05</div>
+                        <h3 class="course-title">A Course in Harmonic Analysis (BMAT3)</h3>
+                    </div>
+                    <div class="course-card-body">
+                        <div class="course-info">
+                            <i class="bi bi-person-fill"></i>
+                            <div><strong>Instructor:</strong> Soumyashant Nayak</div>
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-person-badge"></i>
+                            <div><strong>TA:</strong> Indrajit Ghosh</div>
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-calendar-event"></i>
+                            <div><strong>Duration:</strong> Jan 2024 - Apr 2024</div>
+                        </div>
+                    </div>
+                    <div class="course-card-footer">
+                        <a class="btn-course" href="{{ url_for('teaching.course_harmonic_even2024') }}">
+                            <i class="bi bi-arrow-right"></i> View Course
+                        </a>
+                    </div>
                 </div>
-                <div class="course-card-body">
-                  <div class="course-info">
-                    <i class="bi bi-person-fill"></i>
-                    <div><strong>Lecturers:</strong> Indrajit Ghosh, Gahin Maiti, Soumyashant Nayak</div>
-                  </div>
-                  <div class="course-info">
-                    <i class="bi bi-calendar-event"></i>
-                    <div><strong>Duration:</strong> Jan 2024 - Jun 2024</div>
-                  </div>
-                </div>
-                <div class="course-card-footer">
-                  <a class="btn-course" href="{{ url_for('teaching.intro_to_cp_even_2024') }}">
-                    <i class="bi bi-arrow-right"></i> View Course
-                  </a>
-                </div>
-              </div>
 
-            <div class="course-card">
-                <div class="course-card-header">
-                    <div class="course-number">05</div>
-                    <h3 class="course-title">A Course in Harmonic Analysis (BMAT3)</h3>
-                </div>
-                <div class="course-card-body">
-                    <div class="course-info">
-                        <i class="bi bi-person-fill"></i>
-                        <div><strong>Instructor:</strong> Soumyashant Nayak</div>
+                <div class="course-card" data-inst="isi" data-status="completed">
+                    <div class="course-card-top-bar">
+                        <span class="badge-code"><i class="bi bi-bank"></i> ISI • BMAT2</span>
+                        <span class="badge-status completed"><i class="bi bi-check2-circle"></i> Completed</span>
                     </div>
-                    <div class="course-info">
-                        <i class="bi bi-person-badge"></i>
-                        <div><strong>TA:</strong> Indrajit Ghosh</div>
+                    <div class="course-card-header">
+                        <div class="course-number">04</div>
+                        <h3 class="course-title">Analysis of Several Variables (BMAT2)</h3>
                     </div>
-                    <div class="course-info">
-                        <i class="bi bi-calendar-event"></i>
-                        <div><strong>Duration:</strong> Jan 2024 - Apr 2024</div>
+                    <div class="course-card-body">
+                        <div class="course-info">
+                            <i class="bi bi-person-fill"></i>
+                            <div><strong>Instructor:</strong> Mathew Joseph</div>
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-person-badge"></i>
+                            <div><strong>TA:</strong> Indrajit Ghosh</div>
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-calendar-event"></i>
+                            <div><strong>Duration:</strong> Aug 2023 - Nov 2023</div>
+                        </div>
+                    </div>
+                    <div class="course-card-footer">
+                        <a class="btn-course" href="{{ url_for('teaching.anal_several_vars_odd_2023_ta') }}">
+                            <i class="bi bi-arrow-right"></i> View Course
+                        </a>
                     </div>
                 </div>
-                <div class="course-card-footer">
-                    <a class="btn-course" href="{{ url_for('teaching.course_harmonic_even2024') }}">
-                        <i class="bi bi-arrow-right"></i> View Course
-                    </a>
-                </div>
-            </div>
 
-            <div class="course-card">
-                <div class="course-card-header">
-                    <div class="course-number">04</div>
-                    <h3 class="course-title">Analysis of Several Variables (BMAT2)</h3>
-                </div>
-                <div class="course-card-body">
-                    <div class="course-info">
-                        <i class="bi bi-person-fill"></i>
-                        <div><strong>Instructor:</strong> Mathew Joseph</div>
+                <div class="course-card" data-inst="isi" data-status="completed">
+                    <div class="course-card-top-bar">
+                        <span class="badge-code"><i class="bi bi-bank"></i> ISI • BMAT3</span>
+                        <span class="badge-status completed"><i class="bi bi-check2-circle"></i> Completed</span>
                     </div>
-                    <div class="course-info">
-                        <i class="bi bi-person-badge"></i>
-                        <div><strong>TA:</strong> Indrajit Ghosh</div>
+                    <div class="course-card-header">
+                        <div class="course-number">03</div>
+                        <h3 class="course-title">Complex Analysis I (BMAT3)</h3>
                     </div>
-                    <div class="course-info">
-                        <i class="bi bi-calendar-event"></i>
-                        <div><strong>Duration:</strong> Aug 2023 - Nov 2023</div>
+                    <div class="course-card-body">
+                        <div class="course-info">
+                            <i class="bi bi-person-fill"></i>
+                            <div><strong>Instructor:</strong> Mathew Joseph</div>
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-person-badge"></i>
+                            <div><strong>TA:</strong> Indrajit Ghosh</div>
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-calendar-event"></i>
+                            <div><strong>Duration:</strong> Aug 2022 - Nov 2022</div>
+                        </div>
+                    </div>
+                    <div class="course-card-footer">
+                        <a class="btn-course" href="{{ url_for('teaching.comp_anal_odd_sem_2022_ta') }}">
+                            <i class="bi bi-arrow-right"></i> View Course
+                        </a>
                     </div>
                 </div>
-                <div class="course-card-footer">
-                    <a class="btn-course" href="{{ url_for('teaching.anal_several_vars_odd_2023_ta') }}">
-                        <i class="bi bi-arrow-right"></i> View Course
-                    </a>
-                </div>
-            </div>
 
-            <div class="course-card">
-                <div class="course-card-header">
-                    <div class="course-number">03</div>
-                    <h3 class="course-title">Complex Analysis I (BMAT3)</h3>
-                </div>
-                <div class="course-card-body">
-                    <div class="course-info">
-                        <i class="bi bi-person-fill"></i>
-                        <div><strong>Instructor:</strong> Mathew Joseph</div>
+                <div class="course-card" data-inst="isi" data-status="completed">
+                    <div class="course-card-top-bar">
+                        <span class="badge-code"><i class="bi bi-bank"></i> ISI • MMAT1</span>
+                        <span class="badge-status completed"><i class="bi bi-check2-circle"></i> Completed</span>
                     </div>
-                    <div class="course-info">
-                        <i class="bi bi-person-badge"></i>
-                        <div><strong>TA:</strong> Indrajit Ghosh</div>
+                    <div class="course-card-header">
+                        <div class="course-number">02</div>
+                        <h3 class="course-title">Functional Analysis (MMAT1)</h3>
                     </div>
-                    <div class="course-info">
-                        <i class="bi bi-calendar-event"></i>
-                        <div><strong>Duration:</strong> Aug 2022 - Nov 2022</div>
+                    <div class="course-card-body">
+                        <div class="course-info">
+                            <i class="bi bi-person-fill"></i>
+                            <div><strong>Instructor:</strong> Soumyashant Nayak</div>
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-person-badge"></i>
+                            <div><strong>TA:</strong> Indrajit Ghosh</div>
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-calendar-event"></i>
+                            <div><strong>Duration:</strong> Jan 2022 - Apr 2022</div>
+                        </div>
+                    </div>
+                    <div class="course-card-footer">
+                        <a class="btn-course" href="{{ url_for('teaching.func_anal_even_sem_2021_ta') }}">
+                            <i class="bi bi-arrow-right"></i> View Course
+                        </a>
                     </div>
                 </div>
-                <div class="course-card-footer">
-                    <a class="btn-course" href="{{ url_for('teaching.comp_anal_odd_sem_2022_ta') }}">
-                        <i class="bi bi-arrow-right"></i> View Course
-                    </a>
-                </div>
-            </div>
 
-            <div class="course-card">
-                <div class="course-card-header">
-                    <div class="course-number">02</div>
-                    <h3 class="course-title">Functional Analysis (MMAT1)</h3>
-                </div>
-                <div class="course-card-body">
-                    <div class="course-info">
-                        <i class="bi bi-person-fill"></i>
-                        <div><strong>Instructor:</strong> Soumyashant Nayak</div>
+                <div class="course-card" data-inst="isi" data-status="completed">
+                    <div class="course-card-top-bar">
+                        <span class="badge-code"><i class="bi bi-bank"></i> ISI • BMAT2</span>
+                        <span class="badge-status completed"><i class="bi bi-check2-circle"></i> Completed</span>
                     </div>
-                    <div class="course-info">
-                        <i class="bi bi-person-badge"></i>
-                        <div><strong>TA:</strong> Indrajit Ghosh</div>
+                    <div class="course-card-header">
+                        <div class="course-number">01</div>
+                        <h3 class="course-title">Optimization (BMAT2)</h3>
                     </div>
-                    <div class="course-info">
-                        <i class="bi bi-calendar-event"></i>
-                        <div><strong>Duration:</strong> Jan 2022 - Apr 2022</div>
+                    <div class="course-card-body">
+                        <div class="course-info">
+                            <i class="bi bi-person-fill"></i>
+                            <div><strong>Instructor:</strong> Soumyashant Nayak</div>
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-person-badge"></i>
+                            <div><strong>TA:</strong> Indrajit Ghosh</div>
+                        </div>
+                        <div class="course-info">
+                            <i class="bi bi-calendar-event"></i>
+                            <div><strong>Duration:</strong> Sep 2021 - Dec 2021</div>
+                        </div>
+                    </div>
+                    <div class="course-card-footer">
+                        <a class="btn-course" href="{{ url_for('teaching.optimization_odd_sem_2021_ta') }}">
+                            <i class="bi bi-arrow-right"></i> View Course
+                        </a>
                     </div>
                 </div>
-                <div class="course-card-footer">
-                    <a class="btn-course" href="{{ url_for('teaching.func_anal_even_sem_2021_ta') }}">
-                        <i class="bi bi-arrow-right"></i> View Course
-                    </a>
-                </div>
-            </div>
 
-            <div class="course-card">
-                <div class="course-card-header">
-                    <div class="course-number">01</div>
-                    <h3 class="course-title">Optimization (BMAT2)</h3>
-                </div>
-                <div class="course-card-body">
-                    <div class="course-info">
-                        <i class="bi bi-person-fill"></i>
-                        <div><strong>Instructor:</strong> Soumyashant Nayak</div>
-                    </div>
-                    <div class="course-info">
-                        <i class="bi bi-person-badge"></i>
-                        <div><strong>TA:</strong> Indrajit Ghosh</div>
-                    </div>
-                    <div class="course-info">
-                        <i class="bi bi-calendar-event"></i>
-                        <div><strong>Duration:</strong> Sep 2021 - Dec 2021</div>
-                    </div>
-                </div>
-                <div class="course-card-footer">
-                    <a class="btn-course" href="{{ url_for('teaching.optimization_odd_sem_2021_ta') }}">
-                        <i class="bi bi-arrow-right"></i> View Course
-                    </a>
-                </div>
             </div>
         </div>
+
     </div>
 </section>
 
 {% endblock %}
+
 {% block scripts %}
 {{ super() }}
 <script src="{{ url_for('teaching.static', filename='js/teaching_effects.js') }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const sections = document.querySelectorAll('.teaching-section');
+    const cards = document.querySelectorAll('.course-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            const filter = this.getAttribute('data-filter');
+
+            cards.forEach(card => {
+                const inst = card.getAttribute('data-inst');
+                const status = card.getAttribute('data-status');
+
+                let match = false;
+                if (filter === 'all') {
+                    match = true;
+                } else if (filter === 'ongoing') {
+                    match = (status === 'ongoing');
+                } else if (filter === 'iitk') {
+                    match = (inst === 'iitk');
+                } else if (filter === 'isi') {
+                    match = (inst === 'isi');
+                }
+
+                if (match) {
+                    card.style.display = 'flex';
+                    setTimeout(() => { card.style.opacity = '1'; }, 10);
+                } else {
+                    card.style.display = 'none';
+                    card.style.opacity = '0';
+                }
+            });
+
+            // Toggle sections based on whether any child card is visible
+            sections.forEach(sec => {
+                const visibleCards = sec.querySelectorAll('.course-card:not([style*="display: none"])');
+                if (visibleCards.length === 0) {
+                    sec.style.display = 'none';
+                } else {
+                    sec.style.display = 'block';
+                }
+            });
+        });
+    });
+});
+</script>
 {% endblock %}

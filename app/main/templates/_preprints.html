@@ -1,7 +1,8 @@
 <!-- Paste the work one after another the oldest one is on the top -->
 {% for work in preprints %}
 <li>
-    <div class="publication-card">
+    <div class="publication-card preprint-card">
+        <div class="pub-type-tag preprint"><i class="bi bi-file-earmark-text"></i> Preprint</div>
         <span class="publication-title">
             {{ work.title|safe }}
         </span>
@@ -10,19 +11,19 @@
                 {% if author.is_me %}<span class="my-name">{{ author.name }}</span>{% else %}{{ author.name }}{% endif %}{% if not loop.last %}{% if loop.revindex0 == 1 %} and {% else %}, {% endif %}{% endif %}
             {% endfor %}
         </span>
-        <div class="publication-size">
-            <code>pre-print</code>, <span class="publication-date">{{ work.publication_date }}</span>
+        <div class="publication-size pub-citation">
+            <code>pre-print</code> &bull; <span class="publication-date">{{ work.publication_date }}</span>
         </div>
         <div class="links">
             {% if work.arxiv_id %}
-            <a href="https://arxiv.org/abs/{{ work.arxiv_id }}" target="_blank">arXiv</a>
+            <a href="https://arxiv.org/abs/{{ work.arxiv_id }}" target="_blank"><i class="bi bi-file-earmark-pdf"></i> arXiv</a>
             {% endif %}
             {% if work.researchgate_url %}
-            <a href="{{ work.researchgate_url }}" target="_blank">ResearchGate</a>
+            <a href="{{ work.researchgate_url }}" target="_blank"><i class="bi bi-globe"></i> ResearchGate</a>
             {% endif %}
         </div>
         <details class="abstract-details">
-            <summary>Abstract</summary>
+            <summary><i class="bi bi-file-text"></i> Abstract</summary>
             <div class="abstract-content">
                 {{ work.abstract|safe }}
             </div>

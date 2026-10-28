@@ -1,7 +1,8 @@
 <!-- Paste the work one after another the oldest one is on the top -->
 {% for work in publications %}
 <li>
-    <div class="publication-card">
+    <div class="publication-card published-card">
+        <div class="pub-type-tag"><i class="bi bi-journal-check"></i> Published Paper</div>
         <span class="publication-title">
             {{ work.title|safe }}
         </span>
@@ -10,23 +11,23 @@
                 {% if author.is_me %}<span class="my-name">{{ author.name }}</span>{% else %}{{ author.name }}{% endif %}{% if not loop.last %}{% if loop.revindex0 == 1 %} and {% else %}, {% endif %}{% endif %}
             {% endfor %}
         </span>
-        <div class="publication-size">
+        <div class="publication-size pub-citation">
             <cite>{{ work.journal_conference }}</cite>, Volume {{ work.volume }}, Issue {{ work.issue }}, 
             <span class="publication-date">{{ work.publication_date }}</span>, Pages {{ work.pages }}
         </div>
         <div class="links">
             {% if work.doi %}
-            <a href="https://doi.org/{{ work.doi }}" target="_blank">IMRN</a>
+            <a href="https://doi.org/{{ work.doi }}" target="_blank"><i class="bi bi-box-arrow-up-right"></i> IMRN</a>
             {% endif %}
             {% if work.arxiv_id %}
-            <a href="https://arxiv.org/abs/{{ work.arxiv_id }}" target="_blank">arXiv</a>
+            <a href="https://arxiv.org/abs/{{ work.arxiv_id }}" target="_blank"><i class="bi bi-file-earmark-pdf"></i> arXiv</a>
             {% endif %}
             {% if work.researchgate_url %}
-            <a href="{{ work.researchgate_url }}" target="_blank">ResearchGate</a>
+            <a href="{{ work.researchgate_url }}" target="_blank"><i class="bi bi-globe"></i> ResearchGate</a>
             {% endif %}
         </div>
         <details class="abstract-details">
-            <summary>Abstract</summary>
+            <summary><i class="bi bi-file-text"></i> Abstract</summary>
             <div class="abstract-content">
                 {{ work.abstract|safe }}
             </div>

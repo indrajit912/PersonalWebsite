@@ -18,160 +18,201 @@
 {% block styles %}
 {{ super() }}
 <link rel="stylesheet" href="{{ url_for('main.static', filename='css/research_style.css') }}">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
 <section>
     <div class="page-container">
         <div class="page-heading">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 1.5rem; flex-wrap: wrap;">
-    <canvas id="particleIconCanvas" width="90" height="90" style="border-radius: 50%; background: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border: 1px solid #eaeaea; cursor: crosshair;"></canvas>
-    <h1 style="margin: 0; font-size: 3.5rem; font-weight: 800; color: #2c3e50; letter-spacing: -1px;">Research</h1>
-</div>
-<script>
-    const pCanvas = document.getElementById('particleIconCanvas');
-    const pCtx = pCanvas.getContext('2d');
-    let nodes = [];
-    const numNodes = 30;
-    
-    for (let i = 0; i < numNodes; i++) {
-        nodes.push({
-            x: Math.random() * pCanvas.width,
-            y: Math.random() * pCanvas.height,
-            vx: (Math.random() - 0.5) * 1.2,
-            vy: (Math.random() - 0.5) * 1.2,
-            radius: Math.random() * 2 + 1
-        });
-    }
+            <div class="research-title-row">
+                <canvas id="particleIconCanvas" width="90" height="90" style="border-radius: 50%; background: #ffffff; box-shadow: 0 6px 16px rgba(0,0,0,0.08); border: 1px solid #eaeaea; cursor: crosshair;"></canvas>
+                <h1 class="research-title">Research</h1>
+            </div>
 
-    let pMouse = { x: null, y: null };
-    pCanvas.addEventListener('mousemove', (e) => {
-        const rect = pCanvas.getBoundingClientRect();
-        pMouse.x = e.clientX - rect.left;
-        pMouse.y = e.clientY - rect.top;
-    });
-    pCanvas.addEventListener('mouseleave', () => {
-        pMouse.x = null;
-        pMouse.y = null;
-    });
+            <div class="research-subtitle">
+                <i class="bi bi-journal-bookmark-fill"></i> Operator Algebras &bull; Operator Theory &bull; Noncommutative Geometry
+            </div>
 
-    function animateNodes() {
-        pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
-        
-        for (let i = 0; i < nodes.length; i++) {
-            let p = nodes[i];
-            p.x += p.vx;
-            p.y += p.vy;
-            
-            // Bounce off walls
-            if (p.x < 0 || p.x > pCanvas.width) p.vx *= -1;
-            if (p.y < 0 || p.y > pCanvas.height) p.vy *= -1;
-            
-            // Draw Node
-            pCtx.beginPath();
-            pCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            pCtx.fillStyle = '#3498db';
-            pCtx.fill();
-            
-            // Connect to mouse
-            if (pMouse.x != null) {
-                let dx = pMouse.x - p.x;
-                let dy = pMouse.y - p.y;
-                let dist = Math.sqrt(dx*dx + dy*dy);
-                if (dist < 45) {
-                    pCtx.beginPath();
-                    pCtx.moveTo(p.x, p.y);
-                    pCtx.lineTo(pMouse.x, pMouse.y);
-                    pCtx.strokeStyle = `rgba(231, 76, 60, ${1 - dist/45})`; // Reddish connection to mouse
-                    pCtx.lineWidth = 1.5;
-                    pCtx.stroke();
-                }
-            }
-            
-            // Connect to other nodes
-            for (let j = i + 1; j < nodes.length; j++) {
-                let p2 = nodes[j];
-                let dx = p.x - p2.x;
-                let dy = p.y - p2.y;
-                let dist = Math.sqrt(dx*dx + dy*dy);
+            <script>
+                const pCanvas = document.getElementById('particleIconCanvas');
+                const pCtx = pCanvas.getContext('2d');
+                let nodes = [];
+                const numNodes = 30;
                 
-                if (dist < 30) {
-                    pCtx.beginPath();
-                    pCtx.moveTo(p.x, p.y);
-                    pCtx.lineTo(p2.x, p2.y);
-                    pCtx.strokeStyle = `rgba(44, 62, 80, ${1 - dist/30})`;
-                    pCtx.lineWidth = 0.5;
-                    pCtx.stroke();
+                for (let i = 0; i < numNodes; i++) {
+                    nodes.push({
+                        x: Math.random() * pCanvas.width,
+                        y: Math.random() * pCanvas.height,
+                        vx: (Math.random() - 0.5) * 1.2,
+                        vy: (Math.random() - 0.5) * 1.2,
+                        radius: Math.random() * 2 + 1
+                    });
                 }
-            }
-        }
-        
-        requestAnimationFrame(animateNodes);
-    }
-    animateNodes();
-</script>
-        <div class="page-quote-wrapper">
-            <blockquote class="page-quote">
-                A mathematician, like a painter or a poet, is a maker of patterns. If his patterns are more permanent than theirs, it is because they are made with ideas.
-                <footer>G. H. Hardy</footer>
-            </blockquote>
+
+                let pMouse = { x: null, y: null };
+                pCanvas.addEventListener('mousemove', (e) => {
+                    const rect = pCanvas.getBoundingClientRect();
+                    pMouse.x = e.clientX - rect.left;
+                    pMouse.y = e.clientY - rect.top;
+                });
+                pCanvas.addEventListener('mouseleave', () => {
+                    pMouse.x = null;
+                    pMouse.y = null;
+                });
+
+                function animateNodes() {
+                    pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+                    
+                    for (let i = 0; i < nodes.length; i++) {
+                        let p = nodes[i];
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        
+                        // Bounce off walls
+                        if (p.x < 0 || p.x > pCanvas.width) p.vx *= -1;
+                        if (p.y < 0 || p.y > pCanvas.height) p.vy *= -1;
+                        
+                        // Draw Node
+                        pCtx.beginPath();
+                        pCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        pCtx.fillStyle = '#3498db';
+                        pCtx.fill();
+                        
+                        // Connect to mouse
+                        if (pMouse.x != null) {
+                            let dx = pMouse.x - p.x;
+                            let dy = pMouse.y - p.y;
+                            let dist = Math.sqrt(dx*dx + dy*dy);
+                            if (dist < 45) {
+                                pCtx.beginPath();
+                                pCtx.moveTo(p.x, p.y);
+                                pCtx.lineTo(pMouse.x, pMouse.y);
+                                pCtx.strokeStyle = `rgba(231, 76, 60, ${1 - dist/45})`; // Reddish connection to mouse
+                                pCtx.lineWidth = 1.5;
+                                pCtx.stroke();
+                            }
+                        }
+                        
+                        // Connect to other nodes
+                        for (let j = i + 1; j < nodes.length; j++) {
+                            let p2 = nodes[j];
+                            let dx = p.x - p2.x;
+                            let dy = p.y - p2.y;
+                            let dist = Math.sqrt(dx*dx + dy*dy);
+                            
+                            if (dist < 30) {
+                                pCtx.beginPath();
+                                pCtx.moveTo(p.x, p.y);
+                                pCtx.lineTo(p2.x, p2.y);
+                                pCtx.strokeStyle = `rgba(44, 62, 80, ${1 - dist/30})`;
+                                pCtx.lineWidth = 0.5;
+                                pCtx.stroke();
+                            }
+                        }
+                    }
+                    
+                    requestAnimationFrame(animateNodes);
+                }
+                animateNodes();
+            </script>
+
+            <!-- <div class="page-quote-wrapper">
+                <blockquote class="page-quote">
+                    A mathematician, like a painter or a poet, is a maker of patterns. If his patterns are more permanent than theirs, it is because they are made with ideas.
+                    <footer>G. H. Hardy</footer>
+                </blockquote>
+            </div> -->
         </div>
 
-            <div class="orcid-badge">
+        <!-- Academic Stats Highlight Bar -->
+        <div class="research-stats-bar">
+            <div class="stat-item">
+                <div class="stat-number">10</div>
+                <div class="stat-label">Publications &amp; Preprints</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Institutes (IITK &bull; IITM &bull; ISI)</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-number" style="font-size: 1.15rem; font-weight: 700; color: #1e293b;">Affiliated Operators</div>
+                <div class="stat-label">Core Specialization</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-number" style="color: #059669; font-size: 1.25rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <span class="pulse-dot"></span> IPDF @ IIT Kanpur
+                </div>
+                <div class="stat-label">Current Appointment</div>
+            </div>
+        </div>
+
+        <!-- Academic Profiles & Identifiers Card -->
+        <div class="academic-profiles-card">
+            <div class="orcid-pill-wrapper">
                 <a id="cy-effective-orcid-url" href="https://orcid.org/0009-0007-6353-6637" target="_blank"
                     rel="me noopener noreferrer" class="orcid-link">
                     <img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID iD icon" />
-                    ORCID: 0009-0007-6353-6637
+                    <span>ORCID: <strong>0009-0007-6353-6637</strong></span>
+                    <i class="bi bi-box-arrow-up-right" style="font-size: 0.8rem; margin-left: 2px;"></i>
                 </a>
             </div>
         
             <div class="profile-icons">
-                <a href="https://arxiv.org/a/ghosh_i_1.html" target="_blank" title="arXiv">
+                <a href="https://arxiv.org/a/ghosh_i_1.html" target="_blank" title="arXiv" class="profile-icon-btn">
                     <img src="{{ url_for('main.static', filename='images/arxiv-logo.png') }}" alt="arXiv">
                 </a>
-                <a href="https://www.researchgate.net/profile/Indrajit-Ghosh-15" target="_blank" title="ResearchGate">
+                <a href="https://www.researchgate.net/profile/Indrajit-Ghosh-15" target="_blank" title="ResearchGate" class="profile-icon-btn">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/ResearchGate_icon_SVG.svg" alt="ResearchGate">
                 </a>
-                <a href="https://mathscinet.ams.org/mathscinet/MRAuthorID/1641136" target="_blank" title="MathSciNet">
-                    <img src="{{ url_for('main.static', filename='images/ams-logo.jpg') }}" alt="MathSciNet">
-                </a>
-                <a href="https://scholar.google.com/citations?hl=en&user=6rwt6vAAAAAJ" target="_blank" title="Google Scholar">
+                <a href="https://scholar.google.com/citations?hl=en&user=6rwt6vAAAAAJ" target="_blank" title="Google Scholar" class="profile-icon-btn">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg" alt="Google Scholar">
                 </a>
-                <a href="https://zbmath.org/authors/?q=ghosh.indrajit.1" target="_blank" title="ZbMath">
-                    <img src="{{ url_for('main.static', filename='images/zbmath-logo.png') }}" alt="ZbMath">
+                <a href="https://mathscinet.ams.org/mathscinet/MRAuthorID/1641136" target="_blank" title="MathSciNet" class="profile-icon-btn">
+                    <img src="{{ url_for('main.static', filename='images/ams-logo.jpg') }}" alt="MathSciNet">
                 </a>
-                <a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=349246" target="_blank" title="Math Genealogy Project">
+                <a href="https://zbmath.org/authors/?q=ghosh.indrajit.1" target="_blank" title="zbMATH" class="profile-icon-btn">
+                    <img src="{{ url_for('main.static', filename='images/zbmath-logo.png') }}" alt="zbMATH">
+                </a>
+                <a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=349246" target="_blank" title="Math Genealogy Project" class="profile-icon-btn">
                     <img src="{{ url_for('main.static', filename='images/mgp-logo.svg') }}" alt="Math Genealogy">
                 </a>
             </div>
         </div>
 
-
         <div class="research-container">
 
-            <p>
-                My research is broadly focused on <strong>Operator Algebras</strong> and <strong>Operator Theory</strong>. 
-                I study infinite-dimensional linear operators and algebraic structures, with a particular emphasis on von Neumann algebras, properly infinite factors, and \(C^*\)-algebras. These areas provide a robust mathematical framework that originated in the formalization of quantum mechanics and now has deep connections to functional analysis and noncommutative geometry.
-            </p>
-            
-            <div style="margin-top: 1.5rem; margin-bottom: 2.5rem;">
-                <a href="{{ url_for('main.network') }}" style="display: inline-flex; align-items: center; gap: 8px; background-color: var(--accent-color, #3182ce); color: white; padding: 0.6rem 1.2rem; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 6px rgba(49,130,206,0.2); transition: background-color 0.2s;">
-                    <i class="bi bi-diagram-3" style="font-size: 1.1rem;"></i> View My Collaboration Network
-                </a>
+            <!-- Overview Card -->
+            <div class="research-overview-card">
+                <div class="overview-text">
+                    <p>
+                        My research is broadly focused on <strong>Operator Algebras</strong> and <strong>Operator Theory</strong>. 
+                        I study infinite-dimensional linear operators and algebraic structures, with a particular emphasis on von Neumann algebras, properly infinite factors, and \(C^*\)-algebras. These areas provide a robust mathematical framework that originated in the formalization of quantum mechanics and now has deep connections to functional analysis and noncommutative geometry.
+                    </p>
+                </div>
+                <div class="overview-cta">
+                    <a href="{{ url_for('main.network') }}" class="btn-network">
+                        <i class="bi bi-diagram-3-fill"></i> View My Collaboration Network
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
             </div>
 
-            <h2>Research Journey</h2>
+            <!-- Research Journey Timeline -->
+            <h2 class="section-title"><i class="bi bi-compass"></i> Research Journey</h2>
 
             <div class="research-timeline">
                 
                 <!-- Current Position -->
-                <div class="timeline-item">
+                <div class="timeline-item current-pos">
                     <div class="timeline-header">
-                        <span class="timeline-role">Institute Postdoc Fellow</span>
-                        <span class="timeline-date">Mar 2026 – Present</span>
+                        <span class="timeline-role"><i class="bi bi-mortarboard-fill" style="color: var(--accent-color); margin-right: 8px;"></i> Institute Postdoc Fellow</span>
+                        <span class="timeline-date"><span class="pulse-dot"></span> Mar 2026 – Present</span>
                     </div>
-                    <span class="timeline-inst">Indian Institute of Technology Kanpur</span>
+                    <span class="timeline-inst"><i class="bi bi-building"></i> Indian Institute of Technology Kanpur</span>
                     <div class="timeline-body">
                         <p>Department of Mathematics and Statistics.</p>
                         <p>Working with <a href="https://sites.google.com/view/keshab-bakshi/home" target="_blank">Prof. Keshab Chandra Bakshi</a>.</p>
@@ -181,10 +222,10 @@
                 <!-- Postdoc Madras -->
                 <div class="timeline-item">
                     <div class="timeline-header">
-                        <span class="timeline-role">Postdoctoral Researcher</span>
+                        <span class="timeline-role"><i class="bi bi-mortarboard" style="color: var(--secondary-color); margin-right: 8px;"></i> Postdoctoral Researcher</span>
                         <span class="timeline-date">Nov 2025 – Feb 2026</span>
                     </div>
-                    <span class="timeline-inst">Indian Institute of Technology Madras</span>
+                    <span class="timeline-inst"><i class="bi bi-building"></i> Indian Institute of Technology Madras</span>
                     <div class="timeline-body">
                         <p>Worked with <a href="https://ioe.iitm.ac.in/people/kunal-krishna-mukherjee/" target="_blank">Prof. Kunal Krishna Mukherjee</a>.</p>
                         <p>Research focus: <strong>Properly infinite von Neumann algebras</strong>.</p>
@@ -195,10 +236,10 @@
                 <!-- PhD -->
                 <div class="timeline-item">
                     <div class="timeline-header">
-                        <span class="timeline-role">Doctor of Philosophy</span>
+                        <span class="timeline-role"><i class="bi bi-award" style="color: var(--secondary-color); margin-right: 8px;"></i> Doctor of Philosophy (Ph.D.)</span>
                         <span class="timeline-date">Jul 2019 – Oct 2025</span>
                     </div>
-                    <span class="timeline-inst">Indian Statistical Institute, Bangalore</span>
+                    <span class="timeline-inst"><i class="bi bi-bank"></i> Indian Statistical Institute, Bangalore</span>
                     <div class="timeline-body">
                         <p>Theoretical Stat-Math Unit. Thesis defended on October 15, 2025.</p>
                         <p>Primary research interests during PhD: <strong>von Neumann algebras</strong> and <strong>affiliated operators</strong>.</p>
@@ -208,27 +249,43 @@
 
             </div>
 
+            <!-- Interactive Filter Bar for Works -->
+            <div class="research-filter-bar">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="bi bi-grid-fill"></i> All Works <span class="badge-count">10</span>
+                </button>
+                <button class="filter-btn" data-filter="publications">
+                    <i class="bi bi-journal-check"></i> Publications <span class="badge-count">1</span>
+                </button>
+                <button class="filter-btn" data-filter="preprints">
+                    <i class="bi bi-file-earmark-text"></i> Preprints <span class="badge-count">6</span>
+                </button>
+                <button class="filter-btn" data-filter="ongoing">
+                    <i class="bi bi-hourglass-split"></i> Ongoing Work <span class="badge-count">3</span>
+                </button>
+            </div>
+
             <div class="continuous-pub-wrapper">
 
-                <!-- Oldest: Publications -->
-                <div>
-                    <h2>Publications</h2>
+                <!-- Publications -->
+                <div class="works-section" data-section-type="publications">
+                    <h2 class="section-title"><i class="bi bi-journal-check"></i> Publications</h2>
                     <ol class="continuous-pub-list">
                         {% include '_publications.html' %}
                     </ol>
                 </div>
 
-                <!-- Middle: Preprints -->
-                <div>
-                    <h2>Preprints</h2>
+                <!-- Preprints -->
+                <div class="works-section" data-section-type="preprints">
+                    <h2 class="section-title"><i class="bi bi-file-earmark-text"></i> Preprints</h2>
                     <ol class="continuous-pub-list">
                         {% include '_preprints.html' %}
                     </ol>
                 </div>
 
-                <!-- Newest: Ongoing Work -->
-                <div>
-                    <h2>Ongoing Work</h2>
+                <!-- Ongoing Work -->
+                <div class="works-section" data-section-type="ongoing">
+                    <h2 class="section-title"><i class="bi bi-hourglass-split"></i> Ongoing Work</h2>
                     <ul class="ongoing-work-list">
                         {% include '_ongoing_work.html' %}
                     </ul>
@@ -236,102 +293,140 @@
 
             </div>
             
-            <br>
-            
-            <h2>Doctoral Research</h2>
-            <p>
-                During my PhD, I developed a <strong>generalization of Murray–von Neumann affiliated operators for a general von Neumann algebra</strong>.
-            </p>
-            <p>
-                The classical notion of affiliated operators with a von
-                Neumann algebra—in the sense of Murray and von Neumann—has long been studied in the literature. However, these constructions lack
-                a fully satisfactory algebraic formulation, especially for general von Neumann algebras and independent
-                of Hilbert space representations.
-            </p>
+            <!-- Doctoral Research Overview -->
+            <h2 class="section-title"><i class="bi bi-book-half"></i> Doctoral Research</h2>
+            <div class="doctoral-overview-card">
+                <p>
+                    During my PhD, I developed a <strong>generalization of Murray–von Neumann affiliated operators for a general von Neumann algebra</strong>.
+                </p>
+                <p>
+                    The classical notion of affiliated operators with a von
+                    Neumann algebra—in the sense of Murray and von Neumann—has long been studied in the literature. However, these constructions lack
+                    a fully satisfactory algebraic formulation, especially for general von Neumann algebras and independent
+                    of Hilbert space representations.
+                </p>
 
-            <p>
-                In joint work with <a href="https://www.isibang.ac.in/~soumyashant/" target="_blank">Prof. Soumyashant Nayak</a>, I introduced a new class of unbounded operators
-                denoted \( \mathscr{M}_{\mathrm{aff}} \), defined for a von Neumann algebra \( \mathscr{M} \subseteq
-                \mathcal{B}(\mathcal{H}) \) as the set of operators expressible as quotients \( T = AB^\dagger \) where
-                \( A, B \in \mathscr{M} \) and the null space of \( B \) is contained in that of \( A \). The Kaufman
-                inverse \( B^\dagger \) is used in place of the standard Moore–Penrose inverse to retain
-                operator-theoretic meaning.
-            </p>
+                <p>
+                    In joint work with <a href="https://www.isibang.ac.in/~soumyashant/" target="_blank">Prof. Soumyashant Nayak</a>, I introduced a new class of unbounded operators
+                    denoted \( \mathscr{M}_{\mathrm{aff}} \), defined for a von Neumann algebra \( \mathscr{M} \subseteq
+                    \mathcal{B}(\mathcal{H}) \) as the set of operators expressible as quotients \( T = AB^\dagger \) where
+                    \( A, B \in \mathscr{M} \) and the null space of \( B \) is contained in that of \( A \). The Kaufman
+                    inverse \( B^\dagger \) is used in place of the standard Moore–Penrose inverse to retain
+                    operator-theoretic meaning.
+                </p>
 
-            <p>
-                The key findings include:
-            <ul>
-                <li>\( \mathscr{M}_{\mathrm{aff}} \) forms a right near-semiring under addition, product, adjoint, and
-                    Kaufman inverse.</li>
-                <li>Each quotient representation is essentially unique.</li>
-                <li>The construction \( \mathscr{M}_{\mathrm{aff}} \) is functorial: a unital normal *-homomorphism \( \Phi:
-                    \mathscr{M} \to \mathscr{N} \) induces \( \Phi_{\mathrm{aff}}: \mathscr{M}_{\mathrm{aff}} \to
-                    \mathscr{N}_{\mathrm{aff}} \) preserving structure and operator-theoretic properties.</li>
-                <li>The Murray–von Neumann affiliated operators form a subcollection of this larger set: \(
-                    \mathscr{M}_{\mathrm{aff}}^{\mathrm{MvN}} \subseteq \mathscr{M}_{\mathrm{aff}} \).</li>
-                <li>We also characterized closed operators via factorizations involving projections and
-                    positive operators within \( \mathcal{B}(\mathcal{H}) \).</li>
-                <li>Furthermore, Krein and Friedrichs extensions of positive operators behave functorially under this
-                    framework: \( \Phi_{\mathrm{aff}}(S^{\mathrm{Fr}}) = \Phi_{\mathrm{aff}}(S)^{\mathrm{Fr}} \),
-                    and similarly for Krein extensions.</li>
-            </ul>
-            </p>
-            
-            <!-- Thesis box section -->
-            <div class="preprints-container" id="thesis" style="margin-top: 2rem;">
-                <h2 class="scrollspy" style="margin-top: 0;">PhD Thesis</h2>
-                <div class="links">
-                    <a href="{{ isi_thesis_link }}" target="_blank">ISI</a>
-                    <a href="{{ thesis_link }}" target="_blank">PDF</a>
-                    <a href="javascript:void(0)" onclick="document.getElementById('checksum-box').classList.toggle('d-none')">SHA-256</a>
-                    <a href="{{ thesis_sig_link }}" target="_blank">GPG Sign</a>
-                    <a href="javascript:void(0)" onclick="document.getElementById('verify-instructions').classList.toggle('d-none')">Verify Sign</a>
-                </div>
+                <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--primary-color);">Key Findings:</p>
+                <ul class="findings-list">
+                    <li>\( \mathscr{M}_{\mathrm{aff}} \) forms a right near-semiring under addition, product, adjoint, and Kaufman inverse.</li>
+                    <li>Each quotient representation is essentially unique.</li>
+                    <li>The construction \( \mathscr{M}_{\mathrm{aff}} \) is functorial: a unital normal *-homomorphism \( \Phi: \mathscr{M} 	o \mathscr{N} \) induces \( \Phi_{\mathrm{aff}}: \mathscr{M}_{\mathrm{aff}} 	o \mathscr{N}_{\mathrm{aff}} \) preserving structure and operator-theoretic properties.</li>
+                    <li>The Murray–von Neumann affiliated operators form a subcollection of this larger set: \( \mathscr{M}_{\mathrm{aff}}^{\mathrm{MvN}} \subseteq \mathscr{M}_{\mathrm{aff}} \).</li>
+                    <li>We also characterized closed operators via factorizations involving projections and positive operators within \( \mathcal{B}(\mathcal{H}) \).</li>
+                    <li>Furthermore, Krein and Friedrichs extensions of positive operators behave functorially under this framework: \( \Phi_{\mathrm{aff}}(S^{\mathrm{Fr}}) = \Phi_{\mathrm{aff}}(S)^{\mathrm{Fr}} \), and similarly for Krein extensions.</li>
+                </ul>
             </div>
             
-            <div class="thesis-entry">
+            <!-- PhD Thesis box section -->
+            <div class="thesis-entry" id="thesis">
+                <div class="thesis-top-bar">
+                    <span class="thesis-badge"><i class="bi bi-mortarboard-fill"></i> Doctoral Dissertation</span>
+                    <span class="thesis-inst-badge"><i class="bi bi-bank"></i> ISI Bangalore</span>
+                </div>
                 <div class="thesis-header">
-                    <h3 class="publication-title mb-1">
+                    <h3 class="publication-title">
                         On Algebraic Aspects and Functoriality of the Set of Unbounded Operators Affiliated with a von Neumann Algebra
                     </h3>
-                    <p class="publication-size mb-2">
-                        <strong>PhD Thesis</strong>, Indian Statistical Institute, Bangalore<br>
+                    <p class="publication-size" style="margin-top: 0.5rem; line-height: 1.6;">
+                        <strong>Doctor of Philosophy in Mathematics</strong>, Theoretical Stat-Math Unit, Indian Statistical Institute, Bangalore<br>
                         Advisor: <a href="https://www.isibang.ac.in/~soumyashant/" target="_blank">Prof. Soumyashant Nayak</a><br>
-                        <small class="text-muted">
-                            Defended: Oct 15, 2025 &nbsp;&bull;&nbsp; Awarded: Feb 17, 2026
-                        </small>
+                        <span class="thesis-meta-dates">
+                            <i class="bi bi-calendar-check"></i> Defended: Oct 15, 2025 &nbsp;&bull;&nbsp; Awarded: Feb 17, 2026
+                        </span>
                     </p>
+                </div>
+
+                <div class="thesis-links-bar">
+                    <a href="{{ isi_thesis_link }}" target="_blank" class="btn-thesis"><i class="bi bi-bank"></i> ISI Repository</a>
+                    <a href="{{ thesis_link }}" target="_blank" class="btn-thesis primary"><i class="bi bi-file-earmark-pdf-fill"></i> Download PDF</a>
+                    <a href="javascript:void(0)" onclick="toggleChecksumBox()" class="btn-thesis"><i class="bi bi-shield-check"></i> SHA-256</a>
+                    <a href="{{ thesis_sig_link }}" target="_blank" class="btn-thesis"><i class="bi bi-key-fill"></i> GPG Signature</a>
+                    <a href="javascript:void(0)" onclick="toggleVerifyInstructions()" class="btn-thesis"><i class="bi bi-patch-check"></i> Verify Guide</a>
                 </div>
             
                 <!-- Hidden content -->
-                <div id="checksum-box" class="d-none" style="margin-top: 5px;">
-                    <code class="checksum-value">{{ thesis_sha256sum }}</code>
+                <div id="checksum-box" class="d-none" style="margin-top: 1rem;">
+                    <div class="checksum-container">
+                        <span class="checksum-label"><i class="bi bi-shield-lock"></i> SHA-256 Checksum:</span>
+                        <code class="checksum-value">{{ thesis_sha256sum }}</code>
+                    </div>
                 </div>
             
-                <div id="verify-instructions" class="d-none" style="margin-top: 5px;">
-                    <ol class="publication-size">
-                        <li>Download both the <strong>PDF</strong> and its <strong>GPG signature</strong>.</li>
-                        <li>Import my public key from <a href="{{ url_for('main.gpgkey') }}" target="_blank">here</a>: 
-                            <code>gpg --import indrajit_gpg_public_key.asc</code>
-                        </li>
-                        <li>Verify the signature:
-                            <code>gpg --verify "Indrajit_Ghosh_PhD_Thesis_2025.pdf.asc" "Indrajit_Ghosh_PhD_Thesis_2025.pdf"</code>
-                        </li>
-                        <li>Optionally, check file integrity:
-                            <code>sha256sum Indrajit_Ghosh_PhD_Thesis_2025.pdf</code>
-                        </li>
-                    </ol>
+                <div id="verify-instructions" class="d-none" style="margin-top: 1rem;">
+                    <div class="verify-container">
+                        <h4 style="font-size: 1rem; color: var(--primary-color); margin-bottom: 0.8rem;"><i class="bi bi-terminal"></i> Signature Verification Guide:</h4>
+                        <ol class="publication-size">
+                            <li>Download both the <strong>PDF</strong> and its <strong>GPG signature</strong>.</li>
+                            <li>Import my public key from <a href="{{ url_for('main.gpgkey') }}" target="_blank">here</a>: 
+                                <code>gpg --import indrajit_gpg_public_key.asc</code>
+                            </li>
+                            <li>Verify the signature:
+                                <code>gpg --verify "Indrajit_Ghosh_PhD_Thesis_2025.pdf.asc" "Indrajit_Ghosh_PhD_Thesis_2025.pdf"</code>
+                            </li>
+                            <li>Optionally, check file integrity:
+                                <code>sha256sum Indrajit_Ghosh_PhD_Thesis_2025.pdf</code>
+                            </li>
+                        </ol>
+                    </div>
                 </div>
             </div>
 
-            <!-- Removed References section from the old block as it pertained specifically to the thesis description and was outdated. The doctoral research section was condensed. -->
         </div>
     </div>
 </section>
 
 <p class="last-updated"><i class="bi bi-clock-history"></i> Last Updated: Oct 12, 2026</p>
 {% endblock %}
+
 {% block scripts %}
 {{ super() }}
 <script src="{{ url_for('main.static', filename='js/research_effects.js') }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.research-filter-bar .filter-btn');
+    const workSections = document.querySelectorAll('.works-section');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            const filter = this.getAttribute('data-filter');
+            workSections.forEach(sec => {
+                const secType = sec.getAttribute('data-section-type');
+                if (filter === 'all' || filter === secType) {
+                    sec.style.display = 'block';
+                    setTimeout(() => { sec.style.opacity = '1'; }, 10);
+                } else {
+                    sec.style.display = 'none';
+                    sec.style.opacity = '0';
+                }
+            });
+        });
+    });
+});
+
+function toggleChecksumBox() {
+    const box = document.getElementById('checksum-box');
+    if (box) {
+        box.classList.toggle('d-none');
+    }
+}
+
+function toggleVerifyInstructions() {
+    const box = document.getElementById('verify-instructions');
+    if (box) {
+        box.classList.toggle('d-none');
+    }
+}
+</script>
 {% endblock %}

@@ -1,8 +1,8 @@
 <!-- Paste the work one after another the oldest one is on the top -->
 {% for work in ongoing_works %}
 <li>
-    <div class="publication-card" style="border-left: 5px solid var(--accent-color);">
-        <span class="ongoing-badge">Work in Progress</span><br>
+    <div class="publication-card ongoing-card">
+        <span class="ongoing-badge"><i class="bi bi-hourglass-split"></i> Work in Progress</span><br>
         <span class="publication-title">
             {{ work.title|safe }}
         </span>
