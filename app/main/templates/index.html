@@ -11,6 +11,7 @@
 {% block styles %}
 {{ super() }}
 <!-- Additional styles specific to this template go here -->
+<link rel="stylesheet" href="{{ url_for('main.static', filename='css/pdf_modal.css') }}">
 <style>
     @media (max-width: 768px) {
         .hide-on-mobile {
@@ -89,7 +90,15 @@
             C and C++ as well. I love solving real-world, day-to-day life problems using my coding skills
             whenever possible. I maintain several websites, including this personal website, all by myself.
             More of my projects can be found on my
-            <a href="https://github.com/indrajit912" target="_blank" class="underlined-link">GitHub profile</a>.
+            <a href="https://github.com/indrajit912" target="_blank" class="underlined-link">GitHub profile</a>
+            and summarized in my
+            <a class="underlined-link" 
+               href="{{ professional_cv_view_url }}" 
+               target="_blank"
+               data-pdf-modal 
+               data-pdf-view="{{ professional_cv_view_url }}" 
+               data-pdf-download="{{ professional_cv_download_url }}" 
+               data-pdf-title="Professional CV - Dr. Indrajit Ghosh">Professional CV</a>.
         </p>
         <p>
             I am also an enthusiast of LaTeX and have developed several templates that I freely share.
@@ -105,19 +114,39 @@
             If you are interested in my research activities, publications, academic achievements, and teaching
             experience,
             please see my
-            <a class="underlined-link" href="{{ indra_academic_cv_link }}" target="_blank">Academic CV</a>.
+            <a class="underlined-link" 
+               href="{{ academic_cv_view_url }}" 
+               target="_blank"
+               data-pdf-modal 
+               data-pdf-view="{{ academic_cv_view_url }}" 
+               data-pdf-download="{{ academic_cv_download_url }}" 
+               data-pdf-title="Academic CV - Dr. Indrajit Ghosh">Academic CV</a>
+            (<a href="{{ academic_cv_download_url }}" class="underlined-link" download><i class="bi bi-download"></i> Download</a>).
         </p>
 
         <p>
             If you would like to learn more about my software development experience, technical projects,
             programming skills, and professional work, please refer to my
-            <a class="underlined-link" href="{{ indra_professional_cv_link }}" target="_blank">Professional CV</a>.
+            <a class="underlined-link" 
+               href="{{ professional_cv_view_url }}" 
+               target="_blank"
+               data-pdf-modal 
+               data-pdf-view="{{ professional_cv_view_url }}" 
+               data-pdf-download="{{ professional_cv_download_url }}" 
+               data-pdf-title="Professional CV - Dr. Indrajit Ghosh">Professional CV</a>
+            (<a href="{{ professional_cv_download_url }}" class="underlined-link" download><i class="bi bi-download"></i> Download</a>).
         </p>
     </div>
 </section>
 <!-- About Section End -->
 
-{% endblock %}{% block scripts %}
+<!-- Embedded PDF Modal Component -->
+{% include '_pdf_modal.html' %}
+
+{% endblock %}
+
+{% block scripts %}
 {{ super() }}
 <script src="{{ url_for('main.static', filename='js/index_effects.js') }}"></script>
+<script src="{{ url_for('main.static', filename='js/pdf_modal.js') }}"></script>
 {% endblock %}

@@ -233,6 +233,37 @@ ul.skill-set {
         width: 100%;
         padding: 3rem 2rem;
     }
+
+    /* Hide modal View triggers on smaller screens (mobile & tablet) */
+    .cv-btn-view {
+        display: none !important;
+    }
+    .sidebar-cv-actions {
+        display: none !important;
+    }
+
+    /* Make Download button the prominent primary action on smaller screens */
+    .cv-btn-download {
+        background: var(--primary-color);
+        color: #ffffff !important;
+        border-color: var(--primary-color);
+    }
+    .cv-btn-download:hover {
+        background: #0f2c59;
+        color: #ffffff !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .left {
+        padding: 2.5rem 1.25rem;
+    }
+    .right {
+        padding: 2rem 1.25rem;
+    }
+    .cv-cards-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Custom last-updated style for CV page */
@@ -254,4 +285,256 @@ ul.skill-set {
 .last-updated i {
     color: var(--secondary-color);
     font-size: 1.1rem;
+}
+
+
+/* ==============================================================================
+   CV Dossier Cards & Sidebar Action Styles
+   ============================================================================== */
+.cv-dossiers-section {
+    margin-bottom: 2.5rem !important;
+}
+
+.cv-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.25rem;
+    margin-top: 0.5rem;
+}
+
+.cv-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.35rem;
+    box-shadow: 0 4px 15px rgba(26, 54, 93, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    position: relative;
+}
+
+.cv-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(26, 54, 93, 0.08);
+    border-color: #cbd5e1;
+}
+
+.cv-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+}
+
+.cv-card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.76rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.22rem 0.55rem;
+    border-radius: 20px;
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+.cv-card-badge.cv-badge-tech {
+    background: #f0fdf4;
+    color: #15803d;
+}
+
+.cv-card-format {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #dc2626;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.cv-card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.cv-card-actions {
+    display: flex;
+    gap: 0.55rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.cv-btn {
+    flex: 1;
+    min-width: 80px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: none;
+    line-height: 1.35;
+    white-space: nowrap;
+}
+
+.cv-btn-view {
+    background: var(--primary-color);
+    color: #ffffff !important;
+}
+
+.cv-btn-view:hover {
+    background: #0f2c59;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(15, 44, 89, 0.2);
+}
+
+.cv-btn-download {
+    background: #f8fafc;
+    color: #334155 !important;
+    border: 1px solid #cbd5e1;
+}
+
+.cv-btn-download:hover {
+    background: #e2e8f0;
+    color: #0f172a !important;
+    text-decoration: none;
+}
+
+.cv-btn-hash {
+    background: #f8fafc;
+    color: #475569 !important;
+    border: 1px solid #cbd5e1;
+}
+
+.cv-btn-hash:hover, .cv-btn-hash.active {
+    background: #eff6ff;
+    color: #1d4ed8 !important;
+    border-color: #93c5fd;
+}
+
+/* SHA-256 Collapsible Box */
+.cv-sha-box {
+    margin-top: 0.9rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--border-color);
+    animation: shaFadeIn 0.22s ease-out;
+}
+
+@keyframes shaFadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.cv-sha-inner {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0.65rem 0.8rem;
+}
+
+.cv-sha-label {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+    margin-bottom: 0.35rem;
+}
+
+.cv-sha-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.cv-sha-code {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.78rem;
+    color: #0f2c59;
+    word-break: break-all;
+    line-height: 1.35;
+    background: transparent;
+    padding: 0;
+}
+
+.cv-sha-copy-btn {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    font-size: 0.82rem;
+    color: #475569;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.18s ease;
+    flex-shrink: 0;
+    padding: 0;
+}
+
+.cv-sha-copy-btn:hover {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #1d4ed8;
+}
+
+.cv-sha-copy-btn.copied {
+    background: #dcfce7;
+    border-color: #22c55e;
+    color: #15803d;
+}
+
+/* Sidebar CV Buttons */
+.sidebar-cv-actions {
+    margin-top: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    width: 100%;
+    max-width: 230px;
+}
+
+.sidebar-cv-btn {
+    width: 100%;
+    padding: 0.5rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    color: var(--primary-color);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: all 0.2s ease;
+}
+
+.sidebar-cv-btn:hover {
+    background: #eff6ff;
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    transform: translateY(-1px);
 }

@@ -128,7 +128,7 @@
         <!-- Academic Stats Highlight Bar -->
         <div class="research-stats-bar">
             <div class="stat-item">
-                <div class="stat-number">10</div>
+                <div class="stat-number">{{ publications|length + preprints|length }}</div>
                 <div class="stat-label">Publications &amp; Preprints</div>
             </div>
             <div class="stat-divider"></div>
@@ -249,16 +249,16 @@
             <!-- Interactive Filter Bar for Works -->
             <div class="research-filter-bar">
                 <button class="filter-btn active" data-filter="all">
-                    <i class="bi bi-grid-fill"></i> All Works <span class="badge-count">10</span>
+                    <i class="bi bi-grid-fill"></i> All Works <span class="badge-count">{{ publications|length + preprints|length + ongoing_works|length }}</span>
                 </button>
                 <button class="filter-btn" data-filter="publications">
-                    <i class="bi bi-journal-check"></i> Publications <span class="badge-count">1</span>
+                    <i class="bi bi-journal-check"></i> Publications <span class="badge-count">{{ publications|length }}</span>
                 </button>
                 <button class="filter-btn" data-filter="preprints">
-                    <i class="bi bi-file-earmark-text"></i> Preprints <span class="badge-count">6</span>
+                    <i class="bi bi-file-earmark-text"></i> Preprints <span class="badge-count">{{ preprints|length }}</span>
                 </button>
                 <button class="filter-btn" data-filter="ongoing">
-                    <i class="bi bi-hourglass-split"></i> Ongoing Work <span class="badge-count">3</span>
+                    <i class="bi bi-hourglass-split"></i> Ongoing Work <span class="badge-count">{{ ongoing_works|length }}</span>
                 </button>
             </div>
 

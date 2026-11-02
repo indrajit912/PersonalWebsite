@@ -1,0 +1,300 @@
+/* ==============================================================================
+   PDF Viewer Modal Stylesheet
+   Polished, responsive embedded PDF viewer with desktop and mobile support.
+   ============================================================================== */
+
+:root {
+    --pdf-modal-primary: #1a365d;
+    --pdf-modal-accent: #2563eb;
+    --pdf-modal-accent-hover: #1d4ed8;
+    --pdf-modal-border: #e2e8f0;
+    --pdf-modal-text: #1e293b;
+    --pdf-modal-muted: #64748b;
+    --pdf-modal-bg: #ffffff;
+    --pdf-modal-surface: #f8fafc;
+}
+
+/* Modal Overlay Wrapper */
+.pdf-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.pdf-modal.active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Backdrop */
+.pdf-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.72);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* Modal Dialog Box */
+.pdf-modal-dialog {
+    position: relative;
+    width: 92%;
+    max-width: 1100px;
+    height: 90vh;
+    background: var(--pdf-modal-bg);
+    border-radius: 14px;
+    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1;
+    transform: scale(0.96) translateY(8px);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pdf-modal.active .pdf-modal-dialog {
+    transform: scale(1) translateY(0);
+}
+
+/* Modal Header */
+.pdf-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1.4rem;
+    background: #ffffff;
+    border-bottom: 1px solid var(--pdf-modal-border);
+    flex-shrink: 0;
+    gap: 1rem;
+}
+
+.pdf-modal-title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-width: 0;
+}
+
+.pdf-modal-icon {
+    font-size: 1.5rem;
+    color: #ef4444; /* Clean PDF red accent */
+    flex-shrink: 0;
+}
+
+.pdf-modal-title {
+    font-size: 1.18rem;
+    font-weight: 600;
+    color: var(--pdf-modal-primary);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: -0.01em;
+}
+
+/* Header Actions */
+.pdf-modal-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-shrink: 0;
+}
+
+.pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.95rem;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    line-height: 1.4;
+}
+
+.pdf-btn-primary {
+    background: var(--pdf-modal-accent);
+    color: #ffffff !important;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.pdf-btn-primary:hover {
+    background: var(--pdf-modal-accent-hover);
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.28);
+}
+
+.pdf-btn-secondary {
+    background: var(--pdf-modal-surface);
+    color: var(--pdf-modal-text) !important;
+    border: 1px solid var(--pdf-modal-border);
+}
+
+.pdf-btn-secondary:hover {
+    background: #e2e8f0;
+    color: #0f172a !important;
+}
+
+.pdf-modal-close {
+    background: transparent;
+    border: none;
+    color: var(--pdf-modal-muted);
+    font-size: 1.4rem;
+    line-height: 1;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    padding: 0;
+}
+
+.pdf-modal-close:hover {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* Modal Body */
+.pdf-modal-body {
+    position: relative;
+    flex: 1;
+    background: #525659; /* Standard PDF viewer canvas dark */
+    overflow: hidden;
+    display: flex;
+}
+
+/* Iframe PDF Frame */
+.pdf-modal-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #ffffff;
+    display: block;
+}
+
+/* Loading State */
+.pdf-modal-loading {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+    z-index: 5;
+    color: var(--pdf-modal-primary);
+}
+
+.pdf-modal-loading p {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--pdf-modal-muted);
+    margin: 0;
+}
+
+.pdf-spinner {
+    width: 38px;
+    height: 38px;
+    border: 3px solid rgba(37, 99, 235, 0.15);
+    border-top-color: var(--pdf-modal-accent);
+    border-radius: 50%;
+    animation: pdfSpin 0.75s linear infinite;
+}
+
+@keyframes pdfSpin {
+    to { transform: rotate(360deg); }
+}
+
+/* Fallback Screen */
+.pdf-modal-fallback {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 6;
+    text-align: center;
+}
+
+.pdf-fallback-content {
+    max-width: 480px;
+}
+
+.pdf-fallback-content i {
+    color: var(--pdf-modal-accent);
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.pdf-fallback-content h4 {
+    font-size: 1.3rem;
+    color: var(--pdf-modal-primary);
+    margin-bottom: 0.6rem;
+}
+
+.pdf-fallback-content p {
+    color: var(--pdf-modal-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.pdf-fallback-buttons {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Body scroll lock */
+body.pdf-modal-open {
+    overflow: hidden !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .pdf-modal-dialog {
+        width: 96%;
+        height: 94vh;
+        border-radius: 10px;
+    }
+
+    .pdf-modal-header {
+        padding: 0.7rem 0.9rem;
+    }
+
+    .pdf-modal-title {
+        font-size: 1.05rem;
+    }
+
+    .pdf-btn-text-optional {
+        display: none;
+    }
+
+    .pdf-btn {
+        padding: 0.4rem 0.65rem;
+        font-size: 0.82rem;
+    }
+}

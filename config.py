@@ -16,6 +16,9 @@ load_dotenv(dotenv_path)
 
 BASE_DIR = Path(__file__).parent.resolve()
 APP_DATA_DIR = Path(__file__).parent / "app_data"
+CV_DIR = BASE_DIR / "cv"
+ACADEMIC_CV_PATH = CV_DIR / "academic-cv" / "main.pdf"
+PROFESSIONAL_CV_PATH = CV_DIR / "professional-cv" / "main.pdf"
 
 
 class EmailConfig:

@@ -163,3 +163,27 @@ cython_debug/
 #.idea/
 
 # End of https://www.toptal.com/developers/gitignore/api/python
+
+# ==============================================================================
+# LaTeX build artifacts and intermediate files
+# ==============================================================================
+*.aux
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.nav
+*.snm
+*.vrb
+
+# Ensure LaTeX sources and compiled PDFs are tracked in version control
+!*.tex
+!*.pdf
+

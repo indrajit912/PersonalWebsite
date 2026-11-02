@@ -1,0 +1,254 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Professional & Industry Curriculum Vitae
+% Candidate: Dr. Indrajit Ghosh
+% Focus: Technical, Software Development, Research Engineering & Industry Roles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,a4paper]{article}
+
+% Page Geometry & Margins - optimized for an exact, elegant 2-page layout
+\usepackage[top=1.00cm, bottom=1.00cm, left=1.35cm, right=1.35cm]{geometry}
+
+% Modern Sans-Serif Typography (Google Roboto) & Math Support
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault]{roboto}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{microtype}
+
+% Icons, Colors & Hyperlinks
+\usepackage{fontawesome5}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+% Suppress page numbering for a clean, executive look
+\pagestyle{empty}
+
+% ====================================================================
+% Color Palette: Modern Executive Navy & Tech Cobalt Accent
+% ====================================================================
+\definecolor{primary}{RGB}{15, 44, 89}        % Deep Oxford Navy
+\definecolor{secondary}{RGB}{74, 85, 104}     % Refined Slate
+\definecolor{accentblue}{RGB}{29, 78, 216}    % Vibrant Cobalt Blue
+\definecolor{textdark}{RGB}{30, 41, 59}       % Charcoal body text
+\definecolor{textsecondary}{RGB}{100, 116, 139}% Muted slate for metadata
+\definecolor{rulecolor}{RGB}{203, 213, 225}   % Subtle horizontal border line
+\definecolor{awardgold}{RGB}{180, 83, 9}      % Prestigious award accent
+
+% Hyperref Configuration (ATS-friendly, high-contrast, clickable)
+\hypersetup{
+    colorlinks=true,
+    linkcolor=accentblue,
+    urlcolor=accentblue,
+    citecolor=accentblue,
+    pdfauthor={Dr. Indrajit Ghosh},
+    pdftitle={Professional Curriculum Vitae - Dr. Indrajit Ghosh},
+    pdfsubject={Industry, Software Development and Research Engineering CV},
+    pdfkeywords={Software Engineer, Applied Mathematics, Python, Flask, Cryptography, Operator Algebras, Indrajit Ghosh}
+}
+
+% Set default text color
+\color{textdark}
+
+% ====================================================================
+% Reusable Layout Commands & Environments
+% ====================================================================
+
+% Section Heading Command
+\newcommand{\cvsection}[1]{%
+  \vspace{0.35em}%
+  \phantomsection%
+  \addcontentsline{toc}{section}{#1}%
+  {\noindent\raggedright\color{primary}\fontsize{9.6pt}{11pt}\bfseries\MakeUppercase{#1}}\\[-0.74em]%
+  {\noindent\color{accentblue}\rule{\linewidth}{0.80pt}}\par%
+  \vspace{0.18em}%
+}
+
+% Experience Entry Command
+\newcommand{\cvexperience}[4]{%
+  \noindent\textbf{\color{primary}#1} \hfill {\small\color{textsecondary}\textbf{#2}}\\[0.05em]%
+  \noindent\textit{\small\color{textdark}#3} \hfill {\small\color{textsecondary}#4}\par%
+  \vspace{0.06em}%
+}
+
+% Project Entry Command
+\newcommand{\cvproject}[4]{%
+  \noindent\textbf{\color{primary}#1} \enskip{\color{rulecolor}\textbar}\enskip \textit{\small\color{textdark}#2} \hfill {\small\color{accentblue}\href{#3}{\faGithub\ \texttt{#4}}}\par%
+  \vspace{0.06em}%
+}
+
+% Education Entry Command
+\newcommand{\cveducation}[4]{%
+  \noindent\textbf{\color{primary}#1} \hfill {\small\color{textsecondary}\textbf{#2}}\\[0.05em]%
+  \noindent\textit{\small\color{textdark}#3} \hfill {\small\color{textsecondary}#4}\par%
+  \vspace{0.06em}%
+}
+
+% Custom bullet list configuration for tight, professional spacing
+\setlist[itemize]{
+  leftmargin=1.15em,
+  itemsep=0.8pt,
+  parsep=0pt,
+  topsep=0.4pt,
+  label={\small\color{accentblue}$\bullet$}
+}
+
+\begin{document}
+
+% ====================================================================
+% HEADER: Contact & Professional Links
+% ====================================================================
+\begin{center}
+  {\fontsize{18.5pt}{21pt}\selectfont\textbf{\color{primary}Dr.~Indrajit Ghosh}}\\[0.15em]
+  {\fontsize{9.8pt}{11.5pt}\selectfont\textbf{\color{secondary}Postdoctoral Researcher \& Software Engineer}}\\[0.06em]
+  {\small\color{textsecondary}Applied Mathematics \enskip$\bullet$\enskip Backend Development \enskip$\bullet$\enskip Applied Cryptography \enskip$\bullet$\enskip Algorithm Design}\\[0.30em]
+  
+  {\small
+    \href{mailto:indrajitg@iitk.ac.in}{\faEnvelope\ \texttt{indrajitg@iitk.ac.in}} \enskip{\color{rulecolor}\textbar}\enskip
+    \href{https://github.com/indrajit912}{\faGithub\ \texttt{github.com/indrajit912}} \enskip{\color{rulecolor}\textbar}\enskip
+    \href{https://in.linkedin.com/in/indrajit912/}{\faLinkedin\ \texttt{linkedin.com/in/indrajit912}} \enskip{\color{rulecolor}\textbar}\enskip
+    \href{https://indrajitghosh.onrender.com}{\faGlobe\ \texttt{indrajitghosh.onrender.com}} \enskip{\color{rulecolor}\textbar}\enskip
+    \href{https://scholar.google.com/citations?hl=en&user=6rwt6vAAAAAJ}{\faGraduationCap\ \texttt{Scholar}} \enskip{\color{rulecolor}\textbar}\enskip
+    \href{https://orcid.org/0009-0007-6353-6637}{\faOrcid\ \texttt{0009-0007-6353-6637}}
+  }
+\end{center}
+\vspace{-0.85em}
+
+% ====================================================================
+% PROFESSIONAL PROFILE
+% ====================================================================
+\cvsection{Professional Profile}
+\noindent
+Mathematically rigorous \textbf{Postdoctoral Researcher and Software Engineer} with a Ph.D.\ in Mathematics from the Indian Statistical Institute and extensive expertise in \textbf{Python}, \textbf{backend development}, \textbf{applied cryptography}, and \textbf{algorithmic optimization}. Proven track record of designing modular RESTful microservices, implementing zero-knowledge security tools, and solving complex quantitative problems. Experienced in cross-institutional research collaboration, technical instruction, and building production-grade software. Passionate about applying analytical rigor to software engineering, research engineering, and scalable data-driven systems.
+
+% ====================================================================
+% TECHNICAL SKILLS
+% ====================================================================
+\cvsection{Technical Skills}
+\begin{description}[leftmargin=!, labelwidth=8.8em, itemsep=1.2pt, topsep=0.4pt, font=\normalfont\bfseries\color{primary}]
+  \item[Programming Languages:] Python (Advanced), C, C++, SQL (MySQL, SQLite), JavaScript (ES6+), HTML5, CSS3, Bash
+  \item[Frameworks \& Backend:] Flask, RESTful API Design, SQLAlchemy ORM, Jinja2, Bootstrap, Microservices Architecture
+  \item[Software Tools \& DevOps:] Git, GitHub, Linux/Unix Environments, Shell Scripting, Testing \& Debugging, LaTeX
+  \item[Applied Cryptography:] Symmetric Ciphers (AES-CBC, Fernet), PBKDF2/Argon2 Key Derivation, Secure Token Lifecycle, Zero-Knowledge Credential Storage, SHA-256 Checksum Verification
+  \item[Mathematical Computation:] Linear Algebra, Matrix Analysis, Operator Theory, Combinatorial Optimization, Numerical Algorithms, Mathematical Modeling
+\end{description}
+
+% ====================================================================
+% PROFESSIONAL EXPERIENCE
+% ====================================================================
+\cvsection{Professional Experience}
+
+\cvexperience{Institute Postdoctoral Fellow}{Mar 2026 -- Present}{Department of Mathematics, Indian Institute of Technology Kanpur}{Kanpur, India}
+\begin{itemize}
+  \item Conduct advanced mathematical research in Operator Algebras, von Neumann algebras, and quantum symmetries, collaborating with Prof.~Keshab Chandra Bakshi.
+  \item Formulate rigorous proofs for structural invariants and combinatorial criteria characterizing operator inclusions in finite and infinite dimensions.
+  \item Serve as Teaching Assistant for undergraduate \textit{Calculus I (MTH111M)}, conducting weekly problem-solving tutorials, designing problem sets, and mentoring students in quantitative problem solving.
+\end{itemize}
+
+\vspace{0.12em}
+\cvexperience{Postdoctoral Researcher}{Nov 2025 -- Feb 2026}{Department of Mathematics, Indian Institute of Technology Madras}{Chennai, India}
+\begin{itemize}
+  \item Researched operator-theoretic characterizations of properly infinite von Neumann algebras with Prof.~Kunal Krishna Mukherjee.
+  \item Analyzed projection lattices, spatial decompositions, and algebraic homomorphisms, formulating new invariant criteria for operator systems.
+\end{itemize}
+
+\vspace{0.12em}
+\cvexperience{Doctoral Researcher \& Teaching Fellow}{Jul 2019 -- Oct 2025}{Theoretical Statistics and Mathematics Unit, Indian Statistical Institute (ISI)}{Bangalore, India}
+\begin{itemize}
+  \item Formulated a complete near-semiring algebraic theory and functorial representation for unbounded operators affiliated with von Neumann algebras under Prof.~Soumyashant Nayak.
+  \item Published research in \textit{International Mathematics Research Notices (IMRN, Oxford Academic)}, winning the \textbf{Subhash Bhatt Award (2026)} from the Indian Mathematical Society.
+  \item Delivered lectures and served as TA for graduate/undergraduate courses including \textit{Optimization}, \textit{Harmonic Analysis}, \textit{Functional Analysis}, \textit{Complex Analysis}, and \textit{Analysis of Several Variables}.
+\end{itemize}
+
+% Exact clean transition to Page 2
+\clearpage
+
+% ====================================================================
+% TECHNICAL & SOFTWARE PROJECTS
+% ====================================================================
+\cvsection{Software Engineering Projects}
+
+\cvproject{Hermes -- Secure Transactional Email API Microservice}{Python, Flask, SQLAlchemy, REST API}{https://github.com/indrajit912/Hermes}{github.com/indrajit912/Hermes}
+\begin{itemize}
+  \item Architected a standalone RESTful microservice enabling web applications to dispatch transactional emails securely without managing custom SMTP servers.
+  \item Implemented granular API-key authentication, token validation, rate-limiting, and an administrative approval workflow; deployed in live production applications.
+\end{itemize}
+
+\vspace{0.08em}
+\cvproject{VaultSafe -- Cryptographic Credential Management CLI}{Python, Cryptography (\texttt{hazmat}), PBKDF2, AES}{https://github.com/indrajit912/VaultSafe}{github.com/indrajit912/VaultSafe}
+\begin{itemize}
+  \item Engineered an open-source command-line credential manager enforcing zero-knowledge architecture and enterprise-grade symmetric encryption (AES-CBC via Fernet).
+  \item Designed secure key derivation routines (PBKDF2-HMAC-SHA256) with dynamic salt generation, memory protection, and tamper-evident local encrypted JSON storage.
+\end{itemize}
+
+\vspace{0.08em}
+\cvproject{Slotify -- Automated Hostel Resource Scheduling System}{Python, Flask, SQLAlchemy, Bootstrap, SQLite}{https://github.com/indrajit912/Slotify}{github.com/indrajit912/Slotify}
+\begin{itemize}
+  \item Developed a full-stack scheduling application for hostel laundry facilities to resolve physical booking collisions and eliminate scheduling conflicts.
+  \item Implemented role-based access control (RBAC), conflict-free timeslot reservation algorithms, and real-time visual schedule monitoring.
+\end{itemize}
+
+\vspace{0.08em}
+\cvproject{MindCanvas -- End-to-End Encrypted Knowledge Management Platform}{Python, Flask, Cryptography, MathJax}{https://github.com/indrajit912/MindCanvas}{github.com/indrajit912/MindCanvas}
+\begin{itemize}
+  \item Built a secure personal journaling and research documentation web app featuring client/server encryption, taxonomy tagging, and fast full-text querying.
+  \item Integrated dynamic MathJax rendering for real-time mathematical expression evaluation and LaTeX formula visualization.
+\end{itemize}
+
+% ====================================================================
+% EDUCATION
+% ====================================================================
+\cvsection{Education}
+
+\cvexperience{Doctor of Philosophy (Ph.D.) in Mathematics}{Jul 2019 -- Oct 2025 (Awarded Feb 2026)}{Theoretical Statistics and Mathematics Unit, Indian Statistical Institute (ISI)}{Bangalore, India}
+\begin{itemize}
+  \item \textbf{Thesis:} \textit{On Algebraic Aspects and Functoriality of the Set of Unbounded Operators Affiliated with a von Neumann Algebra}
+  \item \textbf{Advisor:} Prof.~Soumyashant Nayak
+\end{itemize}
+
+\vspace{0.06em}
+\cvexperience{Master of Science (M.Sc.) in Pure Mathematics}{2016 -- 2018}{Department of Pure Mathematics, University of Calcutta}{Kolkata, India}
+
+\vspace{0.06em}
+\cvexperience{Bachelor of Science (B.Sc.~Hons.) in Mathematics}{2013 -- 2016}{Barasat Government College, West Bengal State University}{Barasat, India}
+\begin{itemize}
+  \item First Class Honours in Mathematics
+\end{itemize}
+
+% ====================================================================
+% HONORS, AWARDS & FELLOWSHIPS
+% ====================================================================
+\cvsection{Honors, Awards \& Fellowships}
+\begin{itemize}
+  \item \textbf{Subhash Bhatt Award (2026)}, \textit{Indian Mathematical Society (IMS)} -- Awarded for best research paper in \textit{IMRN (2024)}.
+  \item \textbf{NBHM Ph.D.\ Research Fellowship (2019)}, \textit{National Board for Higher Mathematics}, Dept.\ of Atomic Energy, Govt.\ of India.
+  \item \textbf{CSIR-UGC NET Junior Research Fellowship (JRF)} in Mathematical Sciences (Dec 2018), \textit{CSIR}, Govt.\ of India.
+  \item \textbf{Graduate Aptitude Test in Engineering (GATE)} in Mathematics (2019), \textit{Govt.\ of India}.
+  \item \textbf{Junior Research Fellowship Offers (2019):} Accepted offer at ISI Bangalore; also selected at IIT Madras and IISER Bhopal.
+\end{itemize}
+
+% ====================================================================
+% SELECTED PUBLICATIONS & PREPRINTS
+% ====================================================================
+\cvsection{Selected Publications \& Preprints}
+
+\begin{itemize}[leftmargin=1.15em, itemsep=0.8pt, topsep=0.3pt]
+  \item \textbf{I.~Ghosh} and S.~Nayak (2024). \textit{Algebraic aspects and functoriality of the set of affiliated operators}. \textbf{International Mathematics Research Notices (IMRN)}, Oxford University Press, Vol.~2024, Issue~21, pp.~13525--13562. \newline
+  [\href{https://doi.org/10.1093/imrn/rnae203}{\texttt{DOI:10.1093/imrn/rnae203}}] \enskip{\color{rulecolor}\textbar}\enskip [\href{https://arxiv.org/abs/2311.16170}{\texttt{arXiv:2311.16170}}] \enskip{\color{rulecolor}\textbar}\enskip \textit{\small Recipient of the Subhash Bhatt Award (2026)}
+
+  \item \textbf{I.~Ghosh} and S.~Kumar (2026). \textit{Distances Between von Neumann Subalgebras: Spin Models, Commuting Squares, and Free Group Factors}. arXiv preprint (33 pages). [\href{https://arxiv.org/abs/2609.34856}{\texttt{arXiv:2609.34856}}]
+
+  \item \textbf{I.~Ghosh} and S.~Kumar (2026). \textit{Kadison--Kastler Distance and Interior Angle for Masas: Connections with Entropy and Probabilistic Index}. arXiv preprint (28 pages). [\href{https://arxiv.org/abs/2609.38206}{\texttt{arXiv:2609.38206}}]
+
+  \item K.~C.~Bakshi and \textbf{I.~Ghosh} (2026). \textit{Regularity for Subfactors}. arXiv preprint (18 pages). [\href{https://arxiv.org/abs/2609.10118}{\texttt{arXiv:2609.10118}}]
+
+  \item \textbf{I.~Ghosh} and S.~Kumar (2026). \textit{A Complete Characterization of Cartan Inclusions of Finite Dimensional $C^*$-algebras}. arXiv preprint (16 pages). [\href{https://arxiv.org/abs/2608.11711}{\texttt{arXiv:2608.11711}}]
+
+  \item K.~C.~Bakshi, \textbf{I.~Ghosh}, and S.~Kumar (2026). \textit{A Complete Characterization of Regular Inclusions of Finite Dimensional $C^*$-algebras}. arXiv preprint (21 pages). [\href{https://arxiv.org/abs/2608.04572}{\texttt{arXiv:2608.04572}}]
+\end{itemize}
+
+\vspace{0.12em}
+\noindent{\footnotesize\color{textsecondary}\faInfoCircle\ Complete list of publications, preprints, and citation metrics available on \href{https://arxiv.org/a/ghosh_i_1.html}{\color{accentblue}\faFilePdf\ arXiv Profile} and \href{https://scholar.google.com/citations?hl=en&user=6rwt6vAAAAAJ}{\color{accentblue}\faGraduationCap\ Google Scholar}.}
+
+\end{document}

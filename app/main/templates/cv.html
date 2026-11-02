@@ -7,6 +7,7 @@
   <title>Dr. Indrajit Ghosh - CV</title>
   <link rel="stylesheet" href="{{ url_for('main.static', filename='css/research_style.css') }}">
   <link rel="stylesheet" href="{{ url_for('main.static', filename='css/cv_style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('main.static', filename='css/pdf_modal.css') }}">
   
   <!-- The following is for displaying logos for github, fb, twitter etc -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css">
@@ -37,6 +38,15 @@
             <a href="https://twitter.com/Meself_Indrajit" target="_blank"><i class="fa fa-twitter"></i></a>
             <a href="https://instagram.com/entangled.indra" target="_blank"><i class="icon ion-social-instagram"></i></a>
           </div>
+
+          <div class="sidebar-cv-actions">
+            <button type="button" class="sidebar-cv-btn" data-pdf-modal data-pdf-view="{{ academic_cv_view_url }}" data-pdf-download="{{ academic_cv_download_url }}" data-pdf-title="Academic CV - Dr. Indrajit Ghosh">
+              <i class="bi bi-mortarboard-fill"></i> Academic CV
+            </button>
+            <button type="button" class="sidebar-cv-btn" data-pdf-modal data-pdf-view="{{ professional_cv_view_url }}" data-pdf-download="{{ professional_cv_download_url }}" data-pdf-title="Professional CV - Indrajit Ghosh">
+              <i class="bi bi-code-slash"></i> Professional CV
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -44,6 +54,91 @@
     <div class="right">
       <div class="inner">
         
+        <!-- CV Dossiers Section -->
+        <section class="cv-dossiers-section">
+          <h1>Curriculum Vitae</h1>
+          <div class="cv-cards-grid">
+            <!-- Academic CV Card -->
+            <div class="cv-card cv-card-academic">
+              <div>
+                <div class="cv-card-header">
+                  <span class="cv-card-badge"><i class="bi bi-mortarboard-fill"></i> Academia & Research</span>
+                  <span class="cv-card-format"><i class="bi bi-file-earmark-pdf"></i> PDF</span>
+                </div>
+                <h2 class="cv-card-title">Academic CV</h2>
+              </div>
+              <div class="cv-card-actions">
+                <button type="button" 
+                        class="cv-btn cv-btn-view" 
+                        data-pdf-modal 
+                        data-pdf-view="{{ academic_cv_view_url }}" 
+                        data-pdf-download="{{ academic_cv_download_url }}" 
+                        data-pdf-title="Academic CV - Dr. Indrajit Ghosh">
+                  <i class="bi bi-eye-fill"></i> View
+                </button>
+                <a href="{{ academic_cv_download_url }}" class="cv-btn cv-btn-download" download>
+                  <i class="bi bi-download"></i> Download
+                </a>
+                <button type="button" class="cv-btn cv-btn-hash" onclick="toggleShaBox('academicShaBox', this)" title="Show SHA-256 Checksum">
+                  <i class="bi bi-shield-lock"></i> SHA-256
+                </button>
+              </div>
+
+              <!-- Collapsible SHA-256 Box -->
+              <div id="academicShaBox" class="cv-sha-box" style="display: none;">
+                <div class="cv-sha-inner">
+                  <span class="cv-sha-label"><i class="bi bi-shield-check"></i> SHA-256 Checksum:</span>
+                  <div class="cv-sha-row">
+                    <code id="academicShaVal" class="cv-sha-code">{{ academic_cv_sha256 }}</code>
+                    <button type="button" class="cv-sha-copy-btn" onclick="copySha('academicShaVal', this)" title="Copy SHA-256 Hash">
+                      <i class="bi bi-clipboard"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Professional CV Card -->
+            <div class="cv-card cv-card-professional">
+              <div>
+                <div class="cv-card-header">
+                  <span class="cv-card-badge cv-badge-tech"><i class="bi bi-code-slash"></i> Software & Industry</span>
+                  <span class="cv-card-format"><i class="bi bi-file-earmark-pdf"></i> PDF</span>
+                </div>
+                <h2 class="cv-card-title">Professional CV</h2>
+              </div>
+              <div class="cv-card-actions">
+                <button type="button" 
+                        class="cv-btn cv-btn-view" 
+                        data-pdf-modal 
+                        data-pdf-view="{{ professional_cv_view_url }}" 
+                        data-pdf-download="{{ professional_cv_download_url }}" 
+                        data-pdf-title="Professional CV - Indrajit Ghosh">
+                  <i class="bi bi-eye-fill"></i> View
+                </button>
+                <a href="{{ professional_cv_download_url }}" class="cv-btn cv-btn-download" download>
+                  <i class="bi bi-download"></i> Download
+                </a>
+                <button type="button" class="cv-btn cv-btn-hash" onclick="toggleShaBox('professionalShaBox', this)" title="Show SHA-256 Checksum">
+                  <i class="bi bi-shield-lock"></i> SHA-256
+                </button>
+              </div>
+
+              <!-- Collapsible SHA-256 Box -->
+              <div id="professionalShaBox" class="cv-sha-box" style="display: none;">
+                <div class="cv-sha-inner">
+                  <span class="cv-sha-label"><i class="bi bi-shield-check"></i> SHA-256 Checksum:</span>
+                  <div class="cv-sha-row">
+                    <code id="professionalShaVal" class="cv-sha-code">{{ professional_cv_sha256 }}</code>
+                    <button type="button" class="cv-sha-copy-btn" onclick="copySha('professionalShaVal', this)" title="Copy SHA-256 Hash">
+                      <i class="bi bi-clipboard"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div></section>
+
         <section>
           <h1>Employment</h1>
           <div class="cv-entry">
@@ -139,6 +234,13 @@
 
         <section>
           <h1>Invited Talks</h1>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <span class="cv-entry-title"><a href="https://imsconference.org/" target="_blank">92nd Annual Conference of The Indian Mathematical Society</a></span>
+              <span class="cv-entry-date">Dec 23 - 26, 2026</span>
+            </div>
+            <div class="cv-entry-subtitle">South Asian University, New Delhi, India</div>
+          </div>
           <div class="cv-entry">
             <div class="cv-entry-header">
               <span class="cv-entry-title"><a href="https://sites.google.com/iiserb.ac.in/otoam26" target="_blank">IISER Bhopal Operator Theory and Operator Algebras Meet 2026</a></span>
@@ -424,6 +526,60 @@
                   processClass: "mathjax"
               }
           });
+  </script>
+  <!-- Embedded PDF Modal Component -->
+  {% include '_pdf_modal.html' %}
+
+  <!-- PDF Modal JavaScript -->
+  <script src="{{ url_for('main.static', filename='js/pdf_modal.js') }}"></script>
+
+  <script>
+    function toggleShaBox(boxId, btn) {
+      const box = document.getElementById(boxId);
+      if (!box) return;
+      if (box.style.display === 'none' || !box.style.display) {
+        box.style.display = 'block';
+        if (btn) btn.classList.add('active');
+      } else {
+        box.style.display = 'none';
+        if (btn) btn.classList.remove('active');
+      }
+    }
+
+    function copySha(valId, btn) {
+      const el = document.getElementById(valId);
+      if (!el) return;
+      const text = el.textContent.trim();
+      function showFeedback() {
+        if (!btn) return;
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="bi bi-check-lg" style="color: #16a34a;"></i>';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = orig;
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(showFeedback).catch(function() {
+          fallbackCopy(text);
+          showFeedback();
+        });
+      } else {
+        fallbackCopy(text);
+        showFeedback();
+      }
+      function fallbackCopy(str) {
+        const ta = document.createElement('textarea');
+        ta.value = str;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+    }
   </script>
 </body>
 </html>

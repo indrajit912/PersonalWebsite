@@ -3,13 +3,14 @@
 # Created On: Dec 22, 2023
 #
 import os
+import hashlib
 from pathlib import Path
 import tempfile
 import uuid
 import json
 from . import main_bp
 
-from flask import render_template, redirect, url_for, request, jsonify, flash, send_from_directory
+from flask import render_template, redirect, url_for, request, jsonify, flash, send_from_directory, send_file, abort
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired, Email
@@ -17,9 +18,33 @@ from werkzeug.utils import secure_filename
 
 from scripts.send_email_client import send_email_via_hermes
 from scripts.utils import encrypt_with_public_key, encrypt_file_with_public_key, format_size
-from config import APP_DATA_DIR, EmailConfig
+from config import APP_DATA_DIR, EmailConfig, ACADEMIC_CV_PATH, PROFESSIONAL_CV_PATH
 
 INSTITUTE_EMAIL = "indrajitg@iitk.ac.in"
+
+# Configuration dictionary mapping CV types to compiled PDF paths and download filenames
+
+def calculate_file_sha256(filepath):
+    """Calculate the hexadecimal SHA-256 checksum of a file."""
+    try:
+        with open(filepath, "rb") as f:
+            return hashlib.sha256(f.read()).hexdigest()
+    except Exception:
+        return ""
+
+CV_CONFIGS = {
+    'academic': {
+        'path': ACADEMIC_CV_PATH,
+        'title': 'Academic CV',
+        'download_name': 'Indrajit_Ghosh_Academic_CV.pdf'
+    },
+    'professional': {
+        'path': PROFESSIONAL_CV_PATH,
+        'title': 'Professional CV',
+        'download_name': 'Indrajit_Ghosh_Professional_CV.pdf'
+    }
+}
+
 
 #######################################################
 #                      Homepage
@@ -27,14 +52,20 @@ INSTITUTE_EMAIL = "indrajitg@iitk.ac.in"
 @main_bp.route('/')
 def index():
     institute_email = INSTITUTE_EMAIL
-    indra_academic_cv_link = "https://drive.google.com/file/d/1cOzD2BP7CrsykZZ4H7i8CKvwj6yS5g86/view?usp=drive_link"
-    indra_professional_cv_link = "https://drive.google.com/file/d/15SM1JLgfUYDlIaBEoUq_Bv3VFr34TYIG/view?usp=drive_link"
+    academic_cv_view_url = url_for('main.view_cv', cv_type='academic')
+    academic_cv_download_url = url_for('main.download_cv', cv_type='academic')
+    professional_cv_view_url = url_for('main.view_cv', cv_type='professional')
+    professional_cv_download_url = url_for('main.download_cv', cv_type='professional')
     return render_template(
         'index.html', 
-        indra_academic_cv_link=indra_academic_cv_link, 
-        indra_professional_cv_link=indra_professional_cv_link,
+        indra_academic_cv_link=academic_cv_view_url, 
+        indra_professional_cv_link=professional_cv_view_url,
+        academic_cv_view_url=academic_cv_view_url,
+        academic_cv_download_url=academic_cv_download_url,
+        professional_cv_view_url=professional_cv_view_url,
+        professional_cv_download_url=professional_cv_download_url,
         institute_email=institute_email
-        )
+    )
 
 
 #######################################################
@@ -99,8 +130,66 @@ def cv():
         institute_email=institute_email,
         publications=publications,
         preprints=preprints,
-        ongoing_works=ongoing_works
+        ongoing_works=ongoing_works,
+        academic_cv_view_url=url_for('main.view_cv', cv_type='academic'),
+        academic_cv_download_url=url_for('main.download_cv', cv_type='academic'),
+        professional_cv_view_url=url_for('main.view_cv', cv_type='professional'),
+        professional_cv_download_url=url_for('main.download_cv', cv_type='professional'),
+        academic_cv_sha256=calculate_file_sha256(ACADEMIC_CV_PATH),
+        professional_cv_sha256=calculate_file_sha256(PROFESSIONAL_CV_PATH)
     )
+
+
+@main_bp.route('/cv/<cv_type>/view')
+def view_cv(cv_type):
+    """
+    Serve a CV PDF for inline viewing in the browser or modal viewer.
+    """
+    cv_info = CV_CONFIGS.get(cv_type)
+    if not cv_info or not cv_info['path'].is_file():
+        abort(404, description=f"{cv_type.capitalize()} CV not found.")
+    
+    response = send_file(
+        cv_info['path'],
+        mimetype='application/pdf',
+        as_attachment=False
+    )
+    # Ensure Content-Disposition is set to inline with descriptive filename
+    response.headers['Content-Disposition'] = f'inline; filename="{cv_info["download_name"]}"'
+    return response
+
+
+@main_bp.route('/cv/<cv_type>/download')
+def download_cv(cv_type):
+    """
+    Serve a CV PDF as an attachment to trigger direct file download.
+    """
+    cv_info = CV_CONFIGS.get(cv_type)
+    if not cv_info or not cv_info['path'].is_file():
+        abort(404, description=f"{cv_type.capitalize()} CV not found.")
+    
+    return send_file(
+        cv_info['path'],
+        mimetype='application/pdf',
+        as_attachment=True,
+        download_name=cv_info['download_name']
+    )
+
+@main_bp.route('/cv/<cv_type>/sha256')
+def cv_sha256(cv_type):
+    """
+    Return the SHA-256 checksum of the specified CV PDF as JSON.
+    """
+    cv_info = CV_CONFIGS.get(cv_type)
+    if not cv_info or not cv_info['path'].is_file():
+        abort(404, description=f"{cv_type.capitalize()} CV not found.")
+    
+    return jsonify({
+        'cv_type': cv_type,
+        'filename': cv_info['download_name'],
+        'sha256': calculate_file_sha256(cv_info['path'])
+    })
+
 
 ######################################################################
 #                       Photos

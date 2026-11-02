@@ -1,0 +1,57 @@
+<!-- Reusable PDF Viewer Modal Component -->
+<div id="pdfViewerModal" class="pdf-modal" role="dialog" aria-modal="true" aria-labelledby="pdfModalTitle" aria-hidden="true">
+    <div class="pdf-modal-backdrop" id="pdfModalBackdrop"></div>
+    <div class="pdf-modal-dialog">
+        <!-- Modal Header -->
+        <div class="pdf-modal-header">
+            <div class="pdf-modal-title-group">
+                <i class="bi bi-file-earmark-pdf-fill pdf-modal-icon"></i>
+                <h3 id="pdfModalTitle" class="pdf-modal-title">Curriculum Vitae</h3>
+            </div>
+            <div class="pdf-modal-actions">
+                <a id="pdfModalDownloadBtn" href="#" class="pdf-btn pdf-btn-primary" download>
+                    <i class="bi bi-download"></i>
+                    <span class="pdf-btn-text">Download PDF</span>
+                </a>
+                <a id="pdfModalNewTabBtn" href="#" target="_blank" rel="noopener noreferrer" class="pdf-btn pdf-btn-secondary" title="Open PDF in new window or tab">
+                    <i class="bi bi-box-arrow-up-right"></i>
+                    <span class="pdf-btn-text pdf-btn-text-optional">Open in Tab</span>
+                </a>
+                <button type="button" id="pdfModalCloseBtn" class="pdf-modal-close" aria-label="Close modal">&times;</button>
+            </div>
+        </div>
+
+        <!-- Modal Body / PDF Container -->
+        <div class="pdf-modal-body">
+            <div id="pdfModalLoading" class="pdf-modal-loading">
+                <div class="pdf-spinner" role="status">
+                    <span class="visually-hidden">Loading document...</span>
+                </div>
+                <p>Loading document preview...</p>
+            </div>
+            
+            <iframe id="pdfModalFrame" 
+                    src="about:blank" 
+                    class="pdf-modal-frame" 
+                    title="PDF Document Viewer">
+            </iframe>
+
+            <!-- Fallback container if PDF embedding is not supported by device -->
+            <div id="pdfModalFallback" class="pdf-modal-fallback" style="display: none;">
+                <div class="pdf-fallback-content">
+                    <i class="bi bi-file-earmark-pdf display-1"></i>
+                    <h4>Unable to display embedded PDF</h4>
+                    <p>Your browser or device does not support embedded PDF rendering. You can download the PDF or open it directly in a new window:</p>
+                    <div class="pdf-fallback-buttons">
+                        <a id="pdfFallbackDownloadBtn" href="#" class="pdf-btn pdf-btn-primary" download>
+                            <i class="bi bi-download"></i> Download PDF
+                        </a>
+                        <a id="pdfFallbackOpenBtn" href="#" target="_blank" rel="noopener noreferrer" class="pdf-btn pdf-btn-secondary">
+                            <i class="bi bi-box-arrow-up-right"></i> Open in New Window
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
